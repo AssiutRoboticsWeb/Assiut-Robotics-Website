@@ -203,7 +203,7 @@
                 <input type="text" class="form-control" id="timeFilter" placeholder="ابحث عن موعد...">
             </div>
 
-            <ul class="nav nav-tabs" id="dayTabs" role="tablist">
+            <ul class="nav nav-tabs p-0" id="dayTabs" role="tablist">
                 <!-- سيتم إضافة علامات التبويب ديناميكياً -->
             </ul>
 
@@ -270,7 +270,7 @@
                         <div class="card-body">
                             <h5 class="card-title">${meeting.title}</h5>
                             <p class="card-text">تم الإنشاء بواسطة: ${meeting.createdBy.name}</p>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center overflow-scroll">
                                 <small>الأعضاء:</small>
                                 ${meeting.members.map(member => `
                                     <img src="${member.avatar}" class="member-avatar" title="${member.name}">
@@ -309,7 +309,7 @@
             meeting.tableOfDates.forEach((day, dayIndex) => {
                 // إنشاء علامة التبويب
                 const tab = document.createElement('li');
-                tab.className = 'nav-item';
+                tab.className = 'nav-item w-50';
                 tab.innerHTML = `
                     <a class="nav-link ${dayIndex === 0 ? 'active' : ''}" 
                        id="day-${dayIndex}-tab" 
