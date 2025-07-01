@@ -76,7 +76,7 @@ function renderContainers(committees) {
 
                 memberCard.innerHTML = `
                     <p>${member.name} (${member.role})</p>
-                    <button onclick="approveMember( '${member.email}','${true}')">accept</button>
+                    ${member.role == "not accepted" ? `<button onclick="approveMember('${member.email}','${true}')">accept</button>` : ''}
                     <button onclick="approveMember( '${member.email}','${false}')">Remove</button>
                     ${member.role !== 'Head'
                         ? `<button onclick="setHead('${member._id}')">Set Head</button>`
@@ -138,6 +138,8 @@ function showMemberInfo(member) {
 
 function categorizeMembersByCommittee(members) {
     // Initialize an empty object to hold categorized members
+    console.log("categorizeMembersByCommittee");
+    
     const categorizedMembers = {};
 
     members.forEach(member => {
@@ -151,7 +153,8 @@ function categorizeMembersByCommittee(members) {
         // Push the member into the corresponding committee array
         categorizedMembers[committee].push(member);
     });
-
+    console.log("Catigorized members",categorizedMembers);
+    
     return categorizedMembers;
 }
 
