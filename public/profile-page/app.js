@@ -1,3 +1,7 @@
+// const { log } = require("console");
+
+
+
 // API URLs
 const API_URL = 'https://assiut-robotics-zeta.vercel.app/members/login';
 const VERIFY_URL = 'https://assiut-robotics-zeta.vercel.app/members/verify';
@@ -71,9 +75,7 @@ async function verifyToken() {
     }
     
     const data = await response.json();
-    console.log(data);
     if (data.data) {
-      console.log("data.data");
     //   localStorage.setItem('token', data.data.token);
       bino.classList.add('disabled');
       body.classList.remove('loading');
@@ -82,7 +84,6 @@ async function verifyToken() {
       
       
       currentMemberData = data.data;
-     
       renderCurrentTasks(data.data.tasks)
       renderMemberData(data.data);
       
@@ -377,7 +378,7 @@ function renderTasks(tasks) {
     
     const taskDeadline = document.createElement('div');
     taskDeadline.className = 'task-deadline';
-    taskDeadline.innerHTML = `<i class="icon clock-icon"></i> Due ${task.time   }`;
+    taskDeadline.innerHTML = `<i class="icon clock-icon"></i> Due ${task.time}`;
     
     taskHeader.appendChild(taskTitle);
     taskHeader.appendChild(taskDeadline);
@@ -483,7 +484,12 @@ function renderCurrentTasks(tasks) {
   progressBarFill.style.width = `${progressPercentage}%`;
   progressText.textContent = `${Math.round(progressPercentage)}% Complete`;
 
-  tasks.forEach(task => {
+/* ************************  drsh ******************** */
+let TasksNotExpired = tasks.filter(task => task.deadline > new Date().toISOString());
+
+TasksNotExpired.forEach(task => {
+/* ************************  drsh ******************** */
+  // tasks.forEach(task => {
     const taskElement = document.createElement('div');
     taskElement.className = 'task-item';
 
