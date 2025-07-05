@@ -324,7 +324,7 @@ function renderMemberData(data) {
   if (data.role === "leader" || data.role === "viceLeader") {
     relatedLinks.key = Links.leader;
   }
-  console.log(relatedLinks);
+  // console.log(relatedLinks);
   renderRelatedLinks(relatedLinks);
   renderTracks(data.startedTracks);
 }
