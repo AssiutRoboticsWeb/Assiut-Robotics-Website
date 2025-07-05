@@ -512,6 +512,8 @@ function renderCurrentTasks(tasks) {
   let TasksNotExpired = tasks.filter(
     (task) => task.deadline > new Date().toISOString()
   );
+  console.log(tasks);
+  
 
   TasksNotExpired.forEach((task) => {
     /* ************************  drsh ******************** */
