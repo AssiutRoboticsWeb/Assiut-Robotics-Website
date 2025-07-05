@@ -1,3 +1,4 @@
+
 var home = document.getElementById("home");
 var track = document.getElementById("track");
 var courseContainer = document.getElementById("course");
@@ -320,6 +321,16 @@ const electricData = {
     }
 };
 
+function getAllData(){
+    fetch("https://tempbackendelectrical-production.up.railway.app/api/data")
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            
+        }
+        )
+}
+
 // Render leaderboard with animation
 function renderLeaderboard(trackName = 'All Tracks', trackData) {
     console.log("rendering Leaderboard");
@@ -500,6 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // electricData.tracks = [...];
     // electricData.teamData = {...};
     // electricData.trackData = {...};
+    getAllData()
     renderLeaderboard('All Tracks', electricData.trackData);
     renderTeam(electricData.teamData.mainTeam, 'mainTeam');
     renderTeam(electricData.teamData.assistantTeam, 'assistantTeam');

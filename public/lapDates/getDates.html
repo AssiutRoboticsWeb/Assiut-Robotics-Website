@@ -369,7 +369,9 @@
 
         // دالة لتنسيق الوقت
         function formatTime(hour) {
-            return `${hour}:00`;
+            const period = hour >= 12 ? 'PM' : 'AM';
+            const displayHour = hour > 12 ? hour - 12 : hour;
+            return `${displayHour}:00 ${period}`;
         }
 
         function formatDateTime(dateString) {
@@ -393,6 +395,8 @@
                     }
                 });
                 const data = await response.json();
+                console.log(data);
+                
 
                 if (data.message === 'success') {
                     createCalendar(data.lapDates);
