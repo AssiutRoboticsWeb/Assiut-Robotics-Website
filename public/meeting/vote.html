@@ -495,6 +495,7 @@
                 if (response.ok) {
                     alert('تم حجز الموعد بنجاح');
                     timeSlotModal.hide();
+                    window.location.reload()
                     fetchMeetings(); // تحديث البيانات
                 } else {
                     alert('حدث خطأ: ' + result.message);
