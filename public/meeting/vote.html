@@ -240,6 +240,8 @@
         let selectedTimeId = null;
         let selectedTime = null;
         let currentMeeting = null;
+        let currentTime = null;
+        const userId = JSON.parse(localStorage.getItem("data"))._id
         const timeSlotModal = new bootstrap.Modal(document.getElementById('timeSlotModal'));
 
         // جلب بيانات الاجتماعات
@@ -423,7 +425,7 @@
         function showTimeSlotModal(timeSlot, meeting) {
             selectedTimeId = timeSlot._id;
             selectedTime = timeSlot.time;
-            
+            currentTime = timeSlot;
             document.getElementById('timeSlotTitle').textContent = `موعد ${timeSlot.time}`;
             
             const membersList = document.getElementById('bookedMembersList');
@@ -438,6 +440,7 @@
                 
                 timeSlot.bookedBy.forEach(bookedById => {
                     const member = meeting.members.find(m => m._id === bookedById);
+                    
                     if (member) {
                         const memberDiv = document.createElement('div');
                         memberDiv.className = 'member-item';
@@ -468,7 +471,14 @@
                 alert('الرجاء اختيار موعد');
                 return;
             }
-
+            console.log(currentTime);
+            console.log(userId);
+            
+            if(currentTime.bookedBy.includes(userId))
+            {
+                alert("بالفعل محجوز")
+                return;
+            }
             try {
                 const response = await fetch(`https://assiut-robotics-zeta.vercel.app/meeting/${currentMeetingId}/book`, {
                     method: 'POST',
@@ -490,8 +500,8 @@
                     alert('حدث خطأ: ' + result.message);
                 }
             } catch (error) {
-                console.error('حدث خطأ في حجز الموعد:', error);
                 alert('حدث خطأ في حجز الموعد');
+                console.error('حدث خطأ في حجز الموعد:', error);
             }
         }
 
