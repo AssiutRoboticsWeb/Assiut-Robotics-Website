@@ -1,3 +1,9 @@
+<style>
+    .remove{
+        display: none !important;
+    }
+</style>
+
 <div class="backdrop-container fade" id="backdrop"></div>
 <header class="topnav" id="myTopnav">
     <div class="flex-div1">
@@ -11,11 +17,11 @@
     </div>
     <div class="flex-div2 fade" id="flex-2">
         <!-- All Pages -->
-        <a href="../memberPage/" >Members</a>
+        <!-- <a href="../memberPage/" >Members</a> -->
         <a href="../projects/index.html" >Projects</a>
         <a href="../achievements/index.html" >Achievements</a>
-        <a href="../blog/index.html" >Blog</a>
-        <a href="../OC_page/component.html" >Components</a>
+        <!-- <a href="../blog/index.html" >Blog</a> -->
+        <!-- <a href="../OC_page/component.html" >Components</a> -->
         <a href="../Tracks/index.html" >Education</a>
         <a href="../about-us/about-us.html" >About Us</a>
 
@@ -33,3 +39,19 @@
         <a href="#MyFooter">Contact Us</a>
     </div>
 </header>
+<script>
+    let token = JSON.parse(localStorage.getItem("token"));
+    if(token != undefined)
+    {
+        console.log("profile");
+        
+        document.getElementById("login").classList = "remove"
+        document.getElementById("profile").classList = ""
+    }
+    else {
+        console.log("lgon");
+
+        document.getElementById("login").classList = ""
+        document.getElementById("profile").classList = "remove"
+    }
+</script>
