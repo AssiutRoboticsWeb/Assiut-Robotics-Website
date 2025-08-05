@@ -69,6 +69,7 @@ const Links = {
       { name: "Tracks manager", link: "../Tracks/admin.html" },
       { name: "members", link: "../leader/index.html" },
       { name: "Meeting vote", link: "../meeting/vote.html" },
+      { name: "Create meeting", link: "../meeting/addMeeting.html" },
     ],
     [],
   ],
