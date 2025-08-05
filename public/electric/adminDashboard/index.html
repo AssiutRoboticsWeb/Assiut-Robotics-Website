@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,15 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <div id="dashboard-container">
         <header id="header-section">
             <h2 id="header-title">Tracks</h2>
-            <button id="add-btn">Add Track</button>
+            <ul id="header-tabs">
+                <li><button class="add-btn" id="announce-track-btn">Announce Track</button></li>
+                <li><button class="add-btn" id="add-track-btn" class="active">Add Tracks</button></li>
+            </ul>
         </header>
         <main id="core-section">
             <!-- Dynamic content will be rendered here -->
@@ -30,6 +35,41 @@
             </form>
         </div>
     </div>
+    <!-- Application Btn & state -->
+
+    <section class="application-section" id="application-section">
+        <h2>Application Status</h2>
+        <div class="scroll-table">
+            <table id="application-table">
+                <thead>
+                    <tr>
+                         <th>#</th>   
+                        <th>Track Name</th>
+                        <th>Student Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="application-body">
+                    <!-- Dynamic application rows will be injected here -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <button id="application-btn" class="applay-btn">Application</button>
+
+
+
     <script src="main.js"></script>
 </body>
+
 </html>
