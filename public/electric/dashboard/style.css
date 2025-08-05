@@ -2,7 +2,7 @@ body {
   font-family: 'Arial', sans-serif;
   direction: rtl;
   margin: 20px;
-  background-color: #f9f9f9;
+  background-color: #1565c0;
 }
 
 h1 {
@@ -13,17 +13,17 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background: white;
+  background: #1976d2;
 }
 
 th, td {
-  border: 1px solid #ccc;
+  border: 1px solid #1976d2;
   padding: 10px;
   text-align: center;
 }
 
 th {
-  background-color: #eee;
+  background-color: #1976d2;
 }
 
 /* Modal */
@@ -36,11 +36,11 @@ th {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: #1976d2;
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #1976d2ff;
   margin: 10% auto;
   padding: 20px;
   width: 60%;
@@ -60,4 +60,25 @@ textarea, input {
   width: 100%;
   margin-bottom: 10px;
   padding: 8px;
+}
+
+.home-btn {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.home-btn:hover {
+  background-color: #1565c0; 
+}
+
+.home-btn:active {
+  background-color: #63a1ff; 
+  transform: scale(0.96); 
 }

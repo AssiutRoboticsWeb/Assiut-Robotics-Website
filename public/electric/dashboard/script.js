@@ -67,3 +67,7 @@ function submitCorrection() {
 }
 
 populateTable();
+
+function goToHome() {
+  window.location.href = "../index.html"; 
+}

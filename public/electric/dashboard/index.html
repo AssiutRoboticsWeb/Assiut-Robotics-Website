@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ar">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dahboard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <h1>Dashboard</h1>
   <table id="taskTable">
@@ -31,11 +33,14 @@
       <label>Feedback & Comments</label>
       <textarea id="commentInput" rows="3" required></textarea>
       <label>Rate:</label>
-      <input type="number" id="gradeInput" min="0" max="100" required/>
+      <input type="number" id="gradeInput" min="0" max="100" required />
       <button onclick="submitCorrection()">Send Feedback</button>
     </div>
   </div>
+<button class="home-btn" onclick="goToHome()">Main Page</button>
+
 
   <script src="script.js"></script>
 </body>
+
 </html>
