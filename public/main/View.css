@@ -370,3 +370,69 @@ h1 {
         scale: 1.5;
     }
 }
+
+/* ************************ Achievements **************************** */
+
+#Ach_cards{
+    width: 100%;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+
+}
+#Ach_cards div:hover{
+    background : #a9d2fc;
+    color: white;
+}
+.learnMore {
+    text-decoration: none !important;
+    border: 0;
+    background-color: #eef0e5;
+    padding: 1rem;
+    border-radius: 2rem ;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+.learnMore:hover{
+    scale: 1.1;
+}
+#Ach_cards div{
+    min-width: 40rem;
+    min-height: 30rem;
+    color: black ;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 2rem ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+    transition: all 0.2s ease-out;
+}
+#Ach_cards div:hover{
+    transition: all 0.2s ease-out;
+    scale: 1.02;
+}
+#Ach_cards div img{
+    width: 20rem;
+}
+#Ach_cards div p{
+    width: 30rem ;
+    white-space: pre-line;        
+}
+@media (max-width : 768px) {
+    #Ach_cards div{
+        min-width: 10px;
+    }
+    #Ach_cards div p{
+        width: auto;
+    }
+    #Ach_cards div img{
+        width: 15rem;
+    }
+}
