@@ -16,13 +16,15 @@ async function fetchTracks() {
         if (!response.ok) {
             throw new Error('Failed to fetch tracks', response.message);
         }
+        console.log(res);
+        
         return res.data;
     } catch (error) {
         console.error('Error fetching tracks:', error.message);
         return [];
     }
 }
-
+fetchTracks()
 
 // dummy data
 const trackData = {

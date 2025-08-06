@@ -1,4 +1,3 @@
-// const { log } = require("console");
 
 // API URLs
 const API_URL = "https://assiut-robotics-zeta.vercel.app/members/login";
@@ -38,6 +37,7 @@ const body = document.getElementsByTagName("body")[0];
 const main = document.getElementsByTagName("main")[0];
 const header = document.getElementsByTagName("header")[0];
 const progressBar = document.getElementsByClassName("progress-bar-fill")[0];
+const notificationCount = document.getElementById("notificationCount");
 
 // Related links
 const Links = {
@@ -513,8 +513,7 @@ function renderCurrentTasks(tasks) {
   let TasksNotExpired = tasks.filter(
     (task) => task.deadline > new Date().toISOString()
   );
-  console.log(tasks);
-  
+  console.log("tasks", tasks);
 
   TasksNotExpired.forEach((task) => {
     /* ************************  drsh ******************** */
@@ -646,6 +645,56 @@ async function initialize() {
   // if(!isValid)
   RelatedLinks();
   initializeDarkMode();
+}
+/* ----------------------------------- ED ----------------------------------- */
+let announceTrackData = localStorage.getItem("announceTrackData")
+  ? JSON.parse(localStorage.getItem("announceTrackData"))
+  : [];
+notificationCount.textContent = announceTrackData.length;
+let notificationList = document.getElementById("notificationList");
+// Render notifications
+announceTrackData.forEach((notification) => {
+  notificationList.innerHTML += `
+      <li class="notification-item" >
+      ${notification.name}
+      <br>
+      ${notification.description}
+      <br>
+      ${notification.announcementContent}
+      <br>
+      <button class="applay-btn" 
+      style="background-color: ${notification.applay.isApplaying ? "gray" : "green"}";
+      onclick="handelApplayBtn('${notification.id}', this)"
+      >Applay</button>
+      <span>${notification.applay.isApplaying ? notification.RequestStatus : "Not Applied yet"}</span>
+      </li>`;
+});
+
+// Toggle notifications sidebar
+function toggleNotifications() {
+  const sidebar = document.getElementById("notificationSidebar");
+  const overlay = document.getElementById("overlay");
+  sidebar.classList.toggle("active");
+  overlay.classList.toggle("active");
+}
+// handelApplayBtn
+function handelApplayBtn(id , e) {
+  e.disabled = true
+  e.style.backgroundColor = "gray";
+  const notification = announceTrackData.find((item) => item.id === id);
+  notification.applay = {
+    isApplaying: true,
+    email: currentMemberData.email,
+    Membername: currentMemberData.name,
+    trackId: notification.id,
+    trackName: notification.name,
+  };
+  announceTrackData.map((track, index) => {
+    if (track.id === id) {
+      track = { ...notification };
+    }
+  });
+  localStorage.setItem("announceTrackData", JSON.stringify(announceTrackData));
 }
 
 // Start the application
