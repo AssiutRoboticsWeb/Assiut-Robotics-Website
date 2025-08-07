@@ -41,7 +41,7 @@ const notificationCount = document.getElementById("notificationCount");
 
 // Related links
 const Links = {
-  general:[[{ name: "Meeting vote", link: "../meeting/vote.html" }]] ,
+  general:[[{ name: "Meeting vote", link: "../meeting/vote.html" },{ name: "Components", link: "../OC_page/component.html" }]] ,
   HR: [
     [{ name: "HR page", link: "../control-panel/addHrTocommittee.html" }],
   ],
