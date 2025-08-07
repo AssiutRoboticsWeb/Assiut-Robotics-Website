@@ -66,6 +66,8 @@ const Links = {
      // { name: "members", link: "../leader/index.html" },
     //  { name: "Meeting vote", link: "../meeting/vote.html" },
       { name: "Create meeting", link: "../meeting/addMeeting.html" },
+      { name: "Task manager", link: "../head/index.html" },
+
     ],
     [],
   ],
