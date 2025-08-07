@@ -41,46 +41,42 @@ const notificationCount = document.getElementById("notificationCount");
 
 // Related links
 const Links = {
+  general:[[{ name: "Meeting vote", link: "../meeting/vote.html" }]] ,
   HR: [
     [{ name: "HR page", link: "../control-panel/addHrTocommittee.html" }],
-    [{ name: "Meeting vote", link: "../meeting/vote.html" }],
   ],
   web: [],
   media: [
     [{ name: "Make blog", link: "../blog/add-blog.html" }],
-    [{ name: "Meeting vote", link: "../meeting/vote.html" }],
   ],
   OC: [
-    [],
     [
       { name: "Components management page", link: "../OC_page/OC.html" },
-      { name: "Meeting vote", link: "../meeting/vote.html" },
-    ],
+     ],
   ],
-  PR: [[], [{ name: "Meeting vote", link: "../meeting/vote.html" }]],
-  "AC Electric": [[], [{ name: "Meeting vote", link: "../meeting/vote.html" }]],
+  PR: [[]],
+  "AC Electric": [[]],
   "AC Mechanical": [
     [],
-    [{ name: "Meeting vote", link: "../meeting/vote.html" }],
   ],
   head: [
     [
       { name: "Task manager", link: "../head/index.html" },
-      { name: "Tracks manager", link: "../Tracks/admin.html" },
-      { name: "members", link: "../leader/index.html" },
-      { name: "Meeting vote", link: "../meeting/vote.html" },
+      { name: "Tracks manager", link: "../Tracks/adminDashboard/index.html" },
+     // { name: "members", link: "../leader/index.html" },
+    //  { name: "Meeting vote", link: "../meeting/vote.html" },
       { name: "Create meeting", link: "../meeting/addMeeting.html" },
     ],
     [],
   ],
   leader: [
     [
-      { name: "Leader page", link: "../leader/index.html" },
-      { name: "HR page", link: "../control-panel/addHrTocommittee.html" },
-      { name: "Make blog", link: "../blog/add-blog.html" },
-      { name: "Components management page", link: "../OC_page/OC.html" },
-      { name: "Task manager", link: "../head/index.html" },
-      { name: "Meeting vote", link: "../meeting/vote.html" },
+    //   { name: "Leader page", link: "../leader/index.html" },
+    //   { name: "HR page", link: "../control-panel/addHrTocommittee.html" },
+    //   { name: "Make blog", link: "../blog/add-blog.html" },
+    //   { name: "Components management page", link: "../OC_page/OC.html" },
+    //   { name: "Task manager", link: "../head/index.html" },
+    // //  { name: "Meeting vote", link: "../meeting/vote.html" },
       { name: "members", link: "../leader/index.html" },
     ],
   ],
@@ -264,6 +260,7 @@ async function submitCurrentTask(data) {
 
 // Render member profile data
 function renderMemberData(data) {
+
   localStorage.setItem("data", JSON.stringify(data));
   userAvatar.src = data.avatar;
   userAvatar.alt = `${data.name}'s avatar`;
@@ -276,7 +273,7 @@ function renderMemberData(data) {
   userStatus.className = `status-badge ${
     data.verified ? "verified" : "pending"
   }`;
-  let relatedLinks = {};
+  let relatedLinks = {general : Links.general};
 
   // إنشاء وإظهار Lab Dates للجميع
   const headerButtons = document.querySelector(".header-buttons");
@@ -325,7 +322,7 @@ function renderMemberData(data) {
   if (data.role === "leader" || data.role === "viceLeader") {
     relatedLinks.key = Links.leader;
   }
-  // console.log(relatedLinks);
+  console.log(relatedLinks);
   renderRelatedLinks(relatedLinks);
   renderTracks(data.startedTracks);
 }
@@ -468,8 +465,11 @@ function renderRelatedLinks(relatedLinks) {
   const relatedLinksList =
     document.getElementById("related-links").firstElementChild;
   relatedLinksList.innerHTML = "";
+  console.log("before fill");
+  
   for (const key in relatedLinks) {
     relatedLinks[key].forEach((link, index) => {
+      console.log(link);
       relatedLinks[key][index].forEach((link, index) => {
         const component = `
           <li name = "${link.name}"><a href="${link.link}">${link.name}</a></li>
@@ -478,6 +478,8 @@ function renderRelatedLinks(relatedLinks) {
       });
     });
   }
+  console.log("after fill");
+
 }
 // RelatedLinks btn
 function RelatedLinks() {
