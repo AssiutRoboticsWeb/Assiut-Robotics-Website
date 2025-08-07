@@ -16,7 +16,8 @@ table {
   background: #1976d2;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #1976d2;
   padding: 10px;
   text-align: center;
@@ -25,7 +26,7 @@ th, td {
 
 th {
   background-color: #1976d2;
-  color:#FFF685;
+  color: #FFF685;
 }
 
 /* Modal */
@@ -58,14 +59,15 @@ th {
   cursor: pointer;
 }
 
-textarea, input {
+textarea,
+input {
   width: 100%;
   margin-bottom: 10px;
   padding: 8px;
 }
 
 .home-btn {
-  background-color: #1976d2;
+  background-color: #ffb300;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -76,10 +78,46 @@ textarea, input {
 }
 
 .home-btn:hover {
-  background-color: #1565c0; 
+  background-color: #1565c0;
 }
 
 .home-btn:active {
-  background-color: #63a1ff; 
-  transform: scale(0.96); 
+  background-color: #FFF685;
+  transform: scale(0.96);
+}
+
+p strong {
+  color: white;
+}
+
+#taskAnswer {
+  color: white;
+}
+
+td button {
+  background-color: #ffb300;
+  text-decoration: solid;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+td button:hover {
+  background-color: #1565c0;
+}
+
+td button:active {
+  background-color: #FFF685;
+  transform: scale(0.96);
+}
+
+label {
+  color: white;
+}
+h1{
+  color:white;
 }

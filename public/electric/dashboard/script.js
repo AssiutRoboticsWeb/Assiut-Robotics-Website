@@ -34,7 +34,7 @@ function populateTable() {
       <td>${task.taskName}</td>
       <td>${task.status}</td>
       <td>${task.date}</td>
-      <td><button onclick="openModal(${task.id})">تصحيح</button></td>
+      <td><button onclick="openModal(${task.id})">Checking</button></td>
     `;
     tableBody.appendChild(row);
   });
@@ -47,6 +47,7 @@ function openModal(taskId) {
   commentInput.value = "";
   gradeInput.value = "";
   modal.style.display = "block";
+  modal.style.color = "white";
 }
 
 function closeModal() {
