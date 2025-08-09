@@ -19,7 +19,7 @@ function borrow(e){
                 componentId : e.target.id
             });
 
-        fetch("http://localhost:3000/components/requestToBorrow", {
+        fetch("https://assiut-robotics-server.vercel.app/components/requestToBorrow", {
             method: "POST",
             headers: {    
                 "Content-Type": "application/json",
