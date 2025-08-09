@@ -534,7 +534,11 @@ function renderBorrowedComponents(){
       body.innerHTML = "<h2>No borrowed components found</h2>";
     }
     res.data.forEach((element, index) => {
-        body.innerHTML += `
+      const deadlineDate = new Date(element.borrowedBy.deadlineDate);
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDeadline = deadlineDate.toLocaleDateString('en-US', options);
+      const color = (deadlineDate < new Date()) ? 'red' : 'green';
+      body.innerHTML += `
           <div class="card">
             <h1>${element.title}</h1>
             <img src="${element.image}" alt="component">
@@ -543,6 +547,8 @@ function renderBorrowedComponents(){
               <h4 class="col">${element.borrowedBy.member.name}</h4>
               <h4 class="col">${element.borrowedBy.member.committee}</h4>
             </div>
+              <h4 class="col" style="color: ${color}">${formattedDeadline}</h4>
+
             <div class="action row">
               <button class="col return" id="${index}">Return</button>
             </div>
