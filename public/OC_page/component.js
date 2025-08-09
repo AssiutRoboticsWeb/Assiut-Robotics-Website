@@ -1,10 +1,55 @@
+// const { application } = require("express");
+// const { json } = require("stream/consumers");
+
+// const { json } = require("stream/consumers");
 
 var components = [];
 const container = document.getElementById("mainComponents");
 
 
+function borrow(e){
+    console.log(e.target.id);
+    var token = localStorage.getItem("token");
+    console.log("token ",token);
+    
+    var userAsurance = window.prompt("Are you sure Y/N","N");
+    if(userAsurance == 'Y'){
+        // create the form 
+        console.log({
+                componentId : e.target.id
+            });
+
+        fetch("http://localhost:3000/components/requestToBorrow", {
+            method: "POST",
+            headers: {    
+                "Content-Type": "application/json",
+                Authorization: "bearer " + token
+            },
+            body: JSON.stringify({
+                componentId: e.target.id
+            })
+        }).then(res => res.json())
+        .then((res)=> {
+            console.log(res);
+            if(res.message == "jwt expired")
+                alert("Please sign in first to be able to borrow")
+            if(res.satus == "200")
+            {
+                alert("borrowed successfully")
+            }
+            else{
+                alert(res.message);
+            }
+        })
+        .catch(err => console.error(err))
+        // submit the form
+    }
+    else if(userAsurance == 'N'){
+        return
+    }
+}
 const getComponents = async () => {
-    const response = await fetch("https://assiut-robotics-zeta.vercel.app/components/getComponents")
+    const response = await fetch("https://assiut-robotics-server.vercel.app/components/getComponents")
     if (response.ok) {
         const res = await response.json()
         components = res.data;
@@ -34,11 +79,11 @@ const getComponents = async () => {
                 container.innerHTML = "";
                 // loop through the components
                 for(let i = button.id * step; i < Math.min(step * (Number(button.id) + 1), components.length); i++) {
-                    console.log(i);
                     container.innerHTML += `
-                        <div class="component box" ">
+                        <div class="component box" >
                         <img src="${components[i].image}" alt="">
                         <div class="name"> ${components[i].title}</div>
+                         <button class="borrow" onclick="borrow(event)" id = "${components[i]._id}">Borrow</button>
                         </div>
                     `
                 }
@@ -66,10 +111,12 @@ search.addEventListener("input", () => {
 
     container.innerHTML = "";
     componentsFounded.forEach(element => {
+
         container.innerHTML += `
                 <div class="component box">
                     <img src="${element.image}" alt="">
                     <div class="name"> ${element.title}</div>
+                    <button class="borrow" onclick="borrow(event)" id = "${element._id}">Borrow</button>
                 </div>`
     });
 });

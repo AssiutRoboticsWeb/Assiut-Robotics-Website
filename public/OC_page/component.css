@@ -26,8 +26,22 @@ body{
 .component {
     text-align: center;
     width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     /* background-color: aqua; */
 
+}
+.borrow{
+    border: none;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 3rem;
+    transition: all 0.2s ease-out;
+}
+.borrow:hover{
+    color: #007bff;
 }
 
 .component>img {
