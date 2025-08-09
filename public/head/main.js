@@ -14,7 +14,7 @@ const membersList = document.getElementById('membersList');
 
 
 const adminData = JSON.parse(localStorage.getItem('data'));
-const committee = adminData.committee;
+var committee = adminData.committee;
 console.log("committee",committee);
 
 var role = adminData.role;

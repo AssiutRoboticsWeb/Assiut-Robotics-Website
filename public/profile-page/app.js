@@ -307,8 +307,6 @@ function renderMemberData(data) {
     if (data.committee === key) {
       if (data.role === "head" || data.role === "vice") {
         relatedLinks[key] = Links[key];
-      } else {
-        relatedLinks[key] = Links[key][1];
       }
     }
   }
@@ -468,6 +466,7 @@ function renderRelatedLinks(relatedLinks) {
   console.log("before fill");
   
   for (const key in relatedLinks) {
+    
     relatedLinks[key].forEach((link, index) => {
       console.log(link);
       relatedLinks[key][index].forEach((link, index) => {
