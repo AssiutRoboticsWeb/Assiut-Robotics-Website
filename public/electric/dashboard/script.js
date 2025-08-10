@@ -140,5 +140,5 @@ window.addEventListener("click", (e) => {
 });
 
 function goToPage() {
-  window.location.href = ""; 
+  window.location.href = "../index.html"; 
 }

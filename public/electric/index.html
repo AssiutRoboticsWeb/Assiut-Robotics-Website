@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assiut Robotics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        
+        <div class="logo">
+            <img src="../all-images/default.png" alt=""> 
+            <a href="#" class="active" onclick = "goHome()">Assiut Robotics</a></div>
+    </nav>
+
+    <header class="hero" id="header">
+        <h1>Welcome to Assiut Robotics</h1>
+        <p>Learn How to Learn</p>
+    </header>
+    <div id = "home">
+        <section class="tracks">
+            
+        </section>
+
+        <section class="leaderboard">
+            <h2>Track Leaderboards</h2>
+            <div class="track-filters">
+                <button class="active">All Tracks</button>
+                <button>Hardware</button>
+                <button>Computer Vision</button>
+                <button>ROS & Raspberry</button>
+                <button>Embedded</button>
+            </div>
+            <div id="leaderboardList"></div>
+        </section>
+
+        <section class="team">
+            <h2>Meet Our Team</h2>
+            <div class="team-grid" id="mainTeam"></div>
+        </section>
+
+        <section class="team">
+            <h2>Our Assistant Team</h2>
+            <div class="team-grid" id="assistantTeam"></div>
+        </section>
+
+        <section class="team">
+            <h2>Our HR Team</h2>
+            <div class="team-grid" id="hrTeam"></div>
+        </section>
+    </div>
+    <div id="track"></div>
+    <div id="course"></div>
+    <footer>
+        <p>made by </p>
+    </footer>
+    <script src="https://kit.fontawesome.com/79904cb93e.js" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+</html>
