@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dahboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Dashboard</h1>
+  <table id="taskTable">
+    <thead>
+      <tr>
+        <th>Person</th>
+        <th>Task</th>
+        <th>State</th>
+        <th>Date</th>
+        <th>Rate</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- نافذة التصحيح -->
+  <div id="correctionModal" class="modal">
+    <div class="modal-content">
+      <span class="closeBtn" onclick="closeModal()">&times;</span>
+      <h2 id="taskTitle">Rate Task </h2>
+      <p><strong>Answer Task:</strong></p>
+      <p id="taskAnswer"></p>
+      <label>Feedback & Comments</label>
+      <textarea id="commentInput" rows="3" required></textarea>
+      <label>Rate:</label>
+      <input type="number" id="gradeInput" min="0" max="100" required/>
+      <button onclick="submitCorrection()">Send Feedback</button>
+    </div>
+  </div>
+
+
+  <!-- نافذة تسليم المهمة -->
+  <div id="submitModal" class="modal">
+    <div class="modal-content">
+      <span class="closeBtn" onclick="closeSubmitModal()">&times;</span>
+      <h2>تسليم المهمة</h2>
+      <form id="submissionForm">
+        <div class="form-row">
+          <label for="trackName">المسار (Track)</label>
+          <input type="text" id="trackName" placeholder="مثال: Frontend" required />
+        </div>
+        <div class="form-row">
+          <label for="courseName">اسم الكورس</label>
+          <input type="text" id="courseName" placeholder="مثال: JavaScript 101" required />
+        </div>
+        <div class="form-row">
+          <label for="taskNameInput">اسم المهمة</label>
+          <input type="text" id="taskNameInput" placeholder="سيتم تعبئته تلقائياً" required />
+        </div>
+        <div class="form-row">
+          <label for="fileInput">رفع الملف</label>
+          <input type="file" id="fileInput" required />
+        </div>
+        <button type="submit" class="primary">إرسال</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
