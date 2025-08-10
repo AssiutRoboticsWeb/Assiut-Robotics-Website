@@ -138,3 +138,7 @@ window.addEventListener("click", (e) => {
   if (e.target === submitModal) closeSubmitModal();
   if (e.target === modal) closeModal();
 });
+
+function goToPage() {
+  window.location.href = ""; 
+}

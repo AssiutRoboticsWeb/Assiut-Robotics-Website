@@ -70,7 +70,7 @@ button {
   cursor: pointer;
 }
 
-button.rateBtn { background-color: #6c757d; color: #fff; }
+button.rateBtn { background-color: #ffb300; color: #fff; }
 button.submitBtn { background-color: #1976d2; color: #fff; margin-inline-start: 6px; }
 button.primary { background-color: #1976d2; color: #fff; }
 
