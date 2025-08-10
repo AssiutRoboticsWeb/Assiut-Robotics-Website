@@ -83,7 +83,6 @@ const fileInput = document.getElementById("fileInput");
 function ensureUserId() {
   let uid = localStorage.getItem("userId");
   if (!uid) {
-    // إنشاء آي دي مؤقت إذا لم يكن موجوداً
     uid = "user-" + Math.random().toString(36).slice(2, 10);
     localStorage.setItem("userId", uid);
   }
@@ -92,7 +91,6 @@ function ensureUserId() {
 
 function openSubmitModal(taskId) {
   selectedTask = tasks.find(t => t.id === taskId) || null;
-  // املأ اسم المهمة تلقائياً من الصف إن وجد
   if (selectedTask) {
     taskNameInput.value = selectedTask.taskName;
   }
@@ -127,7 +125,6 @@ submissionForm?.addEventListener("submit", (e) => {
     taskName: taskNameInput.value.trim()
   };
 
-  // خزّنها محلياً لعرضها لاحقاً إن أردت
   const saved = JSON.parse(localStorage.getItem("submissions") || "[]");
   saved.push(submission);
   localStorage.setItem("submissions", JSON.stringify(saved));
@@ -137,7 +134,6 @@ submissionForm?.addEventListener("submit", (e) => {
   closeSubmitModal();
 });
 
-// إغلاق المودال عند الضغط خارج المحتوى
 window.addEventListener("click", (e) => {
   if (e.target === submitModal) closeSubmitModal();
   if (e.target === modal) closeModal();
