@@ -14,14 +14,21 @@
         <header id="header-section">
             <h2 id="header-title">Tracks</h2>
             <ul id="header-tabs">
-                <li><button class="add-btn" id="announce-track-btn">Announce Track</button></li>
-                <li><button class="add-btn" id="add-track-btn" class="active">Add Tracks</button></li>
+                <li class="header-buttons">
+                    <button class="add-btn" id="add-track-btn" class="active">All Tracks</button>
+                    <button class="add-btn" id="all-announce-tracks-btn">Announcement Tracks</button>
+                </li>
+                <li class="control-buttons" id="all-tracks-ctrl-btns">
+                    <button class="custom-btn" id="custom-back-btn" onclick="backForword(this)">Back </button>
+                    <button class="custom-btn" id="custom-add-btn" onclick="addSomething(this)">Add </button>
+                </li>
             </ul>
         </header>
         <main id="core-section">
             <!-- Dynamic content will be rendered here -->
         </main>
     </div>
+
 
     <!-- Modal for Add/Edit Track/Course/Task -->
     <div id="modal" class="modal">
@@ -43,7 +50,7 @@
             <table id="application-table">
                 <thead>
                     <tr>
-                         <th>#</th>   
+                        <th>#</th>
                         <th>Track Name</th>
                         <th>Student Name</th>
                         <th>Action</th>
