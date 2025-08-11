@@ -69,12 +69,16 @@ function renderContainers(committees) {
         container.appendChild(membersHeading);
 
         if (committee && committee.length > 0) {
-            committee
+            const order = { head: 1, vice: 2, member: 3, "not accepted" : 4 };
+            // Sort by custom order
+            committee.sort((a, b) => order[a.role] - order[b.role]);
+            console.log(committee);
+            
             committee.forEach(member => {
                 const memberCard = document.createElement('div');
                 memberCard.className = 'card';
 
-                if (member.role !== "not accepted") {
+                if (member.role !== "not accepted" && member.committee != "manager") {
                     memberCard.innerHTML = `
                         <p>${member.name} (${member.role})</p>
                         <button onclick="approveMember('${member.email}','${false}')">Remove</button>
@@ -85,11 +89,17 @@ function renderContainers(committees) {
                         ${member.role !== 'vice' ? `<button onclick="setVice('${member._id}')">Set Vice</button>` : ''}
                         <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
                     `;
-                } else {
+                } else if(  member.committee != "manager") {
                     memberCard.innerHTML = `
                         <p>${member.name} (${member.role})</p>
                         <button onclick="approveMember('${member.email}','${true}')">Accept</button>
                         <button onclick="approveMember('${member.email}','${false}')">Remove</button>
+                        <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
+                    `;
+                }
+                else{
+                      memberCard.innerHTML = `
+                        <p>${member.name} (${member.role})</p>
                         <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
                     `;
                 }
