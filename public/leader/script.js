@@ -81,7 +81,7 @@ function renderContainers(committees) {
                 if (member.role !== "not accepted" && member.committee != "manager") {
                     memberCard.innerHTML = `
                         <p>${member.name} (${member.role})</p>
-                        <button onclick="approveMember('${member.email}','${false}')">Remove</button>
+                        <button onclick="approveMember('${member.name}','${member.email}','${false}')">Remove</button>
                         ${member.role !== 'head'
                             ? `<button onclick="setHead('${member._id}')">Set Head</button>`
                             : ''
@@ -227,7 +227,9 @@ async function removeMember(committeeId, memberId) {
     location.reload();
 }
 
-async function approveMember(email, accepted) {
+async function approveMember(name,email, accepted) {
+    var answer =window.prompt(`are sure you want to ${accepted ? "accept" : "remove"} ${name} `, "N")
+    if(answer == 'N'){return}
     try {
         
         console.log(email,accepted);
