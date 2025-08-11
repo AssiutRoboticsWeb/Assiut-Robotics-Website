@@ -1,4 +1,3 @@
-
 var home = document.getElementById("home");
 var track = document.getElementById("track");
 var courseContainer = document.getElementById("course");
@@ -6,20 +5,25 @@ var header = document.getElementById("header")
 var backward_BTN = `<div><button onclick = "window.history.back()" class ="backward" > <i class="fa-solid fa-angle-left " style="color: #FFD43B;" ></i> </button></div>`
 
 // backend api
-const backendUrl = "https://assiut-robotics-zeta.vercel.app/";
+const backendUrl = "https://assiut-robotics-server.vercel.app/";
 //  =================  
 
 async function fetchTracks() {
+    console.clear()
     try {
-        const response = await fetch(`${backendUrl}/electric/getAllTracks`);
+        const response = await fetch(`${backendUrl}tracks/`);
         const res = await response.json();
         if (!response.ok) {
+            console.log(response);
+            
             throw new Error('Failed to fetch tracks', response.message);
         }
-        console.log(res);
+        console.log(response);
         
         return res.data;
     } catch (error) {
+        console.log(error);
+        
         console.error('Error fetching tracks:', error.message);
         return [];
     }
