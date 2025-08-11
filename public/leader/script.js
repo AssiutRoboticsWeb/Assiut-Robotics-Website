@@ -130,8 +130,14 @@ function renderContainers(committees) {
 }
 
 function showMemberInfo(member) {
+    console.log(member);
+    
     const infoContainer = document.getElementById('member-info');
+    console.log(infoContainer);
+    infoContainer.style.display = 'block'; // Show the info container
     infoContainer.innerHTML = `
+            <div  class = "close" > <button onclick = "closeInfo()"> X </button> </div>
+
         <div class="info-card">
             <img src="${member.avatar}" alt="${member.name}" class="avatar" />
             <h2>${member.name}</h2>
@@ -144,7 +150,9 @@ function showMemberInfo(member) {
         </div>
     `;
 }
-
+function closeInfo(){
+    document.getElementById('member-info').style.display = 'none';
+}
 function categorizeMembersByCommittee(members) {
     // Initialize an empty object to hold categorized members
     console.log("categorizeMembersByCommittee");
