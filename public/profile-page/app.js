@@ -65,19 +65,21 @@ const Links = {
       { name: "Tracks manager", link: "../Tracks/adminDashboard/index.html" },
      // { name: "members", link: "../leader/index.html" },
     //  { name: "Meeting vote", link: "../meeting/vote.html" },
+      { name: "Leader page", link: "../leader/index.html" },
       { name: "Create meeting", link: "../meeting/addMeeting.html" },
     ],
     [],
   ],
   leader: [
     [
-    //   { name: "Leader page", link: "../leader/index.html" },
     //   { name: "HR page", link: "../control-panel/addHrTocommittee.html" },
     //   { name: "Make blog", link: "../blog/add-blog.html" },
     //   { name: "Components management page", link: "../OC_page/OC.html" },
     //   { name: "Task manager", link: "../head/index.html" },
     // //  { name: "Meeting vote", link: "../meeting/vote.html" },
       { name: "members", link: "../leader/index.html" },
+      { name: "Leader page", link: "../leader/index.html" },
+
     ],
   ],
 };
