@@ -74,16 +74,25 @@ function renderContainers(committees) {
                 const memberCard = document.createElement('div');
                 memberCard.className = 'card';
 
-                memberCard.innerHTML = `
-                    <p>${member.name} (${member.role})</p>
-                    ${member.role == "not accepted" ? `<button onclick="approveMember('${member.email}','${true}')">accept</button>` : ''}
-                    <button onclick="approveMember( '${member.email}','${false}')">Remove</button>
-                    ${member.role !== 'Head'
-                        ? `<button onclick="setHead('${member._id}')">Set Head</button>`
-                        : ''
-                    }
-                <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
-        `;
+                if (member.role !== "not accepted") {
+                    memberCard.innerHTML = `
+                        <p>${member.name} (${member.role})</p>
+                        <button onclick="approveMember('${member.email}','${false}')">Remove</button>
+                        ${member.role !== 'head'
+                            ? `<button onclick="setHead('${member._id}')">Set Head</button>`
+                            : ''
+                        }
+                        ${member.role !== 'vice' ? `<button onclick="setVice('${member._id}')">Set Vice</button>` : ''}
+                        <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
+                    `;
+                } else {
+                    memberCard.innerHTML = `
+                        <p>${member.name} (${member.role})</p>
+                        <button onclick="approveMember('${member.email}','${true}')">Accept</button>
+                        <button onclick="approveMember('${member.email}','${false}')">Remove</button>
+                        <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
+                    `;
+                }
                 container.appendChild(memberCard);
             });
         } else {
@@ -232,6 +241,28 @@ async function setHead(memberId) {
 
     try{
     const res=await fetch(`https://assiut-robotics-zeta.vercel.app/members/changeHead`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization':`Bearer ${token}`
+           
+           },
+        body: JSON.stringify({ memberId })
+    });
+    const response=await res.json();
+    alert(response.message)
+    console.log(response);
+    
+    location.reload();
+} catch (error) {
+       window.alert(error.message) 
+}
+}
+async function setVice(memberId) {
+    const token=window.localStorage.getItem('token')
+
+    try{
+    const res=await fetch(`https://assiut-robotics-server.vercel.app/members/changeVice`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
