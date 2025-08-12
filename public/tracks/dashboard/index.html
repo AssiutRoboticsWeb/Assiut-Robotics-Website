@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar">
-
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dahboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <h1>Dashboard</h1>
   <button class="home-btn" onclick="goToHome()">Main Page</button>
@@ -17,9 +15,11 @@
       <tr>
         <th>Person</th>
         <th>Task</th>
+        <th>Course</th>
+        <th>Track</th>
         <th>State</th>
         <th>Date</th>
-        <th>Rate</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -28,20 +28,29 @@
   <!-- نافذة التصحيح -->
   <div id="correctionModal" class="modal">
     <div class="modal-content">
-      <span class="closeBtn" onclick="closeModal()">&times;</span>
-      <h2 id="taskTitle">Rate Task </h2>
+      <span class="closeBtn" onclick="closeModal('correctionModal')">&times;</span>
+      <h2 id="taskTitle">Rate Task</h2>
       <p><strong>Answer Task:</strong></p>
       <p id="taskAnswer"></p>
       <label>Feedback & Comments</label>
       <textarea id="commentInput" rows="3" required></textarea>
       <label>Rate:</label>
-      <input type="number" id="gradeInput" min="0" max="100" required />
+      <input type="number" id="gradeInput" min="0" max="100" required/>
       <button onclick="submitCorrection()" class="home-btn">Send Feedback</button>
     </div>
   </div>
 
+  <!-- نافذة تسليم بالرابط فقط -->
+  <div id="submitModal" class="modal">
+    <div class="modal-content">
+      <span class="closeBtn" onclick="closeModal('submitModal')">&times;</span>
+      <h2 id="submitTitle">تسليم التاسك</h2>
+      <p class="hint">حط لينك التسليم (GitHub/Drive/Netlify...)</p>
+      <input type="url" id="taskLinkInput" placeholder="https://..." required/>
+      <button onclick="submitTaskLink()" class="home-btn">تأكيد التسليم</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
-
 </html>
