@@ -85,7 +85,7 @@ function submitCorrection() {
     return;
   }
 
-  // هنا ممكن تبعت ريكويست للباك إند لو حابب
+ 
   alert(`Task Has Been Checked!\n\nYour Comment: ${comment}\nThe Rate: ${grade}`);
   closeModal("correctionModal");
 }
@@ -109,7 +109,6 @@ async function submitTaskLink() {
     return;
   }
 
-  // قراءة userId من localStorage — عدّل المفتاح لو مختلف عندك
   const userId = localStorage.getItem("userId") || localStorage.getItem("user_id");
   if (!userId) {
     alert("لم يتم العثور على userId في localStorage");
