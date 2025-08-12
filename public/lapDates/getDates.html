@@ -448,13 +448,12 @@
                     appointments.forEach((apt, index) => {
                         const startDate = new Date(apt.startDate);
                         const endDate = new Date(apt.endDate);
-
                         if (startDate.getDate() === day.getDate() &&
                             startDate.getMonth() === day.getMonth() &&
                             // startDate.getHours() <= hour &&
                             // endDate.getHours() > hour) {
                             startDate.getUTCHours() <= hour &&
-                            endDate.getUTCHours() > hour) {
+                            endDate.getUTCHours() >= hour) {
 
                             const appointment = document.createElement('div');
                             appointment.className = 'appointment';

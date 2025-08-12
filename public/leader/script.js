@@ -69,21 +69,40 @@ function renderContainers(committees) {
         container.appendChild(membersHeading);
 
         if (committee && committee.length > 0) {
-            committee
+            const order = { head: 1, vice: 2, member: 3, "not accepted" : 4 };
+            // Sort by custom order
+            committee.sort((a, b) => order[a.role] - order[b.role]);
+            console.log(committee);
+            
             committee.forEach(member => {
                 const memberCard = document.createElement('div');
                 memberCard.className = 'card';
 
-                memberCard.innerHTML = `
-                    <p>${member.name} (${member.role})</p>
-                    ${member.role == "not accepted" ? `<button onclick="approveMember('${member.email}','${true}')">accept</button>` : ''}
-                    <button onclick="approveMember( '${member.email}','${false}')">Remove</button>
-                    ${member.role !== 'Head'
-                        ? `<button onclick="setHead('${member._id}')">Set Head</button>`
-                        : ''
-                    }
-                <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
-        `;
+                if (member.role !== "not accepted" && member.committee != "manager") {
+                    memberCard.innerHTML = `
+                        <p>${member.name} (${member.role})</p>
+                        <button onclick="approveMember('${member.name}','${member.email}','${false}')">Remove</button>
+                        ${member.role !== 'head'
+                            ? `<button onclick="setHead('${member._id}')">Set Head</button>`
+                            : ''
+                        }
+                        ${member.role !== 'vice' ? `<button onclick="setVice('${member._id}')">Set Vice</button>` : ''}
+                        <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
+                    `;
+                } else if(  member.committee != "manager") {
+                    memberCard.innerHTML = `
+                        <p>${member.name} (${member.role})</p>
+                        <button onclick="approveMember('${member.email}','${true}')">Accept</button>
+                        <button onclick="approveMember('${member.email}','${false}')">Remove</button>
+                        <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
+                    `;
+                }
+                else{
+                      memberCard.innerHTML = `
+                        <p>${member.name} (${member.role})</p>
+                        <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
+                    `;
+                }
                 container.appendChild(memberCard);
             });
         } else {
@@ -121,8 +140,14 @@ function renderContainers(committees) {
 }
 
 function showMemberInfo(member) {
+    console.log(member);
+    
     const infoContainer = document.getElementById('member-info');
+    console.log(infoContainer);
+    infoContainer.style.display = 'block'; // Show the info container
     infoContainer.innerHTML = `
+            <div  class = "close" > <button onclick = "closeInfo()"> X </button> </div>
+
         <div class="info-card">
             <img src="${member.avatar}" alt="${member.name}" class="avatar" />
             <h2>${member.name}</h2>
@@ -135,7 +160,9 @@ function showMemberInfo(member) {
         </div>
     `;
 }
-
+function closeInfo(){
+    document.getElementById('member-info').style.display = 'none';
+}
 function categorizeMembersByCommittee(members) {
     // Initialize an empty object to hold categorized members
     console.log("categorizeMembersByCommittee");
@@ -200,7 +227,9 @@ async function removeMember(committeeId, memberId) {
     location.reload();
 }
 
-async function approveMember(email, accepted) {
+async function approveMember(name,email, accepted) {
+    var answer =window.prompt(`are sure you want to ${accepted ? "accept" : "remove"} ${name} `, "N")
+    if(answer == 'N'){return}
     try {
         
         console.log(email,accepted);
@@ -232,6 +261,28 @@ async function setHead(memberId) {
 
     try{
     const res=await fetch(`https://assiut-robotics-zeta.vercel.app/members/changeHead`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization':`Bearer ${token}`
+           
+           },
+        body: JSON.stringify({ memberId })
+    });
+    const response=await res.json();
+    alert(response.message)
+    console.log(response);
+    
+    location.reload();
+} catch (error) {
+       window.alert(error.message) 
+}
+}
+async function setVice(memberId) {
+    const token=window.localStorage.getItem('token')
+
+    try{
+    const res=await fetch(`https://assiut-robotics-server.vercel.app/members/changeVice`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

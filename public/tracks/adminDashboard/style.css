@@ -35,41 +35,66 @@ html {
 }
 
 #header-section {
+  position: relative;
   width: 80vw;
-  min-height: 120px;
+  /* min-height: 120px; */
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: var(--secondary-color);
   border-radius: 18px;
-  margin-bottom: 32px;
-  padding: 32px 48px;
+  margin-bottom: 4rem;
+  padding: 1rem ;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
-
 #header-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
   color: var(--header-color);
   font-weight: 700;
   letter-spacing: 1px;
 }
 #header-tabs {
   display: flex;
+  flex-direction: column;
   list-style-type: none;
-  gap: 20px;
 }
-#header-tabs li a {
-  text-decoration: none;
+/* --------- */
+.control-buttons{
+  display: flex;
+  justify-content: center;
+    gap: 20%;
+    /* background-color: tan; */
+    position: absolute;
+    top: calc(100% + .25rem);
+    left: 50%;
+    transform: translateX(-50%);
 }
+.custom-btn{
+    background-color: var(--accent-color);
+    color: black;
+    border: none;
+    border-radius: 10px;
+    padding: .5rem 1rem;
+    font-size: clamp(0.8rem, 1vw, 1.1rem);
+    font-weight: 600;
+    cursor: pointer;
+
+}
+.header-buttons{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+} 
 .add-btn,
 #add-btn,
 .back-btn {
+ white-space: nowrap;
   background: var(--accent-color);
   color: var(--secondary-color);
   border: none;
   border-radius: 8px;
-  padding: 12px 28px;
+  padding: .5rem;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
@@ -80,7 +105,11 @@ html {
   background: var(--hover-color);
   color: var(--text-color);
 }
-
+/* --------------------------- ED cancel back btn --------------------------- */
+.back-btn {
+  display: none;
+}
+/* -------------------------------------------------------------------------- */
 #core-section {
   width: 80vw;
   display: flex;
@@ -155,6 +184,9 @@ html {
 }
 .modal.show {
   display: flex;
+}
+.hide{
+  display: none;
 }
 .modal-content {
   background: var(--modal-content-bg);
@@ -237,7 +269,6 @@ html {
   font-weight: 600;
   cursor: pointer;
 }
-
 .action-btn {
   background-color: var(--accent-color);
   color: white;
@@ -299,3 +330,31 @@ th {
 tr:hover {
   background-color: var(--hover-color);
 }
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/* ------------------------------ ED resbonsive ----------------------------- */
+@media screen and (max-width: 850px) {
+#header-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+}
+.add-btn,
+#add-btn,
+.back-btn {
+ white-space: wrap;
+  padding: .25rem;
+  font-size: 1rem;
+}
+}
+
+
+
+
+
+
+
+
+
