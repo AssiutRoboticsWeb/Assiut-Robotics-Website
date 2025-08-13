@@ -193,6 +193,8 @@ header .notifications .notifications-icon:hover + .notification-content {
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
+  /* ========= */
+  position: relative;
 }
 
 .header-buttons {
@@ -673,7 +675,10 @@ main {
   top: 50%;
   width: fit-content;
   height: fit-content;
+<<<<<<< Updated upstream
   transform: translateX(-50%) translateY(-5%);
+=======
+>>>>>>> Stashed changes
   background-color: var(--accent-color);
   border-radius: 0.25rem;
   padding: 1rem 1rem;
@@ -681,6 +686,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  transform: translateX(-50%) translateY(5%);
 }
 #related-links ul li {
   margin-bottom: 0.5rem;
@@ -698,7 +704,11 @@ main {
     transform: translateX(-50%) translateY(25%);
   }
   100% {
+<<<<<<< Updated upstream
     transform: translateX(-50%) translateY(20%);
+=======
+    transform: translateX(-50%) translateY(5%);
+>>>>>>> Stashed changes
   }
 }
 .disapear {

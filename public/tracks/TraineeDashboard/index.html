@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Trainee Dashboard</title>
+
+</head>
+<body>
+  <header>
+    <h1>Trainee Dashboard</h1>
+  </header>
+  <div class="dashboard">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="completed">Completed Tasks</button>
+      <button class="tab-btn" data-tab="ranks">Ranks</button>
+    </div>
+
+    <!-- Completed Tasks Tab -->
+    <div id="completed" class="tab-content active">
+      <h2>Completed Tasks</h2>
+      <label for="courseSelect"><strong>Select Course:</strong></label>
+      <select id="courseSelect">
+        <option value="">-- Choose a course --</option>
+        <option value="Frontend">Frontend</option>
+        <option value="Backend">Backend</option>
+      </select>
+
+      <div class="table-container" id="completedTable" style="display:none">
+        <table>
+          <thead >
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Track</th>
+              <th>Task</th>
+              <th>Hours</th>
+              <th>Points</th>
+              <th>Task Link</th>
+            </tr>
+          </thead>
+          <tbody id="taskBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Ranks Tab -->
+    <div id="ranks" class="tab-content">
+      <h2>Ranks</h2>
+      <p>selectd Course : <span id="selectedCourseForRank"></span></p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Rank</th>
+            </tr>
+          </thead>
+          <tbody id="rankBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+
+</html>

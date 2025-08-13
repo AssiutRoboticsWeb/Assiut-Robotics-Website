@@ -74,6 +74,7 @@ function renderTracks() {
   selectedTrackIndex = null;
   selectedCourseIndex = null;
   headerTitle.textContent = "Tracks";
+  headerTitle.setAttribute("title", headerTitle.textContent) 
   // addTrackBtn.textContent = "Add Track";
   //   addTrackBtn.onclick = () => openModal("track");
   coreSection.innerHTML = "";
@@ -168,6 +169,7 @@ function renderTasks(trackIdx, courseIdx) {
   const track = electricData.tracks[trackIdx];
   const course = track.courses[courseIdx];
   headerTitle.innerHTML = `${track.icon} ${track.name} / ${course.name} - Tasks`;
+  headerTitle.setAttribute("title", headerTitle.textContent) 
   // addTrackBtn.textContent = "Add Task";
   //   addTrackBtn.onclick = () => openModal("task");
   coreSection.innerHTML = "";
@@ -222,6 +224,7 @@ function renderAnnounceTracks() {
   selectedTrackIndex = null;
   selectedCourseIndex = null;
   headerTitle.textContent = "Announce Tracks";
+  headerTitle.setAttribute("title", headerTitle.textContent) 
   //   announceTrackBtn.textContent = "Add Track Announcement";
   // addTrackBtn.textContent = "Add Track";
 
