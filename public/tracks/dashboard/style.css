@@ -1,13 +1,10 @@
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   direction: rtl;
   margin: 20px;
   background-color: #1565c0;
 }
-
-h1 {
-  text-align: center;
-}
+h1 { text-align: center; color: white; }
 
 table {
   width: 100%;
@@ -15,109 +12,63 @@ table {
   margin-top: 20px;
   background: #1976d2;
 }
-
-th,
-td {
+th, td {
   border: 1px solid #1976d2;
   padding: 10px;
   text-align: center;
   color: white;
 }
+th { background-color: #1976d2; color: #FFF685; }
 
-th {
-  background-color: #1976d2;
-  color: #FFF685;
-}
-
-/* Modal */
+/* Modals */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
-  right: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 10;
+  inset: 0;
+  width: 100%; height: 100%;
   overflow: auto;
-  background-color: #1976d2;
+  background-color: rgba(0,0,0,0.3);
 }
-
 .modal-content {
-  background-color: #1976d2ff;
-  margin: 10% auto;
+  background-color: #1976d2;
+  margin: 8% auto;
   padding: 20px;
-  width: 60%;
+  width: min(600px, 92%);
   border-radius: 10px;
   position: relative;
+  color: white;
 }
-
 .closeBtn {
-  position: absolute;
-  top: 10px;
-  left: 15px;
-  font-size: 24px;
-  cursor: pointer;
+  position: absolute; top: 10px; left: 15px;
+  font-size: 24px; cursor: pointer;
 }
 
-textarea,
-input {
+textarea, input {
   width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
-}
-
-.home-btn {
-  background-color: #ffb300;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  margin-bottom: 12px;
+  padding: 10px;
   border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
+  border: 1px solid #1565c0;
+  outline: none;
 }
+.hint { color: #e3f2fd; margin: 6px 0 10px; }
 
-.home-btn:hover {
-  background-color: #1565c0;
-}
-
-.home-btn:active {
-  background-color: #FFF685;
-  transform: scale(0.96);
-}
-
-p strong {
-  color: white;
-}
-
-#taskAnswer {
-  color: white;
-}
-
-td button {
+.home-btn, td button {
   background-color: #ffb300;
-  text-decoration: solid;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
+  color: white; border: none;
+  padding: 10px 14px; font-size: 14px;
+  border-radius: 6px; cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.08s ease;
+}
+.home-btn:hover, td button:hover { background-color: #1565c0; }
+.home-btn:active, td button:active {
+  background-color: #FFF685; transform: scale(0.96); color: #0d47a1;
 }
 
-td button:hover {
-  background-color: #1565c0;
+/* أزرار الأكشن المتعددة */
+.actions {
+  display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
 }
-
-td button:active {
-  background-color: #FFF685;
-  transform: scale(0.96);
-}
-
-label {
-  color: white;
-}
-h1{
-  color:white;
-}
+.btn-secondary { background-color: #29b6f6; }
+.btn-secondary:hover { background-color: #0ea5e9; }
