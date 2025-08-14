@@ -1,29 +1,10 @@
-// ========= إعدادات عامة =========
-const backendUrl = "https://assiut-robotics-zeta.vercel.app"; // غيّر الدومين/المسار حسب الباك إند
-const SUBMIT_ENDPOINT = "/submissions/create";                 // عدّل المسار النهائي
+const backendUrl = "https://assiut-robotics-zeta.vercel.app";
+const SUBMIT_ENDPOINT = "/submissions/create";
 
-// داتا تجريبية — أضفت courseName و trackName
+// بيانات تجريبية
 const tasks = [
-  {
-    id: 1,
-    student: "Mai",
-    taskName: "Task 1",
-    courseName: "Frontend 101",
-    trackName: "Web",
-    status: "Waiting For Rate",
-    date: "2025-08-01",
-    answer: "Task Checked"
-  },
-  {
-    id: 2,
-    student: "Laren",
-    taskName: "Task 10",
-    courseName: "Frontend 201",
-    trackName: "Web",
-    status: "Task Checked",
-    date: "2025-07-28",
-    answer: "The Task was Good"
-  }
+  { id: 1, student: "Mai", taskName: "Task 1", courseName: "Frontend 101", trackName: "Web", status: "Waiting For Rate", date: "2025-08-01", answer: "Task Checked" },
+  { id: 2, student: "Laren", taskName: "Task 10", courseName: "Frontend 201", trackName: "Web", status: "Task Checked", date: "2025-07-28", answer: "The Task was Good" }
 ];
 
 const tableBody    = document.querySelector("#taskTable tbody");
@@ -40,19 +21,18 @@ const taskLinkInput  = document.getElementById("taskLinkInput");
 
 let selectedTask = null;
 
-// ========= بناء الجدول =========
 function populateTable() {
   tableBody.innerHTML = "";
   tasks.forEach(task => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${task.student}</td>
-      <td>${task.taskName}</td>
-      <td>${task.courseName}</td>
-      <td>${task.trackName}</td>
-      <td>${task.status}</td>
-      <td>${task.date}</td>
-      <td>
+      <td data-label="Person">${task.student}</td>
+      <td data-label="Task">${task.taskName}</td>
+      <td data-label="Course">${task.courseName}</td>
+      <td data-label="Track">${task.trackName}</td>
+      <td data-label="State">${task.status}</td>
+      <td data-label="Date">${task.date}</td>
+      <td data-label="Actions">
         <div class="actions">
           <button class="btn-secondary" onclick="openSubmitModal(${task.id})">تسليم</button>
           <button onclick="openCorrectionModal(${task.id})">Checking</button>
@@ -64,7 +44,6 @@ function populateTable() {
 }
 populateTable();
 
-// ========= مودال التصحيح =========
 function openCorrectionModal(taskId) {
   selectedTask = tasks.find(t => t.id === taskId);
   if (!selectedTask) return;
@@ -85,12 +64,10 @@ function submitCorrection() {
     return;
   }
 
- 
   alert(`Task Has Been Checked!\n\nYour Comment: ${comment}\nThe Rate: ${grade}`);
   closeModal("correctionModal");
 }
 
-// ========= مودال التسليم بالرابط =========
 function openSubmitModal(taskId) {
   selectedTask = tasks.find(t => t.id === taskId);
   if (!selectedTask) return;
@@ -115,9 +92,8 @@ async function submitTaskLink() {
     return;
   }
 
-  // تكوين الأوبجكت المطلوب للباك إند
   const payload = {
-    taskName:  selectedTask.taskName,
+    taskName:   selectedTask.taskName,
     courseName: selectedTask.courseName,
     trackName:  selectedTask.trackName,
     userId:     userId,
@@ -136,11 +112,9 @@ async function submitTaskLink() {
       throw new Error(`Server responded ${res.status}. ${errText}`);
     }
 
-    // نجاح
     alert("تم تسليم التاسك بنجاح ✅");
     closeModal("submitModal");
 
-    // (اختياري) حدّث حالة الصف محلياً
     selectedTask.status = "Submitted";
     populateTable();
   } catch (e) {
@@ -149,7 +123,6 @@ async function submitTaskLink() {
   }
 }
 
-// ========= مساعدات =========
 function isValidUrl(u) {
   try {
     const x = new URL(u);
@@ -158,11 +131,20 @@ function isValidUrl(u) {
 }
 
 function openModal(id) {
-  document.getElementById(id).style.display = "block";
+  const el = document.getElementById(id);
+  el.style.display = "block";
+  el.setAttribute("aria-hidden", "false");
 }
 function closeModal(id) {
-  document.getElementById(id).style.display = "none";
+  const el = document.getElementById(id);
+  el.style.display = "none";
+  el.setAttribute("aria-hidden", "true");
 }
+
+window.addEventListener('click', (e) => {
+  if (e.target === correctionMd) closeModal('correctionModal');
+  if (e.target === submitMd) closeModal('submitModal');
+});
 
 function goToHome() {
   window.location.href = "../index.html";

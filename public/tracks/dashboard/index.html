@@ -10,44 +10,52 @@
   <h1>Dashboard</h1>
   <button class="home-btn" onclick="goToHome()">Main Page</button>
 
-  <table id="taskTable">
-    <thead>
-      <tr>
-        <th>Person</th>
-        <th>Task</th>
-        <th>Course</th>
-        <th>Track</th>
-        <th>State</th>
-        <th>Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <div class="table-wrap">
+    <table id="taskTable">
+      <thead>
+        <tr>
+          <th>Person</th>
+          <th>Task</th>
+          <th>Course</th>
+          <th>Track</th>
+          <th>State</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
   <!-- نافذة التصحيح -->
-  <div id="correctionModal" class="modal">
+  <div id="correctionModal" class="modal" aria-hidden="true" role="dialog">
     <div class="modal-content">
-      <span class="closeBtn" onclick="closeModal('correctionModal')">&times;</span>
+      <span class="closeBtn" onclick="closeModal('correctionModal')" aria-label="Close">&times;</span>
       <h2 id="taskTitle">Rate Task</h2>
       <p><strong>Answer Task:</strong></p>
       <p id="taskAnswer"></p>
-      <label>Feedback & Comments</label>
-      <textarea id="commentInput" rows="3" required></textarea>
-      <label>Rate:</label>
-      <input type="number" id="gradeInput" min="0" max="100" required/>
+
+      <label for="commentInput">Feedback & Comments</label>
+      <textarea id="commentInput" rows="3" required placeholder="اكتب ملاحظاتك هنا"></textarea>
+
+      <label for="gradeInput">Rate (0 - 100)</label>
+      <input type="number" id="gradeInput" min="0" max="100" required placeholder="مثال: 85"/>
+
       <button onclick="submitCorrection()" class="home-btn">Send Feedback</button>
+      <button class="close-btn-footer" onclick="closeModal('correctionModal')">إغلاق</button>
     </div>
   </div>
 
   <!-- نافذة تسليم بالرابط فقط -->
-  <div id="submitModal" class="modal">
+  <div id="submitModal" class="modal" aria-hidden="true" role="dialog">
     <div class="modal-content">
-      <span class="closeBtn" onclick="closeModal('submitModal')">&times;</span>
+      <span class="closeBtn" onclick="closeModal('submitModal')" aria-label="Close">&times;</span>
       <h2 id="submitTitle">تسليم التاسك</h2>
       <p class="hint">حط لينك التسليم (GitHub/Drive/Netlify...)</p>
+
       <input type="url" id="taskLinkInput" placeholder="https://..." required/>
       <button onclick="submitTaskLink()" class="home-btn">تأكيد التسليم</button>
+      <button class="close-btn-footer" onclick="closeModal('submitModal')">إغلاق</button>
     </div>
   </div>
 
