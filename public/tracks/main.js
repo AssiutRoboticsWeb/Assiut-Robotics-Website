@@ -245,7 +245,6 @@ const notesInput = document.getElementById('notes');
 const metaTrack = document.getElementById('metaTrack');
 const metaCourse = document.getElementById('metaCourse');
 const metaTask = document.getElementById('metaTask');
-const markClosed = document.getElementById('markClosed');
 
 function openSubmissionModal(trackName, courseName, taskName) {
     metaTrack.value = trackName;
@@ -253,7 +252,6 @@ function openSubmissionModal(trackName, courseName, taskName) {
     metaTask.value = taskName;
     workUrlInput.value = '';
     notesInput.value = '';
-    markClosed.checked = false;
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
     setTimeout(() => workUrlInput.focus(), 60);
@@ -276,7 +274,6 @@ async function handleSubmission(e) {
         taskName: metaTask.value,
         link: workUrlInput.value.trim(),
         notes: notesInput.value.trim(),
-        markClosed: !!markClosed.checked,
         submittedAt: new Date().toISOString()
     };
     if (!/^https?:\/\/.+/.test(payload.link)) { showToast('Please enter a valid URL (starts with http/https).'); return; }

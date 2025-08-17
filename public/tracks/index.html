@@ -11,7 +11,7 @@
 
 <body>
     <nav class="navbar">
-        <div class="logo" onclick="goHome()">
+        <div class="logo" onclick="goHome">
             <img src="../all-images/default.png" alt="Assiut Robotics" />
             <a href="#" class="active">Assiut Robotics</a>
         </div>
@@ -93,12 +93,7 @@
                         <label>Task</label>
                         <input id="metaTask" type="text" readonly />
                     </div>
-                    <div class="row">
-                        <label class="row" style="gap:.5rem; align-items:center;">
-                            <input id="markClosed" type="checkbox" /> Mark task as closed
-                        </label>
-                        <span class="hint">You can reopen later if needed.</span>
-                    </div>
+                    <!-- تم حذف صف Mark task as closed هنا -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn ghost" onclick="closeSubmissionModal()">Cancel</button>
