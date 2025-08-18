@@ -1,18 +1,24 @@
 :root {
-    /* لوحة ألوان مستوحاة من الصورة (تدرجات الأزرق) */
-    --primary: #3b6bb7;
-    --primary-dark: #17416f;
-    --primary-soft: #7aa1de;
-    --bg-top: #e9f2ff;
-    --bg-mid: #d9e8ff;
-    --bg-bottom: #cfe2ff;
-    --text: #111827;
+    --primary: #1976d2;
+    /* الأزرق الأساسي */
+    --primary-dark: #1565c0;
+    /* الأزرق الغامق */
+    --bg: #1565c0;
+    /* الخلفية */
+    --accent: #ffb300;
+    /* لون التمييز */
+    --text: #ffffff;
+    /* النصوص */
+    --hint: #e3f2fd;
+    /* لون مساعد */
+    --title: #FFF685;
+    /* لون العناوين */
+    --line: #e5e7eb;
     --muted: #6b7280;
     --card: #ffffff;
-    --line: #e5e7eb;
-    --warn: #f59e0b;
-    --danger: #e11d48;
-    --ok: #10b981;
+    --warn: #ffb300;
+    --danger: #e53935;
+    --ok: #43a047;
 }
 
 /* Reset بسيط */
@@ -29,15 +35,14 @@ body {
     margin: 0;
     font-family: system-ui, Segoe UI, Roboto, Arial, "Noto Kufi Arabic", "Cairo", sans-serif;
     color: var(--text);
-    background:
-        radial-gradient(1200px 700px at 50% -10%, #ffffff 0%, #f3f7ff 30%, transparent 55%),
-        linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
+    background: var(--bg);
+    /* خلفية لون واحد */
 }
 
 /* Header */
 .app-header {
-    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-    color: #fff;
+    background: var(--primary);
+    color: var(--title);
     padding: 18px 20px 14px;
     border-bottom: 1px solid rgba(255, 255, 255, .25);
     position: sticky;
@@ -66,8 +71,8 @@ body {
 }
 
 .tab {
-    background: #f8fbff;
-    color: var(--text);
+    background: var(--hint);
+    color: #111;
     border: 1px solid var(--line);
     padding: 10px 14px;
     border-radius: 12px;
@@ -80,22 +85,22 @@ body {
 
 .tab:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(59, 107, 183, .15)
+    box-shadow: 0 6px 16px rgba(25, 118, 210, .25)
 }
 
 .tab.active {
-    background: linear-gradient(180deg, #e9f1ff 0%, #d8e7ff 100%);
-    border-color: #c9dcff;
-    box-shadow: 0 10px 22px rgba(59, 107, 183, .25);
+    background: var(--accent);
+    border-color: var(--primary);
+    box-shadow: 0 0 12px rgba(25, 118, 210, .35);
 }
 
 .tab .count {
-    background: #eef4ff;
-    border: 1px solid #d9e8ff;
+    background: #fff;
+    border: 1px solid #bbdefb;
     border-radius: 999px;
     padding: 2px 8px;
     font-size: 12px;
-    color: #1f3b6e
+    color: var(--primary-dark)
 }
 
 /* Course bar */
@@ -103,9 +108,9 @@ body {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    background: #f0f6ff;
-    border: 1px solid #dbe7ff;
-    color: #17335d;
+    background: var(--hint);
+    border: 1px solid #bbdefb;
+    color: var(--primary-dark);
     padding: 10px 12px;
     margin: 6px 0 16px;
     border-radius: 12px
@@ -113,7 +118,7 @@ body {
 
 .course-pill {
     background: #fff;
-    border: 1px solid #dbe7ff;
+    border: 1px solid #bbdefb;
     border-radius: 999px;
     padding: 6px 10px;
     font-size: 13px;
@@ -122,7 +127,7 @@ body {
 
 .course-label {
     font-weight: 800;
-    opacity: .85
+    color: var(--accent);
 }
 
 /* Filters */
@@ -137,7 +142,7 @@ body {
 .filters .field select {
     appearance: none;
     background: #fff;
-    color: var(--text);
+    color: #111;
     border: 1px solid var(--line);
     border-radius: 12px;
     padding: 10px 12px;
@@ -148,8 +153,8 @@ body {
 
 .filters .field input:focus,
 .filters .field select:focus {
-    border-color: var(--primary-soft);
-    box-shadow: 0 0 0 3px rgba(122, 161, 222, .35);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, .35);
 }
 
 /* Grid */
@@ -191,11 +196,12 @@ body {
     padding: 14px;
     transition: transform .12s ease, box-shadow .2s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+    color: #111;
 }
 
 .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(59, 107, 183, .18)
+    box-shadow: 0 12px 24px rgba(25, 118, 210, .25)
 }
 
 .head {
@@ -212,7 +218,7 @@ body {
     place-content: center;
     font-weight: 900;
     color: #fff;
-    background: linear-gradient(135deg, var(--primary), #5f8dd6);
+    background: var(--primary);
     border: 2px solid #e7efff
 }
 
@@ -224,12 +230,12 @@ body {
 }
 
 .name-btn:focus {
-    outline: 3px solid rgba(59, 107, 183, .35);
+    outline: 3px solid rgba(25, 118, 210, .35);
     border-radius: 8px
 }
 
 .role {
-    color: #375a9d;
+    color: var(--primary-dark);
     font-size: 13px
 }
 
@@ -241,35 +247,35 @@ body {
 }
 
 .badge {
-    background: #f3f7ff;
-    border: 1px solid #e3ecff;
+    background: var(--hint);
+    border: 1px solid #bbdefb;
     border-radius: 999px;
     padding: 4px 10px;
     font-size: 12px;
-    color: #1f3b6e
+    color: var(--primary-dark)
 }
 
 .badge.ok {
-    background: #ecfdf5;
-    border-color: #b7f0db;
-    color: #065f46
+    background: #e8f5e9;
+    border-color: #c8e6c9;
+    color: var(--ok)
 }
 
 .badge.warn {
-    background: #fff7ed;
-    border-color: #fde6c8;
-    color: #92400e
+    background: #fff8e1;
+    border-color: #ffe082;
+    color: var(--warn)
 }
 
 .badge.danger {
-    background: #fff1f2;
-    border-color: #ffd0da;
-    color: #9f1239
+    background: #ffebee;
+    border-color: #ffcdd2;
+    color: var(--danger)
 }
 
 .badge.deadline {
-    background: #eef6ff;
-    border-color: #cfe2ff
+    background: #e3f2fd;
+    border-color: #bbdefb
 }
 
 .actions {
@@ -323,8 +329,8 @@ body {
 }
 
 .modal header {
-    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-    color: #fff;
+    background: var(--primary);
+    color: var(--title);
     padding: 14px 16px;
     display: flex;
     align-items: center;
@@ -371,7 +377,7 @@ body {
 }
 
 .member-line .role {
-    color: #375a9d
+    color: var(--primary-dark)
 }
 
 .kpis {
@@ -382,12 +388,12 @@ body {
 }
 
 .kpi {
-    background: #f8fbff;
-    border: 1px solid #e3ecff;
+    background: var(--hint);
+    border: 1px solid #bbdefb;
     border-radius: 12px;
     padding: 8px 12px;
     font-size: 13px;
-    color: #1f3b6e
+    color: var(--primary-dark)
 }
 
 .kpi .num {
@@ -411,8 +417,8 @@ thead th {
     position: sticky;
     top: 0;
     z-index: 1;
-    background: #f0f6ff;
-    color: #17335d;
+    background: var(--hint);
+    color: var(--primary-dark);
     text-align: right;
     border-bottom: 1px solid var(--line);
     padding: 10px;
@@ -435,26 +441,26 @@ tbody td {
 }
 
 .status-done {
-    background: #ecfdf5;
-    color: #065f46;
-    border-color: #b7f0db
+    background: #e8f5e9;
+    color: var(--ok);
+    border-color: #c8e6c9
 }
 
 .status-doing {
-    background: #fff7ed;
-    color: #92400e;
-    border-color: #fde6c8
+    background: #fff8e1;
+    color: var(--warn);
+    border-color: #ffe082
 }
 
 .status-blocked {
-    background: #fff1f2;
-    color: #9f1239;
-    border-color: #ffd0da
+    background: #ffebee;
+    color: var(--danger);
+    border-color: #ffcdd2
 }
 
 .submission-btn {
-    background: var(--primary);
-    color: #fff;
+    background: var(--accent);
+    color: #111;
     border: 0;
     border-radius: 8px;
     padding: 6px 10px;
@@ -462,12 +468,12 @@ tbody td {
 }
 
 .submission-btn:hover {
-    background: var(--primary-dark)
+    background: #ffa000
 }
 
 .app-footer {
-    border-top: 1px solid #dbe7ff;
-    color: #1f3b6e;
+    border-top: 1px solid #bbdefb;
+    color: var(--hint);
     opacity: .85;
     font-size: 13px;
     padding: 14px 16px;
