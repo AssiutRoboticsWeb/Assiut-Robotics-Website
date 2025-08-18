@@ -25,6 +25,7 @@ body {
 .tabs {
     display: flex;
     justify-content: flex-start;
+    overflow: scroll;
     gap: 10px;
     margin-bottom: 20px;
     padding: 10px;
