@@ -17,6 +17,9 @@
         <!-- تبويبات التراكات -->
         <nav id="tabs" class="tabs" aria-label="التراكات"></nav>
 
+        <!-- شريط مسؤولي المادة (يظهر عند اختيار كورس) -->
+        <section id="courseBar" class="course-bar" hidden></section>
+
         <!-- فلاتر -->
         <section class="filters">
             <div class="field">
@@ -29,6 +32,12 @@
                     <option value="done">منتهي</option>
                     <option value="doing">قيد التنفيذ</option>
                     <option value="blocked">متوقف</option>
+                </select>
+            </div>
+            <div class="field">
+                <select id="courseFilter" aria-label="فلتر الكورس">
+                    <option value="">كل الكورسات</option>
+                    <!-- تُملأ ديناميكياً -->
                 </select>
             </div>
         </section>
