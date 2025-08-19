@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assiut Robotics</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/79904cb93e.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <nav class="navbar">
-        
-        <div class="logo">
-            <img src="../all-images/default.png" alt=""> 
-            <a href="#" class="active" onclick = "goHome()">Assiut Robotics</a></div>
+        <div class="logo" onclick="goHome">
+            <img src="../all-images/default.png" alt="Assiut Robotics" />
+            <a href="#" class="active">Assiut Robotics</a>
+        </div>
     </nav>
 
     <header class="hero" id="header">
         <h1>Welcome to Assiut Robotics</h1>
         <p>Learn How to Learn</p>
     </header>
-    <div id = "home">
-        <section class="tracks">
-            
-        </section>
+
+    <div id="home">
+        <section class="tracks"></section>
 
         <section class="leaderboard">
             <h2>Track Leaderboards</h2>
@@ -50,12 +52,61 @@
             <div class="team-grid" id="hrTeam"></div>
         </section>
     </div>
+
     <div id="track"></div>
     <div id="course"></div>
+
     <footer>
-        <p>made by </p>
+        <p>made by</p>
     </footer>
-    <script src="https://kit.fontawesome.com/79904cb93e.js" crossorigin="anonymous"></script>
+
+    <!-- Submission Modal -->
+    <div class="modal" id="submissionModal" aria-hidden="true" role="dialog">
+        <div class="modal-card" role="document">
+            <div class="modal-header">
+                <div class="modal-title">Submit Your Work</div>
+                <button class="close-x" aria-label="Close" onclick="closeSubmissionModal()">×</button>
+            </div>
+            <form id="submissionForm" onsubmit="handleSubmission(event)">
+                <div class="modal-body">
+                    <div class="field">
+                        <label for="workUrl">Work URL</label>
+                        <input id="workUrl" name="workUrl" type="url" placeholder="https://..." required
+                            pattern="https?://.+" />
+                        <div class="hint">Paste the link to your repo, Google Drive, CodePen, etc.</div>
+                    </div>
+                    <div class="field">
+                        <label for="notes">Notes (optional)</label>
+                        <textarea id="notes" name="notes" placeholder="Anything the reviewer should know?"></textarea>
+                    </div>
+                    <div class="meta">
+                        <div class="field">
+                            <label>Track</label>
+                            <input id="metaTrack" type="text" readonly />
+                        </div>
+                        <div class="field">
+                            <label>Course</label>
+                            <input id="metaCourse" type="text" readonly />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Task</label>
+                        <input id="metaTask" type="text" readonly />
+                    </div>
+                    <!-- تم حذف صف Mark task as closed هنا -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn ghost" onclick="closeSubmissionModal()">Cancel</button>
+                    <button type="submit" class="btn success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
     <script src="main.js"></script>
 </body>
+
 </html>
