@@ -40,8 +40,9 @@ html {
   width: 100%;
   background-color: var(--primary-color);
   color: var(--secondary-text-color);
+  color: var(--text-color);
   font-family: "Inter", sans-serif;
-  padding: 20px;
+  padding: 20px 20px;
 }
 /* -------------------------------------------------------------------------- */
 header h1 {
@@ -49,7 +50,7 @@ header h1 {
   margin-bottom: 2rem;
 }
 .dashboard {
-  width: 80%;
+  width: 90%;
   margin: auto;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -93,10 +94,19 @@ header h1 {
   overflow: auto;
   margin-top: 10px;
 }
+.table-container::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.table-container::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background-color: gray;
+}
 
 table {
   width: 100%;
   border-spacing: 0;
+  padding: 10px;
 }
 thead {
   position: sticky;
@@ -107,6 +117,19 @@ thead {
 }
 tbody tr {
   background-color: var(--card-bg);
+}
+tbody tr:hover {
+  transform: scaleY(1.2);
+  transition: all 0.1s;
+  opacity: 0.5;
+}
+tbody tr:hover td:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+tbody tr:hover td:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 tbody tr td {
   border-color: var(--primary-color);
@@ -124,7 +147,7 @@ td {
   border-width: 0;
 }
 a {
-  color: var(--secondary-text-color);
+  color: var(--accent-color);
   text-decoration: none;
 }
 
@@ -139,17 +162,21 @@ select {
   border: 1px solid #ccc;
   margin-top: 10px;
 }
-/* #taskBody{
-  background-color: gray;
-  position: relative;
-} */
-/* #my-task {
-  background-color: green;
-  position: sticky;
-  bottom: 0;
-} */
-
+#courseSelect {
+  background-color: #076bce;
+  border: 1px #313131 solid;
+  color: wheat;
+}
+/* ------------------------------- responsive ------------------------------- */
+/* less than 600 */
 @media (max-width: 600px) {
+  body,
+  html {
+    padding: 20px 2px;
+  }
+  .dashboard {
+    width: 100%;
+  }
   th,
   td {
     font-size: 12px;
