@@ -1,4 +1,3 @@
-
 const backendURL = "https://assiut-robotics-server.vercel.app/"; // Replace with your backend URL
 
 // Electric Data Model
@@ -33,6 +32,20 @@ var electricData = {
 };
 
 /* ----------------------------------- ED ----------------------------------- */
+
+const showApplication = () => {
+  if (applicationBtn.textContent == "Applications") {
+    applicationBtn.textContent = "hide Applications";
+    applicationSection.classList.toggle("show");
+    allTracksCtrlBtn.classList.toggle("hide");
+  } else {
+    applicationBtn.textContent = "Applications";
+    applicationSection.classList.toggle("show");
+    allTracksCtrlBtn.classList.toggle("hide");
+    renderTracks();
+  }
+};
+
 // Announce Tracks Data & store in localStorage
 let announceTrackData = localStorage.getItem("announceTrackData")
   ? JSON.parse(localStorage.getItem("announceTrackData"))
@@ -58,6 +71,8 @@ const modalSubmit = document.getElementById("modal-submit");
 const applicationBtn = document.getElementById("application-btn");
 const applicationSection = document.getElementById("application-section");
 const allTracksCtrlBtn = document.getElementById("all-tracks-ctrl-btns");
+const customAddBtn = document.getElementById("custom-add-btn");
+
 const announceTracksCtrlBtn = document.getElementById(
   "announce-tracks-ctrl-btns"
 );
@@ -71,53 +86,64 @@ function showNotification(msg, type = "success") {
   setTimeout(() => notif.remove(), 2000);
 }
 addTrackBtn.onclick = renderTracks;
-//event 
+//event
 
 // Render Functions
 
-function getTrack(){
+function getTrack() {
   // Example usage: fetch all tracks from backend
-   fetch(`${backendURL}tracks`,{
-    method : "GET",
+  fetch(`${backendURL}tracks`, {
+    method: "GET",
     headers: {
-      "Authorization": `Bearer ${localStorage.getItem("token")}`
-    }
-   })
-   .then(response => {
-    if(response.status === 401) {window.location.href = "../../login/login.html"; return;}
-    return response.json();
-   })
-    .then(data => {
-        console.log(data.data);
-        electricData.tracks = data.data;
-        console.log(electricData);
-        renderTracks()
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  })
+    .then((response) => {
+      if (response.status === 401) {
+        window.location.href = "../../login/login.html";
+        return;
+      }
+      return response.json();
     })
-    .catch(error => {
+    .then((data) => {
+      // console.log(data.data);
+      electricData.tracks = data.data;
+      // console.log(electricData);
+      renderTracks();
+    })
+    .catch((error) => {
       showNotification("Failed to fetch tracks", "error");
       console.error(error);
       return [];
     });
 }
-  getTrack();
+getTrack();
 
 function renderTracks() {
-
+  if (applicationBtn.textContent == "hide Applications") {
+    applicationBtn.textContent = "Applications";
+    applicationSection.classList.toggle("show");
+    allTracksCtrlBtn.classList.toggle("hide");
+  }
+  customAddBtn.style.display = "block";
   currentView = "tracks";
   selectedTrackIndex = null;
   selectedCourseIndex = null;
   headerTitle.textContent = "Tracks";
-  headerTitle.setAttribute("title", headerTitle.textContent) 
+  headerTitle.setAttribute("title", headerTitle.textContent);
   // addTrackBtn.textContent = "Add Track";
   //   addTrackBtn.onclick = () => openModal("track");
   coreSection.innerHTML = "";
   electricData.tracks.forEach((track, idx) => {
-    console.log(track);
+    // console.log(track);
 
     const card = document.createElement("div");
     card.className = "card";
+    card.style.position = "relative";
     card.innerHTML = `
-            ${track.icon}
+    <i  onclick="AnnounceNewTrack(this)" class="AnnounceNewTrack-icon fa-solid fa-bullhorn fa-flip-horizontal fa-xl" style="color: #043a64ff; position: absolute; top: 30px; right: 10px;">
+    </i>
+    ${track.icon}
             <h3>${track.name}</h3>
             <p>${track.description}</p>
             <div class="card-actions">
@@ -135,13 +161,16 @@ function renderTracks() {
           fetch(`${backendURL}tracks/${track._id}`, {
             method: "DELETE",
             headers: {
-              "Authorization": `Bearer ${localStorage.getItem("token")}`
-            }
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
           })
             .then((response) => {
               if (!response.ok) {
-                if(response.status === 401) {window.location.href = "../../login/login.html"; return;}
-                throw new Error("Failed to delete track")
+                if (response.status === 401) {
+                  window.location.href = "../../login/login.html";
+                  return;
+                }
+                throw new Error("Failed to delete track");
               }
               electricData.tracks.splice(idx, 1);
               showNotification("Track deleted", "success");
@@ -152,6 +181,8 @@ function renderTracks() {
               console.error(error);
             });
         }
+      } else if (e.target.closest(".AnnounceNewTrack-icon")) {
+        AnnounceNewTrack(track);
       } else {
         renderCourses(idx);
       }
@@ -160,8 +191,15 @@ function renderTracks() {
   });
 }
 
+/* -------------------------------------------------------------------------- */
+function AnnounceNewTrack(track) {
+  currentView = "announceTracks";
+  openModal("announceTrack");
+}
+
 function renderCourses(trackIdx) {
   currentView = "courses";
+  customAddBtn.style.display = "block";
   selectedTrackIndex = trackIdx;
   selectedCourseIndex = null;
   const track = electricData.tracks[trackIdx];
@@ -179,27 +217,27 @@ function renderCourses(trackIdx) {
   fetch(`${backendURL}tracks/${track._id}/courses`, {
     method: "GET",
     headers: {
-      "Authorization": `Bearer ${localStorage.getItem("token")}`
-    }
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
   })
-  .then(response => {
+    .then((response) => {
       if (response.status === 401) {
         window.location.href = "../../login/login.html";
         return;
       }
       return response.json();
     })
-    .then(data => {
+    .then((data) => {
       if (Array.isArray(data.data)) {
         track.courses = data.data;
       }
     })
-    .catch(error => {
+    .catch((error) => {
       showNotification("Failed to fetch courses", "error");
       console.error(error);
     });
- 
-    if (track.courses.length === 0) {
+
+  if (track.courses.length === 0) {
     const empty = document.createElement("div");
     empty.textContent = "No courses yet.";
     empty.style.margin = "32px auto";
@@ -238,12 +276,13 @@ function renderCourses(trackIdx) {
 
 function renderTasks(trackIdx, courseIdx) {
   currentView = "tasks";
+  customAddBtn.style.display = "block";
   selectedTrackIndex = trackIdx;
   selectedCourseIndex = courseIdx;
   const track = electricData.tracks[trackIdx];
   const course = track.courses[courseIdx];
   headerTitle.innerHTML = `${track.icon} ${track.name} / ${course.name} - Tasks`;
-  headerTitle.setAttribute("title", headerTitle.textContent) 
+  headerTitle.setAttribute("title", headerTitle.textContent);
   // addTrackBtn.textContent = "Add Task";
   //   addTrackBtn.onclick = () => openModal("task");
   coreSection.innerHTML = "";
@@ -294,14 +333,20 @@ function renderTasks(trackIdx, courseIdx) {
 // Render Announce Tracks
 announceTrackBtn.onclick = renderAnnounceTracks;
 function renderAnnounceTracks() {
+  if (applicationBtn.textContent == "hide Applications") {
+    applicationBtn.textContent = "Applications";
+    applicationSection.classList.toggle("show");
+    allTracksCtrlBtn.classList.toggle("hide");
+  }
+
   currentView = "announceTracks";
+  customAddBtn.style.display = "none";
   selectedTrackIndex = null;
   selectedCourseIndex = null;
   headerTitle.textContent = "Announce Tracks";
-  headerTitle.setAttribute("title", headerTitle.textContent) 
+  headerTitle.setAttribute("title", headerTitle.textContent);
   //   announceTrackBtn.textContent = "Add Track Announcement";
   // addTrackBtn.textContent = "Add Track";
-
   coreSection.innerHTML = "";
   //   announceTrackBtn.onclick = () => openModal("announceTrack");
   announceTrackData.forEach((announceTrack, idx) => {
@@ -356,15 +401,20 @@ function addSomething(e) {
 }
 
 function backForword(e) {
-  if (currentView === "announceTracks") {
-    renderTracks();
-  } else if (currentView === "tracks") {
-    renderTracks();
-  } else if (currentView === "courses") {
-    renderTracks();
-  } else if (currentView === "tasks") {
+  if (currentView === "tasks") {
     renderCourses(selectedTrackIndex);
+  } else {
+    renderTracks();
   }
+  // if (currentView === "announceTracks") {
+  //   renderTracks();
+  // } else if (currentView === "tracks") {
+  //   renderTracks();
+  // } else if (currentView === "courses") {
+  //   renderTracks();
+  // } else if (currentView === "tasks") {
+  //   renderCourses(selectedTrackIndex);
+  // }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -431,7 +481,7 @@ function openModal(type, isEdit = false, indices = {}) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify({ name, description }),
         })
@@ -578,14 +628,14 @@ function openModal(type, isEdit = false, indices = {}) {
         `;
     /* ----------------------------------- ED ----------------------------------- */
   } else if (type === "announceTrack") {
-    let AvilableTacks =  electricData.tracks
-    console.log(AvilableTacks);
+    let AvilableTacks = electricData.tracks;
     modalFields.innerHTML = `
 
             <label for="announce-track-name">select Announcement Track</label>
               <select name="announce-track-name" id="announce-track-name">
-              ${AvilableTacks.map(track => 
-                `<option value="${track.name}">${track.name}</option>`
+              ${AvilableTacks.map(
+                (track) =>
+                  `<option value="${track.name}">${track.name}</option>`
               )}
                </select>
 
@@ -639,8 +689,10 @@ window.onclick = function (event) {
 
 applicationBtn.addEventListener("click", () => {
   coreSection.innerHTML = "";
-  applicationSection.classList.toggle("show");
-  allTracksCtrlBtn.classList.toggle("hide");
+  // applicationBtn.textContent= (applicationBtn.textContent == "Applications" ? "hide Applications" : "Applications");
+  // applicationSection.classList.toggle("show");
+  // allTracksCtrlBtn.classList.toggle("hide");
+  showApplication();
 
   announceTrackData = localStorage.getItem("announceTrackData")
     ? JSON.parse(localStorage.getItem("announceTrackData"))
