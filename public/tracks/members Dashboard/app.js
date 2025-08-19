@@ -1,23 +1,23 @@
 /* =========================
-   بيانات تجريبية + مسؤولي المواد
+   البيانات: التراكات + مسؤولي المواد داخل كل تراك
    ========================= */
-const courseOwners = {
-  "Embedded Basics": ["د. مروان عبد المنعم", "م. رودينا رفعت"],
-  "API Fundamentals": ["م. كارين مدحت"],
-  "Member Dashboard": ["م. مصطفى أحمد"],
-  "Sensors 101": ["م. سارة حاتم"],
-  "Track UI": ["م. يوسف سامي"]
-};
-
 const tracks = [
   {
     id: "electric",
     title: "Electric",
+    courseOwners: {
+      "Embedded Basics": ["د. مروان عبد المنعم", "م. رودينا رفعت"],
+      "API Fundamentals": ["م. كارين مدحت"],
+      "Member Dashboard": ["م. مصطفى أحمد"],
+      "Sensors 101": ["م. سارة حاتم"],
+      "Track UI": ["م. يوسف سامي"]
+    },
     members: [
       {
         id: "m1",
         name: "فدية أحمد",
         role: "قائدة التراك",
+        // الطالب ممكن يكون عنده أكتر من كورس عبر المهام
         tasks: [
           { title: "تنظيف الريبو وتنظيم الفروع", course: "Embedded Basics", status: "doing", deadline: "2025-08-20", corrected: true, points: 8, submission: "https://example.com/submissions/clean-repo" },
           { title: "مراجعة PRs المعلّقة", course: "API Fundamentals", status: "done", deadline: "2025-08-10", corrected: true, points: 10, submission: "https://example.com/submissions/review-prs" },
@@ -48,6 +48,9 @@ const tracks = [
   {
     id: "hardware",
     title: "Hardware",
+    courseOwners: {
+      "Sensors 101": ["م. سارة حاتم"]
+    },
     members: [
       {
         id: "m4",
@@ -71,6 +74,9 @@ const tracks = [
   {
     id: "software",
     title: "Software",
+    courseOwners: {
+      "Track UI": ["م. يوسف سامي"]
+    },
     members: [
       {
         id: "m6",
@@ -118,7 +124,7 @@ function summarizeTasks(tasks = [], courseFilter = "") {
   );
 }
 
-/** جميع الكورسات من البيانات */
+/** جمع كل الكورسات من كل المهام */
 function collectCourses() {
   const set = new Set();
   tracks.forEach(tr => tr.members.forEach(m => m.tasks.forEach(t => set.add(t.course))));
@@ -147,6 +153,7 @@ function renderTabs() {
       state.activeTrackId = tr.id;
       renderTabs();
       renderGrid();
+      renderCourseBar(); // تحديث شريط المسؤولين إذا كان فيه فلتر كورس
     });
     tabs.appendChild(btn);
   });
@@ -156,11 +163,12 @@ function renderTabs() {
 function renderCourseBar() {
   const bar = $("#courseBar");
   if (!state.course) { bar.hidden = true; bar.innerHTML = ""; return; }
-  const owners = courseOwners[state.course] || [];
+  const track = tracks.find(t => t.id === state.activeTrackId);
+  const owners = track?.courseOwners?.[state.course] || [];
   bar.hidden = false;
   bar.innerHTML = `
     <span class="course-label">مسؤولو مادة: <b>${state.course}</b></span>
-    ${owners.map(o => `<span class="course-pill">${o}</span>`).join("") || `<span class="course-pill">لم يُحدّد</span>`}
+    ${owners.length ? owners.map(o => `<span class="course-pill">${o}</span>`).join("") : `<span class="course-pill">لم يُحدّد</span>`}
   `;
 }
 
@@ -216,7 +224,6 @@ function renderGrid() {
       </div>
     `;
 
-    // فتح المودال
     card.querySelector(".name-btn").addEventListener("click", () => openModal(m, track));
     card.querySelector(".open-details").addEventListener("click", () => openModal(m, track));
 
@@ -294,16 +301,13 @@ function openModal(member, track) {
                 <th>التسليم</th>
               </tr>
             </thead>
-            <tbody>
-              ${tableRows}
-            </tbody>
+            <tbody>${tableRows}</tbody>
           </table>
         </div>
       </div>
     </div>
   `;
 
-  // إغلاق
   root.addEventListener("click", (e) => { if (e.target === root) closeModal(); });
   root.querySelector(".close").addEventListener("click", closeModal);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); }, { once: true });
@@ -316,7 +320,7 @@ function closeModal() { const m = $("#memberModal"); if (m) m.remove(); }
 function bindFilters() {
   $("#searchInput").addEventListener("input", (e) => { state.search = e.target.value.trim(); renderGrid(); });
   $("#statusFilter").addEventListener("change", (e) => { state.status = e.target.value; renderGrid(); });
-  $("#courseFilter").addEventListener("change", (e) => { state.course = e.target.value; renderGrid(); });
+  $("#courseFilter").addEventListener("change", (e) => { state.course = e.target.value; renderCourseBar(); renderGrid(); });
 }
 
 /* =============== ملء قائمة الكورسات =============== */
