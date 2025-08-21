@@ -38,7 +38,7 @@ const main = document.getElementsByTagName("main")[0];
 const header = document.getElementsByTagName("header")[0];
 const progressBar = document.getElementsByClassName("progress-bar-fill")[0];
 const notificationCount = document.getElementById("notificationCount");
-
+const history = document.getElementById("HistoryTasksList");
 // Related links
 const Links = {
   general:[[{ name: "Meeting vote", link: "../meeting/vote.html" },{ name: "Components", link: "../OC_page/component.html" }]] ,
@@ -115,6 +115,7 @@ async function verifyToken() {
 
       currentMemberData = data.data;
       renderCurrentTasks(data.data.tasks);
+      renderHistoryTasks(data.data.tasks);
       renderMemberData(data.data);
     } else {
       console.log("Invalid data format received from API", data);
@@ -324,62 +325,62 @@ function renderMemberData(data) {
   }
   console.log(relatedLinks);
   renderRelatedLinks(relatedLinks);
-  renderTracks(data.startedTracks);
+  // renderTracks(data.startedTracks);
 }
 
 // Render tracks list
-function renderTracks(tracks) {
-  tracksList.innerHTML = "";
-  tracks.forEach((trackData, index) => {
-    const trackElement = document.createElement("div");
-    trackElement.className = "track-item";
-    trackElement.textContent = trackData.track.name;
-    trackElement.dataset.trackIndex = index;
+// function renderTracks(tracks) {
+//   tracksList.innerHTML = "";
+//   tracks.forEach((trackData, index) => {
+//     const trackElement = document.createElement("div");
+//     trackElement.className = "track-item";
+//     trackElement.textContent = trackData.track.name;
+//     trackElement.dataset.trackIndex = index;
 
-    trackElement.addEventListener("click", () => {
-      document
-        .querySelectorAll(".track-item")
-        .forEach((el) => el.classList.remove("active"));
-      trackElement.classList.add("active");
-      currentTrackId = trackData.track._id;
-      renderCourses(trackData.track.courses);
-      courseTasksTitle.textContent = trackData.track.name;
-    });
+//     trackElement.addEventListener("click", () => {
+//       document
+//         .querySelectorAll(".track-item")
+//         .forEach((el) => el.classList.remove("active"));
+//       trackElement.classList.add("active");
+//       currentTrackId = trackData.track._id;
+//       renderCourses(trackData.track.courses);
+//       courseTasksTitle.textContent = trackData.track.name;
+//     });
 
-    tracksList.appendChild(trackElement);
-  });
-}
+//     tracksList.appendChild(trackElement);
+//   });
+// }
 
 // Render courses for selected track
-function renderCourses(courses) {
-  coursesContainer.innerHTML = "";
-  tasksContainer.style.display = "none";
-  const coursesfinished = courses.submittedTasks;
-  let coursesNumber;
-  courses.forEach((course, index) => {
-    console.log(course);
+// function renderCourses(courses) {
+//   coursesContainer.innerHTML = "";
+//   tasksContainer.style.display = "none";
+//   const coursesfinished = courses.submittedTasks;
+//   let coursesNumber;
+//   courses.forEach((course, index) => {
+//     console.log(course);
 
-    coursesNumber = course.tasks.length;
+//     coursesNumber = course.tasks.length;
 
-    const courseElement = document.createElement("div");
-    courseElement.className = "course-item";
-    courseElement.textContent = course.name;
-    courseElement.dataset.courseIndex = index;
+//     const courseElement = document.createElement("div");
+//     courseElement.className = "course-item";
+//     courseElement.textContent = course.name;
+//     courseElement.dataset.courseIndex = index;
 
-    courseElement.addEventListener("click", () => {
-      progressBar.style.width = `${(coursesfinished / coursesNumber) * 100}%`;
-      progressText.textContent = `${coursesfinished}/${coursesNumber}`;
-      document
-        .querySelectorAll(".course-item")
-        .forEach((el) => el.classList.remove("active"));
-      courseElement.classList.add("active");
-      currentCourseId = course._id;
-      renderTasks(course.tasks);
-    });
+//     courseElement.addEventListener("click", () => {
+//       progressBar.style.width = `${(coursesfinished / coursesNumber) * 100}%`;
+//       progressText.textContent = `${coursesfinished}/${coursesNumber}`;
+//       document
+//         .querySelectorAll(".course-item")
+//         .forEach((el) => el.classList.remove("active"));
+//       courseElement.classList.add("active");
+//       currentCourseId = course._id;
+//       renderTasks(course.tasks);
+//     });
 
-    coursesContainer.appendChild(courseElement);
-  });
-}
+//     coursesContainer.appendChild(courseElement);
+//   });
+// }
 
 // Render tasks for selected course
 function renderTasks(tasks) {
@@ -502,15 +503,15 @@ function RelatedLinks() {
 function renderCurrentTasks(tasks) {
   const tasksList = document.getElementById("CurrentTasksList");
   tasksList.innerHTML = "";
-  tasksContainer.style.display = "block";
+  //tasksContainer.style.display = "block";
 
   // حساب نسبة التقدم بناءً على المهام التي لها تقييم
   const completedTasks = tasks.filter((task) => task.headEvaluation > 0).length;
-  const progressPercentage =
-    tasks.length > 0 ? (completedTasks / tasks.length) * 100 : 0;
+  // const progressPercentage =
+  //   tasks.length > 0 ? (completedTasks / tasks.length) * 100 : 0;
 
-  progressBarFill.style.width = `${progressPercentage}%`;
-  progressText.textContent = `${Math.round(progressPercentage)}% Complete`;
+  // progressBarFill.style.width = `${progressPercentage}%`;
+  // progressText.textContent = `${Math.round(progressPercentage)}% Complete`;
 
   /* ************************  drsh ******************** */
   let TasksNotExpired = tasks.filter(
@@ -521,82 +522,107 @@ function renderCurrentTasks(tasks) {
   TasksNotExpired.forEach((task) => {
     /* ************************  drsh ******************** */
     // tasks.forEach(task => {
+    // Use modern JS (template literals, destructuring, optional chaining, concise DOM manipulation)
+    const {
+      _id,
+      title,
+      startDate,
+      deadline,
+      description,
+      taskUrl,
+      points,
+      rate,
+      headEvaluation,
+      deadlineEvaluation,
+    } = task;
+
     const taskElement = document.createElement("div");
     taskElement.className = "task-item";
 
-    const taskHeader = document.createElement("div");
-    taskHeader.className = "task-header";
+    taskElement.innerHTML = `
+      <div class="task-header">
+        <h3 class="task-title">${title ?? ""}</h3>
+        <div class="task-deadline">
+          <i class="icon clock-icon"></i> Start ${startDate ? new Date(startDate).toLocaleDateString() : ""}
+        </div>
+        <div class="task-deadline">
+          <i class="icon clock-icon"></i> Deadline ${deadline ? new Date(deadline).toLocaleDateString() : ""}
+        </div>
+      </div>
+      <p class="task-description">${description ?? ""}</p>
+      ${taskUrl ? `<a class="task-link" href="${taskUrl}" target="_blank">Material Link</a>` : ""}
+      <div class="task-meta">
+        <span class="task-points">Points: ${points ?? 0}</span>
+        <span class="task-points">Score: ${rate ?? 0}</span>
+        ${
+          headEvaluation > 0
+            ? `<span class="task-evaluation">Head Eval: ${headEvaluation}, deadline: ${deadlineEvaluation ?? ""}</span>`
+            : `<button class="submit-task-btn">Submit Task</button>`
+        }
+      </div>
+    `;
 
-    const taskTitle = document.createElement("h3");
-    taskTitle.className = "task-title";
-    taskTitle.textContent = task.title;
-
-    const taskStartDate = document.createElement("div");
-    taskStartDate.className = "task-deadline";
-    taskStartDate.innerHTML = `<i class="icon clock-icon"></i> start ${new Date(
-      task.startDate
-    ).toLocaleDateString()}`;
-    const taskDeadline = document.createElement("div");
-    taskDeadline.className = "task-deadline";
-    taskDeadline.innerHTML = `<i class="icon clock-icon"></i> Deadline ${new Date(
-      task.deadline
-    ).toLocaleDateString()}`;
-
-    taskHeader.appendChild(taskTitle);
-    taskHeader.appendChild(taskStartDate);
-    taskHeader.appendChild(taskDeadline);
-
-    const taskDescription = document.createElement("p");
-    taskDescription.className = "task-description";
-    taskDescription.textContent = task.description;
-
-    const taskURL = document.createElement("a");
-    taskURL.className = "task-link";
-    taskURL.href = task.taskUrl;
-    taskURL.textContent = "Material Link";
-    taskURL.target = "_blank";
-
-    const taskMeta = document.createElement("div");
-    taskMeta.className = "task-meta";
-
-    // عرض النقاط
-    const taskPoints = document.createElement("span");
-    taskPoints.className = "task-points";
-    taskPoints.textContent = `Points: ${task.points}`;
-    taskMeta.appendChild(taskPoints);
-    // show rate
-    const rate = document.createElement("span");
-    rate.className = "task-points";
-    rate.textContent = `score: ${task.rate}`;
-    taskMeta.appendChild(rate);
-
-    // عرض تقييم headEvaluation و hrEvaluation
-    if (task.headEvaluation > 0) {
-      const taskEvaluation = document.createElement("span");
-      taskEvaluation.className = "task-evaluation";
-      console.log(task);
-
-      taskEvaluation.textContent = `Head Eval: ${task.headEvaluation}, deadline : ${task.deadlineEvaluation}`;
-      taskMeta.appendChild(taskEvaluation);
-    } else {
-      const submitButton = document.createElement("button");
-      submitButton.className = "submit-task-btn";
-      submitButton.textContent = "Submit Task";
-      submitButton.addEventListener("click", () => {
-        currentTaskId = task._id;
-        console.log(currentTaskId);
-
+    if (!(headEvaluation > 0)) {
+      taskElement.querySelector(".submit-task-btn").addEventListener("click", () => {
+        currentTaskId = _id;
         submitTaskModal.style.display = "block";
       });
-      taskMeta.appendChild(submitButton);
     }
 
-    taskElement.appendChild(taskHeader);
-    taskElement.appendChild(taskDescription);
-    taskElement.appendChild(taskURL);
-    taskElement.appendChild(taskMeta);
-
     tasksList.appendChild(taskElement);
+  });
+}
+
+// render history tasks
+
+function renderHistoryTasks(tasks) {
+  history.innerHTML = "";
+  tasks.forEach((task) => {
+    if (task.submissionLink && task.submissionLink !== '*') {
+      const {
+        _id,
+        title,
+        startDate,
+        deadline,
+        description,
+        taskUrl,
+        points,
+        rate,
+        headEvaluation,
+        deadlineEvaluation,
+        submissionLink,
+        submissionDate
+      } = task;
+
+    const taskElement = document.createElement("div");
+    taskElement.className = "task-item";
+
+    taskElement.innerHTML = `
+      <div class="task-header">
+        <h3 class="task-title">${title ?? ""}</h3>
+        <div class="task-deadline">
+          <i class="icon clock-icon"></i> Start ${startDate ? new Date(startDate).toLocaleDateString() : ""}
+        </div>
+        <div class="task-deadline">
+          <i class="icon clock-icon"></i> Deadline ${deadline ? new Date(deadline).toLocaleDateString() : ""}
+        </div>
+        <div class="task-deadline">
+          <i class="icon clock-icon"></i> submissionDate ${submissionDate ? new Date(submissionDate).toLocaleDateString() : ""}
+        </div>
+      </div>
+      <p class="task-description">${description ?? ""}</p>
+        <div class = "links">
+          ${taskUrl ? `<a class="task-link" href="${taskUrl}" target="_blank">Material Link</a>` : ""}
+          ${submissionLink ? `<a class="task-link" href="${submissionLink}" target="_blank">Submission Link</a>` : ""}
+        </div>
+        <div class="task-meta">
+        <span class="task-points">Points: ${points ?? 0}</span>
+        <span class="task-points">Score: ${rate ?? 0}</span>
+      </div>
+    `;
+
+    history.appendChild(taskElement);
+  }
   });
 }
 

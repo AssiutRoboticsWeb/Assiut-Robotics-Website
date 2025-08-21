@@ -418,7 +418,7 @@ main {
 .task-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 0.5rem;
 }
 
@@ -675,10 +675,7 @@ main {
   top: 50%;
   width: fit-content;
   height: fit-content;
-<<<<<<< Updated upstream
   transform: translateX(-50%) translateY(-5%);
-=======
->>>>>>> Stashed changes
   background-color: var(--accent-color);
   border-radius: 0.25rem;
   padding: 1rem 1rem;
@@ -704,11 +701,8 @@ main {
     transform: translateX(-50%) translateY(25%);
   }
   100% {
-<<<<<<< Updated upstream
     transform: translateX(-50%) translateY(20%);
-=======
     transform: translateX(-50%) translateY(5%);
->>>>>>> Stashed changes
   }
 }
 .disapear {
@@ -768,4 +762,29 @@ main {
 
 .profile-button i {
   font-size: 18px;
+}
+.history-tasks-card{
+  margin: 20px 0;
+}
+.card-header > .icon{
+  background-color: var(--primary-bg) !important;
+}
+#HistoryTasksList{
+}
+.links{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.task-link{
+  text-decoration: none;
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background-color: var(--card-bg);
+  transition: background-color 0.3s ease;
+  text-align: left;
+}
+.task-link:hover{
+  background-color: var(--accent-color);
 }
