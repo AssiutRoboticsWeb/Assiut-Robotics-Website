@@ -47,9 +47,7 @@ const tracks = [
   {
     id: "hardware",
     title: "Hardware",
-    courseOwners: {
-      "Sensors 101": ["م. سارة حاتم"]
-    },
+    courseOwners: { "Sensors 101": ["م. سارة حاتم"] },
     members: [
       {
         id: "m4",
@@ -101,7 +99,7 @@ function formatDate(iso) {
   return d.toLocaleDateString("ar-EG", { year: "numeric", month: "short", day: "numeric" });
 }
 
-/** ملخّص مهام (بدون فلترة كورس خارجية) */
+/** ملخّص مهام */
 function summarizeTasks(tasks = []) {
   return tasks.reduce(
     (acc, t) => {
@@ -119,11 +117,23 @@ function summarizeTasks(tasks = []) {
   );
 }
 
+/** جمع كورسات تراك معين من مهام الأعضاء */
+function collectCoursesForTrack(trackId) {
+  const set = new Set();
+  const tr = tracks.find(t => t.id === trackId);
+  if (!tr) return [];
+  tr.members.forEach(m => m.tasks.forEach(t => t.course && set.add(t.course)));
+  // لو عندنا courseOwners ممكن نزودها برضه:
+  Object.keys(tr.courseOwners || {}).forEach(c => set.add(c));
+  return Array.from(set);
+}
+
 /* =============== حالة الواجهة =============== */
 const state = {
   activeTrackId: tracks[0]?.id || "",
   search: "",
-  status: ""   // done | doing | blocked | ''
+  status: "",            // done | doing | blocked | ''
+  courseMembers: ""      // فلتر كورس على مستوى الشبكة (زرار Course Filter)
 };
 
 /* =============== تبويبات التراكات =============== */
@@ -138,6 +148,8 @@ function renderTabs() {
     btn.innerHTML = `<span>${tr.title}</span><span class="count">${tr.members.length}</span>`;
     btn.addEventListener("click", () => {
       state.activeTrackId = tr.id;
+      // إعادة ملء كورسات الزرار
+      fillCourseFilterForActiveTrack();
       renderTabs();
       renderGrid();
     });
@@ -153,11 +165,12 @@ function renderGrid() {
   const track = tracks.find((t) => t.id === state.activeTrackId);
   if (!track) { grid.innerHTML = `<div class="empty">لا يوجد تراك محدد</div>`; return; }
 
-  // فلترة الأعضاء بالاسم والحالة فقط (تم إزالة فلتر الكورس من هنا)
+  // فلترة الأعضاء بالاسم والحالة + كورس الشبكة (لو محدد)
   const members = track.members.filter((m) => {
     const byName = state.search ? m.name.includes(state.search) : true;
     const byStatus = state.status === "" ? true : m.tasks.some((t) => t.status === state.status);
-    return byName && byStatus;
+    const byCourse = state.courseMembers === "" ? true : m.tasks.some((t) => t.course === state.courseMembers);
+    return byName && byStatus && byCourse;
   });
 
   if (!members.length) {
@@ -201,31 +214,26 @@ function renderGrid() {
   });
 }
 
-/* =============== المودال مع فلتر الكورس الداخلي =============== */
+/* =============== المودال (ما زال فيه فلتر كورس داخلي) =============== */
 function openModal(member, track) {
   closeModal();
 
-  // تجهيز قائمة كورسات هذا التراك (أو من مهام العضو فقط)
-  const trackCourses = Object.keys(track.courseOwners || {});
+  // قائمة كورسات هذا التراك / العضو
+  const trackCourses = collectCoursesForTrack(track.id);
   const memberCourses = Array.from(new Set(member.tasks.map(t => t.course).filter(Boolean)));
   const courses = trackCourses.length ? trackCourses : memberCourses;
 
-  // حالة فلتر الكورس داخل المودال
-  let courseFilter = ""; // يبدأ "كل الكورسات"
+  // فلتر مبدئي للمودال = اختيار الشبكة إن وُجد
+  let courseFilter = state.courseMembers || "";
 
-  // عنصر الجذر
   const root = document.createElement("div");
   root.className = "modal-wrap";
   root.id = "memberModal";
 
-  // مولد الكروت/الكبي آيز والجدول حسب الفلتر
   const renderModalBody = () => {
     const tasksFiltered = courseFilter ? member.tasks.filter(t => t.course === courseFilter) : member.tasks;
-
-    // KPIs
     const sum = summarizeTasks(tasksFiltered);
 
-    // صفوف الجدول
     const tableRows = tasksFiltered.length
       ? tasksFiltered.map((t) => {
         const pillClass = t.status === "done" ? "status-done" : t.status === "blocked" ? "status-blocked" : "status-doing";
@@ -248,15 +256,12 @@ function openModal(member, track) {
       }).join("")
       : `<tr><td colspan="7" class="empty">لا توجد تاسكات</td></tr>`;
 
-    // مسؤولو المادة (إن وُجد اختيار كورس)
     const owners = courseFilter ? (track.courseOwners?.[courseFilter] || []) : [];
     const ownersBar = courseFilter
-      ? `
-        <div class="course-owners">
-          <span class="course-label">مسؤولو مادة: <b>${courseFilter}</b></span>
-          ${owners.length ? owners.map(o => `<span class="course-pill">${o}</span>`).join("") : `<span class="course-pill">لم يُحدّد</span>`}
-        </div>`
-      : "";
+      ? `<div class="course-owners">
+           <span class="course-label">مسؤولو مادة: <b>${courseFilter}</b></span>
+           ${owners.length ? owners.map(o => `<span class="course-pill">${o}</span>`).join("") : `<span class="course-pill">لم يُحدّد</span>`}
+         </div>` : "";
 
     return `
       <div class="member-line">
@@ -305,46 +310,86 @@ function openModal(member, track) {
     `;
   };
 
-  // هيكل المودال
   root.innerHTML = `
     <div class="modal" role="dialog" aria-modal="true" aria-label="تفاصيل العضو">
       <header>
         <h2>تفاصيل العضو — ${track.title}</h2>
         <button class="close" aria-label="إغلاق">×</button>
       </header>
-      <div class="body" id="modalBody">
-        ${renderModalBody()}
-      </div>
+      <div class="body" id="modalBody">${renderModalBody()}</div>
     </div>
   `;
 
-  // إغلاق
   root.addEventListener("click", (e) => { if (e.target === root) closeModal(); });
   root.querySelector(".close").addEventListener("click", closeModal);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); }, { once: true });
 
-  // ربط فلتر الكورس داخل المودال
-  const observeFilter = () => {
-    const sel = $("#modalBody #modalCourseFilter", root);
-    if (!sel) return;
-    sel.addEventListener("change", (e) => {
+  const rebindModalFilter = () => {
+    const sel = $("#modalCourseFilter", root);
+    sel?.addEventListener("change", (e) => {
       courseFilter = e.target.value;
       $("#modalBody", root).innerHTML = renderModalBody();
-      observeFilter(); // إعادة ربط الحدث بعد إعادة الرسم
+      rebindModalFilter();
     });
   };
 
   $("#modalRoot").appendChild(root);
-  observeFilter();
+  rebindModalFilter();
 }
 function closeModal() { const m = $("#memberModal"); if (m) m.remove(); }
+
+/* =============== زرار Course Filter للشبكة =============== */
+function fillCourseFilterForActiveTrack() {
+  // إعادة الضبط
+  state.courseMembers = "";
+  const select = $("#courseFilter");
+  const btn = $("#courseFilterBtn");
+  select.innerHTML = "";
+
+  // بناء القائمة
+  const courses = collectCoursesForTrack(state.activeTrackId);
+  const makeOpt = (value, text) => {
+    const opt = document.createElement("option");
+    opt.value = value; opt.textContent = text;
+    return opt;
+  };
+  select.appendChild(makeOpt("", "كل الكورسات"));
+  courses.forEach(c => select.appendChild(makeOpt(c, c)));
+
+  // تحديث زرار النص
+  btn.textContent = "Course Filter: كل الكورسات";
+}
+
+function bindCourseFilterButton() {
+  const btn = $("#courseFilterBtn");
+  const sel = $("#courseFilter");
+  // عند الضغط على الزرار: افتح الـ select الأصلي
+  btn.addEventListener("click", () => {
+    btn.setAttribute("aria-expanded", "true");
+    sel.click(); // يفتح قائمة النظام
+  });
+  // عند التغيير: حدّث الحالة + نص الزرار + أعد رسم الشبكة
+  sel.addEventListener("change", (e) => {
+    state.courseMembers = e.target.value;
+    const label = state.courseMembers || "كل الكورسات";
+    btn.textContent = `Course Filter: ${label}`;
+    btn.setAttribute("aria-expanded", "false");
+    renderGrid();
+  });
+}
 
 /* =============== فلاتر عامة =============== */
 function bindFilters() {
   $("#searchInput").addEventListener("input", (e) => { state.search = e.target.value.trim(); renderGrid(); });
   $("#statusFilter").addEventListener("change", (e) => { state.status = e.target.value; renderGrid(); });
+  bindCourseFilterButton();
 }
 
 /* =============== بدء التشغيل =============== */
-function init() { renderTabs(); renderGrid(); bindFilters(); }
+function init() {
+  renderTabs();
+  fillCourseFilterForActiveTrack();
+  renderGrid();
+  bindFilters();
+}
 document.addEventListener("DOMContentLoaded", init);
