@@ -17,7 +17,6 @@ const tracks = [
         id: "m1",
         name: "فدية أحمد",
         role: "قائدة التراك",
-        // الطالب ممكن يكون عنده أكتر من كورس عبر المهام
         tasks: [
           { title: "تنظيف الريبو وتنظيم الفروع", course: "Embedded Basics", status: "doing", deadline: "2025-08-20", corrected: true, points: 8, submission: "https://example.com/submissions/clean-repo" },
           { title: "مراجعة PRs المعلّقة", course: "API Fundamentals", status: "done", deadline: "2025-08-10", corrected: true, points: 10, submission: "https://example.com/submissions/review-prs" },
@@ -48,9 +47,7 @@ const tracks = [
   {
     id: "hardware",
     title: "Hardware",
-    courseOwners: {
-      "Sensors 101": ["م. سارة حاتم"]
-    },
+    courseOwners: { "Sensors 101": ["م. سارة حاتم"] },
     members: [
       {
         id: "m4",
@@ -74,9 +71,7 @@ const tracks = [
   {
     id: "software",
     title: "Software",
-    courseOwners: {
-      "Track UI": ["م. يوسف سامي"]
-    },
+    courseOwners: { "Track UI": ["م. يوسف سامي"] },
     members: [
       {
         id: "m6",
@@ -104,18 +99,16 @@ function formatDate(iso) {
   return d.toLocaleDateString("ar-EG", { year: "numeric", month: "short", day: "numeric" });
 }
 
-/** ملخّص مهام مع مراعاة فلتر الكورس */
-function summarizeTasks(tasks = [], courseFilter = "") {
-  const list = courseFilter ? tasks.filter(t => t.course === courseFilter) : tasks;
-  return list.reduce(
+/** ملخّص مهام */
+function summarizeTasks(tasks = []) {
+  return tasks.reduce(
     (acc, t) => {
       acc.total++;
       acc[t.status] = (acc[t.status] || 0) + 1;
       if (t.status !== "done" && t.deadline) {
         const due = new Date(t.deadline);
         if (!acc.near || due < acc.nearDate) {
-          acc.near = t;
-          acc.nearDate = due;
+          acc.near = t; acc.nearDate = due;
         }
       }
       return acc;
@@ -124,10 +117,14 @@ function summarizeTasks(tasks = [], courseFilter = "") {
   );
 }
 
-/** جمع كل الكورسات من كل المهام */
-function collectCourses() {
+/** جمع كورسات تراك معين من مهام الأعضاء */
+function collectCoursesForTrack(trackId) {
   const set = new Set();
-  tracks.forEach(tr => tr.members.forEach(m => m.tasks.forEach(t => set.add(t.course))));
+  const tr = tracks.find(t => t.id === trackId);
+  if (!tr) return [];
+  tr.members.forEach(m => m.tasks.forEach(t => t.course && set.add(t.course)));
+  // لو عندنا courseOwners ممكن نزودها برضه:
+  Object.keys(tr.courseOwners || {}).forEach(c => set.add(c));
   return Array.from(set);
 }
 
@@ -135,8 +132,8 @@ function collectCourses() {
 const state = {
   activeTrackId: tracks[0]?.id || "",
   search: "",
-  status: "",   // done | doing | blocked | ''
-  course: ""    // اسم الكورس
+  status: "",            // done | doing | blocked | ''
+  courseMembers: ""      // فلتر كورس على مستوى الشبكة (زرار Course Filter)
 };
 
 /* =============== تبويبات التراكات =============== */
@@ -151,42 +148,28 @@ function renderTabs() {
     btn.innerHTML = `<span>${tr.title}</span><span class="count">${tr.members.length}</span>`;
     btn.addEventListener("click", () => {
       state.activeTrackId = tr.id;
+      // إعادة ملء كورسات الزرار
+      fillCourseFilterForActiveTrack();
       renderTabs();
       renderGrid();
-      renderCourseBar(); // تحديث شريط المسؤولين إذا كان فيه فلتر كورس
     });
     tabs.appendChild(btn);
   });
 }
 
-/* =============== شريط مسؤولي المادة =============== */
-function renderCourseBar() {
-  const bar = $("#courseBar");
-  if (!state.course) { bar.hidden = true; bar.innerHTML = ""; return; }
-  const track = tracks.find(t => t.id === state.activeTrackId);
-  const owners = track?.courseOwners?.[state.course] || [];
-  bar.hidden = false;
-  bar.innerHTML = `
-    <span class="course-label">مسؤولو مادة: <b>${state.course}</b></span>
-    ${owners.length ? owners.map(o => `<span class="course-pill">${o}</span>`).join("") : `<span class="course-pill">لم يُحدّد</span>`}
-  `;
-}
-
 /* =============== شبكة بطاقات الأعضاء =============== */
 function renderGrid() {
-  renderCourseBar();
-
   const grid = $("#grid");
   grid.innerHTML = "";
 
   const track = tracks.find((t) => t.id === state.activeTrackId);
   if (!track) { grid.innerHTML = `<div class="empty">لا يوجد تراك محدد</div>`; return; }
 
-  // فلترة الأعضاء بالاسم والحالة والكورس
+  // فلترة الأعضاء بالاسم والحالة + كورس الشبكة (لو محدد)
   const members = track.members.filter((m) => {
     const byName = state.search ? m.name.includes(state.search) : true;
     const byStatus = state.status === "" ? true : m.tasks.some((t) => t.status === state.status);
-    const byCourse = state.course === "" ? true : m.tasks.some((t) => t.course === state.course);
+    const byCourse = state.courseMembers === "" ? true : m.tasks.some((t) => t.course === state.courseMembers);
     return byName && byStatus && byCourse;
   });
 
@@ -199,7 +182,7 @@ function renderGrid() {
     const card = document.createElement("article");
     card.className = "card";
 
-    const sum = summarizeTasks(m.tasks, state.course);
+    const sum = summarizeTasks(m.tasks);
     const near = sum.near;
 
     card.innerHTML = `
@@ -212,7 +195,7 @@ function renderGrid() {
       </div>
 
       <div class="meta">
-        <span class="badge">تاسكات${state.course ? ` (${state.course})` : ""}: ${sum.total}</span>
+        <span class="badge">تاسكات: ${sum.total}</span>
         <span class="badge ok">تم: ${sum.done}</span>
         <span class="badge warn">قيد التنفيذ: ${sum.doing}</span>
         <span class="badge danger">متوقف: ${sum.blocked}</span>
@@ -231,80 +214,109 @@ function renderGrid() {
   });
 }
 
-/* =============== المودال =============== */
+/* =============== المودال (ما زال فيه فلتر كورس داخلي) =============== */
 function openModal(member, track) {
   closeModal();
+
+  // قائمة كورسات هذا التراك / العضو
+  const trackCourses = collectCoursesForTrack(track.id);
+  const memberCourses = Array.from(new Set(member.tasks.map(t => t.course).filter(Boolean)));
+  const courses = trackCourses.length ? trackCourses : memberCourses;
+
+  // فلتر مبدئي للمودال = اختيار الشبكة إن وُجد
+  let courseFilter = state.courseMembers || "";
 
   const root = document.createElement("div");
   root.className = "modal-wrap";
   root.id = "memberModal";
 
-  const filteredTasks = state.course ? member.tasks.filter(t => t.course === state.course) : member.tasks;
-  const sum = summarizeTasks(member.tasks, state.course);
+  const renderModalBody = () => {
+    const tasksFiltered = courseFilter ? member.tasks.filter(t => t.course === courseFilter) : member.tasks;
+    const sum = summarizeTasks(tasksFiltered);
 
-  const tableRows = filteredTasks.length
-    ? filteredTasks.map((t) => {
-      const pillClass =
-        t.status === "done" ? "status-done" : t.status === "blocked" ? "status-blocked" : "status-doing";
-      const statusLabel = t.status === "done" ? "منتهي" : t.status === "doing" ? "قيد التنفيذ" : "متوقف";
-      const corr = t.corrected ? "✓ تم التصحيح" : "بانتظار";
-      const pts = Number.isFinite(t.points) ? t.points : 0;
-      const date = formatDate(t.deadline);
-      return `
-          <tr>
-            <td>${t.title}</td>
-            <td>${t.course || "-"}</td>
-            <td><span class="status-pill ${pillClass}">${statusLabel}</span></td>
-            <td>${date}</td>
-            <td>${corr}</td>
-            <td>${pts}</td>
-            <td><a href="${t.submission}" target="_blank" rel="noopener">
-              <button class="submission-btn" aria-label="فتح تسليم المهمة">رابط التسليم</button>
-            </a></td>
-          </tr>`;
-    }).join("")
-    : `<tr><td colspan="7" class="empty">لا توجد تاسكات</td></tr>`;
+    const tableRows = tasksFiltered.length
+      ? tasksFiltered.map((t) => {
+        const pillClass = t.status === "done" ? "status-done" : t.status === "blocked" ? "status-blocked" : "status-doing";
+        const statusLabel = t.status === "done" ? "منتهي" : t.status === "doing" ? "قيد التنفيذ" : "متوقف";
+        const corr = t.corrected ? "✓ تم التصحيح" : "بانتظار";
+        const pts = Number.isFinite(t.points) ? t.points : 0;
+        const date = formatDate(t.deadline);
+        return `
+            <tr>
+              <td>${t.title}</td>
+              <td>${t.course || "-"}</td>
+              <td><span class="status-pill ${pillClass}">${statusLabel}</span></td>
+              <td>${date}</td>
+              <td>${corr}</td>
+              <td>${pts}</td>
+              <td><a href="${t.submission}" target="_blank" rel="noopener">
+                <button class="submission-btn" aria-label="فتح تسليم المهمة">رابط التسليم</button>
+              </a></td>
+            </tr>`;
+      }).join("")
+      : `<tr><td colspan="7" class="empty">لا توجد تاسكات</td></tr>`;
+
+    const owners = courseFilter ? (track.courseOwners?.[courseFilter] || []) : [];
+    const ownersBar = courseFilter
+      ? `<div class="course-owners">
+           <span class="course-label">مسؤولو مادة: <b>${courseFilter}</b></span>
+           ${owners.length ? owners.map(o => `<span class="course-pill">${o}</span>`).join("") : `<span class="course-pill">لم يُحدّد</span>`}
+         </div>` : "";
+
+    return `
+      <div class="member-line">
+        <div class="avatar">${initials(member.name)}</div>
+        <div>
+          <div class="who">${member.name}</div>
+          <div class="role">${member.role || ""}</div>
+        </div>
+      </div>
+
+      <div class="modal-controls">
+        <div class="field">
+          <select id="modalCourseFilter" aria-label="فلتر الكورس (داخل المودال)">
+            <option value="">كل الكورسات</option>
+            ${courses.map(c => `<option value="${c}" ${c === courseFilter ? "selected" : ""}>${c}</option>`).join("")}
+          </select>
+        </div>
+      </div>
+
+      ${ownersBar}
+
+      <div class="kpis">
+        <div class="kpi">إجمالي: <span class="num">${sum.total}</span></div>
+        <div class="kpi">تم: <span class="num">${sum.done}</span></div>
+        <div class="kpi">قيد التنفيذ: <span class="num">${sum.doing}</span></div>
+        <div class="kpi">متوقف: <span class="num">${sum.blocked}</span></div>
+        ${sum.near ? `<div class="kpi">أقرب ديدلاين: <span class="num">${formatDate(sum.near.deadline)}</span></div>` : ""}
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>المهمة</th>
+              <th>الكورس</th>
+              <th>الحالة</th>
+              <th>الديدلاين</th>
+              <th>التصحيح</th>
+              <th>النقاط</th>
+              <th>التسليم</th>
+            </tr>
+          </thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+    `;
+  };
 
   root.innerHTML = `
     <div class="modal" role="dialog" aria-modal="true" aria-label="تفاصيل العضو">
       <header>
-        <h2>تفاصيل العضو — ${track.title}${state.course ? ` — ${state.course}` : ""}</h2>
+        <h2>تفاصيل العضو — ${track.title}</h2>
         <button class="close" aria-label="إغلاق">×</button>
       </header>
-      <div class="body">
-        <div class="member-line">
-          <div class="avatar">${initials(member.name)}</div>
-          <div>
-            <div class="who">${member.name}</div>
-            <div class="role">${member.role || ""}</div>
-          </div>
-        </div>
-
-        <div class="kpis">
-          <div class="kpi">إجمالي: <span class="num">${sum.total}</span></div>
-          <div class="kpi">تم: <span class="num">${sum.done}</span></div>
-          <div class="kpi">قيد التنفيذ: <span class="num">${sum.doing}</span></div>
-          <div class="kpi">متوقف: <span class="num">${sum.blocked}</span></div>
-          ${sum.near ? `<div class="kpi">أقرب ديدلاين: <span class="num">${formatDate(sum.near.deadline)}</span></div>` : ""}
-        </div>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>المهمة</th>
-                <th>الكورس</th>
-                <th>الحالة</th>
-                <th>الديدلاين</th>
-                <th>التصحيح</th>
-                <th>النقاط</th>
-                <th>التسليم</th>
-              </tr>
-            </thead>
-            <tbody>${tableRows}</tbody>
-          </table>
-        </div>
-      </div>
+      <div class="body" id="modalBody">${renderModalBody()}</div>
     </div>
   `;
 
@@ -312,32 +324,71 @@ function openModal(member, track) {
   root.querySelector(".close").addEventListener("click", closeModal);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); }, { once: true });
 
+  const rebindModalFilter = () => {
+    const sel = $("#modalCourseFilter", root);
+    sel?.addEventListener("change", (e) => {
+      courseFilter = e.target.value;
+      $("#modalBody", root).innerHTML = renderModalBody();
+      rebindModalFilter();
+    });
+  };
+
   $("#modalRoot").appendChild(root);
+  rebindModalFilter();
 }
 function closeModal() { const m = $("#memberModal"); if (m) m.remove(); }
 
-/* =============== فلاتر =============== */
+/* =============== زرار Course Filter للشبكة =============== */
+function fillCourseFilterForActiveTrack() {
+  // إعادة الضبط
+  state.courseMembers = "";
+  const select = $("#courseFilter");
+  const btn = $("#courseFilterBtn");
+  select.innerHTML = "";
+
+  // بناء القائمة
+  const courses = collectCoursesForTrack(state.activeTrackId);
+  const makeOpt = (value, text) => {
+    const opt = document.createElement("option");
+    opt.value = value; opt.textContent = text;
+    return opt;
+  };
+  select.appendChild(makeOpt("", "كل الكورسات"));
+  courses.forEach(c => select.appendChild(makeOpt(c, c)));
+
+  // تحديث زرار النص
+  btn.textContent = "Course Filter: كل الكورسات";
+}
+
+function bindCourseFilterButton() {
+  const btn = $("#courseFilterBtn");
+  const sel = $("#courseFilter");
+  // عند الضغط على الزرار: افتح الـ select الأصلي
+  btn.addEventListener("click", () => {
+    btn.setAttribute("aria-expanded", "true");
+    sel.click(); // يفتح قائمة النظام
+  });
+  // عند التغيير: حدّث الحالة + نص الزرار + أعد رسم الشبكة
+  sel.addEventListener("change", (e) => {
+    state.courseMembers = e.target.value;
+    const label = state.courseMembers || "كل الكورسات";
+    btn.textContent = `Course Filter: ${label}`;
+    btn.setAttribute("aria-expanded", "false");
+    renderGrid();
+  });
+}
+
+/* =============== فلاتر عامة =============== */
 function bindFilters() {
   $("#searchInput").addEventListener("input", (e) => { state.search = e.target.value.trim(); renderGrid(); });
   $("#statusFilter").addEventListener("change", (e) => { state.status = e.target.value; renderGrid(); });
-  $("#courseFilter").addEventListener("change", (e) => { state.course = e.target.value; renderCourseBar(); renderGrid(); });
-}
-
-/* =============== ملء قائمة الكورسات =============== */
-function fillCourseFilter() {
-  const select = $("#courseFilter");
-  const courses = collectCourses();
-  courses.forEach(c => {
-    const opt = document.createElement("option");
-    opt.value = c; opt.textContent = c;
-    select.appendChild(opt);
-  });
+  bindCourseFilterButton();
 }
 
 /* =============== بدء التشغيل =============== */
 function init() {
   renderTabs();
-  fillCourseFilter();
+  fillCourseFilterForActiveTrack();
   renderGrid();
   bindFilters();
 }

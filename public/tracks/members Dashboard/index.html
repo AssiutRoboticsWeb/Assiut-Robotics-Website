@@ -1,59 +1,56 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>لوحة الأعضاء و التاسكات</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>لوحة الأعضاء و التاسكات</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-    <header class="app-header">
-        <h1>لوحة الأعضاء و التاسكات</h1>
-    </header>
+  <header class="app-header">
+    <h1>لوحة الأعضاء و التاسكات</h1>
+  </header>
 
-    <main class="container">
-        <!-- تبويبات التراكات -->
-        <nav id="tabs" class="tabs" aria-label="التراكات"></nav>
+  <main class="container">
+    <!-- تبويبات التراكات -->
+    <nav id="tabs" class="tabs" aria-label="التراكات"></nav>
 
-        <!-- شريط مسؤولي المادة (يظهر عند اختيار كورس) -->
-        <section id="courseBar" class="course-bar" hidden></section>
+    <!-- فلاتر عامة -->
+    <section class="filters">
+      <div class="field">
+        <input id="searchInput" type="search" placeholder="ابحث بالاسم (مثال: فدية)..." aria-label="بحث بالاسم" />
+      </div>
+      <div class="field">
+        <select id="statusFilter" aria-label="فلتر الحالة">
+          <option value="">كل الحالات</option>
+          <option value="done">منتهي</option>
+          <option value="doing">قيد التنفيذ</option>
+          <option value="blocked">متوقف</option>
+        </select>
+      </div>
 
-        <!-- فلاتر -->
-        <section class="filters">
-            <div class="field">
-                <input id="searchInput" type="search" placeholder="ابحث بالاسم (مثال: فدية)..."
-                    aria-label="بحث بالاسم" />
-            </div>
-            <div class="field">
-                <select id="statusFilter" aria-label="فلتر الحالة">
-                    <option value="">كل الحالات</option>
-                    <option value="done">منتهي</option>
-                    <option value="doing">قيد التنفيذ</option>
-                    <option value="blocked">متوقف</option>
-                </select>
-            </div>
-            <div class="field">
-                <select id="courseFilter" aria-label="فلتر الكورس">
-                    <option value="">كل الكورسات</option>
-                    <!-- تُملأ ديناميكياً -->
-                </select>
-            </div>
-        </section>
+      <!-- زرار Course Filter + select مخفي -->
+      <div class="field">
+        <button id="courseFilterBtn" class="link" type="button" aria-haspopup="listbox" aria-expanded="false">
+          Course Filter: كل الكورسات
+        </button>
+        <select id="courseFilter" aria-label="فلتر الكورس (للشبكة)" hidden>
+          <!-- يُملأ ديناميكيًا حسب التراك -->
+        </select>
+      </div>
+    </section>
 
-        <!-- بطاقات الأعضاء -->
-        <section id="grid" class="grid" aria-live="polite"></section>
-    </main>
+    <!-- بطاقات الأعضاء -->
+    <section id="grid" class="grid" aria-live="polite"></section>
+  </main>
 
-    <!-- مودال -->
-    <div id="modalRoot"></div>
+  <!-- مودال -->
+  <div id="modalRoot"></div>
 
-    <footer class="app-footer">
-        <span>© لجنة الويب</span>
-    </footer>
+  <footer class="app-footer">
+    <span>© لجنة الويب</span>
+  </footer>
 
-    <script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
-
 </html>
