@@ -21,6 +21,8 @@ const userEmail = document.getElementById("userEmail");
 const userCommittee = document.getElementById("userCommittee");
 const userPhone = document.getElementById("userPhone");
 const userStatus = document.getElementById("userStatus");
+const avgRate = document.getElementById("avgRate");
+
 const tracksList = document.getElementById("tracksList");
 const coursesContainer = document.getElementById("coursesContainer");
 const tasksContainer = document.getElementById("tasksContainer");
@@ -276,6 +278,8 @@ function renderMemberData(data) {
   userStatus.className = `status-badge ${
     data.verified ? "verified" : "pending"
   }`;
+  avgRate.textContent = data.avgRate ? data.avgRate : "No Rate yet";
+
   let relatedLinks = {general : Links.general};
 
   // إنشاء وإظهار Lab Dates للجميع
@@ -553,7 +557,6 @@ function renderCurrentTasks(tasks) {
       ${taskUrl ? `<a class="task-link" href="${taskUrl}" target="_blank">Material Link</a>` : ""}
       <div class="task-meta">
         <span class="task-points">Points: ${points ?? 0}</span>
-        <span class="task-points">Score: ${rate ?? 0}</span>
         ${
           headEvaluation > 0
             ? `<span class="task-evaluation">Head Eval: ${headEvaluation}, deadline: ${deadlineEvaluation ?? ""}</span>`
