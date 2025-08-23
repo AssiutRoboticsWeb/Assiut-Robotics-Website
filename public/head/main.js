@@ -106,6 +106,8 @@ async function fetchMembers() {
             </div>
         `).join('');
         
+        // Fill HR Evaluation select with members
+        fillMemberSelectOptions();
         // Initial task display
         displayAllTasks();
         // Display members list
@@ -115,6 +117,16 @@ async function fetchMembers() {
         
         console.error('Error fetching members:', error);
     }
+}
+
+// Fill the select#memberId in the HR Evaluation form with the current members
+function fillMemberSelectOptions() {
+    const memberSelect = document.getElementById('memberId');
+    if (!memberSelect) return;
+    memberSelect.innerHTML = '<option value="">Select Member</option>';
+    members.forEach(member => {
+        memberSelect.innerHTML += `<option value="${member._id}">${member.name}</option>`;
+    });
 }
 
 // Display members  
@@ -302,10 +314,18 @@ function createTaskElement(task, member) {
                 <p>task rate : ${task.rate }</p>
             ` : ''}
             <div class="task-actions">
-                <button onclick="editTask('${member._id}', '${task._id}')" 
-                    style="background-color: var(--primary-color); color: white;">Edit</button>
-                <button onclick="deleteTask('${member._id}', '${task._id}')"
-                    style="background-color: var(--danger-color); color: white;">Delete</button>
+                ${
+                    !(task.submissionLink && task.submissionLink !== '*') 
+                    ? `<button onclick="editTask('${member._id}', '${task._id}')" 
+                        style="background-color: var(--primary-color); color: white;">Edit</button>`
+                    : ''
+                }
+                ${
+                    !(task.submissionLink && task.submissionLink !== '*') 
+                    ? `<button onclick="deleteTask('${member._id}', '${task._id}')"
+                        style="background-color: var(--danger-color); color: white;">Delete</button>`
+                    : ''
+                }
                 <button onclick="rateTask('${member._id}', '${task._id}')"
                     style="background-color: var(--success-color); color: white;">Rate</button>
             </div>

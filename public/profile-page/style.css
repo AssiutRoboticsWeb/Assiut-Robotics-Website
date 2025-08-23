@@ -769,8 +769,6 @@ main {
 .card-header > .icon{
   background-color: var(--primary-bg) !important;
 }
-#HistoryTasksList{
-}
 .links{
   display: flex;
   flex-direction: column;
