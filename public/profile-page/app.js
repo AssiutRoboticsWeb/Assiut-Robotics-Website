@@ -518,9 +518,11 @@ function renderCurrentTasks(tasks) {
   // progressText.textContent = `${Math.round(progressPercentage)}% Complete`;
 
   /* ************************  drsh ******************** */
-  let TasksNotExpired = tasks.filter(
-    (task) => task.deadline > new Date().toISOString()
-  );
+  let TasksNotExpired = tasks
+    .filter(
+      (task) =>
+        !(task.headEvaluation > 0 || (task.submissionLink && task.submissionLink !== '*'))
+    );
   console.log("tasks", tasks);
 
   TasksNotExpired.forEach((task) => {
@@ -542,28 +544,33 @@ function renderCurrentTasks(tasks) {
 
     const taskElement = document.createElement("div");
     taskElement.className = "task-item";
-
+    const isDeadlinePassed = deadline && new Date(deadline) < new Date();
     taskElement.innerHTML = `
       <div class="task-header">
-        <h3 class="task-title">${title ?? ""}</h3>
-        <div class="task-deadline">
-          <i class="icon clock-icon"></i> Start ${startDate ? new Date(startDate).toLocaleDateString() : ""}
-        </div>
-        <div class="task-deadline">
-          <i class="icon clock-icon"></i> Deadline ${deadline ? new Date(deadline).toLocaleDateString() : ""}
-        </div>
+      <h3 class="task-title">${title ?? ""}</h3>
+      <div class="task-deadline">
+        <i class="icon clock-icon"></i> Start ${startDate ? new Date(startDate).toLocaleDateString() : ""}
+      </div>
+      <div class="task-deadline" style="${isDeadlinePassed ? "color: red;" : ""}">
+        <i class="icon clock-icon"></i> Deadline ${deadline ? new Date(deadline).toLocaleDateString() : ""}
+        ${
+          isDeadlinePassed && deadline
+        ? `<span style="color: red; font-size: 0.9em;"> (+${Math.floor((new Date() - new Date(deadline)) / (1000 * 60 * 60 * 24))} days late)</span>`
+        : ""
+        }
+      </div>
       </div>
       <p class="task-description">${description ?? ""}</p>
       ${taskUrl ? `<a class="task-link" href="${taskUrl}" target="_blank">Material Link</a>` : ""}
       <div class="task-meta">
-        <span class="task-points">Points: ${points ?? 0}</span>
-        ${
-          headEvaluation > 0
-            ? `<span class="task-evaluation">Head Eval: ${headEvaluation}, deadline: ${deadlineEvaluation ?? ""}</span>`
-            : `<button class="submit-task-btn">Submit Task</button>`
-        }
+      <span class="task-points">Points: ${points ?? 0}</span>
+      ${
+        headEvaluation > 0
+        ? `<span class="task-evaluation">Head Eval: ${headEvaluation}, deadline: ${deadlineEvaluation ?? ""}</span>`
+        : `<button class="submit-task-btn">Submit Task</button>`
+      }
       </div>
-    `;
+        `;
 
     if (!(headEvaluation > 0)) {
       taskElement.querySelector(".submit-task-btn").addEventListener("click", () => {
@@ -599,7 +606,11 @@ function renderHistoryTasks(tasks) {
 
     const taskElement = document.createElement("div");
     taskElement.className = "task-item";
-
+    // Check if the task is a history task (deadline passed or has submission)
+    const isHistory =
+      (deadline && new Date(deadline) < new Date()) ||
+      (submissionLink && submissionLink !== '*');
+    if (!isHistory) return;
     taskElement.innerHTML = `
       <div class="task-header">
         <h3 class="task-title">${title ?? ""}</h3>
@@ -609,7 +620,7 @@ function renderHistoryTasks(tasks) {
         <div class="task-deadline">
           <i class="icon clock-icon"></i> Deadline ${deadline ? new Date(deadline).toLocaleDateString() : ""}
         </div>
-        <div class="task-deadline">
+        <div class="task-deadline" style="${submissionDate && deadline && new Date(submissionDate) > new Date(deadline) ? 'color: red;' : ''}">
           <i class="icon clock-icon"></i> submissionDate ${submissionDate ? new Date(submissionDate).toLocaleDateString() : ""}
         </div>
       </div>
@@ -622,7 +633,7 @@ function renderHistoryTasks(tasks) {
         <span class="task-points">Points: ${points ?? 0}</span>
         <span class="task-points">Score: ${rate ?? 0}</span>
       </div>
-    `;
+        `;
 
     history.appendChild(taskElement);
   }
