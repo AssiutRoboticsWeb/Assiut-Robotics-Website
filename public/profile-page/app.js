@@ -1,11 +1,11 @@
 
 // API URLs
-const API_URL = "https://assiut-robotics-zeta.vercel.app/members/login";
-const VERIFY_URL = "https://assiut-robotics-zeta.vercel.app/members/verify";
-const CHANGE_AVATAR_URL =
-  "https://assiut-robotics-zeta.vercel.app/members/changeProfileImage";
+const API_URL = serverConfig.getApiUrl("members/login");
+const VERIFY_URL = serverConfig.getApiUrl("members/verify");
+const CHANGE_PROFILE_IMAGE_URL =
+  serverConfig.getApiUrl("members/changeProfileImage");
 const SUBMIT_TASK_URL =
-  "https://assiut-robotics-zeta.vercel.app/members/submitTask";
+  serverConfig.getApiUrl("members/submitTask");
 
 // State management
 let currentMemberData = null;
@@ -170,7 +170,7 @@ async function changeAvatar(file) {
   formData.append("image", file);
 
   try {
-    const response = await fetch(CHANGE_AVATAR_URL, {
+    const response = await fetch(CHANGE_PROFILE_IMAGE_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

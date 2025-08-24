@@ -1,4 +1,4 @@
-const mainURL = "https://assiut-robotics-zeta.vercel.app";
+const mainURL = serverConfig.getLegacyBaseUrl();
 
 async function fetchCommittees() {
     try {
