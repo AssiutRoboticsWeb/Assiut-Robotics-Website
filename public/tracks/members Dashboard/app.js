@@ -18,9 +18,9 @@ const tracks = [
         name: "فدية أحمد",
         role: "قائدة التراك",
         tasks: [
-          { title: "تنظيف الريبو وتنظيم الفروع", course: "Embedded Basics", status: "doing", deadline: "2025-08-20", corrected: true, points: 8, submission: "https://example.com/submissions/clean-repo" },
-          { title: "مراجعة PRs المعلّقة", course: "API Fundamentals", status: "done", deadline: "2025-08-10", corrected: true, points: 10, submission: "https://example.com/submissions/review-prs" },
-          { title: "تجربة API وتحديد التعديلات المطلوبة", course: "API Fundamentals", status: "doing", deadline: "2025-08-25", corrected: false, points: 0, submission: "https://example.com/submissions/api-test" },
+          { title: "تنظيم الفروع", course: "Embedded Basics", status: "doing", deadline: "2025-08-20", corrected: true, points: 8, submission: "https://example.com/submissions/clean-repo" },
+          { title: "مراجعة PRs", course: "API Fundamentals", status: "done", deadline: "2025-08-10", corrected: true, points: 10, submission: "https://example.com/submissions/review-prs" },
+          { title: "تجربة API", course: "API Fundamentals", status: "doing", deadline: "2025-08-25", corrected: false, points: 0, submission: "https://example.com/submissions/api-test" },
         ],
       },
       {
@@ -28,9 +28,9 @@ const tracks = [
         name: "مصطفى أحمد",
         role: "عضو أساسي",
         tasks: [
-          { title: "بناء member dashboard", course: "Member Dashboard", status: "doing", deadline: "2025-08-23", corrected: false, points: 3, submission: "https://example.com/submissions/member-dash" },
-          { title: "زر اختيار التراك + إظهار المتاح", course: "Member Dashboard", status: "done", deadline: "2025-08-12", corrected: true, points: 10, submission: "https://example.com/submissions/track-button" },
-          { title: "إظهار applicants بالأعلى", course: "Member Dashboard", status: "blocked", deadline: "2025-08-19", corrected: false, points: 0, submission: "https://example.com/submissions/applicants" },
+          { title: "member dashboard", course: "Member Dashboard", status: "doing", deadline: "2025-08-23", corrected: false, points: 3, submission: "https://example.com/submissions/member-dash" },
+          { title: "زر اختيار التراك", course: "Member Dashboard", status: "done", deadline: "2025-08-12", corrected: true, points: 10, submission: "https://example.com/submissions/track-button" },
+          { title: "إظهار applicants", course: "Member Dashboard", status: "blocked", deadline: "2025-08-19", corrected: false, points: 0, submission: "https://example.com/submissions/applicants" },
         ],
       },
       {
@@ -38,8 +38,8 @@ const tracks = [
         name: "كارين مدحت",
         role: "Backend & API",
         tasks: [
-          { title: "تجربة الـ API وتوثيق المشاكل", course: "API Fundamentals", status: "doing", deadline: "2025-08-22", corrected: false, points: 0, submission: "https://example.com/submissions/api-issues" },
-          { title: "تحسين الأداء في endpoint /electric", course: "API Fundamentals", status: "blocked", deadline: "2025-08-24", corrected: false, points: 0, submission: "https://example.com/submissions/perf" },
+          { title: "توثيق مشاكل API", course: "API Fundamentals", status: "doing", deadline: "2025-08-22", corrected: false, points: 0, submission: "https://example.com/submissions/api-issues" },
+          { title: "تحسين /electric", course: "API Fundamentals", status: "blocked", deadline: "2025-08-24", corrected: false, points: 0, submission: "https://example.com/submissions/perf" },
         ],
       },
     ],
@@ -55,7 +55,7 @@ const tracks = [
         role: "عضو",
         tasks: [
           { title: "إعداد لوحة التجارب", course: "Sensors 101", status: "doing", deadline: "2025-08-21", corrected: false, points: 2, submission: "https://example.com/submissions/breadboard" },
-          { title: "توثيق الأعطال المتكررة", course: "Sensors 101", status: "done", deadline: "2025-08-05", corrected: true, points: 10, submission: "https://example.com/submissions/issues" },
+          { title: "توثيق الأعطال", course: "Sensors 101", status: "done", deadline: "2025-08-05", corrected: true, points: 10, submission: "https://example.com/submissions/issues" },
         ],
       },
       {
@@ -63,7 +63,7 @@ const tracks = [
         name: "سارة حاتم",
         role: "عضو",
         tasks: [
-          { title: "اختبار وحدات الاستشعار", course: "Sensors 101", status: "blocked", deadline: "2025-08-20", corrected: false, points: 0, submission: "https://example.com/submissions/sensors" },
+          { title: "اختبار المستشعرات", course: "Sensors 101", status: "blocked", deadline: "2025-08-20", corrected: false, points: 0, submission: "https://example.com/submissions/sensors" },
         ],
       },
     ],
@@ -79,7 +79,7 @@ const tracks = [
         role: "عضو",
         tasks: [
           { title: "تصميم صفحة track", course: "Track UI", status: "doing", deadline: "2025-08-19", corrected: false, points: 4, submission: "https://example.com/submissions/track-ui" },
-          { title: "تحسين UI بطاقات الأعضاء", course: "Track UI", status: "done", deadline: "2025-08-11", corrected: true, points: 10, submission: "https://example.com/submissions/cards-ui" },
+          { title: "تحسين UI البطاقات", course: "Track UI", status: "done", deadline: "2025-08-11", corrected: true, points: 10, submission: "https://example.com/submissions/cards-ui" },
         ],
       },
     ],
@@ -117,13 +117,12 @@ function summarizeTasks(tasks = []) {
   );
 }
 
-/** جمع كورسات تراك معين من مهام الأعضاء */
+/** جمع كورسات تراك معين من مهام الأعضاء + courseOwners */
 function collectCoursesForTrack(trackId) {
   const set = new Set();
   const tr = tracks.find(t => t.id === trackId);
   if (!tr) return [];
   tr.members.forEach(m => m.tasks.forEach(t => t.course && set.add(t.course)));
-  // لو عندنا courseOwners ممكن نزودها برضه:
   Object.keys(tr.courseOwners || {}).forEach(c => set.add(c));
   return Array.from(set);
 }
@@ -132,8 +131,8 @@ function collectCoursesForTrack(trackId) {
 const state = {
   activeTrackId: tracks[0]?.id || "",
   search: "",
-  status: "",            // done | doing | blocked | ''
-  courseMembers: ""      // فلتر كورس على مستوى الشبكة (زرار Course Filter)
+  status: "",           // done | doing | blocked | ''
+  courseMembers: ""     // فلتر كورس عام لبطاقات الأعضاء + الافتراضي للمودال
 };
 
 /* =============== تبويبات التراكات =============== */
@@ -148,8 +147,7 @@ function renderTabs() {
     btn.innerHTML = `<span>${tr.title}</span><span class="count">${tr.members.length}</span>`;
     btn.addEventListener("click", () => {
       state.activeTrackId = tr.id;
-      // إعادة ملء كورسات الزرار
-      fillCourseFilterForActiveTrack();
+      fillCourseFilterForActiveTrack(); // إعادة بناء كورسات الفلتر العام
       renderTabs();
       renderGrid();
     });
@@ -165,7 +163,7 @@ function renderGrid() {
   const track = tracks.find((t) => t.id === state.activeTrackId);
   if (!track) { grid.innerHTML = `<div class="empty">لا يوجد تراك محدد</div>`; return; }
 
-  // فلترة الأعضاء بالاسم والحالة + كورس الشبكة (لو محدد)
+  // فلترة الأعضاء بالاسم والحالة + كورس عام (لو مختار)
   const members = track.members.filter((m) => {
     const byName = state.search ? m.name.includes(state.search) : true;
     const byStatus = state.status === "" ? true : m.tasks.some((t) => t.status === state.status);
@@ -182,7 +180,12 @@ function renderGrid() {
     const card = document.createElement("article");
     card.className = "card";
 
-    const sum = summarizeTasks(m.tasks);
+    // ملخص مبني إمّا على كل المهام أو (اختياريًا) ممكن نظهر sum للCourse المختار فقط
+    const tasksForSummary = state.courseMembers
+      ? m.tasks.filter(t => t.course === state.courseMembers)
+      : m.tasks;
+
+    const sum = summarizeTasks(tasksForSummary);
     const near = sum.near;
 
     card.innerHTML = `
@@ -214,7 +217,7 @@ function renderGrid() {
   });
 }
 
-/* =============== المودال (ما زال فيه فلتر كورس داخلي) =============== */
+/* =============== المودال — فلترة «التاسكات» بالكورس هنا أيضًا =============== */
 function openModal(member, track) {
   closeModal();
 
@@ -223,7 +226,7 @@ function openModal(member, track) {
   const memberCourses = Array.from(new Set(member.tasks.map(t => t.course).filter(Boolean)));
   const courses = trackCourses.length ? trackCourses : memberCourses;
 
-  // فلتر مبدئي للمودال = اختيار الشبكة إن وُجد
+  // فلتر مبدئي للمودال = Course Filter العام إن وُجد
   let courseFilter = state.courseMembers || "";
 
   const root = document.createElement("div");
@@ -338,57 +341,40 @@ function openModal(member, track) {
 }
 function closeModal() { const m = $("#memberModal"); if (m) m.remove(); }
 
-/* =============== زرار Course Filter للشبكة =============== */
-function fillCourseFilterForActiveTrack() {
-  // إعادة الضبط
-  state.courseMembers = "";
-  const select = $("#courseFilter");
-  const btn = $("#courseFilterBtn");
-  select.innerHTML = "";
+/* =============== فلاتر عامة =============== */
+function bindFilters() {
+  $("#searchInput").addEventListener("input", (e) => { state.search = e.target.value.trim(); renderGrid(); });
+  $("#statusFilter").addEventListener("change", (e) => { state.status = e.target.value; renderGrid(); });
+  $("#courseFilter").addEventListener("change", (e) => {
+    state.courseMembers = e.target.value;
+    renderGrid();
+  });
+}
 
-  // بناء القائمة
-  const courses = collectCoursesForTrack(state.activeTrackId);
+/* =============== تهيئة قائمة كورسات التراك النشط =============== */
+function fillCourseFilterForActiveTrack() {
+  const select = $("#courseFilter");
+  select.innerHTML = "";
+  // إعادة ضبط الحالة
+  state.courseMembers = "";
+
+  // بناء الخيارات
   const makeOpt = (value, text) => {
     const opt = document.createElement("option");
     opt.value = value; opt.textContent = text;
     return opt;
   };
+
   select.appendChild(makeOpt("", "كل الكورسات"));
+
+  const courses = collectCoursesForTrack(state.activeTrackId);
   courses.forEach(c => select.appendChild(makeOpt(c, c)));
-
-  // تحديث زرار النص
-  btn.textContent = "Course Filter: كل الكورسات";
-}
-
-function bindCourseFilterButton() {
-  const btn = $("#courseFilterBtn");
-  const sel = $("#courseFilter");
-  // عند الضغط على الزرار: افتح الـ select الأصلي
-  btn.addEventListener("click", () => {
-    btn.setAttribute("aria-expanded", "true");
-    sel.click(); // يفتح قائمة النظام
-  });
-  // عند التغيير: حدّث الحالة + نص الزرار + أعد رسم الشبكة
-  sel.addEventListener("change", (e) => {
-    state.courseMembers = e.target.value;
-    const label = state.courseMembers || "كل الكورسات";
-    btn.textContent = `Course Filter: ${label}`;
-    btn.setAttribute("aria-expanded", "false");
-    renderGrid();
-  });
-}
-
-/* =============== فلاتر عامة =============== */
-function bindFilters() {
-  $("#searchInput").addEventListener("input", (e) => { state.search = e.target.value.trim(); renderGrid(); });
-  $("#statusFilter").addEventListener("change", (e) => { state.status = e.target.value; renderGrid(); });
-  bindCourseFilterButton();
 }
 
 /* =============== بدء التشغيل =============== */
 function init() {
   renderTabs();
-  fillCourseFilterForActiveTrack();
+  fillCourseFilterForActiveTrack(); // لازم تتنادى قبل renderGrid عشان القيمة تظهر
   renderGrid();
   bindFilters();
 }
