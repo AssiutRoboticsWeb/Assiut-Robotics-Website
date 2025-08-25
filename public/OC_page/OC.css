@@ -183,15 +183,16 @@ td {
 }
 .card > img{
     width: 10rem;
+    border-radius: 50%;   
 }
 .userinfo{
-    display: grid;
-    grid-column: 3;
-    grid-row: 2;
+    display:flex;
+    flex-direction: row;
     align-items: center;
 }
 .userinfo >img{
-    width: 1rem;
+    width: 4rem !important;
+    border-radius: 50%;
 } 
 .action{
     gap: 2rem;
