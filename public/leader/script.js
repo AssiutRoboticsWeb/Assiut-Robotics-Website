@@ -229,6 +229,10 @@ async function removeMember(committeeId, memberId) {
 
 async function approveMember(name,email, accepted) {
     var answer =window.prompt(`are sure you want to ${accepted ? "accept" : "remove"} ${name} `, "N")
+    if (answer === null) {
+        // User pressed Cancel
+        return;
+    }
     if(answer == 'N'){return}
     try {
         
