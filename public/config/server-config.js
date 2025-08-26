@@ -14,10 +14,10 @@ class ServerConfig {
 
     getBaseUrl() {
         if (this.isDevelopment) {
-            return 'https://staging-robotics-server.vercel.app';
+            return 'https://assiut-robotics-server.vercel.app/';
         } else {
             // Production server URL
-            return 'https://staging-robotics-server.vercel.app';
+            return 'https://assiut-robotics-server.vercel.app/';
         }
     }
 
