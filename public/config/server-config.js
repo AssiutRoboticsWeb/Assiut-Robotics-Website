@@ -33,7 +33,7 @@ class ServerConfig {
         if (this.isDevelopment) {
             return 'http://localhost:3000';
         } else {
-            return 'https://assiut-robotics-server.vercel.app/';
+            return 'https://staging-robotics-server.vercel.app';
         }
     }
 
