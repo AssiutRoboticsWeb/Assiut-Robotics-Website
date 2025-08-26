@@ -183,10 +183,10 @@ td {
 }
 .card > img{
     width: 10rem;
-    border-radius: 50%;   
+    border-radius: 50%;
 }
 .userinfo{
-    display:flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
 }

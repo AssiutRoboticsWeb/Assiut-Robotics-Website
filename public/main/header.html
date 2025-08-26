@@ -40,8 +40,7 @@
     </div>
 </header>
 <script>
-    let token = JSON.parse(localStorage.getItem("token"));
-    if(token != undefined)
+    if(token != null && token != undefined)
     {
         console.log("profile");
         
@@ -49,7 +48,7 @@
         document.getElementById("profile").classList = ""
     }
     else {
-        console.log("lgon");
+        console.log("login");
 
         document.getElementById("login").classList = ""
         document.getElementById("profile").classList = "remove"
