@@ -81,7 +81,7 @@ function renderContainers(committees) {
                 if (member.role !== "not accepted" && member.committee != "manager") {
                     memberCard.innerHTML = `
                         <p>${member.name} (${member.role})</p>
-                        <button onclick="approveMember('${member.name}','${member.email}','${false}')">Remove</button>
+                        <button onclick="approveMember('${member.name}','${member.email}', false)">Remove</button>
                         ${member.role !== 'head'
                             ? `<button onclick="setHead('${member._id}')">Set Head</button>`
                             : ''
