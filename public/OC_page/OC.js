@@ -414,9 +414,10 @@ function renderRequestedComponents(body){
             <img src="${element.image}" alt="component">
             <p style ="font-weight: bold; font-size : larger">Requested By </p>
             <div class="userinfo row">
+           
               <img src="${element.requestToBorrow.avatar}" class="col" alt="user">
               <h4 class="col">${element.requestToBorrow.name}</h4>
-              <h4 class="col">Committee : ${element.requestToBorrow.committee}</h4>
+              <h4 class="col">Committee :${element.requestToBorrow.committee}</h4>
             </div>
             <div class="action row">
               <button class="col accept" id="${index}">Accept</button>
@@ -543,14 +544,14 @@ function renderBorrowedComponents(){
           <div class="card">
             <h1>${element.title}</h1>
             <img src="${element.image}" alt="component">
-             <p style ="font-weight: bold; font-size : larger">Borrowed By </p>
+            <p style ="font-weight: bold; font-size : larger">Borrowed By </p>
             <div class="userinfo row">
               <img src="${element.borrowedBy.member.avatar}" class="col" alt="user">
               <h4 class="col">${element.borrowedBy.member.name}</h4>
               <h4 class="col">${element.borrowedBy.member.committee}</h4>
             </div>
-              <h4 class="col" style="color: ${color}">Handing Deadline: ${formattedDeadline}</h4>
-
+              <h4 class="col" style="color: ${color}">Handing Deadline :${formattedDeadline}</h4>
+            
             <div class="action row">
               <button class="col return" id="${index}">Return</button>
             </div>

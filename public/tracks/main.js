@@ -6,7 +6,7 @@ const header = document.getElementById("header");
 const backward_BTN = `<div><button onclick="window.history.back()" class ="backward" title="Back"><i class="fa-solid fa-angle-left"></i></button></div>`;
 
 // Backend base
-const backendUrl = serverConfig.getApiUrl("");
+const backendUrl = "https://assiut-robotics-server.vercel.app/";
 
 // Data
 const electricData = {

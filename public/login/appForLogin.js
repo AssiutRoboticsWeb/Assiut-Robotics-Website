@@ -4,7 +4,7 @@ try {
     document.forms['loginForm'].addEventListener('submit', async (event) => {
         // alert('submitting form');
         event.preventDefault();
-        event.target.action = serverConfig.getApiUrl("members/login");
+        event.target.action = "https://assiut-robotics-server.vercel.app/members/login";
         let data={
             email: event.target.email.value,
             password: event.target.password.value,

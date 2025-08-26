@@ -1,4 +1,4 @@
-const mainURL = serverConfig.getLegacyBaseUrl();
+const mainURL = "https://assiut-robotics-zeta.vercel.app";
 
 async function fetchCommittees() {
     try {
@@ -81,7 +81,7 @@ function renderContainers(committees) {
                 if (member.role !== "not accepted" && member.committee != "manager") {
                     memberCard.innerHTML = `
                         <p>${member.name} (${member.role})</p>
-                        <button onclick="approveMember('${member.name}','${member.email}', false)">Remove</button>
+                        <button onclick="approveMember('${member.name}','${member.email}','${false}')">Remove</button>
                         ${member.role !== 'head'
                             ? `<button onclick="setHead('${member._id}')">Set Head</button>`
                             : ''
@@ -92,8 +92,8 @@ function renderContainers(committees) {
                 } else if(  member.committee != "manager") {
                     memberCard.innerHTML = `
                         <p>${member.name} (${member.role})</p>
-                        <button onclick="approveMember('${member.name}','${member.email}', true)">Accept</button>
-                        <button onclick="approveMember('${member.name}','${member.email}', false)">Remove</button>
+                        <button onclick="approveMember('${member.email}','${true}')">Accept</button>
+                        <button onclick="approveMember('${member.email}','${false}')">Remove</button>
                         <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
                     `;
                 }

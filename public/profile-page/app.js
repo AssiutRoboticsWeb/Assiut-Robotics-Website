@@ -1,11 +1,11 @@
 
 // API URLs
-const API_URL = serverConfig.getApiUrl("members/login");
-const VERIFY_URL = serverConfig.getApiUrl("members/verify");
-const CHANGE_PROFILE_IMAGE_URL =
-  serverConfig.getApiUrl("members/changeProfileImage");
+const API_URL = "https://assiut-robotics-zeta.vercel.app/members/login";
+const VERIFY_URL = "https://assiut-robotics-zeta.vercel.app/members/verify";
+const CHANGE_AVATAR_URL =
+  "https://assiut-robotics-zeta.vercel.app/members/changeProfileImage";
 const SUBMIT_TASK_URL =
-  serverConfig.getApiUrl("members/submitTask");
+  "https://assiut-robotics-zeta.vercel.app/members/submitTask";
 
 // State management
 let currentMemberData = null;
@@ -43,47 +43,65 @@ const notificationCount = document.getElementById("notificationCount");
 const history = document.getElementById("HistoryTasksList");
 // Related links
 const Links = {
-  general:[[{ name: "Meeting vote", link: "../meeting/vote.html" },{ name: "Components", link: "../OC_page/component.html" }]] ,
-  HR: [
-    [{ name: "HR page", link: "../control-panel/addHrTocommittee.html" }],
-  ],
-  web: [],
-  media: [
-    [{ name: "Make blog", link: "../blog/add-blog.html" }],
-  ],
-  OC: [
-    [
-      { name: "Components management page", link: "../OC_page/OC.html" },
-     ],
-  ],
-  PR: [[]],
-  "AC Electric": [[]],
-  "AC Mechanical": [
-    [],
-  ],
-  head: [
-    [
+  general: {
+    member: [
+      { name: "Meeting vote", link: "../meeting/vote.html" },
+      { name: "Components", link: "../OC_page/component.html" }
+    ],
+    head: []
+  },
+  HR: {
+    member: [
+      { name: "HR page", link: "../control-panel/addHrTocommittee.html" }
+    ],
+    head: []
+  },
+  web: {
+    member: [],
+    head: []
+  },
+  media: {
+    member: [
+      { name: "Make blog", link: "../blog/add-blog.html" }
+    ],
+    head: []
+  },
+  OC: {
+    member: [
+      { name: "Components management page", link: "../OC_page/OC.html" }
+    ],
+    head: []
+  },
+  PR: {
+    member: [],
+    head: []
+  },
+  "AC Electric": {
+    member: [],
+    head: []
+  },
+  "AC Mechanical": {
+    member: [],
+    head: []
+  },
+  head: {
+    member: [],
+    head: [
       { name: "Task manager", link: "../head/index.html" },
       { name: "Tracks manager", link: "../Tracks/adminDashboard/index.html" },
-     // { name: "members", link: "../leader/index.html" },
-    //  { name: "Meeting vote", link: "../meeting/vote.html" },
+      // { name: "members", link: "../leader/index.html" },
+      // { name: "Meeting vote", link: "../meeting/vote.html" },
       { name: "Leader page", link: "../leader/index.html" },
-      { name: "Create meeting", link: "../meeting/addMeeting.html" },
-    ],
-    [],
-  ],
-  leader: [
-    [
-    //   { name: "HR page", link: "../control-panel/addHrTocommittee.html" },
-    //   { name: "Make blog", link: "../blog/add-blog.html" },
-    //   { name: "Components management page", link: "../OC_page/OC.html" },
-    //   { name: "Task manager", link: "../head/index.html" },
-    // //  { name: "Meeting vote", link: "../meeting/vote.html" },
+      { name: "Create meeting", link: "../meeting/addMeeting.html" }
+    ]
+  },
+  leader: {
+    member: [
       { name: "members", link: "../leader/index.html" },
-      { name: "Leader page", link: "../leader/index.html" },
-
+      { name: "Leader page", link: "../leader/index.html" }
     ],
-  ],
+    head: []
+  }
 };
 
 // Verify token
@@ -170,7 +188,7 @@ async function changeAvatar(file) {
   formData.append("image", file);
 
   try {
-    const response = await fetch(CHANGE_PROFILE_IMAGE_URL, {
+    const response = await fetch(CHANGE_AVATAR_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -265,7 +283,6 @@ async function submitCurrentTask(data) {
 
 // Render member profile data
 function renderMemberData(data) {
-
   localStorage.setItem("data", JSON.stringify(data));
   userAvatar.src = data.avatar;
   userAvatar.alt = `${data.name}'s avatar`;
@@ -275,17 +292,20 @@ function renderMemberData(data) {
   userCommittee.textContent = data.committee;
   userPhone.textContent = data.phoneNumber;
   userStatus.textContent = data.verified ? "Verified" : "Pending";
-  userStatus.className = `status-badge ${
-    data.verified ? "verified" : "pending"
-  }`;
+  userStatus.className = `status-badge ${data.verified ? "verified" : "pending"}`;
   avgRate.textContent = data.avgRate ? data.avgRate : "No Rate yet";
 
-  let relatedLinks = {general : Links.general};
+  // Always show all general links
+  let relatedLinks = { general: [] };
+  if (Links.general) {
+    relatedLinks.general = [...Links.general.member];
+    if (data.role === "head" || data.role === "vice") {
+      relatedLinks.general = [...relatedLinks.general, ...(Links.general.head || [])];
+    }
+  }
 
-  // إنشاء وإظهار Lab Dates للجميع
+  // Lab Dates button for all
   const headerButtons = document.querySelector(".header-buttons");
-
-  // إنشاء زر Lab Dates
   const labDatesBtn = document.createElement("a");
   labDatesBtn.id = "lapDates";
   labDatesBtn.href = "../lapDates/getDates.html";
@@ -296,9 +316,8 @@ function renderMemberData(data) {
   `;
   headerButtons.appendChild(labDatesBtn);
 
-  // إنشاء زر Add Date لأعضاء OC فقط
+  // Add Date button for OC only
   if (data.committee === "OC" || data.committee === "OC ") {
-    console.log("Creating Add Date button for OC member");
     const addDateBtn = document.createElement("a");
     addDateBtn.id = "addDate";
     addDateBtn.href = "../lapDates/addDate.html";
@@ -310,26 +329,32 @@ function renderMemberData(data) {
     headerButtons.appendChild(addDateBtn);
   }
 
-  for (const key in Links) {
-    if (data.committee === key) {
-      if (data.role === "head" || data.role === "vice") {
-        relatedLinks[key] = Links[key];
-      }
+  // Show committee links for the user's committee
+  if (Links[data.committee]) {
+    relatedLinks[data.committee] = [...Links[data.committee].member];
+    if (data.role === "head" || data.role === "vice") {
+      relatedLinks[data.committee] = [
+        ...relatedLinks[data.committee],
+        ...(Links[data.committee].head || [])
+      ];
     }
   }
-  if (
-    data.role === "head" ||
-    data.role === "vice" ||
-    data.role.includes("HR ")
-  ) {
-    relatedLinks.head = Links.head;
+
+  // If head/vice, also show all head links (in addition to committee links)
+  if (data.role === "head" || data.role === "vice") {
+    if (Links.head) {
+      relatedLinks.head = [...(Links.head.head || [])];
+    }
   }
+
+  // If leader/viceLeader, also show all leader links
   if (data.role === "leader" || data.role === "viceLeader") {
-    relatedLinks.key = Links.leader;
+    if (Links.leader) {
+      relatedLinks.leader = [...(Links.leader.member || [])];
+    }
   }
-  console.log(relatedLinks);
+
   renderRelatedLinks(relatedLinks);
-  // renderTracks(data.startedTracks);
 }
 
 // Render tracks list
@@ -466,26 +491,14 @@ function renderTasks(tasks) {
 }
 // render relatedLinks list
 function renderRelatedLinks(relatedLinks) {
-  // obj of arr of arr of objs
-  const relatedLinksList =
-    document.getElementById("related-links").firstElementChild;
+  const relatedLinksList = document.getElementById("related-links").firstElementChild;
   relatedLinksList.innerHTML = "";
-  console.log("before fill");
-  
   for (const key in relatedLinks) {
-    
-    relatedLinks[key].forEach((link, index) => {
-      console.log(link);
-      relatedLinks[key][index].forEach((link, index) => {
-        const component = `
-          <li name = "${link.name}"><a href="${link.link}">${link.name}</a></li>
-        `;
-        relatedLinksList.innerHTML += component;
-      });
+    relatedLinks[key].forEach(link => {
+      const component = `<li name="${link.name}"><a href="${link.link}">${link.name}</a></li>`;
+      relatedLinksList.innerHTML += component;
     });
   }
-  console.log("after fill");
-
 }
 // RelatedLinks btn
 function RelatedLinks() {

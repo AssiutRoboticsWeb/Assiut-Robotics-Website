@@ -1,5 +1,5 @@
 
-const token = window.localStorage.getItem("token") ? window.localStorage.getItem("token") : null;
+const token = window.localStorage.getItem("token");
 
 function navButtonClick() {
     const topNav = document.getElementById("myTopnav");
