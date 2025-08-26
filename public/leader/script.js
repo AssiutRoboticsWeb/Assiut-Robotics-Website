@@ -81,7 +81,7 @@ function renderContainers(committees) {
                 if (member.role !== "not accepted" && member.committee != "manager") {
                     memberCard.innerHTML = `
                         <p>${member.name} (${member.role})</p>
-                        <button onclick="approveMember('${member.name}','${member.email}', false)">Remove</button>
+                        <button onclick="approveMember('${member.name}','${member.email}', 'false')">Remove</button>
                         ${member.role !== 'head'
                             ? `<button onclick="setHead('${member._id}')">Set Head</button>`
                             : ''
@@ -92,8 +92,8 @@ function renderContainers(committees) {
                 } else if(  member.committee != "manager") {
                     memberCard.innerHTML = `
                         <p>${member.name} (${member.role})</p>
-                        <button onclick="approveMember('${member.name}','${member.email}', true)">Accept</button>
-                        <button onclick="approveMember('${member.name}','${member.email}', false)">Remove</button>
+                        <button onclick="approveMember('${member.name}','${member.email}', 'true')">Accept</button>
+                        <button onclick="approveMember('${member.name}','${member.email}', 'false')">Remove</button>
                         <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
                     `;
                 }
@@ -228,7 +228,7 @@ async function removeMember(committeeId, memberId) {
 }
 
 async function approveMember(name,email, accepted) {
-    var answer =window.prompt(`are sure you want to ${accepted ? "accept" : "remove"} ${name} `, "N")
+    var answer =window.prompt(`are sure you want to ${(accepted != "false") ? "accept" : "remove"} ${name} `, "N")
     if (answer === null) {
         // User pressed Cancel
         return;
@@ -249,12 +249,18 @@ async function approveMember(name,email, accepted) {
         body: JSON.stringify({email,accepted})
     });
     const response=await res.json();
+    if(response.message == "jwt expired")
+    {
+        window.location.href = "../login/login.html"
+    }
     alert(response.message)
     console.log(response);
     
     // location.reload();
 } catch (error) {
-       window.alert(error.message) 
+       
+        window.alert(error.message) 
+       
        console.log(error);
        
 }
