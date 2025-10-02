@@ -85,7 +85,7 @@ navMenu.addEventListener('click', (e) => {
 // Fetch and display members
 async function fetchMembers() {
     try {
-        const response = await fetch(`https://assiut-robotics-zeta.vercel.app/members/get/${committee }`);
+        const response = await fetch(`https://assiut-robotics-server.vercel.app/members/get/${committee }`);
         const data = await response.json();
         members = data.date;
         console.log(members);
@@ -413,7 +413,7 @@ document.getElementById('taskForm').addEventListener('submit', async (e) => {
 
     try {
         const promises = assignedMembers.map(memberId => 
-            fetch(`https://assiut-robotics-zeta.vercel.app/members/${memberId}/addTask`, {
+            fetch(`https://assiut-robotics-server.vercel.app/members/${memberId}/addTask`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -469,7 +469,7 @@ document.getElementById('taskForm').addEventListener('submit', async (e) => {
 //     };
 
 //     try {
-//         const response = await fetch(`https://assiut-robotics-zeta.vercel.app/members/${memberId}/editTask/${taskId}`, {
+//         const response = await fetch(`https://assiut-robotics-server.vercel.app/members/${memberId}/editTask/${taskId}`, {
 //             method: 'PUT',
 //             headers: {
 //                 'Content-Type': 'application/json',
@@ -496,7 +496,7 @@ async function deleteTask(memberId, taskId) {
     if (!confirm('Are you sure you want to delete this task?')) return;
 
     try {
-        const response = await fetch(`https://assiut-robotics-zeta.vercel.app/members/${memberId}/deleteTask/${taskId}`, {
+        const response = await fetch(`https://assiut-robotics-server.vercel.app/members/${memberId}/deleteTask/${taskId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -535,7 +535,7 @@ async function rateTask(memberId, taskId) {
     
     
     try {
-        const response = await fetch(`https://assiut-robotics-zeta.vercel.app/members/members/${memberId}/rateTask/${taskId}`, {
+        const response = await fetch(`https://assiut-robotics-server.vercel.app/members/members/${memberId}/rateTask/${taskId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -637,7 +637,7 @@ function openEditTaskPopup(task, memberId, taskId, member) {
 
 // Function to update the task
 async function editrequest(memberId,taskId,member){
-    fetch(` https://assiut-robotics-zeta.vercel.app/members/${memberId}/editTask/${taskId}`, {
+    fetch(` https://assiut-robotics-server.vercel.app/members/${memberId}/editTask/${taskId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -744,7 +744,7 @@ async function fetchMembersForHr() {
     // console.log(hrCommitte);
     if(hrCommitte !="Not found"){
         try {
-      const response = await fetch(`https://assiut-robotics-zeta.vercel.app/members/get/${hrCommitte}`);
+      const response = await fetch(`https://assiut-robotics-server.vercel.app/members/get/${hrCommitte}`);
       const data = await response.json();
       let members = data.date;
   
@@ -778,7 +778,7 @@ async function fetchMembersForHr() {
     // console.log(JSON.stringify(formData));
   
     try {
-      const response = await fetch('https://assiut-robotics-zeta.vercel.app/members/update-tasks-evaluation', {
+      const response = await fetch('https://assiut-robotics-server.vercel.app/members/update-tasks-evaluation', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
