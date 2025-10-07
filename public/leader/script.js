@@ -1,4 +1,4 @@
-const mainURL = "https://assiut-robotics-zeta.vercel.app";
+const mainURL = "https://assiut-robotics-server.vercel.app";
 
 async function fetchCommittees() {
     try {
@@ -239,7 +239,7 @@ async function approveMember(name,email, accepted) {
         console.log(email,accepted);
         
     const token=window.localStorage.getItem('token')
-    const res=await fetch(`https://assiut-robotics-zeta.vercel.app/members/confirm`, {
+    const res=await fetch(`https://assiut-robotics-server.vercel.app/members/confirm`, {
         method: 'POST',
         headers: {
              'Content-Type': 'application/json',
@@ -270,7 +270,7 @@ async function setHead(memberId) {
     const token=window.localStorage.getItem('token')
 
     try{
-    const res=await fetch(`https://assiut-robotics-zeta.vercel.app/members/changeHead`, {
+    const res=await fetch(`https://assiut-robotics-server.vercel.app/members/changeHead`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
