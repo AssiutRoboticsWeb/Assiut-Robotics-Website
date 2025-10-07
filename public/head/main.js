@@ -85,7 +85,12 @@ navMenu.addEventListener('click', (e) => {
 // Fetch and display members
 async function fetchMembers() {
     try {
-        const response = await fetch(`https://assiut-robotics-server.vercel.app/members/get/${committee }`);
+        const response = await fetch(`https://assiut-robotics-server.vercel.app/members/get/${committee }`,{
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
         const data = await response.json();
         members = data.date;
         console.log(members);
