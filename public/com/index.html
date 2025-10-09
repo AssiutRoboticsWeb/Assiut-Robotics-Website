@@ -16,18 +16,19 @@
     <header class="header">
         <nav class="nav-container">
             <div class="logo">
-                <h1>أسيوط روبوتكس</h1>
-                <p class="tagline">Assiut Robotics</p>
+                <a href="#home"><img src="../all-images/logo.png" alt="Assiut Robotics Logo" width="100" ></a>
+                <!-- <h1>أسيوط روبوتكس</h1> -->
+                <!-- <p class="tagline">Assiut Robotics</p> -->
             </div>
             <button class="menu-toggle" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="nav-links">
-                <a href="#home" class="active">الرئيسية</a>
-                <a href="#about">من نحن</a>
-                <a href="#committees">اللجان</a>
-                <a href="#contact">اتصل بنا</a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScn4bU5YXhjEOkctauSBE77madkXBSIE8OChxiLpvmc5qovrQ/viewform" class="register-btn formClick" target="_blank">قدم الآن</a>
+                <a id="home-link" href="#home" class="active">الرئيسية</a>
+                <a id="about-link" href="#about">من نحن</a>
+                <a id="committees-link" href="#committees">اللجان</a>
+                <a id="contact-link" href="#contact">اتصل بنا</a>
+                <a id="register-link" href="https://docs.google.com/forms/d/1pOms1ffh8-xCtzbQhEXzdatoBijzxOjHo8FYocbZOaE/viewform?edit_requested=true" class="register-btn formClick" target="_blank">قدم الآن</a>
             </div>
         </nav>
     </header>
@@ -39,7 +40,7 @@
             <p class="hero-subtitle">أول فريق تأسس في كلية الهندسة بجامعة أسيوط</p>
             <div class="hero-buttons">
                 <button class="primary-btn formClick" > 
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScn4bU5YXhjEOkctauSBE77madkXBSIE8OChxiLpvmc5qovrQ/viewform" class="register-btn" target="_blank">انضم إلينا</a>
+                    <a href="https://docs.google.com/forms/d/1pOms1ffh8-xCtzbQhEXzdatoBijzxOjHo8FYocbZOaE/viewform?edit_requested=true" class="register-btn" target="_blank">انضم إلينا</a>
                 </button>
                 <button class="secondary-btn">اكتشف المزيد</button>
             </div>
@@ -200,12 +201,12 @@
                     </div>
                 </div>
 
-                <!-- Web Committee -->
-                <!-- <div class="committee-card" data-aos="fade-up" data-aos-delay="200">
+                <!-- software Committee -->
+                <div class="committee-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="committee-image">
                         <img src="https://images.unsplash.com/photo-1510096358640-cc43efaf92c7?w=800&auto=format&fit=crop" alt="Web Committee">
                         <div class="committee-overlay">
-                            <h3>لجنة الويب</h3>
+                            <h3>لجنة البرمجيات</h3>
                             <p>تطوير وتصميم المواقع الإلكترونية</p>
                         </div>
                     </div>
@@ -214,7 +215,7 @@
                             <div class="committee-icon">
                                 <i class="fas fa-code"></i>
                             </div>
-                            <h2>لجنة الويب</h2>
+                            <h2>لجنة البرمجيات</h2>
                         </div>
                         <div class="committee-text">
                             <h4>المهام الرئيسية</h4>
@@ -227,7 +228,7 @@
                         </div>
                         <button class="read-more" onclick="showDetails('web')">اقرأ المزيد</button>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- HR Committee -->
                 <div class="committee-card" data-aos="fade-up" data-aos-delay="300">

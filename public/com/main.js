@@ -1,3 +1,50 @@
+// navbar switch taps
+var heroSection_link = document.getElementById('home-link');
+var aboutSection_link = document.getElementById('about-link');
+var committeesSection_link = document.getElementById('committees-link');
+var contactSection_link = document.getElementById('contact-link');
+const heroSection = document.getElementById('home');
+const aboutSection = document.getElementById('about');
+const committeesSection = document.getElementById('committees');
+const contactSection = document.getElementById('contact');
+function active(){
+    var scrollPosition = window.scrollY+200; // Adjust offset as needed
+    console.log(scrollPosition);
+    if (scrollPosition >= heroSection.offsetTop && scrollPosition < aboutSection.offsetTop) {
+        // Hero Section
+        heroSection_link.classList.add('active');
+        aboutSection_link.classList.remove('active');
+        committeesSection_link.classList.remove('active');
+        contactSection_link.classList.remove('active');
+        console.log("hero active")
+        console.log(heroSection_link.offsetTop)
+    } else if (scrollPosition >= aboutSection.offsetTop && scrollPosition < committeesSection.offsetTop) {
+        // About Section
+        aboutSection_link.classList.add('active');
+        heroSection_link.classList.remove('active');
+        committeesSection_link.classList.remove('active');
+        contactSection_link.classList.remove('active');
+        console.log("about active")
+        console.log(aboutSection.offsetTop)
+    } else if (scrollPosition >= committeesSection.offsetTop && scrollPosition < contactSection.offsetTop) {
+        // Committees Section
+        committeesSection_link.classList.add('active');
+        heroSection_link.classList.remove('active');
+        aboutSection_link.classList.remove('active');
+        contactSection_link.classList.remove('active');
+        console.log("committees active")
+        console.log(committeesSection.offsetTop)
+    } else if (scrollPosition >= contactSection.offsetTop) {
+        // Contact Section
+        contactSection_link.classList.add('active');
+        heroSection_link.classList.remove('active');
+        aboutSection_link.classList.remove('active');
+        committeesSection_link.classList.remove('active');
+        console.log("contact active")
+        console.log(contactSection_link.offsetTop)
+    }
+}
+window.addEventListener('scroll', active);
 // Splash Screen
 
 
