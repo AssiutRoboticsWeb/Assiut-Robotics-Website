@@ -66,14 +66,14 @@ const heroImages = [
 
 let currentImageIndex = 0;
 const hero = document.querySelector('.hero');
-
+console.log(hero.before);
 
 
 function changeHeroImage() {    
     console.log(currentImageIndex);
     console.log(heroImages[currentImageIndex]);
     console.log(currentImageIndex % heroImages.length);
-    hero.style.backgroundImage = `url('${heroImages[currentImageIndex]}');`;
+    hero.style.background = `url('${heroImages[currentImageIndex]}');`;
     currentImageIndex = (currentImageIndex + 1) % heroImages.length;
 }
 
@@ -267,42 +267,134 @@ const committeeDetails = {
             </div>
         `
     },
-    web: {
-        title: "لجنة الويب",
+    software: {
+        title: "لجنة البرمجيات",
         content: `
-            <div class="committee-detail-content">
-                <h2>لجنة الويب – Web Committee</h2>
-                <p>تتولى لجنة الويب مسؤولية تصميم وتطوير المواقع الإلكترونية الخاصة بفريق أسيوط روبوتكس.</p>
-                
-                <h3>هيكلة العمل داخل اللجنة:</h3>
-                <ul>
-                    <li>
-                        <strong>تنظيم الفرق</strong>
-                        <p>تنقسم اللجنة إلى فرق، حيث يتعاون الأعضاء على تنفيذ المشاريع وفق خطط واضحة.</p>
-                    </li>
-                    <li>
-                        <strong>تطوير المشاريع</strong>
-                        <p>تبدأ عملية تطوير المواقع بتحديد الاحتياجات، ثم تصميم الواجهات وتجهيز الأنظمة الخلفية.</p>
-                    </li>
-                    <li>
-                        <strong>متابعة الأعضاء والتقييم</strong>
-                        <p>يتم تقييم أداء الأعضاء وفق آلية محددة تشمل مدى التزامهم وجودة أعمالهم.</p>
-                    </li>
-                    <li>
-                        <strong>تنظيم الورش والتدريبات</strong>
-                        <p>عقد ورش عمل دورية لتعليم التقنيات الحديثة في تطوير الويب.</p>
-                    </li>
-                </ul>
+                <div class="committee-detail-content">
+                    <h2>لجنة البرمجيات – Software Committee</h2>
+                    <p>تعتبر لجنة البرمجيات هي المسؤولة عن تطوير وصيانة البرمجيات والتطبيقات التي تدعم أنشطة الفريق. تعمل اللجنة على تقديم حلول برمجية مبتكرة وفعالة من خلال اربعة أقسام متخصصة.</p>
+                    
+                    <div class="committee-tabs">
+                        <button class="tab-btn active" onclick="switchTab('frontend')">FrontEnd</button>
+                        <button class="tab-btn" onclick="switchTab('backend')">BackEnd</button>
+                        <button class="tab-btn" onclick="switchTab('mobile')">Mobile</button>
+                        <button class="tab-btn" onclick="switchTab('uiux')">UI/UX</button>
+                    </div>
 
-                <h3>التقنيات المستخدمة:</h3>
-                <ul>
-                    <li>HTML, CSS, JavaScript</li>
-                    <li>React.js</li>
-                    <li>Node.js</li>
-                    <li>أحدث تقنيات تطوير الويب</li>
-                </ul>
-            </div>
-        `
+                    <div id="frontend-content" class="tab-content active">
+                        <h3>قسم frontend</h3>
+                        <p>يختص هذا القسم بتطوير واجهات المستخدم وتجربة المستخدم للتطبيقات والمواقع الإلكترونية.</p>
+                        
+                        <h4>المهام الرئيسية:</h4>
+                        <ul>
+                            <li>
+                                <strong>تحويل التصاميم إلى واجهات تفاعلية</strong>
+                                <p>تطوير واجهات مستخدم جذابة وسهلة الاستخدام للتطبيقات والمواقع الإلكترونية، مع التركيز على تجربة المستخدم.</p>
+                            </li>
+                            <li>
+                                <strong>التكامل مع فريق ال backend</strong>
+                                <p>التعاون مع فريق الbackend والحصول على البيانات المطلوبه وعرضها</p>
+                            </li>
+                            <li>
+                                <strong>تحسين ظهور الموقع في محركات البحث</strong>
+                                <p>التعاون مع فريق الSEO لتحسين ظهور الموقع في نتائج البحث وزيادة الزيارات عن طريق اختيار الكلمات المفتاحيه المناسبه</p>
+                            </li>
+                        </ul>
+
+                        <h4>المهارات المكتسبة:</h4>
+                        <ul>
+                            <li>تطوير واجهات المستخدم باستخدام HTML، CSS، و JavaScript</li>
+                            <li>استخدام مكتبات مثل Bootstrap لتسريع عملية التصميم</li>
+                            <li>استخدام postman لإختبار ال APIs </li>
+                            <li>تطوير الواجهات بإستخدام frameworks مثل React </li>
+                            <li>التعاون مع فرق متعددة التخصصات لتحقيق الأهداف المشتركة</li>
+                            <li>Github: لإدارة المشاريع والتعاون </li>
+                        </ul>
+                    </div>
+
+                    <div id="backend-content" class="tab-content">
+                        <h3>قسم BackEnd</h3>
+                        <p>عمود أساس اللجنة حيث انه هو المسؤول عن تنظيم ال database والتعامل معها بأكفأ الطرق.</p>
+                        
+                        <h4>المهام الرئيسية:</h4>
+                        <ul>
+                            <li>
+                                <strong>هيكلة ال DataBase</strong>
+                                <p>تصميم وتنظيم قواعد البيانات لضمان الكفاءة وسهولة الوصول إلى المعلومات و تجنب تكرار البيانات لتوفير المساحة والموارد.</p>
+                            </li>
+                            <li>
+                                <strong>توفير ال APIs المناسبه</strong>
+                                <p>تصميم وتطوير واجهات برمجة التطبيقات (APIs) التي تضمن وصول المعلومات المناسبه لمطوري الFrontEnd , Mobile.</p>
+                            </li>
+                            <li>
+                                <strong>تأمين قاعدة البيانات</strong>
+                                <p>تطبيق أفضل الممارسات لتأمين قواعد البيانات وحمايتها من الوصول غير المصرح به عن طريق التحقق من هويه كل مستخدم والتعرف على المستخدمين الجدد.</p>
+                            </li>
+                        </ul>
+
+                        <h4>الأدوات والتقنيات:</h4>
+                        <ul>
+                            <li>node.js</li>
+                            <li>Express.js</li>
+                            <li>Mongodb</li>
+                            <li>Postman</li>
+                            <li>Github: لإدارة المشاريع والتعاون </li>
+                        </ul>
+                    </div>
+
+                    <div id="mobile-content" class="tab-content">
+                        <h3>قسم mobile</h3>
+                        <p>قسم متخصص في إدارة وتطوير تطبيقات الهواتف المحمولة، يهدف إلى تحسين تجربة المستخدم على الأجهزة المحمولة.</p>
+
+                        <h4>المهام الرئيسية:</h4>
+                        <ul>
+                            <li>
+                                <strong>تحويل التصاميم إلى واجهات تفاعلية</strong>
+                                <p>تطوير واجهات مستخدم جذابة وسهلة الاستخدام للتطبيقات, مع التركيز على تجربة المستخدم.</p>
+                            </li>
+                            <li>
+                                <strong>التكامل مع فريق ال backend</strong>
+                                <p>التعاون مع فريق الbackend والحصول على البيانات المطلوبه وعرضها</p>
+                            </li>
+                        </ul>
+
+                        <h4>الأدوات والتقنيات:</h4>
+                        <ul>
+                            <li>Postman: لاختبار واجهات برمجة التطبيقات</li>
+                            <li>React Native: لتطوير تطبيقات الهواتف المحمولة</li>
+                            <li>Github: لإدارة المشاريع والتعاون </li>
+                        </ul>
+
+                        
+                    </div>
+                    <div id="uiux-content" class="tab-content">
+                        <h3>قسم UI/UX</h3>
+                        <p>قسم متخصص في تصميم واجهات المستخدم وتجربة المستخدم، يهدف إلى تحسين التفاعل بين المستخدم والتطبيقات.</p>
+
+                        <h4>المهام الرئيسية:</h4>
+                        <ul>
+                            <li>
+                                <strong>تصميم الواجهة</strong>
+                                <p>إنشاء وتطوير واجهات المستخدم التي تلبي احتياجات الفريق والمستخدمين.</p>
+                            </li>
+                            <li>
+                                <strong>الإهتمام بتجربة المستخدم</strong>
+                                <p>تقديم تجربة مستخدم سلسة وجذابة من خلال التصميم الجيد والتفاعل الفعال.</p>
+                            </li>
+                            <li>
+                                <strong>تحليل تجربة المستخدم</strong>
+                                <p>جمع وتحليل ملاحظات المستخدمين لتحسين واجهات المستخدم وتجربة الاستخدام.</p>
+                            </li>
+                        </ul>
+
+                        <h4>الأدوات والتقنيات:</h4>
+                        <ul>
+                            <li>figma</li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            `
     },
     hr: {
         title: "لجنة الموارد البشرية",
@@ -519,16 +611,17 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-function switchTab(tabName) {
+function switchTab(tabName, parent = null) {
     // Handle card tabs
-    const cardContents = document.querySelectorAll('.committee-text .tab-content');
-    const cardButtons = document.querySelectorAll('.committee-tabs .tab-btn');
-    
+    const cardContents = document.querySelectorAll(`#${parent} .committee-text .tab-content`);
+    const cardButtons = document.querySelectorAll(`#${parent} .committee-tabs .tab-btn`);
+
     cardContents.forEach(content => content.classList.remove('active'));
     cardButtons.forEach(button => button.classList.remove('active'));
-    
-    const cardContent = document.querySelector(`.committee-text #${tabName}-content`);
-    const cardButton = document.querySelector(`.committee-tabs [onclick="switchTab('${tabName}')"]`);
+
+    const cardContent = document.querySelector(`#${parent} .committee-text #${tabName}-content`);
+    const cardButton = document.querySelector(`#${parent} .committee-tabs [onclick="switchTab('${tabName}', '${parent}')"]`);
+    console.log(cardButton);
     
     if (cardContent) cardContent.classList.add('active');
     if (cardButton) cardButton.classList.add('active');
@@ -568,7 +661,7 @@ const sendIpApi = async (page) => {
     try{
     const clientIP = await getClientIP();
     console.log("api function ", page, clientIP)
-    const response = await fetch(`https://assiut-robotics-zeta.vercel.app/guest`,{
+    const response = await fetch(`https://assiut-robotics-server.vercel.app/guest`,{
         method: "POST",
         headers: {
             "Content-type": "application/json"

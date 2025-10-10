@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div class="about-image" data-aos="fade-left">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop" alt="Team Image">
+                    <img src="./imgs/group.JPG" alt="Team Image">
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
         </div>
     </section>
 
-    <!-- Developers Section -->
+    <!-- Developers Section --> 
     <!-- <section id="developers" class="developers-section">
         <div class="container">
             <h2 data-aos="fade-up">web committee</h2>
@@ -176,7 +176,7 @@
                             <p>الركيزة الأساسية للعملية التعليمية</p>
                         </div>
                     </div>
-                    <div class="committee-content">
+                    <div class="committee-content" id="academic">
                         <div class="committee-header">
                             <div class="committee-icon">
                                 <i class="fas fa-graduation-cap"></i>
@@ -184,8 +184,8 @@
                             <h2>اللجان الأكاديمية</h2>
                         </div>
                         <div class="committee-tabs">
-                            <button class="tab-btn active" onclick="switchTab('electrical')">كهرباء</button>
-                            <button class="tab-btn" onclick="switchTab('mechanical')">ميكانيكا</button>
+                            <button class="tab-btn active" onclick="switchTab('electrical', 'academic')">كهرباء</button>
+                            <button class="tab-btn" onclick="switchTab('mechanical', 'academic')">ميكانيكا</button>
                         </div>
                         <div class="committee-text">
                             <div id="electrical-content" class="tab-content active">
@@ -202,31 +202,66 @@
                 </div>
 
                 <!-- software Committee -->
-                <div class="committee-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="committee-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="committee-image">
-                        <img src="https://images.unsplash.com/photo-1510096358640-cc43efaf92c7?w=800&auto=format&fit=crop" alt="Web Committee">
+                        <img src="./imgs/software.jpg" alt="">
                         <div class="committee-overlay">
                             <h3>لجنة البرمجيات</h3>
-                            <p>تطوير وتصميم المواقع الإلكترونية</p>
+                            <p>تطوير البرمجيات والتطبيقات</p>
                         </div>
                     </div>
-                    <div class="committee-content">
+                    <div class="committee-content" id="software">
                         <div class="committee-header">
                             <div class="committee-icon">
-                                <i class="fas fa-code"></i>
+                                <i class="fas fa-camera"></i>
                             </div>
                             <h2>لجنة البرمجيات</h2>
                         </div>
-                        <div class="committee-text">
-                            <h4>المهام الرئيسية</h4>
-                            <ul>
-                                <li>تطوير المواقع الإلكترونية</li>
-                                <li>تنظيم الفرق والمشاريع</li>
-                                <li>التدريب والتطوير</li>
-                                <li>إدارة المشروعات</li>
-                            </ul>
+                        <div class="committee-tabs">
+                            <button class="tab-btn active" onclick="switchTab('frontend', 'software')">FrontEnd</button>
+                            <button class="tab-btn" onclick="switchTab('backend', 'software')">Backend</button>
+                            <button class="tab-btn" onclick="switchTab('mobile', 'software')">Mobile</button>
+                            <button class="tab-btn" onclick="switchTab('uiux', 'software')">UI/UX</button>
                         </div>
-                        <button class="read-more" onclick="showDetails('web')">اقرأ المزيد</button>
+                        <div class="committee-text">
+                            <div id="frontend-content" class="tab-content active">
+                                <h4>قسم FrontEnd</h4>
+                                <ul>
+                                    <li>تحويل التصاميم إلى واجهات تفاعلية</li>
+                                    <li>جلب البيانات من الـ Backend وعرضها</li>
+                                    <li>تحسين الأداء وسرعة الموقع.</li>
+                                    <li>تحسين الظهور في البحث. </li>
+                                </ul>
+                            </div>
+                            <div id="backend-content" class="tab-content">
+                                <h4>قسم Backend</h4>
+                                <ul>
+                                    <li>تنظيم قاعدة البيانات والتعامل معها بكفاءة.</li>
+                                    <li>طوّر واجهات الربط (APIs) </li>
+                                    <li>تأمين البيانات وضمان خصوصيتها.</li>
+                                    <li>ادارة تدفّق البيانات بين أجزاء النظام </li>
+                                </ul>
+                            </div>
+                            <div id="mobile-content" class="tab-content">
+                                <h4>قسم Mobile</h4>
+                                <ul>
+                                    <li>تحويل التصاميم إلى تطبيقات عملية</li>
+                                    <li>جلب البيانات من الـ Backend وعرضها</li>
+                                    <li>توفير تجربة مستخدم مريحة على الهاتف.</li>
+                                    <li>دعم أنظمة Android و iOS </li>
+                                </ul>
+                            </div>
+                            <div id="uiux-content" class="tab-content">
+                                <h4>قسم UI/UX</h4>
+                                <ul>
+                                    <li>الإهتمام بتجربة المستخدم من البداية للنهاية</li>
+                                    <li>تنسيق الألوان وتوزيع العناصر.</li>
+                                    <li>تصميم الحركات والتفاصيل الجذابة.</li>
+                                    <li>التعاون مع المطورين لتحسين تجربة الاستخدام </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="read-more" onclick="showDetails('software')">اقرأ المزيد</button>
                     </div>
                 </div>
 
@@ -239,7 +274,7 @@
                             <p>إدارة وتطوير الموارد البشرية</p>
                         </div>
                     </div>
-                    <div class="committee-content">
+                    <div class="committee-content" id="hr">
                         <div class="committee-header">
                             <div class="committee-icon">
                                 <i class="fas fa-users-cog"></i>
@@ -268,7 +303,7 @@
                             <p>إدارة المحتوى والتسويق</p>
                         </div>
                     </div>
-                    <div class="committee-content">
+                    <div class="committee-content" id="digitalMarketing">
                         <div class="committee-header">
                             <div class="committee-icon">
                                 <i class="fas fa-camera"></i>
@@ -276,9 +311,9 @@
                             <h2>لجنة الميديا</h2>
                         </div>
                         <div class="committee-tabs">
-                            <button class="tab-btn active" onclick="switchTab('video')">فيديو</button>
-                            <button class="tab-btn" onclick="switchTab('design')">تصميم</button>
-                            <button class="tab-btn" onclick="switchTab('social')">سوشيال</button>
+                            <button class="tab-btn active" onclick="switchTab('video', 'digitalMarketing')">فيديو</button>
+                            <button class="tab-btn" onclick="switchTab('design', 'digitalMarketing')">تصميم</button>
+                            <button class="tab-btn" onclick="switchTab('social', 'digitalMarketing')">سوشيال</button>
                         </div>
                         <div class="committee-text">
                             <div id="video-content" class="tab-content active">
@@ -301,13 +336,13 @@
                 <!-- OC Committee -->
                 <div class="committee-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="committee-image">
-                        <img src="./imgs/oc.png" alt="OC Committee">
+                        <img src="./imgs/OC.jpg" alt="OC Committee">
                         <div class="committee-overlay">
                             <h3>لجنة التنظيم</h3>
                             <p>تنظيم وتنسيق الفعاليات والأنشطة</p>
                         </div>
                     </div>
-                    <div class="committee-content">
+                    <div class="committee-content" id="oc">
                         <div class="committee-header">
                             <div class="committee-icon">
                                 <i class="fas fa-calendar-check"></i>
@@ -330,13 +365,13 @@
                 <!-- PR Committee -->
                 <div class="committee-card" data-aos="fade-up" data-aos-delay="600">
                     <div class="committee-image">
-                        <img src="./imgs/pr.png" alt="PR Committee">
+                        <img src="./imgs/PR.jpg" alt="PR Committee">
                         <div class="committee-overlay">
                             <h3>لجنة العلاقات العامة</h3>
                             <p>بناء العلاقات والتواصل الخارجي</p>
                         </div>
                     </div>
-                    <div class="committee-content">
+                    <div class="committee-content" id="pr">
                         <div class="committee-header">
                             <div class="committee-icon">
                                 <i class="fas fa-handshake"></i>
@@ -378,10 +413,9 @@
                         <p>+20 123 456 789</p>
                     </div>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/robotics.assiut"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/assiutrobotics/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/assiut-robotics/posts/?feedView=all"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
                 <div class="contact-form" data-aos="fade-left">
@@ -434,10 +468,9 @@
                 <div class="footer-section">
                     <h3>تواصل معنا</h3>
                     <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/robotics.assiut"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/assiutrobotics/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/assiut-robotics/posts/?feedView=all"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
             </div>

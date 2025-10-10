@@ -216,7 +216,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('./imgs/group.JPG') center/cover;
+    background: url('./imgs/group1.JPG') center/cover;
     opacity: 0.8;
     z-index: 1;
 }
@@ -494,7 +494,7 @@ body {
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .committee-icon {
@@ -882,8 +882,14 @@ body {
 
 .committee-tabs {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
+    overflow: auto;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--primary-color);
+    scrollbar-width: thin;
+    scrollbar-gutter: var(--primary-color);
     margin-bottom: 1.5rem;
+
 }
 
 .tab-btn {
