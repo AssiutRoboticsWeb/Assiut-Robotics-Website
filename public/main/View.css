@@ -448,10 +448,10 @@ h1 {
     text-align: center;
  }
 #pioneers .card-slider {
-     display:flex;
-      align-items:center;
-       gap:0.5rem;
-        justify-content:center;
+    display:flex;
+    align-items:center;
+    gap:0.5rem;
+    justify-content:center;
 }
 #pioneers .slider-viewport {
      overflow:hidden; 
@@ -483,6 +483,31 @@ h1 {
     unicode-bidi: isolate;
     text-align: right;
     }
+#pioneers .quote-wrapper {
+    max-height: 4.5rem; /* collapsed height */
+    overflow: hidden;
+    transition: max-height .28s ease;
+    position: relative;
+}
+#pioneers .quote-wrapper.expanded {
+    max-height: 1000px; /* large enough to show full content */
+}
+#pioneers .see-more {
+    margin-top: .5rem;
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    color: #254061;
+    cursor: pointer;
+    font-weight: 700;
+    padding: .15rem .45rem;
+    outline: 2px solid rgba(37,64,97,.12);
+    border-radius: 4px;
+}
+#pioneers .see-more:focus {
+    outline: 2px solid rgba(57,167,255,.3);
+    border-radius: 4px;
+}
 #pioneers .author {
      margin:0;
       font-weight:700;
