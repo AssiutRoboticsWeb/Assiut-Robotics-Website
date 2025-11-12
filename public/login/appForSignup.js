@@ -30,7 +30,7 @@ try {
         // const fileInput = document.getElementById('picture');
         // console.log('avatar', fileInput.files[0]);
         // formData.append('avatar', fileInput.files[0]);
-        const response = await fetch(event.target.action, {
+        const response = await fetch(serverConfig.getApiUrl("members/register"), {
             method: 'POST',
 
             body: new URLSearchParams(new FormData(event.target))

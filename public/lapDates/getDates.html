@@ -389,7 +389,7 @@
         async function fetchAndDisplayAppointments() {
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch('https://assiut-robotics-server.vercel.app/lap-dates', {
+                const response = await fetch('https://assiut-robotics-zeta.vercel.app/lapDates', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

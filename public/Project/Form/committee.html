@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أسئلة اللجنة | Assiut Robotics Team</title>
+  <link rel="stylesheet" href="css/stule.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <img src="../assets/logo.png" alt="Assiut Robotics Team" class="logo" />
+      <h1 id="committeeTitle">أسئلة اللجنة</h1>
+    </div>
+    <nav class="nav">
+      <a href="../Form/form.html">↩ الرجوع للبيانات</a>
+      <a href="../Dashboard/dashboard.html">الداشبورد</a>
+      <button id="themeToggle" class="btn ghost" aria-label="تبديل الثيم">🌙</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2 class="card-title">أجب عن الأسئلة</h2>
+      <form id="answersForm" class="q-form"></form>
+      <div class="actions">
+        <button type="button" id="submitAnswers" class="btn primary">إرسال الإجابات</button>
+      </div>
+      <div id="successBanner" class="banner success hidden">تم حفظ الإجابات بنجاح ✅</div>
+      <div id="emptyState" class="empty">لا توجد أسئلة لهذه اللجنة بعد.</div>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">ملخص آخر إرسال</h2>
+      <div id="lastSubmission" class="mono small empty">لا يوجد بعد.</div>
+      <div class="actions">
+        <button id="clearResponses" class="btn danger outline" type="button">مسح كل الإرسالات</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer"><small>يحفظ الإرسال محليًا.</small></footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/committee.js"></script>
+</body>
+</html>

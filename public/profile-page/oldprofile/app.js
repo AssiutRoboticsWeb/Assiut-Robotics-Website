@@ -9,7 +9,7 @@ const load = async () => {
         console.log(token);
         Token = "Bearer " + localStorage.getItem("token");
         console.log(Token);
-        let response = await fetch("https://assiut-robotics-zeta.vercel.app/members/verify", {
+    let response = await fetch(`${API_BASE_URL}/members/verify`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

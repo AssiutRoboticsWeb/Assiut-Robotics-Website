@@ -43,7 +43,7 @@ function toggleContent(contentId) {
 
 function loadBlogs() {
     async function load() {
-        const res = await fetch("../../blogs/getBlogs");
+        const res = await fetch(`${API_BASE_URL}/blogs/getBlogs`);
         if (res.ok) {
             let response = await res.json();
             console.log(response);

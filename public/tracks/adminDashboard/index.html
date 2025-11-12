@@ -1,82 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electric Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Electric Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 
 <body>
-    <div id="dashboard-container">
-        <header id="header-section">
-            <h2 id="header-title" >Tracks</h2>
-            <ul id="header-tabs">
-                <li class="header-buttons">
-                    <button class="add-btn" id="add-track-btn" class="active">All Tracks</button>
-                    <button class="add-btn" id="all-announce-tracks-btn">Announcement Tracks</button>
-                </li>
-                <li class="control-buttons" id="all-tracks-ctrl-btns">
-                    <button class="custom-btn" id="custom-back-btn" onclick="backForword(this)"><i class="fa-solid fa-backward-step fa-2xl" style="color: #000000;"></i> </button>
-                    <button class="custom-btn" id="custom-add-btn" onclick="addSomething(this)"><i class="fa-solid fa-plus fa-2xl" style="color: #000000;"></i> </button>
-                </li>
-            </ul>
-        </header>
-        <main id="core-section">
-            <!-- Dynamic content will be rendered here -->
-        </main>
+  <div id="dashboard-container">
+    <header id="header-section">
+      <h2 id="header-title" title="Tracks">Tracks</h2>
+
+      <nav aria-label="Primary">
+        <ul id="header-tabs" class="nav-list">
+          <li class="header-buttons">
+            <button class="add-btn" id="add-track-btn">All Tracks</button>
+            <button class="add-btn" id="all-announce-tracks-btn">Announcement Tracks</button>
+          </li>
+          <li class="control-buttons" id="all-tracks-ctrl-btns">
+            <button class="custom-btn" id="custom-back-btn" title="Back" onclick="backForword(this)">
+              <i class="fa-solid fa-backward-step fa-2xl"></i>
+            </button>
+            <button class="custom-btn" id="custom-add-btn" title="Add" onclick="addSomething(this)">
+              <i class="fa-solid fa-plus fa-2xl"></i>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="core-section"><!-- dynamic --></main>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+    <button type="button" id="floating-close" class="floating-close" aria-label="Close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="modal-content" tabindex="-1">
+      <header class="modal-header drag-handle">
+        <h3 id="modal-title">Modal</h3>
+        <button type="button" class="close" id="close-modal" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <form id="modal-form" novalidate>
+        <div id="modal-fields"><!-- injected --></div>
+
+        <!-- Live Preview -->
+        <aside id="modal-preview" class="modal-preview" aria-live="polite" hidden>
+          <div class="card preview-card" aria-label="Live preview">
+            <div class="preview-icon" id="preview-icon"><i class="fa fa-microchip icon"></i></div>
+            <h3 id="preview-name">Name</h3>
+            <p id="preview-desc" class="muted">Description</p>
+            <div class="admins-inline" id="preview-admins-wrap">
+              <span class="admins-title">Admins:</span>
+              <div class="admins-chips" id="preview-admins">
+                <span class="muted">No admins</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <footer class="modal-footer">
+          <p id="form-errors" class="form-errors" aria-live="assertive"></p>
+          <button type="button" class="btn-outline" id="modal-cancel">Cancel</button>
+          <button type="submit" id="modal-submit">Save</button>
+        </footer>
+      </form>
     </div>
+  </div>
 
-
-    <!-- Modal for Add/Edit Track/Course/Task -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="close-modal">&times;</span>
-            <form id="modal-form">
-                <div id="modal-fields">
-                    <!-- Dynamic form fields will be injected here -->
-                </div>
-                <button type="submit" id="modal-submit">Save</button>
-            </form>
-        </div>
+  <!-- Applications -->
+  <section class="application-section" id="application-section">
+    <h2>Application Status</h2>
+    <div class="scroll-table">
+      <table id="application-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Track Name</th>
+            <th>Student Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="application-body"></tbody>
+      </table>
     </div>
-    <!-- Application Btn & state -->
+  </section>
 
-    <section class="application-section" id="application-section">
-        <h2>Application Status</h2>
-        <div class="scroll-table">
-            <table id="application-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Track Name</th>
-                        <th>Student Name</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="application-body">
-                    <!-- Dynamic application rows will be injected here -->
-                </tbody>
-            </table>
-        </div>
-    </section>
+  <button id="application-btn" class="applay-btn">Applications</button>
 
-
-
-
-
-
-
-
-
-
-    <button id="application-btn" class="applay-btn">Applications</button>
-
-
-
-    <script src="main.js"></script>
+  <!-- Config + App -->
+  <script src="../../config/server-config.js"></script>
+  <script src="./main.js"></script>
 </body>
-
 </html>

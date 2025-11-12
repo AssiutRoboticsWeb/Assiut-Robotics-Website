@@ -1,4 +1,5 @@
-const mainURL = "https://assiut-robotics-server.vercel.app";
+// Use global API_BASE_URL defined in config/server-config.js
+const mainURL = API_BASE_URL;
 
 async function fetchCommittees() {
     try {
@@ -228,18 +229,18 @@ async function removeMember(committeeId, memberId) {
 }
 
 async function approveMember(name,email, accepted) {
-    var answer =window.prompt(`are sure you want to ${(accepted != "false") ? "accept" : "remove"} ${name} `, "N")
+    var answer =window.prompt(`are sure you want to ${accepted ? "accept" : "remove"} ${name} `, "N")
+    if(answer == 'N'){return}
     if (answer === null) {
         // User pressed Cancel
         return;
     }
-    if(answer == 'N'){return}
     try {
         
         console.log(email,accepted);
         
     const token=window.localStorage.getItem('token')
-    const res=await fetch(`https://assiut-robotics-server.vercel.app/members/confirm`, {
+    const res=await fetch(`${mainURL}/members/confirm`, {
         method: 'POST',
         headers: {
              'Content-Type': 'application/json',
@@ -258,9 +259,7 @@ async function approveMember(name,email, accepted) {
     
     // location.reload();
 } catch (error) {
-       
-        window.alert(error.message) 
-       
+       window.alert(error.message) 
        console.log(error);
        
 }
@@ -270,7 +269,7 @@ async function setHead(memberId) {
     const token=window.localStorage.getItem('token')
 
     try{
-    const res=await fetch(`https://assiut-robotics-server.vercel.app/members/changeHead`, {
+    const res=await fetch(`${mainURL}/members/changeHead`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -292,7 +291,7 @@ async function setVice(memberId) {
     const token=window.localStorage.getItem('token')
 
     try{
-    const res=await fetch(`https://assiut-robotics-server.vercel.app/members/changeVice`, {
+    const res=await fetch(`${mainURL}/members/changeVice`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -104,7 +104,7 @@ button {
     height: 30px;
     border: none;
     cursor: pointer;
-    background-color: #1d7bc7;
+    background-color: #2daee2;
     color: #fff;
     border-radius: 10px;
     transition: 0.5s;
@@ -183,10 +183,10 @@ td {
 }
 .card > img{
     width: 10rem;
-    border-radius: 50%;   
+    border-radius: 50%;
 }
 .userinfo{
-    display:flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
 }
@@ -200,4 +200,27 @@ td {
 .action button{
     min-width: 8rem;
     border-radius: 3rem;
+}
+#taps{
+    text-align: center;
+}
+#taps > button{
+    min-width: 8rem;
+    border-radius: 3rem;
+    margin: 0 1rem;
+    width: 10rem;
+}
+
+.btn-primary {
+    background-color: #2daee2 !important;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #2daee2 !important;
+    letter-spacing: 2px;
+}
+.btn:hover{
+    background-color: #2daee2 !important;
+    letter-spacing: 2px;
 }

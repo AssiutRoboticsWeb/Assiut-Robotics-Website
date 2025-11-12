@@ -1,6 +1,37 @@
+/* ===== Navbar behavior (open/close + active link) ===== */
+(function () {
+  const toggle = document.querySelector(".nav-toggle");
+  const menu = document.getElementById("primary-menu");
+  const links = menu ? menu.querySelectorAll(".nav-link") : [];
+  if (toggle && menu) {
+    const toggleMenu = (force) => {
+      const opened = typeof force === "boolean" ? force : !menu.classList.contains("open");
+      menu.classList.toggle("open", opened);
+      toggle.setAttribute("aria-expanded", String(opened));
+    };
+    toggle.addEventListener("click", () => toggleMenu());
+    document.addEventListener("click", (e) => {
+      if (!menu.classList.contains("open")) return;
+      const inside = e.target.closest(".navbar");
+      if (!inside) toggleMenu(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.classList.contains("open")) toggleMenu(false);
+    });
+    links.forEach(a => a.addEventListener("click", () => toggleMenu(false)));
+  }
+  try {
+    const here = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    links.forEach(a => {
+      const href = (a.getAttribute("href") || "").toLowerCase();
+      if ((here === "" && href === "index.html") || href === here) a.classList.add("is-active");
+    });
+  } catch (_) { }
+})();
+
+/* ---------------------------- Tabs Controller ---------------------------- */
 const tabs = document.querySelectorAll(".tab-btn");
 const contents = document.querySelectorAll(".tab-content");
-
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     tabs.forEach((btn) => btn.classList.remove("active"));
@@ -10,774 +41,137 @@ tabs.forEach((tab) => {
   });
 });
 
+/* ------------------------------- Data Seed ------------------------------- */
 const courseData = {
   Frontend: [
-    {
-      id: 1,
-      name: "Mostafa",
-      track: "Frontend",
-      task: "Portfolio Website",
-      hours: 10,
-      points: 95,
-      link: "#",
-    },
-    {
-      id: 2,
-      name: "Sara",
-      track: "Frontend",
-      task: "Landing Page",
-      hours: 6,
-      points: 88,
-      link: "#",
-    },
-    {
-      id: 3,
-      name: "Omar",
-      track: "Frontend",
-      task: "Responsive Blog",
-      hours: 7,
-      points: 90,
-      link: "#",
-    },
-    {
-      id: 4,
-      name: "Nour",
-      track: "Frontend",
-      task: "E-commerce UI",
-      hours: 12,
-      points: 98,
-      link: "#",
-    },
-    {
-      id: 5,
-      name: "Ahmed",
-      track: "Frontend",
-      task: "Admin Dashboard",
-      hours: 9,
-      points: 92,
-      link: "#",
-    },
-    {
-      id: 6,
-      name: "Laila",
-      track: "Frontend",
-      task: "Contact Form Validation",
-      hours: 4,
-      points: 85,
-      link: "#",
-    },
-    {
-      id: 7,
-      name: "Khaled",
-      track: "Frontend",
-      task: "Dark Mode Toggle",
-      hours: 3,
-      points: 80,
-      link: "#",
-    },
-    {
-      id: 8,
-      name: "Hana",
-      track: "Frontend",
-      task: "Landing Page 2.0",
-      hours: 5,
-      points: 87,
-      link: "#",
-    },
-    {
-      id: 9,
-      name: "Youssef",
-      track: "Frontend",
-      task: "CSS Animation Showcase",
-      hours: 6,
-      points: 89,
-      link: "#",
-    },
-    {
-      id: 10,
-      name: "Salma",
-      track: "Frontend",
-      task: "Single Page App",
-      hours: 15,
-      points: 99,
-      link: "#",
-    },
-    {
-      id: 11,
-      name: "Ola",
-      track: "Frontend",
-      task: "Image Gallery",
-      hours: 5,
-      points: 84,
-      link: "#",
-    },
-    {
-      id: 12,
-      name: "Wael",
-      track: "Frontend",
-      task: "Custom Slider",
-      hours: 4,
-      points: 82,
-      link: "#",
-    },
-    {
-      id: 13,
-      name: "Ramy",
-      track: "Frontend",
-      task: "Multi-step Form",
-      hours: 8,
-      points: 90,
-      link: "#",
-    },
-    {
-      id: 14,
-      name: "Reem",
-      track: "Frontend",
-      task: "Weather App",
-      hours: 6,
-      points: 88,
-      link: "#",
-    },
-    {
-      id: 15,
-      name: "Ziad",
-      track: "Frontend",
-      task: "Kanban Board",
-      hours: 11,
-      points: 94,
-      link: "#",
-    },
-    {
-      id: 16,
-      name: "Shady",
-      track: "Frontend",
-      task: "Product Carousel",
-      hours: 5,
-      points: 86,
-      link: "#",
-    },
-    {
-      id: 17,
-      name: "Marwa",
-      track: "Frontend",
-      task: "Quiz App",
-      hours: 7,
-      points: 89,
-      link: "#",
-    },
-    {
-      id: 18,
-      name: "Adel",
-      track: "Frontend",
-      task: "Pricing Table",
-      hours: 3,
-      points: 83,
-      link: "#",
-    },
-    {
-      id: 19,
-      name: "Nada",
-      track: "Frontend",
-      task: "Blog Post Page",
-      hours: 6,
-      points: 88,
-      link: "#",
-    },
-    {
-      id: 20,
-      name: "Bassem",
-      track: "Frontend",
-      task: "Newsletter Signup",
-      hours: 4,
-      points: 82,
-      link: "#",
-    },
-    {
-      id: 21,
-      name: "Mai",
-      track: "Frontend",
-      task: "Video Player UI",
-      hours: 9,
-      points: 91,
-      link: "#",
-    },
-    {
-      id: 22,
-      name: "Othman",
-      track: "Frontend",
-      task: "Search Bar with Suggestions",
-      hours: 4,
-      points: 85,
-      link: "#",
-    },
-    {
-      id: 23,
-      name: "Nadia",
-      track: "Frontend",
-      task: "Timeline Component",
-      hours: 7,
-      points: 89,
-      link: "#",
-    },
-    {
-      id: 24,
-      name: "Sameera",
-      track: "Frontend",
-      task: "Custom Dropdown",
-      hours: 5,
-      points: 87,
-      link: "#",
-    },
-    {
-      id: 25,
-      name: "Tarek",
-      track: "Frontend",
-      task: "Interactive Map",
-      hours: 10,
-      points: 93,
-      link: "#",
-    },
-    {
-      id: 26,
-      name: "Dina",
-      track: "Frontend",
-      task: "Testimonials Slider",
-      hours: 4,
-      points: 84,
-      link: "#",
-    },
-    {
-      id: 27,
-      name: "Hussein",
-      track: "Frontend",
-      task: "Sticky Navbar",
-      hours: 3,
-      points: 82,
-      link: "#",
-    },
-    {
-      id: 28,
-      name: "Layla",
-      track: "Frontend",
-      task: "Event Calendar",
-      hours: 12,
-      points: 96,
-      link: "#",
-    },
-    {
-      id: 29,
-      name: "Fares",
-      track: "Frontend",
-      task: "Responsive Table",
-      hours: 6,
-      points: 88,
-      link: "#",
-    },
-    {
-      id: 30,
-      name: "Yara",
-      track: "Frontend",
-      task: "Color Theme Picker",
-      hours: 5,
-      points: 85,
-      link: "#",
-    },
-    {
-      id: 31,
-      name: "Mohamed",
-      track: "Frontend",
-      task: "Parallax Scrolling Page",
-      hours: 8,
-      points: 90,
-      link: "#",
-    },
-    {
-      id: 32,
-      name: "Hady",
-      track: "Frontend",
-      task: "Progress Bar Animation",
-      hours: 3,
-      points: 81,
-      link: "#",
-    },
-    {
-      id: 33,
-      name: "Kenza",
-      track: "Frontend",
-      task: "Card Flip Animation",
-      hours: 4,
-      points: 83,
-      link: "#",
-    },
-    {
-      id: 34,
-      name: "Samir",
-      track: "Frontend",
-      task: "Step Progress Tracker",
-      hours: 6,
-      points: 86,
-      link: "#",
-    },
-    {
-      id: 35,
-      name: "Nada",
-      track: "Frontend",
-      task: "Tag Input Field",
-      hours: 4,
-      points: 84,
-      link: "#",
-    },
-    {
-      id: 36,
-      name: "Bassel",
-      track: "Frontend",
-      task: "Chat UI",
-      hours: 9,
-      points: 91,
-      link: "#",
-    },
-    {
-      id: 37,
-      name: "Habiba",
-      track: "Frontend",
-      task: "Sign-up/Login Page",
-      hours: 7,
-      points: 88,
-      link: "#",
-    },
-    {
-      id: 38,
-      name: "Ilyas",
-      track: "Frontend",
-      task: "Drag and Drop List",
-      hours: 6,
-      points: 87,
-      link: "#",
-    },
-    {
-      id: 39,
-      name: "Rasha",
-      track: "Frontend",
-      task: "Custom Tooltip",
-      hours: 3,
-      points: 82,
-      link: "#",
-    },
-    {
-      id: 40,
-      name: "Mostafa",
-      track: "Frontend",
-      task: "Footer Redesign",
-      hours: 2,
-      points: 80,
-      link: "#",
-    },
+    { id: 1, name: "Mostafa", track: "Frontend", task: "Portfolio Website", hours: 10, points: 95, link: "#" },
+    { id: 2, name: "Sara", track: "Frontend", task: "Landing Page", hours: 6, points: 88, link: "#" },
+    { id: 3, name: "Omar", track: "Frontend", task: "Responsive Blog", hours: 7, points: 90, link: "#" },
+    { id: 4, name: "Nour", track: "Frontend", task: "E-commerce UI", hours: 12, points: 98, link: "#" },
+    { id: 5, name: "Ahmed", track: "Frontend", task: "Admin Dashboard", hours: 9, points: 92, link: "#" },
+    { id: 6, name: "Laila", track: "Frontend", task: "Contact Form Validation", hours: 4, points: 85, link: "#" },
+    { id: 7, name: "Khaled", track: "Frontend", task: "Dark Mode Toggle", hours: 3, points: 80, link: "#" },
+    { id: 8, name: "Hana", track: "Frontend", task: "Landing Page 2.0", hours: 5, points: 87, link: "#" },
+    { id: 9, name: "Youssef", track: "Frontend", task: "CSS Animation Showcase", hours: 6, points: 89, link: "#" },
+    { id: 10, name: "Salma", track: "Frontend", task: "Single Page App", hours: 15, points: 99, link: "#" },
+    { id: 11, name: "Ola", track: "Frontend", task: "Image Gallery", hours: 5, points: 84, link: "#" },
+    { id: 12, name: "Wael", track: "Frontend", task: "Custom Slider", hours: 4, points: 82, link: "#" },
+    { id: 13, name: "Ramy", track: "Frontend", task: "Multi-step Form", hours: 8, points: 90, link: "#" },
+    { id: 14, name: "Reem", track: "Frontend", task: "Weather App", hours: 6, points: 88, link: "#" },
+    { id: 15, name: "Ziad", track: "Frontend", task: "Kanban Board", hours: 11, points: 94, link: "#" },
+    { id: 16, name: "Shady", track: "Frontend", task: "Product Carousel", hours: 5, points: 86, link: "#" },
+    { id: 17, name: "Marwa", track: "Frontend", task: "Quiz App", hours: 7, points: 89, link: "#" },
+    { id: 18, name: "Adel", track: "Frontend", task: "Pricing Table", hours: 3, points: 83, link: "#" },
+    { id: 19, name: "Nada", track: "Frontend", task: "Blog Post Page", hours: 6, points: 88, link: "#" },
+    { id: 20, name: "Bassem", track: "Frontend", task: "Newsletter Signup", hours: 4, points: 82, link: "#" },
+    { id: 21, name: "Mai", track: "Frontend", task: "Video Player UI", hours: 9, points: 91, link: "#" },
+    { id: 22, name: "Othman", track: "Frontend", task: "Search Bar with Suggestions", hours: 4, points: 85, link: "#" },
+    { id: 23, name: "Nadia", track: "Frontend", task: "Timeline Component", hours: 7, points: 89, link: "#" },
+    { id: 24, name: "Sameera", track: "Frontend", task: "Custom Dropdown", hours: 5, points: 87, link: "#" },
+    { id: 25, name: "Tarek", track: "Frontend", task: "Interactive Map", hours: 10, points: 93, link: "#" },
+    { id: 26, name: "Dina", track: "Frontend", task: "Testimonials Slider", hours: 4, points: 84, link: "#" },
+    { id: 27, name: "Hussein", track: "Frontend", task: "Sticky Navbar", hours: 3, points: 82, link: "#" },
+    { id: 28, name: "Layla", track: "Frontend", task: "Event Calendar", hours: 12, points: 96, link: "#" },
+    { id: 29, name: "Fares", track: "Frontend", task: "Responsive Table", hours: 6, points: 88, link: "#" },
+    { id: 30, name: "Yara", track: "Frontend", task: "Color Theme Picker", hours: 5, points: 85, link: "#" },
+    { id: 31, name: "Mohamed", track: "Frontend", task: "Parallax Scrolling Page", hours: 8, points: 90, link: "#" },
+    { id: 32, name: "Hady", track: "Frontend", task: "Progress Bar Animation", hours: 3, points: 81, link: "#" },
+    { id: 33, name: "Kenza", track: "Frontend", task: "Card Flip Animation", hours: 4, points: 83, link: "#" },
+    { id: 34, name: "Samir", track: "Frontend", task: "Step Progress Tracker", hours: 6, points: 86, link: "#" },
+    { id: 35, name: "Nada", track: "Frontend", task: "Tag Input Field", hours: 4, points: 84, link: "#" },
+    { id: 36, name: "Bassel", track: "Frontend", task: "Chat UI", hours: 9, points: 91, link: "#" },
+    { id: 37, name: "Habiba", track: "Frontend", task: "Sign-up/Login Page", hours: 7, points: 88, link: "#" },
+    { id: 38, name: "Ilyas", track: "Frontend", task: "Drag and Drop List", hours: 6, points: 87, link: "#" },
+    { id: 39, name: "Rasha", track: "Frontend", task: "Custom Tooltip", hours: 3, points: 82, link: "#" },
+    { id: 40, name: "Mostafa", track: "Frontend", task: "Footer Redesign", hours: 2, points: 80, link: "#" },
   ],
-
   Backend: [
-    {
-      id: 1,
-      name: "Ali",
-      track: "Backend",
-      task: "API Development",
-      hours: 8,
-      points: 88,
-      link: "#",
-    },
-    {
-      id: 2,
-      name: "Omar",
-      track: "Backend",
-      task: "Database Design",
-      hours: 7,
-      points: 90,
-      link: "#",
-    },
-    {
-      id: 3,
-      name: "Hassan",
-      track: "Backend",
-      task: "User Authentication",
-      hours: 6,
-      points: 85,
-      link: "#",
-    },
-    {
-      id: 4,
-      name: "Rana",
-      track: "Backend",
-      task: "Payment Gateway Integration",
-      hours: 10,
-      points: 93,
-      link: "#",
-    },
-    {
-      id: 5,
-      name: "Mona",
-      track: "Backend",
-      task: "RESTful API with Node.js",
-      hours: 9,
-      points: 94,
-      link: "#",
-    },
-    {
-      id: 6,
-      name: "Tamer",
-      track: "Backend",
-      task: "Socket.IO Chat Server",
-      hours: 8,
-      points: 91,
-      link: "#",
-    },
-    {
-      id: 7,
-      name: "Zeinab",
-      track: "Backend",
-      task: "GraphQL API",
-      hours: 11,
-      points: 97,
-      link: "#",
-    },
-    {
-      id: 8,
-      name: "Mahmoud",
-      track: "Backend",
-      task: "Server-Side Rendering",
-      hours: 7,
-      points: 89,
-      link: "#",
-    },
-    {
-      id: 9,
-      name: "Aya",
-      track: "Backend",
-      task: "Data Migration Script",
-      hours: 5,
-      points: 86,
-      link: "#",
-    },
-    {
-      id: 10,
-      name: "Fady",
-      track: "Backend",
-      task: "Cron Job Scheduler",
-      hours: 4,
-      points: 83,
-      link: "#",
-    },
-    {
-      id: 11,
-      name: "Bassam",
-      track: "Backend",
-      task: "Email Notification System",
-      hours: 6,
-      points: 88,
-      link: "#",
-    },
-    {
-      id: 12,
-      name: "Lina",
-      track: "Backend",
-      task: "API Rate Limiter",
-      hours: 7,
-      points: 90,
-      link: "#",
-    },
-    {
-      id: 13,
-      name: "Ibrahim",
-      track: "Backend",
-      task: "Microservice Setup",
-      hours: 9,
-      points: 92,
-      link: "#",
-    },
-    {
-      id: 14,
-      name: "Hala",
-      track: "Backend",
-      task: "Unit Testing",
-      hours: 5,
-      points: 87,
-      link: "#",
-    },
-    {
-      id: 15,
-      name: "Sameh",
-      track: "Backend",
-      task: "Logging Middleware",
-      hours: 4,
-      points: 85,
-      link: "#",
-    },
-    {
-      id: 16,
-      name: "Farah",
-      track: "Backend",
-      task: "Database Backup Script",
-      hours: 3,
-      points: 82,
-      link: "#",
-    },
-    {
-      id: 17,
-      name: "Karim",
-      track: "Backend",
-      task: "Search API",
-      hours: 8,
-      points: 90,
-      link: "#",
-    },
-    {
-      id: 18,
-      name: "Ghada",
-      track: "Backend",
-      task: "File Upload Service",
-      hours: 7,
-      points: 88,
-      link: "#",
-    },
-    {
-      id: 19,
-      name: "Sherif",
-      track: "Backend",
-      task: "Cache Optimization",
-      hours: 6,
-      points: 89,
-      link: "#",
-    },
-    {
-      id: 20,
-      name: "Doaa",
-      track: "Backend",
-      task: "OAuth2 Integration",
-      hours: 10,
-      points: 94,
-      link: "#",
-    },
-    {
-      id: 21,
-      name: "Hatem",
-      track: "Backend",
-      task: "Session Management",
-      hours: 5,
-      points: 85,
-      link: "#",
-    },
-    {
-      id: 22,
-      name: "Nada",
-      track: "Backend",
-      task: "Load Balancer Setup",
-      hours: 8,
-      points: 90,
-      link: "#",
-    },
-    {
-      id: 23,
-      name: "Walid",
-      track: "Backend",
-      task: "Data Encryption Service",
-      hours: 9,
-      points: 93,
-      link: "#",
-    },
-    {
-      id: 24,
-      name: "Mariam",
-      track: "Backend",
-      task: "Background Job Queue",
-      hours: 6,
-      points: 87,
-      link: "#",
-    },
-    {
-      id: 25,
-      name: "Osama",
-      track: "Backend",
-      task: "Monitoring & Metrics",
-      hours: 4,
-      points: 84,
-      link: "#",
-    },
-    {
-      id: 26,
-      name: "Rania",
-      track: "Backend",
-      task: "API Versioning",
-      hours: 5,
-      points: 86,
-      link: "#",
-    },
-    {
-      id: 27,
-      name: "Mostafa",
-      track: "Backend",
-      task: "Message Queue Worker",
-      hours: 7,
-      points: 88,
-      link: "#",
-    },
-    {
-      id: 28,
-      name: "Saif",
-      track: "Backend",
-      task: "Push Notification Service",
-      hours: 6,
-      points: 89,
-      link: "#",
-    },
-    {
-      id: 29,
-      name: "Fouad",
-      track: "Backend",
-      task: "Data Sync Script",
-      hours: 3,
-      points: 82,
-      link: "#",
-    },
-    {
-      id: 30,
-      name: "Jana",
-      track: "Backend",
-      task: "Custom CLI Tool",
-      hours: 4,
-      points: 83,
-      link: "#",
-    },
-    {
-      id: 31,
-      name: "Anas",
-      track: "Backend",
-      task: "Security Audit",
-      hours: 8,
-      points: 91,
-      link: "#",
-    },
-    {
-      id: 32,
-      name: "Nourhan",
-      track: "Backend",
-      task: "IP Whitelisting",
-      hours: 5,
-      points: 85,
-      link: "#",
-    },
-    {
-      id: 33,
-      name: "Hossam",
-      track: "Backend",
-      task: "Log Rotation Service",
-      hours: 4,
-      points: 84,
-      link: "#",
-    },
-    {
-      id: 34,
-      name: "Samar",
-      track: "Backend",
-      task: "Event-driven API",
-      hours: 7,
-      points: 88,
-      link: "#",
-    },
-    {
-      id: 35,
-      name: "Majed",
-      track: "Backend",
-      task: "AI-powered Recommendations",
-      hours: 12,
-      points: 98,
-      link: "#",
-    },
-    {
-      id: 36,
-      name: "Alaa",
-      track: "Backend",
-      task: "Fraud Detection Service",
-      hours: 10,
-      points: 95,
-      link: "#",
-    },
-    {
-      id: 37,
-      name: "Ibtisam",
-      track: "Backend",
-      task: "Geolocation API",
-      hours: 6,
-      points: 87,
-      link: "#",
-    },
-    {
-      id: 38,
-      name: "Yassin",
-      track: "Backend",
-      task: "Social Login Integration",
-      hours: 5,
-      points: 86,
-      link: "#",
-    },
-    {
-      id: 39,
-      name: "Hany",
-      track: "Backend",
-      task: "SSO Setup",
-      hours: 7,
-      points: 89,
-      link: "#",
-    },
-    {
-      id: 40,
-      name: "Ola",
-      track: "Backend",
-      task: "Service Worker Setup",
-      hours: 3,
-      points: 82,
-      link: "#",
-    },
+    { id: 1, name: "Ali", track: "Backend", task: "API Development", hours: 8, points: 88, link: "#" },
+    { id: 2, name: "Omar", track: "Backend", task: "Database Design", hours: 7, points: 90, link: "#" },
+    { id: 3, name: "Hassan", track: "Backend", task: "User Authentication", hours: 6, points: 85, link: "#" },
+    { id: 4, name: "Rana", track: "Backend", task: "Payment Gateway Integration", hours: 10, points: 93, link: "#" },
+    { id: 5, name: "Mona", track: "Backend", task: "RESTful API with Node.js", hours: 9, points: 94, link: "#" },
+    { id: 6, name: "Tamer", track: "Backend", task: "Socket.IO Chat Server", hours: 8, points: 91, link: "#" },
+    { id: 7, name: "Zeinab", track: "Backend", task: "GraphQL API", hours: 11, points: 97, link: "#" },
+    { id: 8, name: "Mahmoud", track: "Backend", task: "Server-Side Rendering", hours: 7, points: 89, link: "#" },
+    { id: 9, name: "Aya", track: "Backend", task: "Data Migration Script", hours: 5, points: 86, link: "#" },
+    { id: 10, name: "Fady", track: "Backend", task: "Cron Job Scheduler", hours: 4, points: 83, link: "#" },
+    { id: 11, name: "Bassam", track: "Backend", task: "Email Notification System", hours: 6, points: 88, link: "#" },
+    { id: 12, name: "Lina", track: "Backend", task: "API Rate Limiter", hours: 7, points: 90, link: "#" },
+    { id: 13, name: "Ibrahim", track: "Backend", task: "Microservice Setup", hours: 9, points: 92, link: "#" },
+    { id: 14, name: "Hala", track: "Backend", task: "Unit Testing", hours: 5, points: 87, link: "#" },
+    { id: 15, name: "Sameh", track: "Backend", task: "Logging Middleware", hours: 4, points: 85, link: "#" },
+    { id: 16, name: "Farah", track: "Backend", task: "Database Backup Script", hours: 3, points: 82, link: "#" },
+    { id: 17, name: "Karim", track: "Backend", task: "Search API", hours: 8, points: 90, link: "#" },
+    { id: 18, name: "Ghada", track: "Backend", task: "File Upload Service", hours: 7, points: 88, link: "#" },
+    { id: 19, name: "Sherif", track: "Backend", task: "Cache Optimization", hours: 6, points: 89, link: "#" },
+    { id: 20, name: "Doaa", track: "Backend", task: "OAuth2 Integration", hours: 10, points: 94, link: "#" },
+    { id: 21, name: "Hatem", track: "Backend", task: "Session Management", hours: 5, points: 85, link: "#" },
+    { id: 22, name: "Nada", track: "Backend", task: "Load Balancer Setup", hours: 8, points: 90, link: "#" },
+    { id: 23, name: "Walid", track: "Backend", task: "Data Encryption Service", hours: 9, points: 93, link: "#" },
+    { id: 24, name: "Mariam", track: "Backend", task: "Background Job Queue", hours: 6, points: 87, link: "#" },
+    { id: 25, name: "Osama", track: "Backend", task: "Monitoring & Metrics", hours: 4, points: 84, link: "#" },
+    { id: 26, name: "Rania", track: "Backend", task: "API Versioning", hours: 5, points: 86, link: "#" },
+    { id: 27, name: "Mostafa", track: "Backend", task: "Message Queue Worker", hours: 7, points: 88, link: "#" },
+    { id: 28, name: "Saif", track: "Backend", task: "Push Notification Service", hours: 6, points: 89, link: "#" },
+    { id: 29, name: "Fouad", track: "Backend", task: "Data Sync Script", hours: 3, points: 82, link: "#" },
+    { id: 30, name: "Jana", track: "Backend", task: "Custom CLI Tool", hours: 4, points: 83, link: "#" },
+    { id: 31, name: "Anas", track: "Backend", task: "Security Audit", hours: 8, points: 91, link: "#" },
+    { id: 32, name: "Nourhan", track: "Backend", task: "IP Whitelisting", hours: 5, points: 85, link: "#" },
+    { id: 33, name: "Hossam", track: "Backend", task: "Log Rotation Service", hours: 4, points: 84, link: "#" },
+    { id: 34, name: "Samar", track: "Backend", task: "Event-driven API", hours: 7, points: 88, link: "#" },
+    { id: 35, name: "Majed", track: "Backend", task: "AI-powered Recommendations", hours: 12, points: 98, link: "#" },
+    { id: 36, name: "Alaa", track: "Backend", task: "Fraud Detection Service", hours: 10, points: 95, link: "#" },
+    { id: 37, name: "Ibtisam", track: "Backend", task: "Geolocation API", hours: 6, points: 87, link: "#" },
+    { id: 38, name: "Yassin", track: "Backend", task: "Social Login Integration", hours: 5, points: 86, link: "#" },
+    { id: 39, name: "Hany", track: "Backend", task: "SSO Setup", hours: 7, points: 89, link: "#" },
+    { id: 40, name: "Ola", track: "Backend", task: "Service Worker Setup", hours: 3, points: 82, link: "#" },
   ],
 };
 
+/* ------------------------------- DOM Hooks ------------------------------- */
 const courseSelect = document.getElementById("courseSelect");
 const taskBody = document.getElementById("taskBody");
 const completedTable = document.getElementById("completedTable");
-completedTable.style.display = "block";
+const rankBody = document.getElementById("rankBody");
+const selectedCourseForRank = document.getElementById("selectedCourseForRank");
 
+/* ------------------------------ Renderers -------------------------------- */
+function renderTasks(list) {
+  taskBody.innerHTML = list.map(task => `
+    <tr>
+      <td>${task.id}</td>
+      <td>${task.name}</td>
+      <td>${task.track}</td>
+      <td>${task.task}</td>
+      <td>${task.hours}</td>
+      <td>${task.points}</td>
+      <td><a href="${task.link}" target="_blank" rel="noopener">View</a></td>
+    </tr>
+  `).join("");
+}
+
+function renderRanks(list) {
+  const sorted = list.slice().sort((a, b) => b.points - a.points);
+  let lastPoints = null, lastRank = 0;
+  rankBody.innerHTML = sorted.map((item, idx) => {
+    const rank = (item.points === lastPoints) ? lastRank : idx + 1;
+    lastPoints = item.points; lastRank = rank;
+    return `<tr><td>${rank}</td><td>${item.name}</td><td>${item.points}</td></tr>`;
+  }).join("");
+}
+
+/* ------------------------------ Interactions ----------------------------- */
 courseSelect.addEventListener("change", () => {
-  const selectedCourse = courseSelect.value;
-  console.log("1");
-  taskBody.innerHTML = "";
-  if (selectedCourse && courseData[selectedCourse]) {
-    courseData[selectedCourse].forEach((task) => {
-      console.log("xx");
-      taskBody.innerHTML += `
-            <tr >
-              <td>${task.id}</td>
-              <td>${task.name}</td>
-              <td>${task.track}</td>
-              <td>${task.task}</td>
-              <td>${task.hours}</td>
-              <td>${task.points}</td>
-              <td><a href="${task.link}">View</a></td>
-            </tr>
-          `;
-    });
-
-    document.getElementById("selectedCourseForRank").innerHTML = selectedCourse;
-    const rankBody = document.getElementById("rankBody");
-    rankBody.innerHTML = "";
-    let sortedRank = courseData[selectedCourse].sort(
-      (a, b) => b.points - a.points
-    );
-    for (let i = 1; i < sortedRank.length; i++) {
-      rankBody.innerHTML += `
-            <tr>
-              <td>${i}</td>
-              <td>${sortedRank[i].name}</td>
-              <td>${sortedRank[i].points}</td>
-            </tr>
-          `;
-    }
-    // completedTable.style.display = "none";
+  const selected = courseSelect.value;
+  taskBody.innerHTML = ""; rankBody.innerHTML = "";
+  selectedCourseForRank.textContent = selected || "—";
+  if (selected && courseData[selected]) {
+    const list = courseData[selected];
+    renderTasks(list);
+    renderRanks(list);
+    completedTable.hidden = false;
+  } else {
+    completedTable.hidden = true;
   }
 });

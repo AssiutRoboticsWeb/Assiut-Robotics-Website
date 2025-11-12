@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>البيانات الشخصية | Assiut Robotics Team</title>
+  <link rel="stylesheet" href="css/stule.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <img src="../assets/logo.png" alt="Assiut Robotics Team" class="logo" />
+      <h1>البيانات الشخصية</h1>
+    </div>
+    <nav class="nav">
+      <a href="../Dashboard/dashboard.html">الداشبورد</a>
+      <a href="../Form/form.html" class="active">النموذج</a>
+      <button id="themeToggle" class="btn ghost" aria-label="تبديل الثيم">🌙</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2 class="card-title">الخطوة 1: بيانات عامة</h2>
+      <form id="profileForm" class="grid">
+        <label class="field">
+          <span>الاسم الكامل</span>
+          <input type="text" id="fullName" placeholder="اكتب اسمك" required />
+        </label>
+        <label class="field">
+          <span>البريد الإلكتروني</span>
+          <input type="text" id="email" placeholder="example@email.com" required />
+        </label>
+        <label class="field">
+          <span>رقم الهاتف</span>
+          <input type="text" id="phone" placeholder="01XXXXXXXXX" />
+        </label>
+        <label class="field">
+          <span>اللجنة المراد الانضمام لها</span>
+          <select id="committeeSelect"></select>
+        </label>
+        <div class="actions">
+          <button type="submit" class="btn primary">التالي →</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="app-footer"><small>بياناتك محفوظة محليًا.</small></footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/form.js"></script>
+</body>
+</html>

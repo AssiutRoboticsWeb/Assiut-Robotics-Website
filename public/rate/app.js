@@ -9,8 +9,9 @@
 
 // // {"token : "....will be brought from localstorage......", ID"...will be brought from data above....", rate"....will be brought from the html...""}
 
+// Example for using API_BASE_URL:
 // async function data() {
-//     let response = await fetch('https://assiutrobotics-production.up.railway.app/members/getAllMembers');
+//     let response = await fetch(`${API_BASE_URL}/members/getAllMembers`);
 //     let data = await response.json();
 //     return data.data.members;
 // }

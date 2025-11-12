@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة الأسئلة</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <img src="../assets/logo.png" alt="Assiut Robotics Team" class="logo" />
+      <h1>لوحة الأسئلة</h1>
+    </div>
+    <nav class="nav">
+      <a href="../Dashboard/dashboard.html" class="active">الداشبورد</a>
+      <a href="../Form/form.html">النموذج</a>
+      <button id="themeToggle" class="btn ghost" aria-label="تبديل الثيم">🌙</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2 class="card-title">أضف سؤالًا جديدًا</h2>
+      <form id="questionForm" class="grid">
+        <label class="field">
+          <span>نص السؤال</span>
+          <input type="text" id="qText" placeholder="اكتب السؤال هنا" required />
+        </label>
+
+        <label class="field">
+          <span>نوع السؤال</span>
+          <select id="qType">
+            <option value="short">إجابة قصيرة</option>
+            <option value="long">إجابة طويلة</option>
+            <option value="mcq_single">اختيار واحد</option>
+            <option value="mcq_multi">اختيارات متعددة</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>اللجنة</span>
+          <select id="qCommittee"></select>
+        </label>
+
+        <div id="optionsBlock" class="options-block hidden">
+          <div class="options-head">
+            <span>خيارات الإجابة</span>
+            <button type="button" id="addOption" class="btn">+ إضافة خيار</button>
+          </div>
+          <div id="optionsList" class="options-list"></div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn primary">حفظ السؤال</button>
+          <button type="button" id="clearAll" class="btn danger outline">حذف كل الأسئلة</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">الأسئلة الحالية</h2>
+      <div class="filters">
+        <label>تصفية اللجنة
+          <select id="filterCommittee"></select>
+        </label>
+      </div>
+      <div id="questionsEmpty" class="empty">لا توجد أسئلة بعد.</div>
+      <ul id="questionsList" class="q-list"></ul>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>يحفظ محليًا في المتصفح (localStorage)</small>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

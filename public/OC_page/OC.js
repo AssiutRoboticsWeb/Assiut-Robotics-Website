@@ -1,74 +1,86 @@
+import Loader from "../utiles/loader.js";
 
+// Loader.show(); 
+// setTimeout(() => Loader.hide(), 2000);
 const crud = document.getElementsByClassName('crud')[0]
+let Components = document.getElementsByClassName('Components')[0]
+let Borrow = document.getElementsByClassName('Borrow')[0]
 
+Components.addEventListener('click', renderComponentManagement)
+Borrow.addEventListener('click', renderBorrowManagment)
 
 function renderComponentManagement(){
-    crud.innerHTML = `
-      <div class="container">
+  Components.classList.add('btn-primary');
+  Components.classList.remove('btn-outline-primary');
+  Borrow.classList.remove('btn-primary');
+  Borrow.classList.add('btn-outline-primary');
 
-      <form id="componentForm" class="input" enctype="multipart/form-data">
+  crud.innerHTML = `
+    <div class="container">
 
-        <input type="text" id="title" placeholder="title">
-        <input type="number" type="number" id="price" placeholder="price">
-        <input type="number" id="count" placeholder="count">
-        <input type="text" id="componentLocation" placeholder="Location">
-        <input type="text" id="category" placeholder="category">
-        <input type="file" id="image" accept="image/*">
-        <button type="submit" id="submit">Create</button>
+    <form id="componentForm" class="input" enctype="multipart/form-data">
 
-      </form>
-      <div class="output">
-        <div class="search-box">
-          <input onkeyup="searchdata(this.value)" type="text" id="search" placeholder="search">
-          <div class="btn-search">
-            <button onclick="searchq(this.id)" id="search-title">Search By Title</button>
-            <button onclick="searchq(this.id)" id="search-cat">Search By Category</button>
+      <input type="text" id="title" placeholder="title">
+      <input type="number" type="number" id="price" placeholder="price">
+      <input type="number" id="count" placeholder="count">
+      <input type="text" id="componentLocation" placeholder="Location">
+      <input type="text" id="category" placeholder="category">
+      <input type="file" id="image" accept="image/*">
+      <button type="submit" id="submit">Create</button>
 
-          </div>
-          <div id="delALL"></div>
+    </form>
+    <div class="output">
+      <div class="search-box">
+        <input onkeyup="searchdata(this.value)" type="text" id="search" placeholder="search">
+        <div class="btn-search">
+          <button onclick="searchq(this.id)" id="search-title">Search By Title</button>
+          <button onclick="searchq(this.id)" id="search-cat">Search By Category</button>
+
         </div>
-
-
-        <table>
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>title</th>
-              <th>price</th>
-              <th>category</th>
-              <th>update</th>
-              <th>delete</th>
-
-            </tr>
-          </thead>
-          <tbody id="body">
-
-          </tbody>
-        </table>
-
-
-
+        <div id="delALL"></div>
       </div>
-    `
-    let title = document.getElementById('title');
-    let price = document.getElementById('price');
-    let count = document.getElementById('count');
-    let category = document.getElementById('category');
-    let componentLocation = document.getElementById('componentLocation');
-    let imageInput = document.getElementById('image');
-    let submit = document.getElementById('submit');
-    let mood = 'create';
-    let it;
-    let searchmood = 'title';
-    let prodata = [];
-    // if (localStorage.product != null) {
-    //   prodata = JSON.parse(localStorage.product);
-    // }
-    // else {
-    //   prodata = [];
-    // }                      //  this code replaced with get the data from DB 
-    const getComponents = async () => {
-      const res = await fetch("https://assiut-robotics-server.vercel.app/components/getComponents")
+
+
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>price</th>
+            <th>category</th>
+            <th>update</th>
+            <th>delete</th>
+
+          </tr>
+        </thead>
+        <tbody id="body">
+
+        </tbody>
+      </table>
+
+
+
+    </div>
+  `
+  let title = document.getElementById('title');
+  let price = document.getElementById('price');
+  let count = document.getElementById('count');
+  let category = document.getElementById('category');
+  let componentLocation = document.getElementById('componentLocation');
+  let imageInput = document.getElementById('image');
+  let submit = document.getElementById('submit');
+  let mood = 'create';
+  let it;
+  let searchmood = 'title';
+  let prodata = [];
+  // if (localStorage.product != null) {
+  //   prodata = JSON.parse(localStorage.product);
+  // }
+  // else {
+  //   prodata = [];
+  // }                      //  this code replaced with get the data from DB 
+  const getComponents = async () => {
+  const res = await fetch(`${API_BASE_URL}/components/getComponents`)
       if (res.ok) {
         const response = await res.json();
         console.log(response);
@@ -93,7 +105,7 @@ function renderComponentManagement(){
           dataObject[key] = value;
         }
 
-        const res = await fetch("https://assiut-robotics-server.vercel.app/components/update", {
+  const res = await fetch(`${API_BASE_URL}/components/update`, {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -214,7 +226,7 @@ function renderComponentManagement(){
       data = {
         id
       }
-      const res = await fetch("https://assiut-robotics-server.vercel.app/components/deleteOne", {
+  const res = await fetch(`${API_BASE_URL}/components/deleteOne`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -334,7 +346,7 @@ function renderComponentManagement(){
           console.log(`${key}: ${value}`); 
         }
     
-        const res = await fetch("https://assiut-robotics-server.vercel.app/components/add", {
+  const res = await fetch(`${API_BASE_URL}/components/add`, {
           method: "post",
           body: formData
         })
@@ -356,7 +368,7 @@ function renderComponentManagement(){
     }
     
     const deleteAll = async () => {
-      const res = await fetch("https://assiut-robotics-server.vercel.app/components/deleteAll")
+  const res = await fetch(`${API_BASE_URL}/components/deleteAll`)
       if (res.ok) {
         const response = await res.json();
         console.log(await response);
@@ -369,161 +381,252 @@ function renderComponentManagement(){
         console.log(await response.message);
       }
     }
-}
+} 
 
 function renderBorrowManagment(){
+  Borrow.classList.add('btn-primary');
+  Borrow.classList.remove('btn-outline-primary');
+  Components.classList.remove('btn-primary');
+  Components.classList.add('btn-outline-primary');
   crud.innerHTML = `
-    <section id="taps">
-        <button  id = "RequestedComponents" class = "m-2">Requested components</button>
-        <button id = "BorrowedComponents"   class = "m-2">borrowed components</button>
-      </section>
-      <section id="render-body">
-        
-      </section>
-  
+    <section id="taps" class="mb-4" style = "transition : all 0.2s ease">
+      <div class="btn-group" role="group" aria-label="Borrow Management Tabs" >
+        <button id="RequestedComponents" class="w-auto h-auto btn btn-outline-primary"   style = "transition : all 0.2s ease ">Requested Components</button>
+        <button id="BorrowedComponents" class=" w-auto h-auto btn btn-outline-primary" style = "transition : all 0.2s ease   ">Borrowed Components</button>
+      </div>
+    </section>
+    <section id="render-body" class="mt-4">
+    </section>
   `
   const body = document.getElementById("render-body");
   console.log(body);
+  let requested = document.getElementById("RequestedComponents");
+  let borrowed = document.getElementById("BorrowedComponents");
   
-  document.getElementById("RequestedComponents").addEventListener("click", () => (renderRequestedComponents(body)))
-  document.getElementById("BorrowedComponents").addEventListener("click", () => renderBorrowedComponents(body))
-  
+  requested.addEventListener("click", () => (renderRequestedComponents(body,requested,borrowed)))
+  borrowed.addEventListener("click", () => renderBorrowedComponents(body,requested,borrowed))
+
 }
-function renderRequestedComponents(body){
+function renderRequestedComponents(body,requested,borrowed){
+  requested.classList.add('btn-primary');
+  requested.classList.remove('btn-outline-primary');
+  borrowed.classList.remove('btn-primary');
+  borrowed.classList.add('btn-outline-primary');
   console.log(body);
   body.innerHTML = ""
   const token = localStorage.getItem("token")
   // get data 
-  fetch("https://assiut-robotics-server.vercel.app/components/getRequestedComponent", {
+  Loader.show(body)
+  fetch(`${API_BASE_URL}/components/getRequestedComponent`, {
     method: "GET",
     headers: {
       Authorization: "bearer " + token
     }
   })
-  .then(res => res.json())
-  .then((res) => {
-    console.log(res);
-    if (res.data.length == 0) {
-      body.innerHTML = "<h2>No requested components found</h2>";
-      return;
+    .then(res => res.json())
+    .then((res) => {if(res.statusText === "Fail") {
+      throw new Error(res.message);
     }
-    res.data.forEach((element, index) => {
+      else return res
+    })
+    .then((res) => {
+      console.log(res);
+      Loader.hide(body);
+      Toastify({
+        text: "Fetched requested components successfully",
+        duration: 3000,
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(90deg, #2daee2 0%, #28a745 100%)", // blue to success green
+        },
+        gravity: "top",
+        stopOnFocus: true
+      }).showToast();
+      if (res.data.length == 0) {
+        body.innerHTML = "<h2>No requested components found</h2>";
+        return;
+      }
+      res.data.forEach((element, index) => {
         body.innerHTML += `
-          <div class="card ">
-            <h1>${element.title}</h1>
-            <img src="${element.image}" alt="component">
-            <p style ="font-weight: bold; font-size : larger">Requested By </p>
-            <div class="userinfo row">
-           
-              <img src="${element.requestToBorrow.avatar}" class="col" alt="user">
-              <h4 class="col">${element.requestToBorrow.name}</h4>
-              <h4 class="col">Committee :${element.requestToBorrow.committee}</h4>
-            </div>
-            <div class="action row">
-              <button class="col accept" id="${index}">Accept</button>
-              <button class="col reject" id="${index}">Reject</button>
+          <div class="card mb-3 shadow-sm" style="transition: all 0.2s ease;">
+            <div class="card-body" style="transition: all 0.2s ease;">
+              <h5 class="card-title">${element.title}</h5>
+              <img src="${element.image}" alt="component" class="img-fluid mb-3" style="max-height: 200px; object-fit: contain; transition: all 0.2s ease;">
+              <p class="fw-bold fs-5 mb-2">Requested By</p>
+              <div class="d-flex align-items-center mb-3" style="transition: all 0.2s ease;">
+                <img src="${element.requestToBorrow.avatar}" class="rounded-circle me-2" alt="user" style="width:40px; height:40px; transition: all 0.2s ease;">
+                <div>
+                  <div class="fw-semibold">${element.requestToBorrow.name}</div>
+                  <div class="text-muted small">Committee: ${element.requestToBorrow.committee}</div>
+                </div>
+              </div>
+              <div class="d-flex gap-2" style="transition: all 0.2s ease;">
+                <button class="btn btn-success accept flex-fill" id="${index}" style="transition: all 0.2s ease;">Accept</button>
+                <button class="btn btn-danger reject flex-fill" id="${index}" style="transition: all 0.2s ease;">Reject</button>
+              </div>
             </div>
           </div>
         `;
-    });
+      });
 
-    const accept = document.querySelectorAll('.accept');
-    console.log(accept);
+      const accept = document.querySelectorAll('.accept');
+      console.log(accept);
 
-    accept.forEach(element => {
-      // Your click listener
-      element.addEventListener("click", (e) => {
-      const component = res.data[e.target.id];
-      console.log(component);
-      // Show popup
-      var deadlinePopup = document.getElementById("deadlinePopup");
-      console.log(deadlinePopup);
+      accept.forEach(element => {
+        // Your click listener
+        element.addEventListener("click", (e) => {
+          const component = res.data[e.target.id];
+          console.log(component);
+          // Show popup
+          var deadlinePopup = document.getElementById("deadlinePopup");
+          console.log(deadlinePopup);
 
-      deadlinePopup.style.display = "block";
-      // Cancel button
-      document.getElementById("deadlineCancel").onclick = () => {
-        document.getElementById("deadlinePopup").style.display = "none";
-      };
-      // Confirm button
-      document.getElementById("deadlineConfirm").onclick = () => {
-        const selectedDate = document.getElementById("deadlineInput").value;
-        if (!selectedDate) {
-          alert("Please choose a date");
-          return;
-        }
+          deadlinePopup.style.display = "block";
+          // Cancel button
+          document.getElementById("deadlineCancel").onclick = () => {
+            document.getElementById("deadlinePopup").style.display = "none";
+          };
+          // Confirm button
+          let confirming = document.getElementById("deadlineConfirm");
+          confirming.onclick = () => {
+            const selectedDate = document.getElementById("deadlineInput").value;
+            if (!selectedDate) {
+              alert("Please choose a date");
+              return;
+            }
 
-        const body = {
-          componentId: component._id,
-          borrowDate: new Date(),
-          deadlineDate: new Date(selectedDate).toISOString()
-        };
+            const body = {
+              componentId: component._id,
+              borrowDate: new Date(),
+              deadlineDate: new Date(selectedDate).toISOString()
+            };
 
-        console.log("Form data:", body);
+            console.log("Form data:", body);
 
-        // Hide popup after confirming
-        document.getElementById("deadlinePopup").style.display = "none";
-
-        fetch("https://assiut-robotics-server.vercel.app/components/acceptRequestToBorrow", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "bearer " + token
+            // Hide popup after confirming
+            document.getElementById("deadlinePopup").style.display = "none";
+            Loader.show(confirming);
+            fetch(`${API_BASE_URL}/components/acceptRequestToBorrow`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "bearer " + token
               },
               body: JSON.stringify(body)
             })
               .then(res => res.json())
               .then((res) => {
                 console.log(res);
+                Loader.hide(confirming);
                 if (res.message == "accepted") {
-                  alert("Request accepted successfully");
+                  Toastify({
+                    text: " accepted successfully",
+                    className: "info",
+                    duration: 3000,
+                    gravity: "top",
+                    style: {
+                      background: "linear-gradient(90deg, #2daee2 0%, #28a745 100%)",
+                    },
+                    stopOnFocus: true
+                  }).showToast();
                   window.location.reload();
                 } else {
-                  alert("Error accepting request");
+                    console.error("Error accepting request:", res);
                 }
-              });
+              })
+              .catch(error => {
+                Loader.hide(confirming);
+                  Toastify({
+                    text: "Error accepting request",
+                    className: "error",
+                    duration: 3000,
+                    gravity: "top",
+                    style: {
+                      background: "linear-gradient(90deg, #2daee2 0%, #dc3545 100%)",
+                    },
+                    stopOnFocus: true
+                  }).showToast();
+              })
           };
         });
       });
 
       const reject = document.querySelectorAll('.reject');
-    console.log(reject);
-    reject.forEach(element => {
-      element.addEventListener("click", (e) => {
-        const component = res.data[e.target.id];
-        console.log(component);
-
-        fetch("https://assiut-robotics-server.vercel.app/components/rejectRequestToBorrow",{
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "bearer " + token
-          },
-          body: JSON.stringify({ componentId: component._id })
-        }).then(res => res.json())
-          .then((res) => {
-            console.log(res);
-            if (res.message == "rejected") {
-              alert("Rejection Request has been done successfully");
-              window.location.reload();
-            } else {
-              alert("Error rejecting request");
-            }
-          });
+      console.log(reject);
+      reject.forEach(element => {
+        element.addEventListener("click", (e) => {
+          const component = res.data[e.target.id];
+          console.log(component);
+          Loader.show(element);
+          fetch(`${API_BASE_URL}/components/rejectRequestToBorrow`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "bearer " + token
+            },
+            body: JSON.stringify({ componentId: component._id })
+          }).then(res => res.json())
+            .then((res) => {
+              console.log(res);
+              Loader.hide(element);
+              if (res.message == "rejected") {
+                Toastify({
+                  text: "Request rejected successfully",
+                  className: "info",
+                  duration: 3000,
+                  gravity: "top",
+                  style: {
+                    background: "linear-gradient(90deg, #2daee2 0%, #28a745 100%)",
+                  },
+                  stopOnFocus: true
+                }).showToast();
+                window.location.reload();
+              } else {
+               console.error("Error rejecting request:", res);
+              }
+            }).catch((error)=>{
+              Loader.hide(element);
+               Toastify({
+                  text: "Error rejecting request",
+                  className: "error",
+                  duration: 3000,
+                  gravity: "top",
+                  style: {
+                    background: "linear-gradient(90deg, #2daee2 0%, #dc3545 100%)",
+                  },
+                  stopOnFocus: true
+                }).showToast();
+            })
+        })
       })
-    })
-  });
-
-
-    
-    
-  
+    }).catch((error) => {
+      console.error("Error:", error);
+      if(error.message == "jwt expired")
+        window.location.href = "../login/login.html";
+      Loader.hide(body);
+      Toastify({
+        text: error.message,
+        className: "error",
+        duration: 3000,
+        stopOnFocus: true,
+        gravity: "top",
+        style: {
+          background: "linear-gradient(90deg, #2daee2 0%, #dc3545 100%)", // blue to danger red
+        },
+        stopOnFocus: true
+      }).showToast();
+    });
 }
-function renderBorrowedComponents(){
-  const body = document.getElementById("render-body");
+function renderBorrowedComponents(body , requested , borrowed){
+  requested.classList.remove('btn-primary');
+  requested.classList.add('btn-outline-primary');
+  borrowed.classList.add('btn-primary');
+  borrowed.classList.remove('btn-outline-primary');
   body.innerHTML = ""
   const token = localStorage.getItem("token")
   // get data 
-  fetch("https://assiut-robotics-server.vercel.app/components/getBorrowedComponent", {
+  Loader.show(body)
+  fetch(`${API_BASE_URL}/components/getBorrowedComponent`, {
     method: "GET",
     headers: {
       Authorization: "bearer " + token
@@ -532,7 +635,18 @@ function renderBorrowedComponents(){
   .then(res => res.json())
   .then((res) => {
     console.log(res);
-    if(res.length == 0){
+    Loader.hide(body)
+    Toastify({
+      text: "Fetched borrowed components successfully",
+      className: "info",
+      duration: 3000,
+      gravity: "top",
+      style: {
+          background: "linear-gradient(90deg, #2daee2 0%, #28a745 100%)", // blue to success green
+        },
+      stopOnFocus: true
+    }).showToast();
+    if(res.data.length == 0){
       body.innerHTML = "<h2>No borrowed components found</h2>";
     }
     res.data.forEach((element, index) => {
@@ -544,14 +658,14 @@ function renderBorrowedComponents(){
           <div class="card">
             <h1>${element.title}</h1>
             <img src="${element.image}" alt="component">
-            <p style ="font-weight: bold; font-size : larger">Borrowed By </p>
+             <p style ="font-weight: bold; font-size : larger">Borrowed By </p>
             <div class="userinfo row">
               <img src="${element.borrowedBy.member.avatar}" class="col" alt="user">
               <h4 class="col">${element.borrowedBy.member.name}</h4>
               <h4 class="col">${element.borrowedBy.member.committee}</h4>
             </div>
-              <h4 class="col" style="color: ${color}">Handing Deadline :${formattedDeadline}</h4>
-            
+              <h4 class="col" style="color: ${color}">Handing Deadline: ${formattedDeadline}</h4>
+
             <div class="action row">
               <button class="col return" id="${index}">Return</button>
             </div>
@@ -566,6 +680,7 @@ function renderBorrowedComponents(){
       element.addEventListener("click", (e) => {
         const component = res.data[e.target.id];
         console.log(component);
+        Loader.show(element);
         fetch("https://assiut-robotics-zeta.vercel.app/components/return",{
           method: "POST",
           headers: {
@@ -576,19 +691,67 @@ function renderBorrowedComponents(){
         }).then(res => res.json())
           .then((res) => {
             console.log(res);
+            Loader.hide(element);
             if (res.message == "returned") {
-              alert("Component returned successfully");
+              Toastify({
+                text: "Component returned successfully",
+                className: "info",
+                duration: 3000,
+                gravity: "top",
+                style: {
+                  background: "linear-gradient(90deg, #2daee2 0%, #28a745 100%)",
+                },
+                stopOnFocus: true
+              }).showToast();
               window.location.reload();
             } else {
-              alert("Error returning component");
+              Toastify({
+                text: "Error returning component",
+                className: "error",
+                duration: 3000,
+                gravity: "top",
+                style: {
+                  background: "linear-gradient(90deg, #2daee2 0%, #dc3545 100%)",
+                },
+                stopOnFocus: true
+              }).showToast();
             }
           });
       })
     })
   })
   .catch((error) => {
-    console.error("Error fetching borrowed components:", error);
+    if(error.message == "jwt expired")
+      window.location.href = "../login/login.html";
+    Loader.hide(body)
+    Toastify({
+      text : error.message,
+      className: "error",
+      duration: 3000,
+      gravity: "top",
+      style: {
+        background: "linear-gradient(90deg, #2daee2 0%, #dc3545 100%)", // blue to danger red
+      },
+      stopOnFocus: true
+    }).showToast();
   });
 
 
 }
+
+Toastify({
+  text: "This is a toast",
+  className: "info",
+  duration: 3000,
+  // destination: "https://github.com/apvarun/toastify-js",
+  // newWindow: true,
+  // close: true,
+  gravity: "top", // `top` or `bottom`
+  // position: "left", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: " #2daee2",
+  },
+  onClick: function(){}, // Callback after click
+  stopOnFocus: true
+}).showToast();

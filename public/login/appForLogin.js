@@ -4,7 +4,7 @@ try {
     document.forms['loginForm'].addEventListener('submit', async (event) => {
         // alert('submitting form');
         event.preventDefault();
-        event.target.action = "https://assiut-robotics-server.vercel.app/members/login";
+        event.target.action = serverConfig.getApiUrl("members/login");
         let data={
             email: event.target.email.value,
             password: event.target.password.value,
@@ -32,7 +32,7 @@ try {
             console.log('aaa', JSONresponse);
             window.localStorage.setItem('token', JSONresponse.data.token);
             document.querySelector(".message").innerHTML = JSONresponse.message;
-            window.location.href = "../profile-page/index.html"
+            window.location.href = document.referrer || '../profile-page/index.html';
         }
 
 

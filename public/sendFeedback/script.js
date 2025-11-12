@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Fetch members data
     async function fetchMembers() {
         try {
-            const response = await fetch('https://assiut-robotics-zeta.vercel.app/members/get/web');
+            const response = await fetch(`${API_BASE_URL}/members/get/web`);
             const data = await response.json();
             
             if (data.date) {
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
 
         try {
-            const response = await fetch(`https://assiut-robotics-zeta.vercel.app/members/sendFeedBackEmail/${memberId}`, {
+            const response = await fetch(`${API_BASE_URL}/members/sendFeedBackEmail/${memberId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

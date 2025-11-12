@@ -1,99 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Assiut Robotics</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Assiut Robotics — Committees</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="https://kit.fontawesome.com/79904cb93e.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/79904cb93e.js" crossorigin="anonymous" defer></script>
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="logo" onclick="goHome">
+    <nav class="navbar" role="navigation" aria-label="Main Menu">
+        <div class="logo" id="siteLogo" onclick="goHome()" role="button" aria-label="Home Page">
             <img src="../all-images/default.png" alt="Assiut Robotics" />
-            <a href="#" class="active">Assiut Robotics</a>
+            <div class="site-text">
+                <a href="#" class="active">Assiut Robotics</a>
+                <div class="site-sub">Committees and Tracks</div>
+            </div>
+        </div>
+
+        <div class="committees-wrap">
+            <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="committeesNav"
+                aria-label="Open Menu">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="committees-nav" id="committeesNav" aria-label="Committees Menu"></div>
         </div>
     </nav>
 
     <header class="hero" id="header">
         <h1>Welcome to Assiut Robotics</h1>
-        <p>Learn How to Learn</p>
+        <p>Learn about the committees and their respective tracks</p>
     </header>
 
-    <div id="home">
-        <section class="tracks"></section>
+    <main id="home">
+        <section class="tracks" id="tracksSection"></section>
 
         <section class="leaderboard">
-            <h2>Track Leaderboards</h2>
-            <div class="track-filters">
-                <button class="active">All Tracks</button>
-                <button>Hardware</button>
-                <button>Computer Vision</button>
-                <button>ROS & Raspberry</button>
-                <button>Embedded</button>
-            </div>
-            <div id="leaderboardList"></div>
+            <h2>Competitors' Rankings — View by Committee</h2>
+            <div class="track-filters" id="trackFiltersContainer" role="tablist"></div>
+            <div id="leaderboardList" aria-live="polite"></div>
         </section>
 
         <section class="team">
-            <h2>Meet Our Team</h2>
+            <h2>Main Committee Team</h2>
             <div class="team-grid" id="mainTeam"></div>
         </section>
 
         <section class="team">
-            <h2>Our Assistant Team</h2>
+            <h2>Assistants Team</h2>
             <div class="team-grid" id="assistantTeam"></div>
         </section>
 
         <section class="team">
-            <h2>Our HR Team</h2>
+            <h2>Human Resources Team</h2>
             <div class="team-grid" id="hrTeam"></div>
         </section>
-    </div>
+    </main>
 
-    <div id="track"></div>
-    <div id="course"></div>
+    <div id="track" class="disabled" aria-hidden="true"></div>
+    <div id="course" class="disabled" aria-hidden="true"></div>
 
-    <footer>
-        <p>made by</p>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="../all-images/default.png" alt="Assiut Robotics" />
+                <div>
+                    <h3>Assiut Robotics</h3>
+                    <p class="muted">Committees and Tracks — Competition Support Platform</p>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="links-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#tracksSection">Tracks</a></li>
+                        <li><a href="#mainTeam">Team</a></li>
+                    </ul>
+                </div>
+
+                <div class="links-column">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><a href="mailto:info@assiut-robotics.org">info@assiut-robotics.org</a></li>
+                        <li><a href="tel:+201234567890">+20 123 456 7890</a></li>
+                    </ul>
+                </div>
+
+                <div class="links-column social">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© <span id="year"></span> Assiut Robotics — All Rights Reserved</p>
+            <p class="muted">Built with love for teams and students</p>
+        </div>
     </footer>
 
-    <!-- Submission Modal -->
     <div class="modal" id="submissionModal" aria-hidden="true" role="dialog">
         <div class="modal-card" role="document">
             <div class="modal-header">
-                <div class="modal-title">Submit Your Work</div>
-                <button class="close-x" aria-label="Close" onclick="closeSubmissionModal()">×</button>
+                <div class="modal-title">Submit Work</div>
+                <button class="close-x" onclick="closeSubmissionModal()" aria-label="Close">×</button>
             </div>
             <form id="submissionForm" onsubmit="handleSubmission(event)">
                 <div class="modal-body">
+                    <input type="hidden" id="metaTrack" name="metaTrack" value="">
+                    <input type="hidden" id="metaCourse" name="metaCourse" value="">
+                    <input type="hidden" id="metaTask" name="metaTask" value="">
+
                     <div class="field">
-                        <label for="workUrl">Work URL</label>
-                        <input id="workUrl" name="workUrl" type="url" placeholder="https://..." required
-                            pattern="https?://.+" />
-                        <div class="hint">Paste the link to your repo, Google Drive, CodePen, etc.</div>
-                    </div>
-                    <div class="field">
-                        <label for="notes">Notes (optional)</label>
-                        <textarea id="notes" name="notes" placeholder="Anything the reviewer should know?"></textarea>
-                    </div>
-                    <div class="meta">
-                        <div class="field">
-                            <label>Track</label>
-                            <input id="metaTrack" type="text" readonly />
-                        </div>
-                        <div class="field">
-                            <label>Course</label>
-                            <input id="metaCourse" type="text" readonly />
-                        </div>
+                        <label for="workUrl">Work Link</label>
+                        <input id="workUrl" type="url" placeholder="https://..." required />
                     </div>
                     <div class="field">
-                        <label>Task</label>
-                        <input id="metaTask" type="text" readonly />
+                        <label for="notes">Notes</label>
+                        <textarea id="notes"></textarea>
                     </div>
-                    <!-- تم حذف صف Mark task as closed هنا -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn ghost" onclick="closeSubmissionModal()">Cancel</button>
@@ -103,10 +135,152 @@
         </div>
     </div>
 
-    <!-- Toast -->
-    <div class="toast" id="toast"></div>
-
-    <script src="main.js"></script>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="main.js" defer></script>
 </body>
 
-</html>
+</html> 
+
+
+<!-- <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Assiut Robotics — اللجان</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/79904cb93e.js" crossorigin="anonymous" defer></script>
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="القائمة الرئيسية">
+        <div class="logo" id="siteLogo" onclick="goHome()" role="button" aria-label="الصفحة الرئيسية">
+            <img src="../all-images/default.png" alt="Assiut Robotics" />
+            <div class="site-text">
+                <a href="#" class="active">Assiut Robotics</a>
+                <div class="site-sub">اللجان والتراكات</div>
+            </div>
+        </div>
+
+        <div class="committees-wrap">
+            <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="committeesNav"
+                aria-label="فتح القائمة">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="committees-nav" id="committeesNav" aria-label="قائمة اللجان"></div>
+        </div>
+    </nav>
+
+    <header class="hero" id="header">
+        <h1>مرحبًا في Assiut Robotics</h1>
+        <p>تعرف على اللجان والتراكات الخاصة بكل لجنة</p>
+    </header>
+
+    <main id="home">
+        <section class="tracks" id="tracksSection"></section>
+
+        <section class="leaderboard">
+            <h2>لوائح المتسابقين — عرض حسب اللجنة</h2>
+            <div class="track-filters" id="trackFiltersContainer" role="tablist"></div>
+            <div id="leaderboardList" aria-live="polite"></div>
+        </section>
+
+        <section class="team">
+            <h2>فريق اللجنة الرئيسية</h2>
+            <div class="team-grid" id="mainTeam"></div>
+        </section>
+
+        <section class="team">
+            <h2>فريق المساعدين</h2>
+            <div class="team-grid" id="assistantTeam"></div>
+        </section>
+
+        <section class="team">
+            <h2>فريق الموارد البشرية</h2>
+            <div class="team-grid" id="hrTeam"></div>
+        </section>
+    </main>
+
+    <div id="track" class="disabled" aria-hidden="true"></div>
+    <div id="course" class="disabled" aria-hidden="true"></div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="../all-images/default.png" alt="Assiut Robotics" />
+                <div>
+                    <h3>Assiut Robotics</h3>
+                    <p class="muted">اللجان والتراكات — منصة دعم المنافسات</p>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="links-column">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#tracksSection">التراكات</a></li>
+                        <li><a href="#mainTeam">الفريق</a></li>
+                    </ul>
+                </div>
+
+                <div class="links-column">
+                    <h4>تواصل معنا</h4>
+                    <ul>
+                        <li><a href="mailto:info@assiut-robotics.org">info@assiut-robotics.org</a></li>
+                        <li><a href="tel:+201234567890">+20 123 456 7890</a></li>
+                    </ul>
+                </div>
+
+                <div class="links-column social">
+                    <h4>تابعنا</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="فيسبوك"><i class="fa fa-facebook"></i></a>
+                        <a href="#" aria-label="تويتر"><i class="fa fa-twitter"></i></a>
+                        <a href="#" aria-label="انستجرام"><i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© <span id="year"></span> Assiut Robotics — جميع الحقوق محفوظة</p>
+            <p class="muted">بُنيت بمحبة للفِرق والطلاب</p>
+        </div>
+    </footer>
+
+    <div class="modal" id="submissionModal" aria-hidden="true" role="dialog">
+        <div class="modal-card" role="document">
+            <div class="modal-header">
+                <div class="modal-title">تسليم العمل</div>
+                <button class="close-x" onclick="closeSubmissionModal()" aria-label="إغلاق">×</button>
+            </div>
+            <form id="submissionForm" onsubmit="handleSubmission(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="metaTrack" name="metaTrack" value="">
+                    <input type="hidden" id="metaCourse" name="metaCourse" value="">
+                    <input type="hidden" id="metaTask" name="metaTask" value="">
+
+                    <div class="field">
+                        <label for="workUrl">رابط العمل</label>
+                        <input id="workUrl" type="url" placeholder="https://..." required />
+                    </div>
+                    <div class="field">
+                        <label for="notes">ملاحظات</label>
+                        <textarea id="notes"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn ghost" onclick="closeSubmissionModal()">إلغاء</button>
+                    <button type="submit" class="btn success">إرسال</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="main.js" defer></script>
+</body>
+
+</html>  -->

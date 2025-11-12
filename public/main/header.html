@@ -4,6 +4,8 @@
     }
 </style>
 
+<script src="../config/server-config.js"></script>
+
 <div class="backdrop-container fade" id="backdrop"></div>
 <header class="topnav" id="myTopnav">
     <div class="flex-div1">
@@ -23,7 +25,7 @@
         <!-- <a href="../OC_page/component.html" >Components</a> -->
       
         <a href="../about-us/about-us.html" >About Us</a>
-  <a href="../tracks/" >Education</a>
+  <!-- <a href="../tracks/" >Education</a> -->
        
 
         <!-- Contact Us -->
@@ -40,8 +42,7 @@
     </div>
 </header>
 <script>
-    let token = JSON.parse(localStorage.getItem("token"));
-    if(token != undefined)
+    if(token != null && token != undefined)
     {
         console.log("profile");
         
@@ -49,7 +50,7 @@
         document.getElementById("profile").classList = ""
     }
     else {
-        console.log("lgon");
+        console.log("login");
 
         document.getElementById("login").classList = ""
         document.getElementById("profile").classList = "remove"

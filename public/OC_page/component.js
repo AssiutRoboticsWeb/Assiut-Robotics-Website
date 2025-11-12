@@ -3,6 +3,8 @@
 
 // const { json } = require("stream/consumers");
 
+
+
 var components = [];
 const container = document.getElementById("mainComponents");
 
@@ -19,7 +21,7 @@ function borrow(e){
                 componentId : e.target.id
             });
 
-        fetch("https://assiut-robotics-server.vercel.app/components/requestToBorrow", {
+    fetch(`${API_BASE_URL}/components/requestToBorrow`, {
             method: "POST",
             headers: {    
                 "Content-Type": "application/json",
@@ -49,7 +51,7 @@ function borrow(e){
     }
 }
 const getComponents = async () => {
-    const response = await fetch("https://assiut-robotics-server.vercel.app/components/getComponents")
+    const response = await fetch(`${API_BASE_URL}/components/getComponents`)
     if (response.ok) {
         const res = await response.json()
         components = res.data;
