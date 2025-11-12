@@ -1,0 +1,21 @@
+# Sitemap include list - only pages listed here will be in the sitemap
+# One pattern per line. Lines starting with # are comments.
+# Keep paths relative to the public/ folder.
+
+index.html
+
+# Projects pages
+achievements/index_micro.html
+achievements/index_rov.html
+achievements/index_mins.html
+
+# Introduction / About
+introduction/index.html
+about-us/about-us.html
+
+# Auth pages
+login/signup.html
+login/login.html
+
+# Profile
+profile-page/index.html
