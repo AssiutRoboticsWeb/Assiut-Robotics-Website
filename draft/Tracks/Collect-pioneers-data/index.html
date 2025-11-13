@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>collect data</title>
+</head>
+<body>
+    <form >
+        <label for="author">author</label>
+        <input type="text" id="author" name="author" required>
+        <br>
+        <label for="message">message</label>
+        <input type="text" id="message" name="message" required>
+        <br>
+        <label for="gradYear">gradYear</label>
+        <input type="text" id="gradYear" name="gradYear" required>
+        <br>
+        <button type="submit">submit</button>
+    </form>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const author = document.getElementById('author').value;
+            const message = document.getElementById('message').value;
+            const gradYear = document.getElementById('gradYear').value;
+
+            const data = { author, message, gradYear };
+
+            let rootData = localStorage.getItem('Pioneers');
+            rootData = rootData ? JSON.parse(rootData) : { pioneers: [] };
+            if(rootData.pioneers.find(p => p.author === author && p.graduationYear === gradYear)) {
+                alert('This entry already exists.');
+                return;
+            }
+            rootData.pioneers.push({
+                author,
+                message,
+                graduationYear: gradYear,
+                priority: 0.7
+            });
+            localStorage.setItem('Pioneers', JSON.stringify(rootData));
+        });
+    </script>
+</body>
+</html>

@@ -1,247 +1,5 @@
-// To use API_BASE_URL for API calls, example:
-// fetch(`${API_BASE_URL}/your-endpoint`)
-const API_BASE_URL = window.API_BASE_URL ;
-const elts = {
-    text1: document.getElementById("text1"),
-    text2: document.getElementById("text2"),
-};
-
-const texts = ["Let's", "Know", "More", "About", "Assiut", "Robotics", "Team", ":)"];
-
-const morphTime = 1;
-const cooldownTime = 0.25;
-
-let textIndex = texts.length - 1;
-let time = new Date();
-let morph = 0;
-let cooldown = cooldownTime;
-
-elts.text1.textContent = texts[textIndex % texts.length];
-elts.text2.textContent = texts[(textIndex + 1) % texts.length];
-
-function doMorph() {
-    morph -= cooldown;
-    cooldown = 0;
-
-    let fraction = morph / morphTime;
-
-    if (fraction > 1) {
-        cooldown = cooldownTime;
-        fraction = 1;
-    }
-
-    setMorph(fraction);
-}
-
-function setMorph(fraction) {
-    elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-    elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-
-    fraction = 1 - fraction;
-    elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-    elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-
-    elts.text1.textContent = texts[textIndex % texts.length];
-    elts.text2.textContent = texts[(textIndex + 1) % texts.length];
-}
-
-function doCooldown() {
-    morph = 0;
-
-    elts.text2.style.filter = "";
-    elts.text2.style.opacity = "100%";
-
-    elts.text1.style.filter = "";
-    elts.text1.style.opacity = "0%";
-}
-
-function animate() {
-    requestAnimationFrame(animate);
-
-    let newTime = new Date();
-    let shouldIncrementIndex = cooldown > 0;
-    let dt = (newTime - time) / 1000;
-    time = newTime;
-
-    cooldown -= dt;
-
-    if (cooldown <= 0) {
-        if (shouldIncrementIndex) {
-            textIndex++;
-        }
-        doMorph();
-    } else {
-        doCooldown();
-    }
-}
-
-animate();
-
-
-//=============================slider image ===================================================
-
-
-class Slider {
-    constructor(slider) {
-        this.slider = slider;
-        this.display = slider.querySelector(".image-display");
-        this.navButtons = Array.from(slider.querySelectorAll(".nav-button"));
-        this.prevButton = slider.querySelector(".prev-button");
-        this.nextButton = slider.querySelector(".next-button");
-        this.sliderNavigation = slider.querySelector(".slider-navigation");
-        this.currentSlideIndex = 0;
-        this.preloadedImages = {};
-
-        this.initialize();
-    }
-
-    initialize() {
-        this.setupSlider();
-        this.preloadImages();
-        this.eventListeners();
-    }
-
-    setupSlider() {
-        this.showSlide(this.currentSlideIndex);
-    }
-
-    showSlide(index) {
-        this.currentSlideIndex = index;
-        const navButtonImg = this.navButtons[
-            this.currentSlideIndex
-        ].querySelector("img");
-        if (navButtonImg) {
-            const imgClone = navButtonImg.cloneNode();
-            this.display.replaceChildren(imgClone);
-        }
-        this.updateNavButtons();
-    }
-
-    updateNavButtons() {
-        this.navButtons.forEach((button, buttonIndex) => {
-            const isSelected = buttonIndex === this.currentSlideIndex;
-            button.setAttribute("aria-selected", isSelected);
-            // if (isSelected) button.focus();
-        });
-    }
-
-    preloadImages() {
-        this.navButtons.forEach((button) => {
-            const imgElement = button.querySelector("img");
-            if (imgElement) {
-                const imgSrc = imgElement.src;
-                if (!this.preloadedImages[imgSrc]) {
-                    this.preloadedImages[imgSrc] = new Image();
-                    this.preloadedImages[imgSrc].src = imgSrc;
-                }
-            }
-        });
-    }
-
-    eventListeners() {
-        document.addEventListener("keydown", (event) => {
-            this.handleAction(event.key);
-        });
-
-        this.sliderNavigation.addEventListener("click", (event) => {
-            const targetButton = event.target.closest(".nav-button");
-            const index = targetButton
-                ? this.navButtons.indexOf(targetButton)
-                : -1;
-            if (index !== -1) {
-                this.showSlide(index);
-            }
-        });
-
-        this.prevButton.addEventListener("click", () =>
-            this.handleAction("prev")
-        );
-        this.nextButton.addEventListener("click", () =>
-            this.handleAction("next")
-        );
-    }
-
-    handleAction(action) {
-        if (action === "Home") {
-            this.currentSlideIndex = 0;
-        } else if (action === "End") {
-            this.currentSlideIndex = this.navButtons.length - 1;
-        } else if (action === "ArrowRight" || action === "next") {
-            this.currentSlideIndex =
-                (this.currentSlideIndex + 1) % this.navButtons.length;
-        } else if (action === "ArrowLeft" || action === "prev") {
-            this.currentSlideIndex =
-                (this.currentSlideIndex - 1 + this.navButtons.length) %
-                this.navButtons.length;
-        }
-
-        this.showSlide(this.currentSlideIndex);
-    }
-
-
-}
-
-const ImageSlider = new Slider(document.querySelector(".image-slider"));
-
-document.querySelector(".slider-navigation").style = `
-grid-template-columns:repeat(${ImageSlider.navButtons.length}, 1fr);
-`
-setInterval(() => {
-    const imgs = ImageSlider.navButtons.length;
-    let index = ImageSlider.currentSlideIndex + 1;
-    if (index > imgs - 1)
-        index = 0
-    ImageSlider.showSlide(index);
-
-
-
-}, 4000);
-
-
-
-
-
-
-
-// sendIp 
-
-const getip = async () => {
-    const response = await fetch('https://api.ipify.org?format=json');
-    const data = await response.json();
-    return data.ip;
-} 
-
-
-sendIp = async () => {
-    const ip = await getip();
-    const response = await fetch(`${API_BASE_URL}/visits`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ip }),
-    });
-    const data = await response.json();
-    return data;
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
-    await sendIp();
-});
-
-// ============================ Pioneers ===================================================
-
-(function () {
-        const section = document.getElementById('pioneers');
-        if (!section) return;
-
-        const track = section.querySelector('.slider-track');
-        const prevBtn = section.querySelector('.slider-btn.prev');
-        const nextBtn = section.querySelector('.slider-btn.next');
-        let index = 0;
-
-        // data may come from an API in dynamic use case
-    const data = [
+{
+    "pioneers": [
         {
             "message": "السلام عليكم ورحمة الله وبركاته لعلكم بخير يا شباب انا احمد أسامة ... كنت ف التيم من ٢٠١٥ إلى ٢٠١٩ ... دخلت لجنةOC أول ما دخلت التيم و بعدها بكام شهر مسكت اللجنة لمدة سنة و نص تقريبا و انتقلت إلى AC لحد التخرج إشتركت ف مشروع minesweeper ٣ سنين ورا بعض أخرهم أخدنا المركز الثاني و كنا هنسافر اسبانيا بس ماحصلش نصيب بعد التخرج اتعينت معيد ف قسم كهربا من ٢٠٢٠ إلى ٢٠٢٤ و أخدت الماسترز ف ٢٠٢٣ و كنت mentor ... مشرف غير رسمى للتيم حوالى سنة و حاليا بحضر دكتوراه ف جامعة كونكورديا موتيريال بكندا روبوتيكس و الناس اللى عرفتها فيه و المواقف و الخبرات يعتبر ساعدنى ف حاجات كتير ف حياتى بشكل عام مش ف الدراسة بس كانت تجربة عملية علمية إجتماعية لا تنسى بالنسبالى ف enjoy يا شباب و learn how to learn",
             "author": "أحمد أسامة",
@@ -306,209 +64,55 @@ document.addEventListener('DOMContentLoaded', async () => {
             "author": "محمد صابر",
             "message": "صباح الفل للناس الكل ✌🏼🔥 انا محمد صابر 2020 لحد 2023 اغلبكم عارفني بي هيد الفيديو او المصوراتي 📷 او بجملتي المشهورة \" انجزوا !! الشمس بتروح مني\" 😂✌🏽 طبعا بحكم اني كنت ماسك تصوير اي حاجه تقريباً في الفريق فا كنت محظوظ ❤ اني تقريبا قابلت كل الناس اللي كانو في الفريق في الوقت ده وخدتلهم على الاقل صورة ال ID 😂✌🏼ودول شوية من شغلي انا والشباب في لجنة الفيديو https://www.facebook.com/share/v/14Mc9VuD6qU/ https://youtu.be/zpxgMbO5gh0?si=bABnyhq0B6ken7jS الفريق كان نقطة محورية ليا في الكليه عشان كنت متردد بين عماره وكهرباء لكن يشاء ربنا احضر معرض الفريق في أولى كهرباء و انبهر بالروبوتات اللي كانت معموله ❤❤ واسجل في الفورم بعدها والاقيني معاكم 😂✌🏼 كا تيكنيكال في الفريق حبيت شغل ros وبسببه اتجرأت❤ اسطب Linux 🐧 وكا مسابقات شاركت في مسابقة UAV وخذنا دورة aerodynamic عشان نعرف نعمل ال drone وحمدت ربنا بعدها اني مدخلتش ميكانيكا 😂😂😂 لكن مكنش لينا نصيب نكمل فيها وبعدها دخلت في مسابقة ال UGV كا شغل ros و vision وشاركنا بيها في معرض egypt industry 4.0 بس كانت مشاركة متواضعه عشان الروبوت مكنش كامل 😇 بعد ماتخرجت اشتغلت بدي كورسات plc Siemens في النقابه لحد دلوقتي واشتغلت كم شهر مهندس Plc في مشروع تبع السد العالي وخزان اسوان على تركيب نظام تحكم لي 4 اوناش وحاليا بفنش في اخر شهر في ال Nti تراك Embedded Linux 🐧✌🏽",
             "graduationYear": "2023",
-            "priority": 11
+            "priority": 0.7
         },
         {
             "author": "هاجر عبدالحكيم",
             "message": "السلام عليكم يا رب تكونوا جميعا بخير انا هاجر عبد الحكيم دخلت الفريق 2019 لحد التخرج سنة 2023 كنت في لجنة ال PR طول فترة وجودي في الفريق وبقيت فيها head لمدة سنة زي الكل الفريق أثر فيا جدا وكان من أهم الحاجات في فترة الجامعة، استفدت كتير على المستوى الشخصي والعملي والعلمي حتى مع عدم دخولي مسابقات واكيد كسبت ناس عظيمة كتير بفضل الله بعد التخرج رغم انهم سنتين بس عملت فيهم حاجات مختلفة كتير واقدر اقول ان 60 في المية من الحاجات دي وجودي في روبتكس ساعدني فيها جدا انا فعلا ممتنة جدا لكل اللي قبلنا على مجهودهم لوجود الفريق ولوصوله لده🙏🏻 اتمنى كلكم تستمتعوا برحلتكم في الفريق وتستفادوا منها اكبر استفادة على كل المستويات وده مش هيحصل غير بمجهودكم وشغلكم وسعيكم ورا الشغل فاستغلوا الفترة دي صح واتمنى زي ما تستفادوا من الفريق تحافظوا عليه عشان يفيد اجيال جاية كتير",
             "graduationYear": "2023",
-            "priority": 12
+            "priority": 0.7
         },
         {
             "author": "محمد جمعة",
             "message": "السلام عليكم ورحمة الله وبركاته، انا محمد جمعة دخلت الفريق في ٢٠٢٠ لحد مايو ٢٠٢٢ ، مشاركتي في الفريق كانت ف الجزء الاداري بس كنت في لجنة البي ار ميمبر بعد كده فايس بعد كده هيد اللجنة وفي سنتنا عملنا الدوشة الي اتعملت ع ROV في السوشيال ميديا والتليفزيون في ٢٠٢٢ وحاليا انا بدير مركز innova لتدريبات الالكترونكس والروبوتكس للاطفال والمهندسين يمكن سمعتوا عنه 😁 مشاركتي في الفريق وفي الجزء الاداري لمدة سنتين منهم سنة هيد حولتني من شخص لشخص تاني تماما اتعلمت في اللجنة ازاي اعبر عن نفسي وعن افكاري وكانت فرصة متتعوضش اني اجرب وافتكس من غير عواقب وخيمة 😂🤏🏻 لانك ف الاول والاخر طالب وعندك مساحة للخطأ ودي حاجة مش هتلاقيها بعد التخرج وده خلاني بعد التخرج قادر اشتغل وادير شغل، تحية لشباب البي ار السابقين والحاليين 💙 هتلاقوا درايف خاص بلجنة البي ار في شغل اجدادكم اهتموا بيه وضيفوا بصمتكم فيه للي بعدكم الله الله بالجزء الاداري والتكنيكال ملحوق 😂🫡 ودرج الورق ممنوع يتفتح غير لأعضاء البي ار 🫡",
             "graduationYear": "2022",
-            "priority": 13
+            "priority": 0.7
         },
         {
             "author": "أحمد عمر",
             "message": "السلام عليكم ورحمة الله وبركاته لعلكم بخير جميعا أحمد عمر، دخلت التيم بداية ٢٠١٧ لغاية التخرج ٢٠١٩ اشتغلت ميديا في الأول مسكت هيد الفيديو وبعد كده دخلت AC كهربا ومسكت هيد لغاية التخرج اشتركت في مشروع ARM و بعد كده Minesweeper 2018 الحمدلله أخدنا مركز ثاني عالجمهورية مع تيم جميل جدا واتأهلنا لاسبانيا لكن ما حصلش نصيب حاليا مهندس اتصالات بشركة جاسكو وبحضر ماستر المعمل بجد فرصة جميلة جدا وإضافة ليك علميا و اجتماعيا، حاول تستفيد بكل حاجة قدر المستطاع وكمان تفيد غيرك اعتبرها حاجة لله أو زكاة علم يعني لما تكبر في التيم هتلاقي استفادتك العلمية بتقل بس الاجتماعية بتزيد فحاول تعلم غيرك كون علاقات جوى وبره التيم على قد ما تقدر هتنفعك جدا بعد التخرج وما تتكسفش المعمل بيمنحك الفرصة دي وفرصة انك تشارك في مسابقات وتجرب العمل الجماعي وتقسيم الشغل برضه نصيحة كنت أتمنى حد يقولهالنا زمان، حاولوا تتعلموا PMP ولو كمقدمة، هتفرق معاكم جدا في ادارة المشاريع والمسابقات واداريات الفريق، وقبل ما تمشي من الفريق علم غيرك وسلمهم الشغل كويس واعمل Documentation لو تقدر عشان ما نخترعش العجلة كل مرة من البداية بل كل سنة نكمل عاللي قبلها حافظوا عالفريق وحبوا بعض بس كده ان شاءالله نسمع عنكم كل خير",
             "graduationYear": "2019",
-            "priority": 14
+            "priority": 0.7
         },
         {
             "author": "عبدالحميد محمد",
             "message": "السلام عليكم أنا عبدالحميد محمد، مدرس مساعد في جامعة أسيوط الجديدة التكنولوجية، كلية العلوم الصحية. كنت ضمن فريق الروبوتكس من 2021 لحد 2025. اشتغلت في لجنة الـ Media كـ Content Writer، وبعدها كـ Media Head لمدة سنة. وبعدها انتقلت للجنة الـ Mechanical (AC). كنت زعلان جدًا إنّي مقدرتش أشارك في مسابقات مع الفريق، بس كنت مبسوط بكل حاجة اتعلمتها في التيم سواء Technical أو Soft Skills. وبحب أشكر كل حد اشتغلت معاه واستفدت منه. كلكم كنتوا أكتر من إخوات. اتخرّجت 2025، وبإذن الله أفضل على تواصل معاكم دايمًا 💙",
             "graduationYear": "2025",
-            "priority": 15
+            "priority": 0.7
         },
         {
             "author": "أحمد سيد",
             "message": "السلام عليكم * أنا أحمد سيد أو ( هيرو ) كما يعرفني البعض منكم كنت في روبوتيكس من 2016 لحد 2021 ده بعتبر نفسي من الجيل الحديث في الفريق 😁 بعد د. محسن ، م. عطوان، م. هبة * كنت PR من اول ما دخلت لحد اخر يوم في الكلية وكنت في مسابقة Minesweeper اللي اخدنا مركز اول في ماكاو 🥇 بعد مجهود عظيم من كل واحد في روبوتيكس وعلى رأسهم الحج تيفا♥ وطبعا بناءا ع خبرات السابقون اللي محدش فيه يبخل علينا بمعلومة ♥ * الخبرات اللي اكتسبناها من روبوتكيس لا يمكن وصفها لأنها هتفضل مؤثرة عليك طول حياتك بشكل غير مباشر والحمد لله خرجنا من روبوتيكس بأشخاص بيننا محبة تدوم اكتر من دايرة دفعتك والقسم والسكشن دايما دايرة روبوتيكس أهم ♥ * واخيرا انا مازلت قلبي معلق بين جدران المعمل وكل فرصة اكون في الكلية لازم ازوركم واتعرف علي الأجيال اللي شايلين الفريق حاليا دمتم موفقين ان شاء الله ♥♥♥",
             "graduationYear": "2021",
-            "priority": 16
+            "priority": 0.7
         },
         {
             "author": "مصطفى دياب",
             "message": "السلام عليكم. انا مصطفى دياب، وكنت معروف في روبوتكس ب(الحاج تيفا) كنت في روبوتكس من أبريل ٢٠١٦ حتى أبريل ٢٠٢١. اشتغلت ميديا و oc وأحيانا hr كنت هيد ميديا سنة ونص وليدر فريق سنة ونص وأنا معتبر روبوتكس أحلى حاجة حصلتلي في فترة الكلية، بسبب الخبرة اللي اكتسبناها والناس العظيمة اللي اتعرفنا عليهم.",
             "graduationYear": "2021",
-            "priority": 17
+            "priority": 0.7
         },
         {
             "author": "عبدالرحمن محمود",
             "message": "السلام عليكم 🫡 أنا عبدالرحمن محمود (مٌلقب باسم رفعت😅) و حاليا سنة رابعة ميكاترونكس رحلتي في الفريق بدأت 2021 كنت ميمبر OC و بتعلم في فترة AC mechanical و انتهت 2022 و هنا كانت نقطة تحول 180 درجة في كل حاجة تقريبا من طريقة التعامل و الإدارة و شغل التكنيكال و طبعا معرفة أشخاص هم دلوقتي أكتر من الإخوة فعلا❤ حاليا بفضل الله شغال في مجال ال 3D printing & mechanical design ما يقارب ال 3 سنين دلوقتي وفاتح شغلي الخاص بالطباعة و التصميم اسمه The Mechanic في منكم اليعرفه و شغال حاليا في Startup في كندا خاص بال Wind turbines و الواحد ميقدرش ينسي فضل التيم عليه لانه كان البداية لكل دا عشان فعلا اتعلمت معني learn how to learn خلال مسيرتي و في النهاية نقول شكرا روبوتكس و الحمد لله❤",
             "graduationYear": "2022",
-            "priority":18
+            "priority": 0.7
         },
         {
             "author": "سلطان",
             "message": "السلام عليكم أنا سلطان(وبس هم الناس عارفنّي كدا😂)، مهندس صيانة في شركة IP كنت ضمن فريق الروبوتكس من 2022 لحد 2024. اشتغلت في لجنة الـ Media كـ Video editor، وبعدها كـ Video Head، وبعدها كـ Media Head لمدة ٨شهور. وبعدها اتنقلت للجنة الـ HR. على قد ما كنت نفسي أشارك في المسابقات مع الفريق، على قد مانا فعلاً ممتن لكل تجربة اتعلمتها جوة التيم، سواء من الناحية التيكنيكال أو المهارات الشخصية. شكرًا جدًا لكل شخص كان جزء من الرحلة دي وجودكم فرق معايا جدًا.🤍 اتخرّجت 2025، ولكن لسة بزور التيم والمعمل في كل مرة أنزل فيها البلد وبدعي ربنا يوفق ويعين كل فرد في التيم دا بجد🤍",
             "graduationYear": "2024",
-            "priority": 19
+            "priority": 0.7
         }
     ]
-        console.log("data ",data);   
-            // populate slides
-        data.sort((a, b) => a.priority - b.priority);
-        for (let i = 0; i < data.length; i++) {
-            // Wrap quote in a wrapper so we can collapse it with CSS, and add a See more button
-            let content = `
-                    <article class="slider-card" dir="auto">
-                        <div class="quote-wrapper">
-                            <p class="quote">"${data[i].message}"</p>
-                        </div>
-                        <button class="see-more" aria-expanded="false">See more</button>
-                        <div>
-                            <h4 class="author">— ${data[i].author}</h4>
-                            <h4 class="author">— ${data[i].graduationYear}</h4>
-                        </div>
-                    </article>
-                `;
-            track.insertAdjacentHTML('beforeend', content);
-        }
-
-        const slides = Array.from(track.children);
-
-        // Wire up See more buttons after layout is ready
-        requestAnimationFrame(() => {
-            slides.forEach(card => {
-                const wrapper = card.querySelector('.quote-wrapper');
-                const btn = card.querySelector('.see-more');
-                if (!wrapper || !btn) return;
-
-                // If the quote fits within the collapsed wrapper, hide the button
-                const collapsedHeight = parseFloat(getComputedStyle(wrapper).maxHeight) || 72; // fallback
-                const needsToggle = wrapper.scrollHeight > wrapper.clientHeight + 2;
-                if (!needsToggle) {
-                    btn.style.display = 'none';
-                    return;
-                }
-
-                // Toggle behavior: expand/collapse without changing slider index
-                btn.addEventListener('click', (e) => {
-                    console.log("see more");
-                    const expanded = btn.getAttribute('aria-expanded') === 'true';
-                    btn.setAttribute('aria-expanded', (!expanded).toString());
-                    btn.textContent = expanded ? 'See more' : 'See less';
-                    wrapper.classList.toggle('expanded', !expanded);
-                });
-            });
-        });
-
-        function update() {
-            const slideWidth = slides[0].getBoundingClientRect().width;
-            console.log('slideWidth:', slideWidth);
-            // compute how many fully visible cards fit in viewport
-            const viewport = section.querySelector('.slider-viewport');
-            const visibleCount = Math.max(1, Math.floor(viewport.clientWidth / (slideWidth + parseFloat(getComputedStyle(track).gap || 0))));
-            const maxIndex = Math.max(0, slides.length - visibleCount);
-            index = Math.min(Math.max(0, index), maxIndex);
-            const offset = index * (slideWidth + parseFloat(getComputedStyle(track).gap || 0));
-            track.style.transform = `translateX(-${offset}px)`;
-            prevBtn.disabled = index === 0;
-            nextBtn.disabled = index === maxIndex;
-        }
-
-        prevBtn.addEventListener('click', () => { index -= 1; update(); });
-        nextBtn.addEventListener('click', () => { index += 1; update(); });
-
-        // swipe support
-        // let startX = 0, currentX = 0, dragging = false;
-        // section.querySelector('.slider-viewport').addEventListener('pointerdown', (e) => {
-        //     dragging = true; startX = e.clientX; section.querySelector('.slider-viewport').setPointerCapture(e.pointerId);
-        // });
-        // section.querySelector('.slider-viewport').addEventListener('pointermove', (e) => {
-        //     if (!dragging) return; currentX = e.clientX;
-        // });
-        // section.querySelector('.slider-viewport').addEventListener('pointerup', () => {
-        //     if (!dragging) return; dragging = false;
-        //     const dx = currentX - startX;
-        //     if (dx / window.innerWidth > 0.1) index -= 1;
-        //     else if (dx / window.innerWidth < -0.1) index += 1;
-        //     update();
-        // });
-        var dragging = false;
-        var startX = 0;
-        var currentX = 0;
-        var baseTranslateX = 0; // pixels
-
-        const viewport = section.querySelector('.slider-viewport');
-
-        viewport.addEventListener('touchstart', (e) => {
-            if (!e.touches || e.touches.length === 0) return;
-            startX = e.touches[0].clientX;
-            currentX = startX;
-            dragging = true;
-
-            // read current transform (may be like 'matrix(a, b, c, d, tx, ty)')
-            const style = getComputedStyle(track).transform;
-            if (style && style !== 'none') {
-                try {
-                    const m = new DOMMatrixReadOnly(style);
-                    baseTranslateX = m.m41; // translation x
-                } catch (err) {
-                    // fallback parsing
-                    const match = style.match(/matrix\([^,]+,[^,]+,[^,]+,[^,]+,\s*([^,]+),/);
-                    baseTranslateX = match ? parseFloat(match[1]) : 0;
-                }
-            } else {
-                baseTranslateX = 0;
-            }
-
-            // disable track transition during dragging for immediate response
-            track.style.transition = 'none';
-        }, { passive: true });
-
-        // touchmove: prevent default to avoid page scrolling during horizontal drag
-        viewport.addEventListener('touchmove', (e) => {
-            if (!dragging) return;
-            if (!e.touches || e.touches.length === 0) return;
-            // prevent vertical scrolling while dragging horizontally
-            e.preventDefault && e.preventDefault();
-            currentX = e.touches[0].clientX;
-            const dx = currentX - startX; // positive = move right
-            // apply delta to the base translate (baseTranslateX already includes current offset)
-            track.style.transform = `translateX(${baseTranslateX + dx}px)`;
-        }, { passive: false });
-
-        viewport.addEventListener('touchend', (e) => {
-            if (!dragging) return;
-            dragging = false;
-            // re-enable transition
-            track.style.transition = '';
-
-            const totalDx = currentX - startX;
-            // determine threshold (one quarter of a slide)
-            const slideWidth = slides[0].getBoundingClientRect().width;
-            const threshold = slideWidth * 0.25;
-
-            if (totalDx > threshold) {
-                // swipe right -> previous
-                index = Math.max(0, index - 1);
-            } else if (totalDx < -threshold) {
-                // swipe left -> next
-                const viewportWidth = viewport.clientWidth;
-                const visibleCount = Math.max(1, Math.floor(viewportWidth / (slideWidth + parseFloat(getComputedStyle(track).gap || 0))));
-                const maxIndex = Math.max(0, slides.length - visibleCount);
-                index = Math.min(maxIndex, index + 1);
-            }
-
-            // snap to calculated index
-            update();
-        }, { passive: true });
-
-
-        window.addEventListener('resize', update);
-        // initial layout
-        requestAnimationFrame(update);
-    })();
+}
