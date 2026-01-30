@@ -11,7 +11,7 @@ const backendUrl = "https://assiut-robotics-zeta.vercel.app/";
 
 async function fetchTracks() {
     try {
-        const response = await fetch(`${backendUrl}/electric/getAllTracks`);
+        const response = await fetch(ServerConfig.getElectricalGetAllTracks());
         const res = await response.json();
         if (!response.ok) {
             throw new Error('Failed to fetch tracks', response.message);
@@ -322,7 +322,7 @@ const electricData = {
 };
 
 function getAllData(){
-    fetch("https://tempbackendelectrical-production.up.railway.app/api/data")
+    fetch(ServerConfig.getElectricalData())
         .then(res => res.json())
         .then(res => {
             console.log(res);

@@ -661,7 +661,7 @@ const sendIpApi = async (page) => {
     try{
     const clientIP = await getClientIP();
     console.log("api function ", page, clientIP)
-    const response = await fetch(`https://assiut-robotics-server.vercel.app/guest`,{
+    const response = await fetch(APIConfig.getGuestEndpoint(),{
         method: "POST",
         headers: {
             "Content-type": "application/json"

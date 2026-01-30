@@ -104,6 +104,9 @@
         <div id="successMessage" class="success-message"></div>
     </div>
 
+    <!-- Include Server Configuration -->
+    <script src="../config/server-config-simple.js"></script>
+    
     <script>
         document.getElementById('dateForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -131,7 +134,7 @@
             console.log('Sending data:', data); // للتأكد من البيانات قبل الإرسال
 
             try {
-                const response = await fetch('https://assiut-robotics-server.vercel.app/lap-dates', {
+                const response = await fetch(APIConfig.getLapDatesEndpoint(), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

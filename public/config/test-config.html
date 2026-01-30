@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Configuration Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        button {
+            margin: 5px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .btn-primary { background-color: #007bff; color: white; }
+        .btn-success { background-color: #28a745; color: white; }
+        .btn-warning { background-color: #ffc107; color: black; }
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Configuration Test</h1>
+    
+    <div class="test-section info">
+        <h3>Environment Detection</h3>
+        <p>Current Environment: <strong id="current-env">Loading...</strong></p>
+        <p>Hostname: <strong id="hostname">Loading...</strong></p>
+        <p>Manual Override: <strong id="manual-override">Loading...</strong></p>
+    </div>
+
+    <div class="test-section">
+        <h3>Environment Controls</h3>
+        <button class="btn-primary" onclick="switchToDev()">Switch to Development</button>
+        <button class="btn-success" onclick="switchToProd()">Switch to Production</button>
+        <button class="btn-warning" onclick="clearOverride()">Clear Override</button>
+    </div>
+
+    <div class="test-section">
+        <h3>API URLs</h3>
+        <div id="api-urls">Loading...</div>
+    </div>
+
+    <div class="test-section">
+        <h3>API Endpoint Tests</h3>
+        <div id="endpoint-tests">Loading...</div>
+    </div>
+
+    <div class="test-section">
+        <h3>Test Results</h3>
+        <div id="test-results">Ready to test...</div>
+    </div>
+
+    <!-- Include Server Configuration -->
+    <script src="server-config.js"></script>
+    <script src="dev-helper.js"></script>
+
+    <script>
+        function updateDisplay() {
+            // Update environment info
+            document.getElementById('current-env').textContent = ServerConfig.getCurrentEnvironment();
+            document.getElementById('hostname').textContent = window.location.hostname;
+            document.getElementById('manual-override').textContent = localStorage.getItem('DEV_MODE') || 'None';
+
+            // Update API URLs
+            const urls = {
+                'Main API': ServerConfig.getMainAPI(),
+                'Server API': ServerConfig.getServerAPI(),
+                'Electrical API': ServerConfig.getElectricalAPI(),
+                'Legacy API': ServerConfig.getLegacyAPI()
+            };
+
+            document.getElementById('api-urls').innerHTML = '<pre>' + JSON.stringify(urls, null, 2) + '</pre>';
+
+            // Update endpoint tests
+            const endpoints = {
+                'Members Login': ServerConfig.getMembersLogin(),
+                'Tracks': ServerConfig.getTracksGetAll(),
+                'Components': ServerConfig.getComponentsGetAll(),
+                'Guest': ServerConfig.getGuestBase(),
+                'Visitor': ServerConfig.getVisitorBase(),
+                'Meeting': ServerConfig.getMeetingBase(),
+                'Lap Dates': ServerConfig.getLapDatesBase()
+            };
+
+            document.getElementById('endpoint-tests').innerHTML = '<pre>' + JSON.stringify(endpoints, null, 2) + '</pre>';
+        }
+
+        function switchToDev() {
+            ServerConfig.setEnvironment('development');
+            updateDisplay();
+            addTestResult('Switched to development environment', 'success');
+        }
+
+        function switchToProd() {
+            ServerConfig.setEnvironment('production');
+            updateDisplay();
+            addTestResult('Switched to production environment', 'success');
+        }
+
+        function clearOverride() {
+            localStorage.removeItem('DEV_MODE');
+            updateDisplay();
+            addTestResult('Cleared manual override', 'info');
+        }
+
+        function addTestResult(message, type) {
+            const results = document.getElementById('test-results');
+            const timestamp = new Date().toLocaleTimeString();
+            results.innerHTML += `<div class="test-section ${type}"><strong>[${timestamp}]</strong> ${message}</div>`;
+        }
+
+        // Initialize display when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Wait for ServerConfig to be available
+            const checkServerConfig = setInterval(() => {
+                if (typeof ServerConfig !== 'undefined') {
+                    updateDisplay();
+                    addTestResult('Server Configuration loaded successfully', 'success');
+                    clearInterval(checkServerConfig);
+                }
+            }, 100);
+
+            // Timeout after 5 seconds
+            setTimeout(() => {
+                if (typeof ServerConfig === 'undefined') {
+                    addTestResult('Failed to load Server Configuration', 'error');
+                    clearInterval(checkServerConfig);
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

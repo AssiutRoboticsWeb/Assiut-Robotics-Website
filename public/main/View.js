@@ -214,7 +214,7 @@ const getip = async () => {
 
 sendIp = async () => {
     const ip = await getip();
-    const response = await fetch(`${API_BASE_URL}/visits`, {
+    const response = await fetch(APIConfig.getVisitorEndpoint(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

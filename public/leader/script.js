@@ -1,10 +1,11 @@
-// Use global API_BASE_URL defined in config/server-config.js
-const mainURL = API_BASE_URL;
+// const mainURL = "https://assiut-robotics-zeta.vercel.app";
+
+const mainURL = ServerConfig.getMainAPI();
 
 async function fetchCommittees() {
     try {
         // Fetch the data from the API
-        const response = await fetch(`${mainURL}/members/getAllMembers`);
+        const response = await fetch(ServerConfig.getMembersGetAll());
 
         // Parse the response as JSON
         const data = await response.json();
@@ -240,7 +241,9 @@ async function approveMember(name,email, accepted) {
         console.log(email,accepted);
         
     const token=window.localStorage.getItem('token')
-    const res=await fetch(`${mainURL}/members/confirm`, {
+    // const res=await fetch(`https://assiut-robotics-zeta.vercel.app/members/confirm`, {
+
+    const res=await fetch(ServerConfig.getMembersConfirm(), {
         method: 'POST',
         headers: {
              'Content-Type': 'application/json',
@@ -269,7 +272,9 @@ async function setHead(memberId) {
     const token=window.localStorage.getItem('token')
 
     try{
-    const res=await fetch(`${mainURL}/members/changeHead`, {
+    // const res=await fetch(`https://assiut-robotics-zeta.vercel.app/members/changeHead`, {
+
+    const res=await fetch(ServerConfig.getMembersChangeHead(), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -291,7 +296,9 @@ async function setVice(memberId) {
     const token=window.localStorage.getItem('token')
 
     try{
-    const res=await fetch(`${mainURL}/members/changeVice`, {
+    // const res=await fetch(`https://assiut-robotics-server.vercel.app/members/changeVice`, {
+
+    const res=await fetch(ServerConfig.getMembersChangeVice(), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

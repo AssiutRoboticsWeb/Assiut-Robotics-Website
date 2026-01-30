@@ -116,7 +116,7 @@ var data ;
 const API_BASE_URL = window.API_BASE_URL ;
 async function getDate() {
     try {
-        const response = await fetch(`${API_BASE_URL}/visits/`);
+        const response = await fetch(APIConfig.getVisitorEndpoint('/'));
         data = await response.json();
         processData();
     } catch (error) {

@@ -60,27 +60,27 @@ function renderComponentManagement(){
 
 
 
-    </div>
-  `
-  let title = document.getElementById('title');
-  let price = document.getElementById('price');
-  let count = document.getElementById('count');
-  let category = document.getElementById('category');
-  let componentLocation = document.getElementById('componentLocation');
-  let imageInput = document.getElementById('image');
-  let submit = document.getElementById('submit');
-  let mood = 'create';
-  let it;
-  let searchmood = 'title';
-  let prodata = [];
-  // if (localStorage.product != null) {
-  //   prodata = JSON.parse(localStorage.product);
-  // }
-  // else {
-  //   prodata = [];
-  // }                      //  this code replaced with get the data from DB 
-  const getComponents = async () => {
-  const res = await fetch(`${API_BASE_URL}/components/getComponents`)
+      </div>
+    `
+    let title = document.getElementById('title');
+    let price = document.getElementById('price');
+    let count = document.getElementById('count');
+    let category = document.getElementById('category');
+    let componentLocation = document.getElementById('componentLocation');
+    let imageInput = document.getElementById('image');
+    let submit = document.getElementById('submit');
+    let mood = 'create';
+    let it;
+    let searchmood = 'title';
+    let prodata = [];
+    // if (localStorage.product != null) {
+    //   prodata = JSON.parse(localStorage.product);
+    // }
+    // else {
+    //   prodata = [];
+    // }                      //  this code replaced with get the data from DB 
+    const getComponents = async () => {
+      const res = await fetch(ServerConfig.getComponentsGetAll())
       if (res.ok) {
         const response = await res.json();
         console.log(response);
@@ -105,7 +105,7 @@ function renderComponentManagement(){
           dataObject[key] = value;
         }
 
-  const res = await fetch(`${API_BASE_URL}/components/update`, {
+        const res = await fetch(ServerConfig.getComponentsUpdate(), {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -226,7 +226,7 @@ function renderComponentManagement(){
       data = {
         id
       }
-  const res = await fetch(`${API_BASE_URL}/components/deleteOne`, {
+      const res = await fetch(ServerConfig.getComponentsDeleteOne(), {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -346,7 +346,7 @@ function renderComponentManagement(){
           console.log(`${key}: ${value}`); 
         }
     
-  const res = await fetch(`${API_BASE_URL}/components/add`, {
+        const res = await fetch(ServerConfig.getComponentsAdd(), {
           method: "post",
           body: formData
         })
@@ -368,7 +368,7 @@ function renderComponentManagement(){
     }
     
     const deleteAll = async () => {
-  const res = await fetch(`${API_BASE_URL}/components/deleteAll`)
+      const res = await fetch(ServerConfig.getComponentsDeleteAll())
       if (res.ok) {
         const response = await res.json();
         console.log(await response);
@@ -417,7 +417,7 @@ function renderRequestedComponents(body,requested,borrowed){
   const token = localStorage.getItem("token")
   // get data 
   Loader.show(body)
-  fetch(`${API_BASE_URL}/components/getRequestedComponent`, {
+  fetch(ServerConfig.getComponentsGetRequested(), {
     method: "GET",
     headers: {
       Authorization: "bearer " + token
@@ -503,14 +503,14 @@ function renderRequestedComponents(body,requested,borrowed){
 
             console.log("Form data:", body);
 
-            // Hide popup after confirming
-            document.getElementById("deadlinePopup").style.display = "none";
-            Loader.show(confirming);
-            fetch(`${API_BASE_URL}/components/acceptRequestToBorrow`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "bearer " + token
+        // Hide popup after confirming
+        document.getElementById("deadlinePopup").style.display = "none";
+        Loader.show(confirming);
+        fetch(ServerConfig.getComponentsAcceptRequest(), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "bearer " + token
               },
               body: JSON.stringify(body)
             })
@@ -552,70 +552,61 @@ function renderRequestedComponents(body,requested,borrowed){
       });
 
       const reject = document.querySelectorAll('.reject');
-      console.log(reject);
-      reject.forEach(element => {
-        element.addEventListener("click", (e) => {
-          const component = res.data[e.target.id];
-          console.log(component);
-          Loader.show(element);
-          fetch(`${API_BASE_URL}/components/rejectRequestToBorrow`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "bearer " + token
-            },
-            body: JSON.stringify({ componentId: component._id })
-          }).then(res => res.json())
-            .then((res) => {
-              console.log(res);
-              Loader.hide(element);
-              if (res.message == "rejected") {
-                Toastify({
-                  text: "Request rejected successfully",
-                  className: "info",
-                  duration: 3000,
-                  gravity: "top",
-                  style: {
-                    background: "linear-gradient(90deg, #2daee2 0%, #28a745 100%)",
-                  },
-                  stopOnFocus: true
-                }).showToast();
-                window.location.reload();
-              } else {
-               console.error("Error rejecting request:", res);
-              }
-            }).catch((error)=>{
-              Loader.hide(element);
-               Toastify({
-                  text: "Error rejecting request",
-                  className: "error",
-                  duration: 3000,
-                  gravity: "top",
-                  style: {
-                    background: "linear-gradient(90deg, #2daee2 0%, #dc3545 100%)",
-                  },
-                  stopOnFocus: true
-                }).showToast();
-            })
-        })
+    console.log(reject);
+    reject.forEach(element => {
+      element.addEventListener("click", (e) => {
+        const component = res.data[e.target.id];
+        console.log(component);
+        Loader.show(element);
+        fetch(ServerConfig.getComponentsRejectRequest(),{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "bearer " + token
+          },
+          body: JSON.stringify({ componentId: component._id })
+        }).then(res => res.json())
+          .then((res) => {
+            console.log(res);
+            Loader.hide(element);
+            if (res.message == "rejected") {
+              // alert("Rejection Request has been done successfully");
+              Toastify({
+                text: "Request rejected successfully",
+                className: "info",
+                duration: 3000,
+                gravity: "top",
+                style: {
+                  background: "linear-gradient(90deg, #2daee2 0%, #28a745 100%)",
+                },
+                stopOnFocus: true
+              }).showToast();
+              window.location.reload();
+            } else {
+              //alert("Error rejecting request");
+              console.error("Error rejecting request:", res);
+            }
+          }).catch((error)=>{
+            Loader.hide(element);
+             Toastify({
+                text: "Error rejecting request",
+                className: "error",
+                duration: 3000,
+                gravity: "top",
+                style: {
+                  background: "linear-gradient(90deg, #2daee2 0%, #dc3545 100%)",
+                },
+                stopOnFocus: true
+              }).showToast();
+          });
       })
-    }).catch((error) => {
-      console.error("Error:", error);
-      if(error.message == "jwt expired")
-        window.location.href = "../login/login.html";
-      Loader.hide(body);
-      Toastify({
-        text: error.message,
-        className: "error",
-        duration: 3000,
-        stopOnFocus: true,
-        gravity: "top",
-        style: {
-          background: "linear-gradient(90deg, #2daee2 0%, #dc3545 100%)", // blue to danger red
-        },
-        stopOnFocus: true
-      }).showToast();
-    });
+    })
+  });
+
+
+    
+    
+  
 }
 function renderBorrowedComponents(body , requested , borrowed){
   requested.classList.remove('btn-primary');
@@ -626,7 +617,7 @@ function renderBorrowedComponents(body , requested , borrowed){
   const token = localStorage.getItem("token")
   // get data 
   Loader.show(body)
-  fetch(`${API_BASE_URL}/components/getBorrowedComponent`, {
+  fetch(ServerConfig.getComponentsGetBorrowed(), {
     method: "GET",
     headers: {
       Authorization: "bearer " + token
@@ -681,7 +672,7 @@ function renderBorrowedComponents(body , requested , borrowed){
         const component = res.data[e.target.id];
         console.log(component);
         Loader.show(element);
-        fetch("https://assiut-robotics-zeta.vercel.app/components/return",{
+        fetch(ServerConfig.getComponentsReturn(),{
           method: "POST",
           headers: {
             "Content-Type": "application/json",

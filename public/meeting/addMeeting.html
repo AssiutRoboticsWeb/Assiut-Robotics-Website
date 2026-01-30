@@ -116,6 +116,9 @@
         </div>
     </div>
 
+    <!-- Include Server Configuration -->
+    <script src="../config/server-config-simple.js"></script>
+    
     <script>
         let allMembers = [];
         let selectedMembers = new Set();
@@ -123,7 +126,7 @@
         // جلب بيانات الأعضاء عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const response = await fetch('https://assiut-robotics-zeta.vercel.app/members/getAllMembers');
+                const response = await fetch(APIConfig.getMembersEndpoint('/getAllMembers'));
                 const data = await response.json();
                 console.log(data);
                 
@@ -238,7 +241,7 @@
             }
             
             try {
-                const response = await fetch('https://assiut-robotics-zeta.vercel.app/meeting', {
+                const response = await fetch(APIConfig.getMeetingEndpoint(), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

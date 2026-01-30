@@ -14,8 +14,11 @@ const menuToggle = document.getElementById("menuToggle");
 const siteLogo = document.getElementById("siteLogo");
 const backward_BTN = `<div><button onclick="window.history.back()" class ="backward" title="Back"><i class="fa-solid fa-angle-left"></i></button></div>`;
 
-// backend base (optional)
-const backendUrl = (typeof API_BASE_URL !== 'undefined') ? API_BASE_URL + "/" : "";
+// Backend base
+// const backendUrl = "https://assiut-robotics-server.vercel.app/";
+
+// Backend base - Now using centralized server configuration
+const backendUrl = ServerConfig.getTracksAPI() + "/";
 
 /* بيانات تجريبية */
 const electricData = {
@@ -320,9 +323,10 @@ async function handleSubmission(e) {
     if (!/^https?:\/\/.+/.test(payload.link)) { showToast('من فضلك أدخل رابط صحيح يبدأ ب http/https.'); return; }
     try {
         let posted = false;
-        if (backendUrl) {
-            try { const resp = await fetch(`${backendUrl}submissions`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (resp.ok) posted = true; } catch (_) { }
-        }
+        try {
+            const resp = await fetch(ServerConfig.getTracksSubmissions(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            if (resp.ok) { posted = true; }
+        } catch (_) { /* ignore network error; fallback to local */ }
         const subs = getSubmissionsMap();
         subs[makeKey(payload.committee, payload.courseName, payload.taskName)] = payload;
         setSubmissionsMap(subs);

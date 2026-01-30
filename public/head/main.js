@@ -93,12 +93,7 @@ navMenu.addEventListener('click', (e) => {
 // Fetch and display members
 async function fetchMembers() {
     try {
-        const response = await fetch(`${baseUrl}/members/get/${committee}`, {
-            method : "GET",
-            headers : {
-                authorization : "bearer " + token
-            }
-        });
+        const response = await fetch(APIConfig.getMembersEndpoint(`/get/${committee}`));
         const data = await response.json();
         console.log(data);
         if(data.message == "token is required")
@@ -621,8 +616,7 @@ document.getElementById('taskForm').addEventListener('submit', async (e) => {
 
     try {
         const promises = assignedMembers.map(memberId => 
-        {
-          return  fetch(`${baseUrl}/members/${memberId}/addTask`, {
+            fetch(APIConfig.getMembersEndpoint(`/${memberId}/addTask`), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -729,7 +723,7 @@ window.deleteTask = async function deleteTask(memberId, taskId) {
     if (!confirm('Are you sure you want to delete this task?')) return;
 
     try {
-        const response = await fetch(`${baseUrl}/members/${memberId}/deleteTask/${taskId}`, {
+        const response = await fetch(APIConfig.getMembersEndpoint(`/${memberId}/deleteTask/${taskId}`), {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -790,7 +784,7 @@ window.rateTask = async function(memberId, taskId) {
     
     
     try {
-        const response = await fetch(`${baseUrl}/members/${memberId}/rateTask/${taskId}`, {
+        const response = await fetch(APIConfig.getMembersEndpoint(`/members/${memberId}/rateTask/${taskId}`), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -911,7 +905,7 @@ function openEditTaskPopup(task, memberId, taskId, member) {
 
 // Function to update the task
 async function editrequest(memberId,taskId,member){
-    fetch(`${baseUrl}/members/${memberId}/editTask/${taskId}`, {
+    fetch(APIConfig.getMembersEndpoint(`/${memberId}/editTask/${taskId}`), {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -1047,7 +1041,7 @@ async function fetchMembersForHr() {
     // console.log(hrCommitte);
     if(hrCommitte !="Not found"){
         try {
-      const response = await fetch(`${baseUrl}/members/get/${hrCommitte}`);
+      const response = await fetch(APIConfig.getMembersEndpoint(`/get/${hrCommitte}`));
       const data = await response.json();
       if (response.ok) {
             Toastify({
@@ -1098,7 +1092,7 @@ async function fetchMembersForHr() {
     // console.log(JSON.stringify(formData));
   
     try {
-      const response = await fetch(`${baseUrl}/members/update-tasks-evaluation`, {
+      const response = await fetch(APIConfig.getMembersEndpoint('/update-tasks-evaluation'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

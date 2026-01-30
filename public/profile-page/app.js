@@ -1,8 +1,17 @@
-// ---------------------- Config & API endpoints ----------------------
-const API_URL = `${API_BASE_URL}/members/login`;
-const VERIFY_URL = `${API_BASE_URL}/members/verify`;
-const CHANGE_PROFILE_IMAGE_URL = `${API_BASE_URL}/members/changeProfileImage`;
-const SUBMIT_TASK_URL = `${API_BASE_URL}/members/submitTask`;
+
+// API URLs
+// const API_URL = "https://assiut-robotics-zeta.vercel.app/members/login";
+// const VERIFY_URL = "https://assiut-robotics-zeta.vercel.app/members/verify";
+// const CHANGE_AVATAR_URL =
+//   "https://assiut-robotics-zeta.vercel.app/members/changeProfileImage";
+// const SUBMIT_TASK_URL =
+//   "https://assiut-robotics-zeta.vercel.app/members/submitTask";
+
+// API URLs - Now using centralized server configuration
+const API_URL = ServerConfig.getMembersLogin();
+const VERIFY_URL = ServerConfig.getMembersVerify();
+const CHANGE_AVATAR_URL = ServerConfig.getMembersChangeProfile();
+const SUBMIT_TASK_URL = ServerConfig.getMembersSubmitTask();
 
 // ---------------------- State ----------------------
 let currentMemberData = null;
@@ -369,11 +378,20 @@ async function submitCurrentTask(formData) {
   if (!token) return;
 
   try {
-    const res = await fetch(`${API_BASE_URL}/members/submitMemberTask/${currentTaskId}`, {
-      method: "PUT",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
+    console.log(currentTaskId);
+
+    const response = await fetch(
+      // `https://assiut-robotics-zeta.vercel.app/members/submitMemberTask/${currentTaskId}`,
+      ServerConfig.getMembersSubmitMemberTask(currentTaskId),
+      {
+        method: "PUT",
+        headers: {
+          // 'contentType': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      }
+    );
 
     const data = await res.json();
     if (!res.ok) throw new Error(data?.message || "Submit failed");

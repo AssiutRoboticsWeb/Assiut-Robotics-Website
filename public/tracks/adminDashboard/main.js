@@ -1,6 +1,4 @@
-// ================= Core Config =================
-const backendURL = (typeof API_BASE_URL !== "undefined" ? API_BASE_URL : "") + "/";
-const MEMBERS_API = "http://localhost:3000/members/get/web";
+const backendURL = APIConfig.getServerAPI() + "/"; // Now using environment-based configuration
 
 // ================= State =================
 let membersDirectory = []; // filled from API

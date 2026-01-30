@@ -21,7 +21,7 @@ function borrow(e){
                 componentId : e.target.id
             });
 
-    fetch(`${API_BASE_URL}/components/requestToBorrow`, {
+        fetch(ServerConfig.getComponentsRequestToBorrow(), {
             method: "POST",
             headers: {    
                 "Content-Type": "application/json",
@@ -51,7 +51,7 @@ function borrow(e){
     }
 }
 const getComponents = async () => {
-    const response = await fetch(`${API_BASE_URL}/components/getComponents`)
+    const response = await fetch(ServerConfig.getComponentsGetAll())
     if (response.ok) {
         const res = await response.json()
         components = res.data;

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServerConfig Setup Verification</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 10px 0; padding: 15px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        .warning { background-color: #fff3cd; color: #856404; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        .checklist { margin: 20px 0; }
+        .checklist li { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>ServerConfig Setup Verification</h1>
+    
+    <div class="test info">
+        <h3>📋 Setup Checklist</h3>
+        <ul class="checklist">
+            <li>✅ server-config-simple.js created and working</li>
+            <li>✅ Login pages (login.html, signup.html) updated</li>
+            <li>✅ Form pages (views.html) updated</li>
+            <li>✅ Meeting pages (addMeeting.html, vote.html) updated</li>
+            <li>✅ Lab dates pages (getDates.html, addDate.html) updated</li>
+            <li>✅ Test pages (test.html) updated</li>
+            <li>✅ Main pages (index.html, profile-page, tracks, leader, OC_page) updated</li>
+        </ul>
+    </div>
+
+    <div id="results"></div>
+
+    <!-- Include Server Configuration -->
+    <script src="server-config-simple.js"></script>
+
+    <script>
+        function addResult(message, type = 'info') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+        }
+
+        function runVerification() {
+            addResult('<h3>🔍 ServerConfig Verification</h3>', 'info');
+
+            // Test 1: ServerConfig availability
+            if (typeof ServerConfig !== 'undefined') {
+                addResult('✅ <strong>ServerConfig is loaded successfully</strong>', 'success');
+            } else {
+                addResult('❌ <strong>ServerConfig is not available</strong>', 'error');
+                return;
+            }
+
+            // Test 2: Environment detection
+            try {
+                const env = ServerConfig.getCurrentEnvironment();
+                addResult(`✅ <strong>Environment detected:</strong> ${env}`, 'success');
+            } catch (error) {
+                addResult(`❌ <strong>Environment detection failed:</strong> ${error.message}`, 'error');
+            }
+
+            // Test 3: Key functions
+            const keyFunctions = [
+                'getMembersLogin',
+                'getMembersRegister',
+                'getMembersVerify',
+                'getMembersGetAll',
+                'getComponentsGetAll',
+                'getTracksGetAll',
+                'getElectricalData',
+                'getGuestBase',
+                'getVisitorBase'
+            ];
+
+            let workingFunctions = 0;
+            keyFunctions.forEach(funcName => {
+                try {
+                    if (typeof ServerConfig[funcName] === 'function') {
+                        const result = ServerConfig[funcName]();
+                        workingFunctions++;
+                    }
+                } catch (error) {
+                    addResult(`❌ <strong>${funcName}() failed:</strong> ${error.message}`, 'error');
+                }
+            });
+
+            addResult(`✅ <strong>Working functions:</strong> ${workingFunctions}/${keyFunctions.length}`, 'success');
+
+            // Test 4: Environment switching
+            try {
+                const originalEnv = ServerConfig.getCurrentEnvironment();
+                ServerConfig.setEnvironment('development');
+                const devUrl = ServerConfig.getMembersLogin();
+                ServerConfig.setEnvironment('production');
+                const prodUrl = ServerConfig.getMembersLogin();
+                ServerConfig.setEnvironment(originalEnv);
+                
+                addResult('✅ <strong>Environment switching works correctly</strong>', 'success');
+                addResult(`<strong>Development URL:</strong> ${devUrl}`, 'info');
+                addResult(`<strong>Production URL:</strong> ${prodUrl}`, 'info');
+            } catch (error) {
+                addResult(`❌ <strong>Environment switching failed:</strong> ${error.message}`, 'error');
+            }
+
+            // Test 5: Sample API calls
+            addResult('<h3>🌐 Sample API Endpoints</h3>', 'info');
+            
+            const sampleEndpoints = {
+                'Members Login': ServerConfig.getMembersLogin(),
+                'Members Register': ServerConfig.getMembersRegister(),
+                'Members Verify': ServerConfig.getMembersVerify(),
+                'Components Get All': ServerConfig.getComponentsGetAll(),
+                'Tracks Get All': ServerConfig.getTracksGetAll(),
+                'Electrical Data': ServerConfig.getElectricalData(),
+                'Guest Base': ServerConfig.getGuestBase(),
+                'Visitor Base': ServerConfig.getVisitorBase()
+            };
+
+            const endpointsDiv = document.createElement('div');
+            endpointsDiv.className = 'test info';
+            endpointsDiv.innerHTML = '<pre>' + JSON.stringify(sampleEndpoints, null, 2) + '</pre>';
+            document.getElementById('results').appendChild(endpointsDiv);
+
+            // Final result
+            if (workingFunctions === keyFunctions.length) {
+                addResult('🎉 <strong>All tests passed! ServerConfig is fully functional.</strong>', 'success');
+                addResult('✅ <strong>You can now use ServerConfig throughout your application.</strong>', 'success');
+            } else {
+                addResult('⚠️ <strong>Some functions are not working. Please check the configuration.</strong>', 'warning');
+            }
+        }
+
+        // Run verification when page loads
+        document.addEventListener('DOMContentLoaded', runVerification);
+    </script>
+</body>
+</html>

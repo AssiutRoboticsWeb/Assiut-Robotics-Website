@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServerConfig Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; }
+        .error { background-color: #f8d7da; }
+        .info { background-color: #d1ecf1; }
+        pre { background: #f8f9fa; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>ServerConfig Debug Test</h1>
+    
+    <div id="results"></div>
+
+    <!-- Include Server Configuration -->
+    <script src="server-config.js"></script>
+
+    <script>
+        function addResult(message, type = 'info') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test ${type}`;
+            div.innerHTML = `<strong>${type.toUpperCase()}:</strong> ${message}`;
+            results.appendChild(div);
+        }
+
+        function runTests() {
+            addResult('Starting ServerConfig tests...', 'info');
+
+            // Test 1: Check if ServerConfig exists
+            if (typeof ServerConfig !== 'undefined') {
+                addResult('✓ ServerConfig is defined', 'success');
+            } else {
+                addResult('✗ ServerConfig is not defined', 'error');
+                return;
+            }
+
+            // Test 2: Check if it's an instance
+            if (ServerConfig instanceof ServerConfig.constructor) {
+                addResult('✓ ServerConfig is properly instantiated', 'success');
+            } else {
+                addResult('✗ ServerConfig is not properly instantiated', 'error');
+            }
+
+            // Test 3: Check environment detection
+            try {
+                const env = ServerConfig.getCurrentEnvironment();
+                addResult(`✓ Environment detected: ${env}`, 'success');
+            } catch (error) {
+                addResult(`✗ Environment detection failed: ${error.message}`, 'error');
+            }
+
+            // Test 4: Check specific functions
+            const functionsToTest = [
+                'getMembersLogin',
+                'getMembersRegister', 
+                'getMembersVerify',
+                'getMembersGetAll',
+                'getComponentsGetAll',
+                'getTracksGetAll'
+            ];
+
+            functionsToTest.forEach(funcName => {
+                try {
+                    if (typeof ServerConfig[funcName] === 'function') {
+                        const result = ServerConfig[funcName]();
+                        addResult(`✓ ${funcName}() works: ${result}`, 'success');
+                    } else {
+                        addResult(`✗ ${funcName} is not a function`, 'error');
+                    }
+                } catch (error) {
+                    addResult(`✗ ${funcName}() failed: ${error.message}`, 'error');
+                }
+            });
+
+            // Test 5: Check all available methods
+            try {
+                const methods = Object.getOwnPropertyNames(ServerConfig.constructor.prototype)
+                    .filter(name => name.startsWith('get') && name !== 'getConfigurations')
+                    .sort();
+                
+                addResult(`Available methods (${methods.length}):`, 'info');
+                const methodsDiv = document.createElement('div');
+                methodsDiv.className = 'test info';
+                methodsDiv.innerHTML = `<pre>${methods.join('\n')}</pre>`;
+                document.getElementById('results').appendChild(methodsDiv);
+            } catch (error) {
+                addResult(`✗ Could not get methods: ${error.message}`, 'error');
+            }
+
+            // Test 6: Test environment switching
+            try {
+                const originalEnv = ServerConfig.getCurrentEnvironment();
+                ServerConfig.setEnvironment('development');
+                const devEnv = ServerConfig.getCurrentEnvironment();
+                ServerConfig.setEnvironment('production');
+                const prodEnv = ServerConfig.getCurrentEnvironment();
+                ServerConfig.setEnvironment(originalEnv);
+                
+                addResult(`✓ Environment switching works: ${originalEnv} → dev → prod → ${originalEnv}`, 'success');
+            } catch (error) {
+                addResult(`✗ Environment switching failed: ${error.message}`, 'error');
+            }
+
+            addResult('Tests completed!', 'info');
+        }
+
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>

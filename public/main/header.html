@@ -42,7 +42,8 @@
     </div>
 </header>
 <script>
-    if(token != null && token != undefined)
+    let token2 = window.localStorage.getItem("token");
+    if(token2 != undefined && token2 != null)
     {
         console.log("profile");
         

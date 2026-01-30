@@ -4,7 +4,7 @@ try {
     document.forms['loginForm'].addEventListener('submit', async (event) => {
         // alert('submitting form');
         event.preventDefault();
-        event.target.action = serverConfig.getApiUrl("members/login");
+        event.target.action = ServerConfig.getMembersLogin();
         let data={
             email: event.target.email.value,
             password: event.target.password.value,

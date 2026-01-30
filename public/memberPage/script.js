@@ -13,7 +13,7 @@ themeToggle.addEventListener('click', () => {
 // Fetch data from API
 async function fetchMembers() {
     try {
-        const response = await fetch(`${API_BASE_URL}/members/getAllMembers`);
+        const response = await fetch(APIConfig.getMembersEndpoint('/getAllMembers'));
         const data = await response.json();
         return data.data.members;
     } catch (error) {
