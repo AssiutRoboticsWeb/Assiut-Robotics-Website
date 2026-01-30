@@ -15,5 +15,5 @@
 # /.vercel/
 
 
-# .cursorindexingignore
-# .specstory
+.cursorindexingignore
+.specstory
