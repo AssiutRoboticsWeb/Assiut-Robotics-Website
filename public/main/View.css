@@ -786,7 +786,8 @@ h1 {
     background: white;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    width: 340px;
+    max-width: 340px;
+    flex: 1 0 33.3%;
     overflow: hidden;
     transition: all 0.3s ease;
     position: relative;
@@ -878,6 +879,10 @@ h1 {
     border-bottom: 4px solid #d63232;
 }
 
+.team-member-card.member-card.software-card {
+    flex: 1 0 21%;
+}
+
 .team-member-card.member-card .team-member-info .member-role {
     color: #d63232;
 }
@@ -936,6 +941,11 @@ h1 {
     .team-member-card {
         width: 100%;
         max-width: 350px;
+        flex: 1 0 50%;
+    }
+
+    .team-member-card.member-card.software-card {
+        flex: 1 0 50%;
     }
 
     .team-member-img-wrapper {

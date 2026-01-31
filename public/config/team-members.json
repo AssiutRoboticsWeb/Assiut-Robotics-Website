@@ -49,25 +49,25 @@
         "name": "Mazen Magdy",
         "role": "Frontend Sub-head",
         "image": "./all-images/board/mazen.png",
-        "cardClass": "member-card"
+        "cardClass": "member-card software-card"
       },
       {
         "name": "Mostafa Ahmed",
         "role": "Backend Sub-head",
         "image": "./all-images/board/mostafa.jpg",
-        "cardClass": "member-card"
+        "cardClass": "member-card software-card"
       },
       {
         "name": "Mahmoud Mohamed",
         "role": "UI/UX Sub-head",
         "image": "./all-images/web.jpg",
-        "cardClass": "member-card"
+        "cardClass": "member-card software-card"
       },
       {
         "name": "Karen Medhat",
         "role": "Application Sub-head",
         "image": "./all-images/web.jpg",
-        "cardClass": "member-card"
+        "cardClass": "member-card software-card"
       }
     ]
   },
