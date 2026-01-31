@@ -1,0 +1,20 @@
+[
+    {
+        "title": "ROV2017",
+        "image": "./all-images/ROV2017.png",
+        "description": "The 2017 ROV Competition, organized by the MATE Center, was a global event promoting innovation in underwater robotics. Teams from around the world built and operated ROVs to complete complex underwater missions. The competition aimed to inspire students to pursue STEM careers through real-world challenges.",
+        "link": "./achievements/index_rov.html"
+    },
+    {
+        "title": "Minesweepers Competition",
+        "image": "./all-images/mine.jpg",
+        "description": "The Minesweepers Competition is a global event focused on developing robotic solutions for landmine detection and removal. It promotes innovation and teamwork among international teams to build safe and efficient systems for dangerous environments. The competition supports technological advancement in humanitarian demining.",
+        "link": "./achievements/index_mins.html"
+    },
+    {
+        "title": "Micromouse Competition",
+        "image": "./all-images/micrologo.png",
+        "description": "The Micromouse competition challenges small autonomous robots to navigate a 16×16 maze and reach the center on their own. Robots explore the maze, detect walls, and track their position to find the goal. After mapping the maze, they race through the optimal path in the shortest time.",
+        "link": "./achievements/index_micro.html"
+    }
+]
