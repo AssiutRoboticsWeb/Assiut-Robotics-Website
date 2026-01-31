@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quick ServerConfig Test</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .result { margin: 10px 0; padding: 10px; border-radius: 5px; }
-        .success { background-color: #d4edda; color: #155724; }
-        .error { background-color: #f8d7da; color: #721c24; }
-        .info { background-color: #d1ecf1; color: #0c5460; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
     </style>
 </head>
+
 <body>
     <h1>Quick ServerConfig Test</h1>
     <div id="results"></div>
 
     <!-- Include Server Configuration -->
-    <script src="server-config-simple.js"></script>
+    <script src="server-config.js"></script>
 
     <script>
         function addResult(message, type = 'info') {
@@ -32,21 +54,21 @@
         try {
             if (typeof ServerConfig !== 'undefined') {
                 addResult('✓ ServerConfig is loaded', 'success');
-                
+
                 // Test environment
                 const env = ServerConfig.getCurrentEnvironment();
                 addResult(`✓ Environment: ${env}`, 'success');
-                
+
                 // Test specific functions
                 const loginUrl = ServerConfig.getMembersLogin();
                 addResult(`✓ getMembersLogin(): ${loginUrl}`, 'success');
-                
+
                 const registerUrl = ServerConfig.getMembersRegister();
                 addResult(`✓ getMembersRegister(): ${registerUrl}`, 'success');
-                
+
                 const verifyUrl = ServerConfig.getMembersVerify();
                 addResult(`✓ getMembersVerify(): ${verifyUrl}`, 'success');
-                
+
                 // Test environment switching
                 const originalEnv = ServerConfig.getCurrentEnvironment();
                 ServerConfig.setEnvironment('development');
@@ -54,13 +76,13 @@
                 ServerConfig.setEnvironment('production');
                 const prodUrl = ServerConfig.getMembersLogin();
                 ServerConfig.setEnvironment(originalEnv);
-                
+
                 addResult(`✓ Environment switching works`, 'success');
                 addResult(`  Dev URL: ${devUrl}`, 'info');
                 addResult(`  Prod URL: ${prodUrl}`, 'info');
-                
+
                 addResult('🎉 All tests passed! ServerConfig is working correctly.', 'success');
-                
+
             } else {
                 addResult('✗ ServerConfig is not defined', 'error');
             }
@@ -69,4 +91,5 @@
         }
     </script>
 </body>
+
 </html>

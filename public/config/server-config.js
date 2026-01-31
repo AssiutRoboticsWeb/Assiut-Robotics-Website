@@ -30,7 +30,8 @@
                 deleteTask: "http://localhost:3000/members",
                 rateTask: "http://localhost:3000/members/members",
                 updateTasksEvaluation: "http://localhost:3000/members/update-tasks-evaluation",
-                sendFeedBackEmail: "http://localhost:3000/members/sendFeedBackEmail"
+                sendFeedBackEmail: "http://localhost:3000/members/sendFeedBackEmail",
+                rateMember: "http://localhost:3000/members/rate"
             },
 
             // ===== TRACKS API =====
@@ -66,10 +67,11 @@
 
             // ===== GUEST & VISITOR API =====
             guest: {
-                base: "http://localhost:3000/guest"
+                base: "http://localhost:3000/guests"
             },
+
             visitor: {
-                base: "http://localhost:3000/visitor"
+                base: "http://localhost:3000/visits"
             },
 
             // ===== MEETING API =====
@@ -114,7 +116,8 @@
                 deleteTask: "https://assiut-robotics-zeta.vercel.app/members",
                 rateTask: "https://assiut-robotics-zeta.vercel.app/members/members",
                 updateTasksEvaluation: "https://assiut-robotics-zeta.vercel.app/members/update-tasks-evaluation",
-                sendFeedBackEmail: "https://assiut-robotics-zeta.vercel.app/members/sendFeedBackEmail"
+                sendFeedBackEmail: "https://assiut-robotics-zeta.vercel.app/members/sendFeedBackEmail",
+                rateMember: "https://assiut-robotics-zeta.vercel.app/members/rate"
             },
 
             // ===== TRACKS API =====
@@ -150,10 +153,10 @@
 
             // ===== GUEST & VISITOR API =====
             guest: {
-                base: "https://assiut-robotics-zeta.vercel.app/guest"
+                base: "https://assiut-robotics-zeta.vercel.app/guests"
             },
             visitor: {
-                base: "https://assiut-robotics-zeta.vercel.app/visitor"
+                base: "https://assiut-robotics-zeta.vercel.app/visits"
             },
 
             // ===== MEETING API =====
@@ -226,6 +229,7 @@
         getMembersRateTask: function (memberId, taskId) { return `${getCurrentConfig().members.rateTask}/${memberId}/rateTask/${taskId}`; },
         getMembersUpdateTasksEvaluation: function () { return getCurrentConfig().members.updateTasksEvaluation; },
         getMembersSendFeedback: function (memberId) { return `${getCurrentConfig().members.sendFeedBackEmail}/${memberId}`; },
+        getMembersRateMember: function () { return getCurrentConfig().members.rateMember; },
 
         // Tracks API functions
         getTracksGetAll: function () { return getCurrentConfig().tracks.getAllTracks; },

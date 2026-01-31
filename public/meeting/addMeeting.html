@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,17 @@
         body {
             background-color: #f8f9fa;
         }
+
         .container {
             max-width: 800px;
             margin-top: 50px;
         }
+
         .card {
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
+
         .member-item {
             display: flex;
             align-items: center;
@@ -24,21 +28,26 @@
             border-bottom: 1px solid #eee;
             transition: background-color 0.2s;
         }
+
         .member-item:hover {
             background-color: #f8f9fa;
         }
+
         .member-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             margin-left: 10px;
         }
+
         .member-info {
             flex-grow: 1;
         }
+
         .search-box {
             margin-bottom: 20px;
         }
+
         .members-container {
             max-height: 400px;
             overflow-y: auto;
@@ -46,13 +55,16 @@
             border-radius: 5px;
             background: white;
         }
+
         .form-check-input {
             cursor: pointer;
         }
+
         .form-check-label {
             cursor: pointer;
             width: 100%;
         }
+
         .selected-members {
             margin-bottom: 20px;
             padding: 15px;
@@ -60,11 +72,13 @@
             border-radius: 10px;
             border: 1px solid #ddd;
         }
+
         .selected-members-title {
             font-weight: bold;
             margin-bottom: 10px;
             color: #495057;
         }
+
         .selected-member {
             display: inline-flex;
             align-items: center;
@@ -72,14 +86,16 @@
             padding: 5px 10px;
             border-radius: 20px;
             margin: 5px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
+
         .selected-member img {
             width: 25px;
             height: 25px;
             border-radius: 50%;
             margin-left: 5px;
         }
+
         .remove-member {
             margin-right: 5px;
             cursor: pointer;
@@ -87,6 +103,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="card p-4">
@@ -117,8 +134,8 @@
     </div>
 
     <!-- Include Server Configuration -->
-    <script src="../config/server-config-simple.js"></script>
-    
+    <script src="../config/server-config.js"></script>
+
     <script>
         let allMembers = [];
         let selectedMembers = new Set();
@@ -129,7 +146,7 @@
                 const response = await fetch(APIConfig.getMembersEndpoint('/getAllMembers'));
                 const data = await response.json();
                 console.log(data);
-                
+
                 allMembers = data.data.members;
                 displayMembers(allMembers);
             } catch (error) {
@@ -146,7 +163,7 @@
                 const memberDiv = document.createElement('div');
                 memberDiv.className = 'member-item';
                 const isSelected = selectedMembers.has(member._id);
-                
+
                 memberDiv.innerHTML = `
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="${member._id}" 
@@ -183,14 +200,14 @@
         // تحديث عرض الأعضاء المختارين
         function updateSelectedMembersDisplay() {
             const container = document.getElementById('selectedMembersContainer');
-            
+
             if (selectedMembers.size === 0) {
                 container.innerHTML = '<div class="selected-members-title">لم يتم اختيار أي أعضاء</div>';
                 return;
             }
 
             let html = '<div class="selected-members-title">الأعضاء المختارين:</div>';
-            
+
             selectedMembers.forEach(memberId => {
                 const member = allMembers.find(m => m._id === memberId);
                 if (member) {
@@ -222,7 +239,7 @@
         // فلترة الأعضاء عند البحث
         document.getElementById('memberSearch').addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
-            const filteredMembers = allMembers.filter(member => 
+            const filteredMembers = allMembers.filter(member =>
                 member.name.toLowerCase().includes(searchTerm) ||
                 member.email.toLowerCase().includes(searchTerm)
             );
@@ -232,14 +249,14 @@
         // معالجة إرسال النموذج
         document.getElementById('meetingForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const title = document.getElementById('title').value;
-            
+
             if (selectedMembers.size === 0) {
                 alert('الرجاء اختيار عضو واحد على الأقل');
                 return;
             }
-            
+
             try {
                 const response = await fetch(APIConfig.getMeetingEndpoint(), {
                     method: 'POST',
@@ -252,7 +269,7 @@
                         members: Array.from(selectedMembers)
                     })
                 });
-                
+
                 const result = await response.json();
                 if (response.ok) {
                     alert('تم إضافة الاجتماع بنجاح');
@@ -267,4 +284,5 @@
         });
     </script>
 </body>
+
 </html>

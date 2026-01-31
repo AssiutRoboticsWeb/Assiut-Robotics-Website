@@ -60,7 +60,7 @@
 //             // objOfAllMembersRated[id]
 //             //
 //             console.log("Data will be sent :", objOfAllMembersRated[id])
-//             fetch('https://assiut-robotics-zeta.vercel.app/members/rate', {
+//             fetch(ServerConfig.getMembersRateMember(), {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -91,22 +91,22 @@
         inputElement.addEventListener('input', () => {
             let percentElement = document.querySelector(`label[for="${inputElement.id}"].percent`);
             console.log(percentElement);
-            
+
             percentElement.innerHTML = `${inputElement.value * 10}%`;
             let barParent = document.querySelector(`label[for="${inputElement.id}"].bar`);
             let bar = barParent.querySelector('div');
             let container = bar.closest('.member');
             console.log(container);
-            
-            if(inputElement.value < 2) {
+
+            if (inputElement.value < 2) {
                 bar.style.backgroundColor = 'brown';
                 container.style.borderColor = 'brown';
             }
-            else if(inputElement.value < 5) {
+            else if (inputElement.value < 5) {
                 bar.style.backgroundColor = 'red';
                 container.style.borderColor = 'red';
             }
-            else if(inputElement.value < 7.5) {
+            else if (inputElement.value < 7.5) {
                 bar.style.backgroundColor = 'lightgreen';
                 container.style.borderColor = 'lightgreen';
             }
@@ -117,6 +117,6 @@
             bar.style.width = `${inputElement.value * 10}%`;
         });
     });
-    
+
 
 }

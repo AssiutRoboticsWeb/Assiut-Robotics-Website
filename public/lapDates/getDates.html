@@ -329,8 +329,8 @@
     </div>
 
     <!-- Include Server Configuration -->
-    <script src="../config/server-config-simple.js"></script>
-    
+    <script src="../config/server-config.js"></script>
+
     <script>
         // Add this at the beginning of your script
         function initTheme() {
@@ -399,7 +399,7 @@
                 });
                 const data = await response.json();
                 console.log(data);
-                
+
 
                 if (data.message === 'success') {
                     createCalendar(data.lapDates);

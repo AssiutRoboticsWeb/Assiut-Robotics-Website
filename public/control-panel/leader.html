@@ -11,7 +11,8 @@
         * {
             list-style: none;
         }
-/* 
+
+        /* 
         .main {
             width: 100%;
         } */
@@ -128,6 +129,7 @@
             width: 20%;
         }
     </style>
+    <script src="../config/server-config.js"></script>
 </head>
 
 <body>
@@ -172,9 +174,9 @@
                     id: id,
                     role: role
                 }
-                
-                
-                const response = await fetch("https://assiut-robotics-zeta.vercel.app/members/confirm", {
+
+
+                const response = await fetch(ServerConfig.getMembersConfirm(), {
                     method: "post",
                     headers: {
                         "Content-Type": "application/json",
@@ -254,7 +256,7 @@
                             new_id: element.dataset.id
                         }
                         console.log(data);
-                        const response = await fetch("https://assiut-robotics-zeta.vercel.app/members/changeHead", {
+                        const response = await fetch(ServerConfig.getMembersChangeHead(), {
                             method: "post",
                             headers: {
                                 "Content-Type": "application/json",
@@ -334,11 +336,11 @@
         }
 
 
-        onload = async function() {
+        onload = async function () {
             // https://assiutrobotics-production.up.railway.app
             //https://assiut-robotics-website.onrender.com/
             //http://localhost:3000/
-            const res = await fetch("https://assiutrobotics-production.up.railway.app/members/getAllMembers");
+            const res = await fetch(ServerConfig.getLegacyGetAllMembers());
             if (res.ok) {
                 const response = await res.json();
                 members = response.data.members;
@@ -357,7 +359,7 @@
                 members.forEach(member => {
                     const splitcom = member.committee.split('-', 1);
                     // console.log(splitcom);
-                    if (splitcom == com && member.role < 5 && member.role!=1) {
+                    if (splitcom == com && member.role < 5 && member.role != 1) {
                         addMembersToCommittee('.members', member)
 
                     }
@@ -394,8 +396,8 @@
                 console.log(tab.dataset.com);
                 members.forEach(member => {
                     const splitcom = member.committee.split('-', 1);
-                    console.log("split com",splitcom);
-                    if (splitcom == tab.dataset.com && member.role < 5 &&member.role!=1) {
+                    console.log("split com", splitcom);
+                    if (splitcom == tab.dataset.com && member.role < 5 && member.role != 1) {
                         addMembersToCommittee('.members', member)
 
                     }

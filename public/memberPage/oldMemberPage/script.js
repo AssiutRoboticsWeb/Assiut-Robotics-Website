@@ -1,5 +1,5 @@
 // API Configuration
-const API_URL = 'https://assiut-robotics-zeta.vercel.app/members/getAllMembers';
+const API_URL = ServerConfig.getMembersGetAll();
 
 // DOM Elements
 const leaderSection = document.getElementById('leaderSection');
@@ -37,7 +37,7 @@ function organizeMembers(members) {
         }
 
         if (!member.committee) return;
-        
+
         if (!committees[member.committee]) {
             committees[member.committee] = { members: [] };
         }
@@ -113,7 +113,7 @@ function calculateBestMember(members) {
         };
     });
 
-    return scoredMembers.sort((a, b) => 
+    return scoredMembers.sort((a, b) =>
         b.score - a.score || b.tasksCount - a.tasksCount
     )[0];
 }

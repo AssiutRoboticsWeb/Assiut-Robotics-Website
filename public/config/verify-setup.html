@@ -1,24 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ServerConfig Setup Verification</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .test { margin: 10px 0; padding: 15px; border-radius: 5px; }
-        .success { background-color: #d4edda; color: #155724; }
-        .error { background-color: #f8d7da; color: #721c24; }
-        .info { background-color: #d1ecf1; color: #0c5460; }
-        .warning { background-color: #fff3cd; color: #856404; }
-        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
-        .checklist { margin: 20px 0; }
-        .checklist li { margin: 5px 0; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .test {
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+
+        .checklist {
+            margin: 20px 0;
+        }
+
+        .checklist li {
+            margin: 5px 0;
+        }
     </style>
 </head>
+
 <body>
     <h1>ServerConfig Setup Verification</h1>
-    
+
     <div class="test info">
         <h3>📋 Setup Checklist</h3>
         <ul class="checklist">
@@ -35,7 +73,7 @@
     <div id="results"></div>
 
     <!-- Include Server Configuration -->
-    <script src="server-config-simple.js"></script>
+    <script src="server-config.js"></script>
 
     <script>
         function addResult(message, type = 'info') {
@@ -100,7 +138,7 @@
                 ServerConfig.setEnvironment('production');
                 const prodUrl = ServerConfig.getMembersLogin();
                 ServerConfig.setEnvironment(originalEnv);
-                
+
                 addResult('✅ <strong>Environment switching works correctly</strong>', 'success');
                 addResult(`<strong>Development URL:</strong> ${devUrl}`, 'info');
                 addResult(`<strong>Production URL:</strong> ${prodUrl}`, 'info');
@@ -110,7 +148,7 @@
 
             // Test 5: Sample API calls
             addResult('<h3>🌐 Sample API Endpoints</h3>', 'info');
-            
+
             const sampleEndpoints = {
                 'Members Login': ServerConfig.getMembersLogin(),
                 'Members Register': ServerConfig.getMembersRegister(),
@@ -140,4 +178,5 @@
         document.addEventListener('DOMContentLoaded', runVerification);
     </script>
 </body>
+
 </html>

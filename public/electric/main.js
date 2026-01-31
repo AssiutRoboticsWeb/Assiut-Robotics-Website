@@ -6,7 +6,6 @@ var header = document.getElementById("header")
 var backward_BTN = `<div><button onclick = "window.history.back()" class ="backward" > <i class="fa-solid fa-angle-left " style="color: #FFD43B;" ></i> </button></div>`
 
 // backend api
-const backendUrl = "https://assiut-robotics-zeta.vercel.app/";
 //  =================  
 
 async function fetchTracks() {
@@ -124,106 +123,106 @@ const teamData = {
 const electricData = {
     tracks: [
         {
-          name: "Embedded",
-          icon: "<i class='fa fa-microchip'></i>",
-          description: "كل ما يخص الأنظمة المدمجة.",
-          courses: [
-            {
-              name: "Intro to Embedded",
-              description: "مقدمة عن الأنظمة المدمجة.",
-              tasks: [
+            name: "Embedded",
+            icon: "<i class='fa fa-microchip'></i>",
+            description: "كل ما يخص الأنظمة المدمجة.",
+            courses: [
                 {
-                  name: "Blink LED",
-                  description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
-                  link: "https://example.com/blink",
-                  submitLink: "https://forms.gle/submit-blink",
-                  deadline: "2024-08-10"
+                    name: "Intro to Embedded",
+                    description: "مقدمة عن الأنظمة المدمجة.",
+                    tasks: [
+                        {
+                            name: "Blink LED",
+                            description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
+                            link: "https://example.com/blink",
+                            submitLink: "https://forms.gle/submit-blink",
+                            deadline: "2024-08-10"
+                        },
+                        {
+                            name: "Blink LED",
+                            description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
+                            link: "https://example.com/blink",
+                            submitLink: "https://forms.gle/submit-blink",
+                            deadline: "2024-07-15"
+                        },
+                        {
+                            name: "Blink LED",
+                            description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
+                            link: "https://example.com/blink",
+                            submitLink: "https://forms.gle/submit-blink",
+                            deadline: "2024-07-20"
+                        },
+                        // ... باقي التاسكات كما هي
+                    ]
                 },
                 {
-                  name: "Blink LED",
-                  description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
-                  link: "https://example.com/blink",
-                  submitLink: "https://forms.gle/submit-blink",
-                  deadline: "2024-07-15"
+                    name: "Intro to Embedded",
+                    description: "مقدمة عن الأنظمة المدمجة.",
+                    tasks: [
+                        {
+                            name: "Blink LED",
+                            description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
+                            link: "https://example.com/blink",
+                            submitLink: "https://forms.gle/submit-blink",
+                            deadline: "2024-07-10"
+                        },
+                        {
+                            name: "Blink LED",
+                            description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
+                            link: "https://example.com/blink",
+                            submitLink: "https://forms.gle/submit-blink",
+                            deadline: "2024-07-15"
+                        },
+                        {
+                            name: "Blink LED",
+                            description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
+                            link: "https://example.com/blink",
+                            submitLink: "https://forms.gle/submit-blink",
+                            deadline: "2024-07-20"
+                        },
+                        // ... باقي التاسكات كما هي
+                    ]
                 },
                 {
-                  name: "Blink LED",
-                  description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
-                  link: "https://example.com/blink",
-                  submitLink: "https://forms.gle/submit-blink",
-                  deadline: "2024-07-20"
+                    name: "Intro to Embedded",
+                    description: "مقدمة عن الأنظمة المدمجة.",
+                    tasks: [
+                        {
+                            name: "Blink LED",
+                            description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
+                            link: "https://example.com/blink",
+                            submitLink: "https://forms.gle/submit-blink",
+                            deadline: "2024-07-10"
+                        },
+                        {
+                            name: "Blink LED",
+                            description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
+                            link: "https://example.com/blink",
+                            submitLink: "https://forms.gle/submit-blink",
+                            deadline: "2024-07-15"
+                        },
+                        {
+                            name: "Blink LED",
+                            description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
+                            link: "https://example.com/blink",
+                            submitLink: "https://forms.gle/submit-blink",
+                            deadline: "2024-08-20"
+                        },
+
+                        // ... المزيد من التاسكات
+                    ]
                 },
-                // ... باقي التاسكات كما هي
-              ]
-            },
-            {
-              name: "Intro to Embedded",
-              description: "مقدمة عن الأنظمة المدمجة.",
-              tasks: [
-                {
-                  name: "Blink LED",
-                  description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
-                  link: "https://example.com/blink",
-                  submitLink: "https://forms.gle/submit-blink",
-                  deadline: "2024-07-10"
-                },
-                {
-                  name: "Blink LED",
-                  description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
-                  link: "https://example.com/blink",
-                  submitLink: "https://forms.gle/submit-blink",
-                  deadline: "2024-07-15"
-                },
-                {
-                  name: "Blink LED",
-                  description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
-                  link: "https://example.com/blink",
-                  submitLink: "https://forms.gle/submit-blink",
-                  deadline: "2024-07-20"
-                },
-                // ... باقي التاسكات كما هي
-              ]
-            },
-            {
-              name: "Intro to Embedded",
-              description: "مقدمة عن الأنظمة المدمجة.",
-              tasks: [
-                {
-                  name: "Blink LED",
-                  description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
-                  link: "https://example.com/blink",
-                  submitLink: "https://forms.gle/submit-blink",
-                  deadline: "2024-07-10"
-                },
-                {
-                  name: "Blink LED",
-                  description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
-                  link: "https://example.com/blink",
-                  submitLink: "https://forms.gle/submit-blink",
-                  deadline: "2024-07-15"
-                },
-                {
-                  name: "Blink LED",
-                  description: "برمجة دائرة لجعل LED تضيء وتطفئ.",
-                  link: "https://example.com/blink",
-                  submitLink: "https://forms.gle/submit-blink",
-                  deadline: "2024-08-20"
-                },
-                
-                // ... المزيد من التاسكات
-              ]
-            },
-            
-            // ... المزيد من الكورسات
-          ]
+
+                // ... المزيد من الكورسات
+            ]
         },
         {
-          name: "Hardware",
-          icon: "<i class='fa fa-cogs'></i>",
-          description: "كل ما يخص الهاردوير.",
-          courses: [
-            // ... كورسات وتاسكات
-          ]
+            name: "Hardware",
+            icon: "<i class='fa fa-cogs'></i>",
+            description: "كل ما يخص الهاردوير.",
+            courses: [
+                // ... كورسات وتاسكات
+            ]
         }
         // ... المزيد من التراكات
     ],         // هتحط فيه التراكات
@@ -321,12 +320,12 @@ const electricData = {
     }
 };
 
-function getAllData(){
+function getAllData() {
     fetch(ServerConfig.getElectricalData())
         .then(res => res.json())
         .then(res => {
             console.log(res);
-            
+
         }
         )
 }
@@ -334,7 +333,7 @@ function getAllData(){
 // Render leaderboard with animation
 function renderLeaderboard(trackName = 'All Tracks', trackData) {
     console.log("rendering Leaderboard");
-    
+
     const leaderboardList = document.getElementById('leaderboardList');
     leaderboardList.style.opacity = '0';
     setTimeout(() => {
@@ -366,7 +365,7 @@ function renderTeam(teamArray, containerId) {
     console.log("finished from rendering team");
 }
 
-function goHome(){
+function goHome() {
     home.classList.remove("disabled");
     header.classList.remove("disabled");
     track.classList.add("disabled");
@@ -375,9 +374,9 @@ function goHome(){
 }
 
 
-function renderTracks(tracks){
+function renderTracks(tracks) {
     console.log("rendering tracks in  home page");
-    
+
     var tracksCards = document.getElementsByClassName("tracks")[0];
     tracksCards.innerHTML += tracks.map(track => {
         return `
@@ -389,11 +388,11 @@ function renderTracks(tracks){
         `
     }).join('');
     console.log("finished rendering tracks");
-    
+
 }
 
 let currentTrack = null;
-function tapSwitching(e){
+function tapSwitching(e) {
     currentTrack = e.id;
     renderTrack(electricData.tracks, currentTrack, track)
     home.classList.add("disabled");
@@ -401,10 +400,10 @@ function tapSwitching(e){
     track.classList.remove("disabled");
     courseContainer.classList.add("disabled");
     // سجل الحالة في history
-    history.pushState({view: 'track', trackName: currentTrack}, '', '');
+    history.pushState({ view: 'track', trackName: currentTrack }, '', '');
 }
 
-function renderTrack(tracks, trackName, trackContainer){
+function renderTrack(tracks, trackName, trackContainer) {
     let track = tracks.find(track => track.name === trackName);
     if (!track || !Array.isArray(track.courses)) {
         trackContainer.innerHTML = "<p>No courses found for this track.</p>";
@@ -414,8 +413,8 @@ function renderTrack(tracks, trackName, trackContainer){
 
 
     let trackDetails =
-    
-    `
+
+        `
         <div class="track-details">
             <div class="track-icon">${track.icon || ""}</div>
             <h2>${track.name}</h2>
@@ -452,7 +451,7 @@ function tasksRendering(e) {
     courseContainer.classList.remove("disabled");
     renderCourse(course, courseContainer);
     // سجل الحالة في history
-    history.pushState({view: 'course', trackName: currentTrack, courseName: courseName}, '', '');
+    history.pushState({ view: 'course', trackName: currentTrack, courseName: courseName }, '', '');
 }
 
 function renderCourse(course, courseContainer) {

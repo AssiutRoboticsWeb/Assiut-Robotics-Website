@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,21 +11,25 @@
             background-color: #f8f9fa;
             padding: 20px;
         }
+
         .meeting-card {
             cursor: pointer;
             transition: transform 0.2s;
             margin-bottom: 20px;
             border: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+
         .meeting-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
+
         .calendar-container {
             display: none;
             margin-top: 20px;
         }
+
         .time-slot {
             cursor: pointer;
             padding: 15px;
@@ -34,21 +39,25 @@
             position: relative;
             min-height: 100px;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+
         .time-slot.available {
             background-color: #f8f9fa;
             color: #495057;
             border: 2px solid #e6cc97;
         }
+
         .time-slot.booked {
             background-color: #e6cc97;
             color: white;
         }
+
         .time-slot.selected {
             background-color: #007bff;
             color: white;
         }
+
         .member-avatar {
             width: 35px;
             height: 35px;
@@ -56,6 +65,7 @@
             margin-right: 5px;
             border: 2px solid white;
         }
+
         .booking-info {
             font-size: 0.9rem;
             margin-top: 10px;
@@ -63,19 +73,23 @@
             background: rgba(255, 255, 255, 0.2);
             border-radius: 5px;
         }
+
         .modal-content {
             border-radius: 15px;
             border: none;
         }
+
         .modal-header {
             background: #e6cc97;
             color: white;
             border-radius: 15px 15px 0 0;
         }
+
         .modal-footer {
             background: #f8f9fa;
             border-radius: 0 0 15px 15px;
         }
+
         .nav-tabs .nav-link {
             color: #495057;
             border: none;
@@ -84,32 +98,39 @@
             border-radius: 10px;
             transition: all 0.3s ease;
         }
+
         .nav-tabs .nav-link:hover {
             background-color: #f8f9fa;
         }
+
         .nav-tabs .nav-link.active {
             background-color: #e6cc97;
             color: white;
             border: none;
         }
+
         .time-slot-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
+
         .day-tab {
             display: none;
         }
+
         .day-tab.active {
             display: block;
         }
+
         .booked-members {
             margin-top: 10px;
             padding: 10px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 8px;
         }
+
         .booked-member {
             display: flex;
             align-items: center;
@@ -118,14 +139,17 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
         }
+
         .filter-container {
             margin-bottom: 20px;
         }
+
         .filter-container input {
             border-radius: 10px;
             padding: 10px 15px;
             border: 2px solid #e6cc97;
         }
+
         .book-button {
             position: absolute;
             bottom: 10px;
@@ -137,6 +161,7 @@
             border: none;
             color: white;
         }
+
         .view-members-btn {
             position: absolute;
             bottom: 10px;
@@ -149,11 +174,13 @@
             color: white;
             cursor: pointer;
         }
+
         .members-modal .modal-body {
             max-height: 400px;
             overflow-y: auto;
             padding: 20px;
         }
+
         .members-modal .member-item {
             display: flex;
             align-items: center;
@@ -161,14 +188,17 @@
             border-bottom: 1px solid #eee;
             transition: background-color 0.2s;
         }
+
         .members-modal .member-item:hover {
             background-color: #f8f9fa;
         }
+
         .members-modal .member-avatar {
             width: 45px;
             height: 45px;
             margin-left: 15px;
         }
+
         .time-slot-info {
             position: absolute;
             bottom: 10px;
@@ -179,11 +209,13 @@
             border-radius: 5px;
             color: white;
         }
+
         .time-slot-time {
             font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 10px;
         }
+
         .no-results {
             text-align: center;
             padding: 20px;
@@ -192,13 +224,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2 class="text-center mb-4">جدول الاجتماعات</h2>
         <div id="meetingsContainer" class="row"></div>
         <div id="calendarContainer" class="calendar-container">
             <h3 id="meetingTitle" class="text-center mb-4"></h3>
-            
+
             <div class="filter-container">
                 <input type="text" class="form-control" id="timeFilter" placeholder="ابحث عن موعد...">
             </div>
@@ -236,8 +269,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Include Server Configuration -->
-    <script src="../config/server-config-simple.js"></script>
-    
+    <script src="../config/server-config.js"></script>
+
     <script>
         let currentMeetingId = null;
         let selectedTimeId = null;
@@ -303,11 +336,11 @@
             currentMeetingId = meeting._id;
             document.getElementById('meetingTitle').textContent = meeting.title;
             document.getElementById('calendarContainer').style.display = 'block';
-            
+
             const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
             const tabsContainer = document.getElementById('dayTabs');
             const contentContainer = document.getElementById('dayTabsContent');
-            
+
             tabsContainer.innerHTML = '';
             contentContainer.innerHTML = '';
 
@@ -338,14 +371,14 @@
                 day.forEach(timeSlot => {
                     const timeElement = document.createElement('div');
                     timeElement.className = `time-slot ${timeSlot.isBooked ? 'booked' : 'available'}`;
-                    
+
                     const timeDiv = document.createElement('div');
                     timeDiv.className = 'time-slot-time';
                     timeDiv.textContent = timeSlot.time;
                     timeElement.appendChild(timeDiv);
-                    
+
                     timeElement.dataset.timeId = timeSlot._id;
-                    
+
                     // إضافة معلومات الحجز
                     if (timeSlot.bookedBy && timeSlot.bookedBy.length > 0) {
                         const infoDiv = document.createElement('div');
@@ -355,7 +388,7 @@
 
                         const membersDiv = document.createElement('div');
                         membersDiv.className = 'booked-members';
-                        
+
                         // عرض أول عضوين فقط
                         timeSlot.bookedBy.slice(0, 2).forEach(bookedById => {
                             const member = meeting.members.find(m => m._id === bookedById);
@@ -389,7 +422,7 @@
                     timeElement.addEventListener('click', () => {
                         showTimeSlotModal(timeSlot, meeting);
                     });
-                    
+
                     timeGrid.appendChild(timeElement);
                 });
 
@@ -430,20 +463,20 @@
             selectedTime = timeSlot.time;
             currentTime = timeSlot;
             document.getElementById('timeSlotTitle').textContent = `موعد ${timeSlot.time}`;
-            
+
             const membersList = document.getElementById('bookedMembersList');
             membersList.innerHTML = '';
-            
+
             if (timeSlot.bookedBy && timeSlot.bookedBy.length > 0) {
                 const membersTitle = document.createElement('h6');
                 membersTitle.textContent = 'الأعضاء المحجوزين';
                 membersTitle.style.marginBottom = '15px';
                 membersTitle.style.color = '#495057';
                 membersList.appendChild(membersTitle);
-                
+
                 timeSlot.bookedBy.forEach(bookedById => {
                     const member = meeting.members.find(m => m._id === bookedById);
-                    
+
                     if (member) {
                         const memberDiv = document.createElement('div');
                         memberDiv.className = 'member-item';
@@ -464,7 +497,7 @@
                 noMembers.style.color = '#6c757d';
                 membersList.appendChild(noMembers);
             }
-            
+
             timeSlotModal.show();
         }
 
@@ -476,9 +509,8 @@
             }
             console.log(currentTime);
             console.log(userId);
-            
-            if(currentTime.bookedBy.includes(userId))
-            {
+
+            if (currentTime.bookedBy.includes(userId)) {
                 alert("بالفعل محجوز")
                 return;
             }
@@ -516,4 +548,5 @@
         document.addEventListener('DOMContentLoaded', fetchMeetings);
     </script>
 </body>
+
 </html>
