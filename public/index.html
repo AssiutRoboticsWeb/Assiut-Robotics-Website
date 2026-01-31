@@ -101,7 +101,9 @@ Main Page
         <!-- <script src="inex.js"></script> -->
     </div>
 
-    <section>
+    <section id="committees">
+        <h1>Our Committees</h1>
+        <p class="subtitle">Discover the roles that drive our success.</p>
 
         <div class="row">
             <!-- Column 1-->
@@ -188,6 +190,7 @@ Main Page
                     </div>
                 </div>
             </div>
+            
             <!-- Column 3-->
             <div class="column">
                 <div class="card">
@@ -238,7 +241,7 @@ Main Page
     </section>
     <section>
         <h1>Achievements</h1>
-        <p style="text-align: center; padding: 2rem;">we have achieved a perfect place in these competition</p>
+        <p class="subtitle">we have achieved a perfect place in these competition</p>
         <div id="Ach_cards">
 
             <div>
@@ -282,49 +285,28 @@ Main Page
     <!-- Team Board Section -->
     <section id="team-board">
         <h1>Team Board</h1>
+        <p class="subtitle">Meet the dedicated individuals behind our success.</p>
         <div id="team-board-container">
             <!-- Content loaded via main/team-loader.js -->
         </div>
     </section>
 
     <section id="pioneers">
-        <div class="card-slider-wrapper">
-            <h2>Pioneers</h2>
-            <div class="card-slider">
-                <button class="slider-btn prev" aria-label="Previous">‹</button>
-                <div class="slider-viewport">
-                    <div class="slider-track">
-                        <!-- <article class="slider-card">
-                        <p class="quote">"Dreams don't work unless you do. Keep moving one small step at a time."</p>
-                        <h4 class="author">— Ada Hassan</h4>
-                    </article>
-                    <article class="slider-card">
-                        <p class="quote">"Curiosity is the engine of achievement. Ask, explore, and build."</p>
-                        <h4 class="author">— Omar Khaled</h4>
-                    </article>
-                    <article class="slider-card">
-                        <p class="quote">"Failure is a lesson disguised as a setback. Learn fast, iterate faster."</p>
-                        <h4 class="author">— Lina Mustafa</h4>
-                    </article>
-                    <article class="slider-card">
-                        <p class="quote">"Collaboration turns individual sparks into a bright flame. Share your light."</p>
-                        <h4 class="author">— Karim Tarek</h4>
-                    </article>
-                    <article class="slider-card">
-                        <p class="quote">"Start small, stay consistent, and the compound effect will surprise you."</p>
-                        <h4 class="author">— Sara El-Sayed</h4>
-                    </article> -->
-                    </div>
-                </div>
-                <button class="slider-btn next" aria-label="Next">›</button>
-            </div>
+        <h1>Pioneers</h1>
+        <p class="subtitle">Those who paved the way for our success.</p>
+        <div id="pioneers-container">
+            <!-- Content loaded via main/pioneers-loader.js -->
         </div>
     </section>
+    
     <!--Footer-->
     <div id="myUniqueFooterID"></div>
+
+    <!--Scripts-->
     <script src="./config/server-config.js"></script>
     <script src="main/View.js"></script>
     <script src="main/team-loader.js"></script>
+    <script src="main/pioneers-loader.js"></script>
     <script src="./main/footerAndheader.js" defer></script>
 
 </body>
