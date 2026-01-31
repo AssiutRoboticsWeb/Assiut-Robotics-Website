@@ -733,6 +733,10 @@ body {
     .flex-div2.active {
         display: flex;
     }
+
+    #auth-buttons a {
+        margin-left: 0;
+    }
 }
 
 @media (max-width: 767px) {

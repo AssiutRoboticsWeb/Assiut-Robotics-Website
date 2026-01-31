@@ -27,7 +27,7 @@ function renderTeamBoard(departments, container) {
           // Create Department Section
           const deptSection = document.createElement('div');
           deptSection.className = 'department-section';
-          // deptSection.dataset.aos = "fade-up"; // Preparation for animation if used
+          deptSection.dataset.aos = "fade-up"; // Preparation for animation if used
 
           // Title
           const title = document.createElement('div');
@@ -40,6 +40,8 @@ function renderTeamBoard(departments, container) {
           const others = [];
 
           dept.members.forEach(member => {
+               if (member.name.toLowerCase() === "name here") return;
+
                const role = member.role || "";
 
                // Special case: High Board (Team Leader & Vice) stays in one row
@@ -71,6 +73,9 @@ function renderTeamBoard(departments, container) {
                }
           });
 
+          // Sort heads by priority to ensure Head -> Vice order
+          heads.sort((a, b) => getRolePriority(a.role) - getRolePriority(b.role));
+
           // Helper to create and append a grid row
           const appendGrid = (membersList) => {
                if (membersList.length === 0) return;
@@ -90,15 +95,6 @@ function renderTeamBoard(departments, container) {
                appendGrid(heads);
           }
 
-          // Add a small spacer if both exist? 
-          // With standard block layout, they will stack. 
-          // .team-grid has gap: 2rem which handles internal spacing.
-          // Between two grids, there is 0 margin. 
-          // Let's add a spacer or margin to the first grid if strictly needed, 
-          // but let's try standard stacking first as it might look cleaner (just a new line).
-          // Actually, without margin, they might look like one big blob if width allows.
-          // But since they are separate DIVs, they force a line break. 
-          // Adding a style for separate rows might be safer for visual distinction.
           if (heads.length > 0 && others.length > 0) {
                // simple spacer
                const spacer = document.createElement('div');
@@ -112,6 +108,17 @@ function renderTeamBoard(departments, container) {
 
           container.appendChild(deptSection);
      });
+}
+
+function getRolePriority(role) {
+     var priority = 99;
+     if (!role) return priority;
+     const r = role.toLowerCase();
+     if (r.includes('leader') || r.includes('head') && !r.includes('vice') && !r.includes('sub')) priority = 1;
+     if (r.includes('vice') || r.includes('face')) priority = 2;
+     if (r.includes('sub-head') || r.includes('sub head')) priority = 3;
+     // console.log("role: ", r, "priority: ", priority);
+     return priority;
 }
 
 function createMemberCard(member) {
@@ -141,13 +148,31 @@ function createMemberCard(member) {
      role.className = 'member-role';
      role.textContent = member.role;
 
-     // Optional: Socials (if added to JSON later)
-     // const socials = document.createElement('div');
-     // socials.className = 'member-socials';
-     // ...
-
      info.appendChild(name);
      info.appendChild(role);
+
+     // New Fields: Bio, Email, Date
+     if (member.bio) {
+          const bio = document.createElement('p');
+          bio.className = 'member-bio';
+          bio.textContent = member.bio;
+          info.appendChild(bio);
+     }
+
+     if (member.email) {
+          const email = document.createElement('a');
+          email.className = 'member-email';
+          email.href = `mailto:${member.email}`;
+          email.textContent = member.email;
+          info.appendChild(email);
+     }
+
+     if (member.date) {
+          const date = document.createElement('span');
+          date.className = 'member-date';
+          date.textContent = member.date;
+          info.appendChild(date);
+     }
 
      card.appendChild(imgWrapper);
      card.appendChild(info);

@@ -102,7 +102,7 @@ function renderPioneers(data, container) {
                               setTimeout(() => {
                                    el.classList.remove('expanded');
                                    el.style.maxHeight = null; // Revert to CSS handling
-                              }, 500); // Matches CSS transition duration
+                              }, 400); // Matches CSS transition duration
                          };
 
                          // 1. Collapse ALL other cards
