@@ -660,6 +660,10 @@ h1 {
     border-bottom: 4px solid #39a7ff;
 }
 
+.team-member-card.member-card {
+    border-bottom: 4px solid #ff3939;
+}
+
 .team-member-card.high-board-card {
     border-bottom: 4px solid #1f003b;
     width: 300px;

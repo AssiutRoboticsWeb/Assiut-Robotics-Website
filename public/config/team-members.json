@@ -4,35 +4,59 @@
     "title": "High Board",
     "members": [
       {
-        "name": "Name Here",
-        "role": "President",
+        "name": "Ahmed Eid",
+        "role": "Team Leader",
         "image": "./all-images/default.png",
         "cardClass": "high-board-card"
       },
       {
-        "name": "Name Here",
-        "role": "Vice President",
+        "name": "Ibrahim Sayed",
+        "role": "Vice Team Leader",
         "image": "./all-images/default.png",
         "cardClass": "high-board-card"
       }
     ]
   },
   {
-    "id": "hr-pr",
-    "title": "HR & PR",
+    "id": "hr-pr-oc",
+    "title": "HR & PR & OC",
     "members": [
       {
-        "name": "Name Here",
+        "name": "Mahammad Ashraf",
         "role": "HR Head",
         "image": "./all-images/hr.jpg",
         "cardClass": "lead-card"
       },
       {
-        "name": "Name Here",
+          "name": "Amena Hassan",
+          "role": "OC Head",
+          "image": "./all-images/oc.jpg",
+          "cardClass": "lead-card"
+        },
+      {
+        "name": "Mariam Mahmoud",
         "role": "PR Head",
         "image": "./all-images/pr.jpg",
         "cardClass": "lead-card"
-      }
+      },
+      {
+          "name": "Name Here",
+          "role": "HR Vice",
+          "image": "./all-images/hr.jpg",
+          "cardClass": "member-card"
+        },
+        {
+            "name": "Name Here",
+            "role": "OC Vice",
+            "image": "./all-images/oc.jpg",
+            "cardClass": "member-card"
+          },
+        {
+          "name": "Name Here",
+          "role": "PR Vice",
+          "image": "./all-images/pr.jpg",
+          "cardClass": "member-card"
+        }
     ]
   },
   {
@@ -44,7 +68,13 @@
         "role": "Marketing Head",
         "image": "./all-images/marketing.jpg",
         "cardClass": "lead-card"
-      }
+      },
+      {
+          "name": "Name Here",
+          "role": "Marketing Vice",
+          "image": "./all-images/marketing.jpg",
+          "cardClass": "member-card"
+        }
     ]
   },
   {
@@ -52,34 +82,40 @@
     "title": "Software Team",
     "members": [
       {
-        "name": "Name Here",
+        "name": "Anthony Gaius",
         "role": "Software Head",
-        "image": "./all-images/laptop.jpg",
+        "image": "./all-images/board/anthony.jpg",
         "cardClass": "lead-card"
       },
       {
-        "name": "Name Here",
-        "role": "Frontend Lead",
-        "image": "./all-images/web.jpg",
-        "cardClass": ""
+          "name": "Name Here",
+          "role": "Software Vice",
+          "image": "./all-images/web.jpg",
+          "cardClass": "lead-card"
+        },
+      {
+        "name": "Mazen Magdy",
+        "role": "Frontend Sub-head",
+        "image": "./all-images/board/mazen.png",
+        "cardClass": "member-card"
       },
       {
-        "name": "Name Here",
-        "role": "Backend Lead",
-        "image": "./all-images/web.jpg",
-        "cardClass": ""
+        "name": "Mostafa Ahmed",
+        "role": "Backend Sub-head",
+        "image": "./all-images/board/mostafa.jpg",
+        "cardClass": "member-card"
       },
       {
-        "name": "Name Here",
-        "role": "UI/UX Lead",
+        "name": "Mahmoud Mohamed",
+        "role": "UI/UX Sub-head",
         "image": "./all-images/web.jpg",
-        "cardClass": ""
+        "cardClass": "member-card"
       },
       {
-        "name": "Name Here",
-        "role": "Application Lead",
+        "name": "Karen Medhat",
+        "role": "Application Sub-head",
         "image": "./all-images/web.jpg",
-        "cardClass": ""
+        "cardClass": "member-card"
       }
     ]
   },
@@ -94,16 +130,16 @@
         "cardClass": "lead-card"
       },
       {
-        "name": "Name Here",
-        "role": "Electrical Lead",
+        "name": "Arwa Hassan",
+        "role": "Electrical Vice Head",
         "image": "./all-images/default.png",
-        "cardClass": ""
+        "cardClass": "member-card"
       },
       {
-        "name": "Name Here",
-        "role": "Mechanical Lead",
+        "name": "Diaa Hassan",
+        "role": "Mechanical Vice Head",
         "image": "./all-images/default.png",
-        "cardClass": ""
+        "cardClass": "member-card"
       }
     ]
   }

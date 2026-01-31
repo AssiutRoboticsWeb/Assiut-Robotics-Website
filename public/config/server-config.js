@@ -8,176 +8,108 @@
     // Configuration data
     const configs = {
         development: {
-            // ===== MAIN SERVER ENDPOINTS =====
-            baseUrl: "http://localhost:3000",
-
-            // ===== MEMBERS API =====
-            members: {
-                base: "http://localhost:3000/members",
-                login: "http://localhost:3000/members/login",
-                register: "http://localhost:3000/members/register",
-                verify: "http://localhost:3000/members/verify",
-                getAllMembers: "http://localhost:3000/members/getAllMembers",
-                getMembersByCommittee: "http://localhost:3000/members/get",
-                changeProfileImage: "http://localhost:3000/members/changeProfileImage",
-                submitTask: "http://localhost:3000/members/submitTask",
-                submitMemberTask: "http://localhost:3000/members/submitMemberTask",
-                confirm: "http://localhost:3000/members/confirm",
-                changeHead: "http://localhost:3000/members/changeHead",
-                changeVice: "http://localhost:3000/members/changeVice",
-                addTask: "http://localhost:3000/members",
-                editTask: "http://localhost:3000/members",
-                deleteTask: "http://localhost:3000/members",
-                rateTask: "http://localhost:3000/members/members",
-                updateTasksEvaluation: "http://localhost:3000/members/update-tasks-evaluation",
-                sendFeedBackEmail: "http://localhost:3000/members/sendFeedBackEmail",
-                rateMember: "http://localhost:3000/members/rate"
-            },
-
-            // ===== TRACKS API =====
-            tracks: {
-                base: "http://localhost:3001/tracks",
-                getAllTracks: "http://localhost:3001/tracks",
-                getCourses: "http://localhost:3001/tracks",
-                submissions: "http://localhost:3001/submissions"
-            },
-
-            // ===== COMPONENTS API =====
-            components: {
-                base: "http://localhost:3001/components",
-                getComponents: "http://localhost:3001/components/getComponents",
-                add: "http://localhost:3001/components/add",
-                update: "http://localhost:3001/components/update",
-                deleteOne: "http://localhost:3001/components/deleteOne",
-                deleteAll: "http://localhost:3001/components/deleteAll",
-                requestToBorrow: "http://localhost:3001/components/requestToBorrow",
-                getRequestedComponent: "http://localhost:3001/components/getRequestedComponent",
-                acceptRequestToBorrow: "http://localhost:3001/components/acceptRequestToBorrow",
-                rejectRequestToBorrow: "http://localhost:3001/components/rejectRequestToBorrow",
-                getBorrowedComponent: "http://localhost:3001/components/getBorrowedComponent",
-                return: "http://localhost:3001/components/return"
-            },
-
-            // ===== ELECTRICAL API =====
-            electrical: {
-                base: "http://localhost:3002/api",
-                data: "http://localhost:3002/api/data",
-                getAllTracks: "http://localhost:3002/api/electric/getAllTracks"
-            },
-
-            // ===== GUEST & VISITOR API =====
-            guest: {
-                base: "http://localhost:3000/guests"
-            },
-
-            visitor: {
-                base: "http://localhost:3000/visits"
-            },
-
-            // ===== MEETING API =====
-            meeting: {
-                base: "http://localhost:3000/meeting",
-                book: "http://localhost:3000/meeting"
-            },
-
-            // ===== LAB DATES API =====
-            lapDates: {
-                base: "http://localhost:3000/lapDates"
-            },
-
-            // ===== LEGACY API =====
-            legacy: {
-                base: "http://localhost:3003",
-                getAllMembers: "http://localhost:3003/members/getAllMembers",
-                rate: "http://localhost:3003/members/rate"
-            }
+            apiBase: "http://localhost:3000",
+            tracksBase: "http://localhost:3001",
+            electricalBase: "http://localhost:3002",
+            legacyBase: "http://localhost:3003"
         },
-
         production: {
-            // ===== MAIN SERVER ENDPOINTS =====
-            baseUrl: "https://assiut-robotics-zeta.vercel.app",
-
-            // ===== MEMBERS API =====
-            members: {
-                base: "https://assiut-robotics-zeta.vercel.app/members",
-                login: "https://assiut-robotics-zeta.vercel.app/members/login",
-                register: "https://assiut-robotics-server.vercel.app/members/register",
-                verify: "https://assiut-robotics-zeta.vercel.app/members/verify",
-                getAllMembers: "https://assiut-robotics-zeta.vercel.app/members/getAllMembers",
-                getMembersByCommittee: "https://assiut-robotics-zeta.vercel.app/members/get",
-                changeProfileImage: "https://assiut-robotics-zeta.vercel.app/members/changeProfileImage",
-                submitTask: "https://assiut-robotics-zeta.vercel.app/members/submitTask",
-                submitMemberTask: "https://assiut-robotics-zeta.vercel.app/members/submitMemberTask",
-                confirm: "https://assiut-robotics-zeta.vercel.app/members/confirm",
-                changeHead: "https://assiut-robotics-zeta.vercel.app/members/changeHead",
-                changeVice: "https://assiut-robotics-server.vercel.app/members/changeVice",
-                addTask: "https://assiut-robotics-zeta.vercel.app/members",
-                editTask: "https://assiut-robotics-zeta.vercel.app/members",
-                deleteTask: "https://assiut-robotics-zeta.vercel.app/members",
-                rateTask: "https://assiut-robotics-zeta.vercel.app/members/members",
-                updateTasksEvaluation: "https://assiut-robotics-zeta.vercel.app/members/update-tasks-evaluation",
-                sendFeedBackEmail: "https://assiut-robotics-zeta.vercel.app/members/sendFeedBackEmail",
-                rateMember: "https://assiut-robotics-zeta.vercel.app/members/rate"
-            },
-
-            // ===== TRACKS API =====
-            tracks: {
-                base: "https://assiut-robotics-server.vercel.app/tracks",
-                getAllTracks: "https://assiut-robotics-server.vercel.app/tracks",
-                getCourses: "https://assiut-robotics-server.vercel.app/tracks",
-                submissions: "https://assiut-robotics-server.vercel.app/submissions"
-            },
-
-            // ===== COMPONENTS API =====
-            components: {
-                base: "https://assiut-robotics-server.vercel.app/components",
-                getComponents: "https://assiut-robotics-server.vercel.app/components/getComponents",
-                add: "https://assiut-robotics-server.vercel.app/components/add",
-                update: "https://assiut-robotics-server.vercel.app/components/update",
-                deleteOne: "https://assiut-robotics-server.vercel.app/components/deleteOne",
-                deleteAll: "https://assiut-robotics-server.vercel.app/components/deleteAll",
-                requestToBorrow: "https://assiut-robotics-server.vercel.app/components/requestToBorrow",
-                getRequestedComponent: "https://assiut-robotics-server.vercel.app/components/getRequestedComponent",
-                acceptRequestToBorrow: "https://assiut-robotics-server.vercel.app/components/acceptRequestToBorrow",
-                rejectRequestToBorrow: "https://assiut-robotics-server.vercel.app/components/rejectRequestToBorrow",
-                getBorrowedComponent: "https://assiut-robotics-server.vercel.app/components/getBorrowedComponent",
-                return: "https://assiut-robotics-zeta.vercel.app/components/return"
-            },
-
-            // ===== ELECTRICAL API =====
-            electrical: {
-                base: "https://tempbackendelectrical-production.up.railway.app/api",
-                data: "https://tempbackendelectrical-production.up.railway.app/api/data",
-                getAllTracks: "https://tempbackendelectrical-production.up.railway.app/api/electric/getAllTracks"
-            },
-
-            // ===== GUEST & VISITOR API =====
-            guest: {
-                base: "https://assiut-robotics-zeta.vercel.app/guests"
-            },
-            visitor: {
-                base: "https://assiut-robotics-zeta.vercel.app/visits"
-            },
-
-            // ===== MEETING API =====
-            meeting: {
-                base: "https://assiut-robotics-zeta.vercel.app/meeting",
-                book: "https://assiut-robotics-zeta.vercel.app/meeting"
-            },
-
-            // ===== LAB DATES API =====
-            lapDates: {
-                base: "https://assiut-robotics-zeta.vercel.app/lapDates"
-            },
-
-            // ===== LEGACY API =====
-            legacy: {
-                base: "https://assiutrobotics-production.up.railway.app",
-                getAllMembers: "https://assiutrobotics-production.up.railway.app/members/getAllMembers",
-                rate: "https://assiutrobotics-production.up.railway.app/members/rate"
-            }
+            apiBase: "https://assiut-robotics-server.vercel.app", // Main centralized server
+            tracksBase: "https://assiut-robotics-server.vercel.app",
+            electricalBase: "https://tempbackendelectrical-production.up.railway.app",
+            legacyBase: "https://assiutrobotics-production.up.railway.app"
         }
     };
+
+    // Helper to build config object dynamically
+    function buildConfig(envConfig) {
+        const { apiBase, tracksBase, electricalBase, legacyBase } = envConfig;
+
+        return {
+            baseUrl: apiBase,
+
+            // ===== MEMBERS API =====
+            members: {
+                base: `${apiBase}/members`,
+                login: `${apiBase}/members/login`,
+                register: `${apiBase}/members/register`,
+                verify: `${apiBase}/members/verify`,
+                getAllMembers: `${apiBase}/members/getAllMembers`,
+                getMembersByCommittee: `${apiBase}/members/get`,
+                changeProfileImage: `${apiBase}/members/changeProfileImage`,
+                submitTask: `${apiBase}/members/submitTask`,
+                submitMemberTask: `${apiBase}/members/submitMemberTask`,
+                confirm: `${apiBase}/members/confirm`,
+                changeHead: `${apiBase}/members/changeHead`,
+                changeVice: `${apiBase}/members/changeVice`,
+                addTask: `${apiBase}/members`,
+                editTask: `${apiBase}/members`,
+                deleteTask: `${apiBase}/members`,
+                rateTask: `${apiBase}/members/members`,
+                updateTasksEvaluation: `${apiBase}/members/update-tasks-evaluation`,
+                sendFeedBackEmail: `${apiBase}/members/sendFeedBackEmail`,
+                rateMember: `${apiBase}/members/rate`
+            },
+
+            // ===== TRACKS API =====
+            tracks: {
+                base: `${tracksBase}/tracks`,
+                getAllTracks: `${tracksBase}/tracks`,
+                getCourses: `${tracksBase}/tracks`,
+                submissions: `${tracksBase}/submissions`
+            },
+
+            // ===== COMPONENTS API =====
+            components: {
+                base: `${tracksBase}/components`, // Assuming components moved to main server or stay with tracks
+                getComponents: `${tracksBase}/components/getComponents`,
+                add: `${tracksBase}/components/add`,
+                update: `${tracksBase}/components/update`,
+                deleteOne: `${tracksBase}/components/deleteOne`,
+                deleteAll: `${tracksBase}/components/deleteAll`,
+                requestToBorrow: `${tracksBase}/components/requestToBorrow`,
+                getRequestedComponent: `${tracksBase}/components/getRequestedComponent`,
+                acceptRequestToBorrow: `${tracksBase}/components/acceptRequestToBorrow`,
+                rejectRequestToBorrow: `${tracksBase}/components/rejectRequestToBorrow`,
+                getBorrowedComponent: `${tracksBase}/components/getBorrowedComponent`,
+                return: `${tracksBase}/components/return`
+            },
+
+            // ===== ELECTRICAL API =====
+            electrical: {
+                base: `${electricalBase}/api`,
+                data: `${electricalBase}/api/data`,
+                getAllTracks: `${electricalBase}/api/electric/getAllTracks`
+            },
+
+            // ===== GUEST & VISITOR API =====
+            guest: {
+                base: `${apiBase}/guests`
+            },
+
+            visitor: {
+                base: `${apiBase}/visits`
+            },
+
+            // ===== MEETING API =====
+            meeting: {
+                base: `${apiBase}/meeting`,
+                book: `${apiBase}/meeting`
+            },
+
+            // ===== LAB DATES API =====
+            lapDates: {
+                base: `${apiBase}/lapDates`
+            },
+
+            // ===== LEGACY API =====
+            legacy: {
+                base: legacyBase,
+                getAllMembers: `${legacyBase}/members/getAllMembers`,
+                rate: `${legacyBase}/members/rate`
+            }
+        };
+    }
 
     // Environment detection
     function detectEnvironment() {
@@ -191,7 +123,7 @@
 
     // Get current config
     function getCurrentConfig() {
-        return configs[detectEnvironment()];
+        return buildConfig(configs[detectEnvironment()]);
     }
 
     // Create ServerConfig object
