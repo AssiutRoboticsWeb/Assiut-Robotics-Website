@@ -72,19 +72,19 @@
             <div class="task-form">
                 <h2>Create New Task</h2>
                 <form id="taskForm">
-                    <input type="text" id="taskTitle" placeholder="Task Title" >
-                    <textarea id="taskDescription" placeholder="Task Description" ></textarea>
-                    <input type="text" id="taskUrl" placeholder="Task URL" >
-                    <input type="number" id="points" placeholder="Points" min="1" >
+                    <input type="text" id="taskTitle" placeholder="Task Title">
+                    <textarea id="taskDescription" placeholder="Task Description"></textarea>
+                    <input type="text" id="taskUrl" placeholder="Task URL">
+                    <input type="number" id="points" placeholder="Points" min="1">
                     <!-- <input type="number" id="headPercent" placeholder="Head Percent (50-100)" min="50" max="100" required> -->
                     <div class="date-inputs">
                         <div class="date-field">
                             <label for="startDate">Start Date:</label>
-                            <input type="datetime-local" id="taskStartDate" >
+                            <input type="datetime-local" id="taskStartDate">
                         </div>
                         <div class="date-field">
                             <label for="endDate">End Date:</label>
-                            <input type="datetime-local" id="taskEndDate" >
+                            <input type="datetime-local" id="taskEndDate">
                         </div>
                     </div>
                     <div class="member-checkbox">
@@ -186,7 +186,9 @@
         <!-- <span class="light-icon">🌞</span> -->
         <!-- <span class="dark-icon" style="display: none;">🌜</span> -->
     </button>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Server Configuration -->
     <script src="../config/server-config.js"></script>
     <script type="module" src="main.js"></script>
 </body>

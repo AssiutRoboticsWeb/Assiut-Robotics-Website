@@ -1,0 +1,110 @@
+[
+  {
+    "id": "high-board",
+    "title": "High Board",
+    "members": [
+      {
+        "name": "Name Here",
+        "role": "President",
+        "image": "./all-images/default.png",
+        "cardClass": "high-board-card"
+      },
+      {
+        "name": "Name Here",
+        "role": "Vice President",
+        "image": "./all-images/default.png",
+        "cardClass": "high-board-card"
+      }
+    ]
+  },
+  {
+    "id": "hr-pr",
+    "title": "HR & PR",
+    "members": [
+      {
+        "name": "Name Here",
+        "role": "HR Head",
+        "image": "./all-images/hr.jpg",
+        "cardClass": "lead-card"
+      },
+      {
+        "name": "Name Here",
+        "role": "PR Head",
+        "image": "./all-images/pr.jpg",
+        "cardClass": "lead-card"
+      }
+    ]
+  },
+  {
+    "id": "marketing",
+    "title": "Digital Marketing",
+    "members": [
+      {
+        "name": "Name Here",
+        "role": "Marketing Head",
+        "image": "./all-images/marketing.jpg",
+        "cardClass": "lead-card"
+      }
+    ]
+  },
+  {
+    "id": "software",
+    "title": "Software Team",
+    "members": [
+      {
+        "name": "Name Here",
+        "role": "Software Head",
+        "image": "./all-images/laptop.jpg",
+        "cardClass": "lead-card"
+      },
+      {
+        "name": "Name Here",
+        "role": "Frontend Lead",
+        "image": "./all-images/web.jpg",
+        "cardClass": ""
+      },
+      {
+        "name": "Name Here",
+        "role": "Backend Lead",
+        "image": "./all-images/web.jpg",
+        "cardClass": ""
+      },
+      {
+        "name": "Name Here",
+        "role": "UI/UX Lead",
+        "image": "./all-images/web.jpg",
+        "cardClass": ""
+      },
+      {
+        "name": "Name Here",
+        "role": "Application Lead",
+        "image": "./all-images/web.jpg",
+        "cardClass": ""
+      }
+    ]
+  },
+  {
+    "id": "ac",
+    "title": "AC Team",
+    "members": [
+      {
+        "name": "Name Here",
+        "role": "AC Head",
+        "image": "./all-images/default.png",
+        "cardClass": "lead-card"
+      },
+      {
+        "name": "Name Here",
+        "role": "Electrical Lead",
+        "image": "./all-images/default.png",
+        "cardClass": ""
+      },
+      {
+        "name": "Name Here",
+        "role": "Mechanical Lead",
+        "image": "./all-images/default.png",
+        "cardClass": ""
+      }
+    ]
+  }
+]
