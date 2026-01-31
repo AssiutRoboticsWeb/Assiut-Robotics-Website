@@ -43,13 +43,13 @@ function renderTeamBoard(departments, container) {
                const role = member.role || "";
 
                // Special case: High Board (Team Leader & Vice) stays in one row
-               if (dept.id === 'high-board' || dept.id === 'ac') {
+               if (dept.id === 'high-board' || dept.id === 'hr' || dept.id === 'oc' || dept.id === 'pr') {
                     heads.push(member);
                     return;
                }
 
                // Special case: Software Team (Head & Vice in one row, Sub-heads in another)
-               if (dept.id === 'software') {
+               if (dept.id === 'software' || dept.id === 'ac-electrical' || dept.id === 'ac-mechanical' || dept.id === 'digital-marketing') {
                     if (/Head|Leader|Vice/i.test(role) && !/Sub-head/i.test(role)) {
                          heads.push(member);
                     } else {

@@ -32,6 +32,7 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
+
     #text1,
     #text2 {
         font-size: 55pt;
@@ -202,6 +203,7 @@ h1 {
         max-width: 33.33%;
         padding: 0 1em;
     }
+
     .above-container {
         position: relative;
         width: 100%;
@@ -253,6 +255,7 @@ h1 {
 
 .slider-control--button:where(:hover) {
     background-image: linear-gradient(to var(--position), #0000 0%, #0002, 80%, #0006 100%);
+
     .icon {
         fill: var(--icon-accent);
         background: #0001;
@@ -267,6 +270,7 @@ h1 {
 .prev-button {
     --position: left;
 }
+
 .next-button {
     --position: right;
 }
@@ -276,6 +280,7 @@ h1 {
 
     inset: 0;
 }
+
 .image-slider img {
     /* position: fixed; */
     animation: anim 1s forwards;
@@ -287,6 +292,7 @@ h1 {
         transform: translateY(-90%);
         opacity: 0.1;
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -370,7 +376,7 @@ h1 {
         border-radius: 50%;
     }
 
-    .nav-button > .thumbnail {
+    .nav-button>.thumbnail {
         display: none;
     }
 
@@ -382,7 +388,7 @@ h1 {
 
 /* ************************ Achievements **************************** */
 
-#Ach_cards{
+#Ach_cards {
     width: 100%;
     padding: 2rem 1rem;
     display: flex;
@@ -392,29 +398,33 @@ h1 {
     justify-content: center;
 
 }
-#Ach_cards div:hover{
-    background : #a9d2fc;
+
+#Ach_cards div:hover {
+    background: #a9d2fc;
     color: white;
 }
+
 .learnMore {
     text-decoration: none !important;
     border: 0;
     background-color: #eef0e5;
     padding: 1rem;
-    border-radius: 2rem ;
+    border-radius: 2rem;
     cursor: pointer;
     transition: all 0.2s ease-out;
 }
-.learnMore:hover{
+
+.learnMore:hover {
     scale: 1.1;
 }
-#Ach_cards div{
+
+#Ach_cards div {
     min-width: 40rem;
     min-height: 30rem;
-    color: black ;
+    color: black;
     background-color: white;
     padding: 1rem;
-    border-radius: 2rem ;
+    border-radius: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -423,25 +433,31 @@ h1 {
     text-align: center;
     transition: all 0.2s ease-out;
 }
-#Ach_cards div:hover{
+
+#Ach_cards div:hover {
     transition: all 0.2s ease-out;
     scale: 1.02;
 }
-#Ach_cards div img{
+
+#Ach_cards div img {
     width: 20rem;
 }
-#Ach_cards div p{
-    width: 30rem ;
-    white-space: pre-line;        
+
+#Ach_cards div p {
+    width: 30rem;
+    white-space: pre-line;
 }
+
 @media (max-width : 768px) {
-    #Ach_cards div{
+    #Ach_cards div {
         min-width: 10px;
     }
-    #Ach_cards div p{
+
+    #Ach_cards div p {
         width: auto;
     }
-    #Ach_cards div img{
+
+    #Ach_cards div img {
         width: 15rem;
     }
 }
@@ -469,14 +485,14 @@ h1 {
     pointer-events: none;
 }
 
-#pioneers .card-slider-wrapper { 
+#pioneers .card-slider-wrapper {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     align-items: center;
     position: relative;
     z-index: 1;
- }
+}
 
 #pioneers .card-slider {
     display: flex;
@@ -484,37 +500,44 @@ h1 {
     gap: 1.5rem;
     justify-content: center;
     width: 100%;
-    max-width: 1400px; /* Wider layout */
+    max-width: 1400px;
+    /* Wider layout */
 }
 
 #pioneers .slider-viewport {
-     overflow: hidden; 
-     width: 100%;
-     padding: 2rem 1rem; /* Space for shadows */
-     mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); /* Fade edges */
-     -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    overflow: hidden;
+    width: 100%;
+    padding: 2rem 1rem;
+    /* Space for shadows */
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    /* Fade edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
-#pioneers .slider-track { 
+#pioneers .slider-track {
     display: flex;
-     gap: 2rem; 
-     padding-inline-start: 4rem; /* Safe margin from the fade mask */
-     transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); /* Smoother bezier */
-     will-change: transform; 
+    gap: 2rem;
+    padding-inline-start: 4rem;
+    /* Safe margin from the fade mask */
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    /* Smoother bezier */
+    will-change: transform;
 }
 
 /* Creative Card Style */
 #pioneers .slider-card {
-    flex: 0 0 85%; /* Mobile width */
+    flex: 0 0 85%;
+    /* Mobile width */
     max-width: 500px;
     box-sizing: border-box;
     padding: 2.5rem;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 24px;
-    box-shadow: 
+    box-shadow:
         0 10px 30px -5px rgba(0, 0, 0, 0.05),
         0 20px 60px -10px rgba(50, 50, 93, 0.1),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.5); /* Inner light border */
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    /* Inner light border */
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -528,7 +551,7 @@ h1 {
 /* Hover Lift Effect */
 #pioneers .slider-card:hover {
     transform: translateY(-8px);
-    box-shadow: 
+    box-shadow:
         0 20px 40px -5px rgba(0, 0, 0, 0.1),
         0 30px 70px -10px rgba(50, 50, 93, 0.15);
 }
@@ -541,7 +564,8 @@ h1 {
     right: 20px;
     font-family: serif;
     font-size: 10rem;
-    color: rgba(57, 167, 255, 0.08); /* Brand color transparent */
+    color: rgba(57, 167, 255, 0.08);
+    /* Brand color transparent */
     line-height: 1;
     pointer-events: none;
     z-index: 0;
@@ -550,7 +574,8 @@ h1 {
 #pioneers .quote-wrapper {
     max-height: 8.5rem;
     overflow: hidden;
-    transition: max-height 0.5s ease-out; /* Smooth transition */
+    transition: max-height 0.5s ease-out;
+    /* Smooth transition */
     position: relative;
     z-index: 1;
     margin-bottom: 1.5rem;
@@ -565,21 +590,25 @@ h1 {
     */
 }
 
-#pioneers .quote { 
-    font-size: 1.1rem; 
+#pioneers .quote {
+    font-size: 1.1rem;
     line-height: 1.6;
     margin: 0;
-    color: #39a7ff; /* Accent color for ellipsis */
+    color: #39a7ff;
+    /* Accent color for ellipsis */
     font-style: italic;
-    font-family: "Georgia", serif; /* Elegant serif for quotes */
-    border-right: 3px solid #39a7ff; /* Accent line */
+    font-family: "Georgia", serif;
+    /* Elegant serif for quotes */
+    border-right: 3px solid #39a7ff;
+    /* Accent line */
     padding-right: 1rem;
     text-align: right;
     direction: rtl;
-    
+
     /* Ellipsis Logic */
     display: -webkit-box;
-    -webkit-line-clamp: 4; /* Show 4 lines */
+    -webkit-line-clamp: 4;
+    /* Show 4 lines */
     line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -587,7 +616,8 @@ h1 {
 }
 
 #pioneers .quote span {
-    color: #4a5568; /* Original text color */
+    color: #4a5568;
+    /* Original text color */
 }
 
 #pioneers .quote-wrapper.expanded .quote {
@@ -620,7 +650,7 @@ h1 {
 /* Author Info */
 #pioneers .author-info {
     margin-top: 2rem;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     padding-top: 1.5rem;
     text-align: right;
     z-index: 1;
@@ -658,7 +688,7 @@ h1 {
     justify-content: center;
     cursor: pointer;
     font-size: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 10;
 }
@@ -683,13 +713,23 @@ h1 {
 
 /* Responsive */
 @media (min-width: 768px) {
-    #pioneers .slider-card { flex: 0 0 55%; }
-    #pioneers .slider-viewport { width: 90%; }
+    #pioneers .slider-card {
+        flex: 0 0 55%;
+    }
+
+    #pioneers .slider-viewport {
+        width: 90%;
+    }
 }
 
 @media (min-width: 1200px) {
-    #pioneers .slider-card { flex: 0 0 40%; }
-    #pioneers .slider-viewport { width: 85%; }
+    #pioneers .slider-card {
+        flex: 0 0 40%;
+    }
+
+    #pioneers .slider-viewport {
+        width: 85%;
+    }
 }
 
 /* -------------------- Team Board Section -------------------- */
@@ -745,8 +785,8 @@ h1 {
 .team-member-card {
     background: white;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    width: 280px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    width: 350px;
     overflow: hidden;
     transition: all 0.3s ease;
     position: relative;
@@ -758,12 +798,12 @@ h1 {
 
 .team-member-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(57,167,255,0.2);
+    box-shadow: 0 15px 40px rgba(57, 167, 255, 0.2);
 }
 
 .team-member-img-wrapper {
     width: 100%;
-    height: 250px;
+    height: 325px;
     overflow: hidden;
     position: relative;
     background-color: #f0f0f0;
@@ -819,25 +859,86 @@ h1 {
 }
 
 .team-member-card.lead-card {
-    border-bottom: 4px solid #39a7ff;
+    border-bottom: 4px solid #2e88d1;
+}
+
+.team-member-card.lead-card .team-member-info .member-role {
+    color: #2e88d1;
+}
+
+.team-member-card.vice-card {
+    border-bottom: 4px solid #2ed22a;
+}
+
+.team-member-card.vice-card .team-member-info .member-role {
+    color: #2ed22a;
 }
 
 .team-member-card.member-card {
-    border-bottom: 4px solid #ff3939;
+    border-bottom: 4px solid #d63232;
+}
+
+.team-member-card.member-card .team-member-info .member-role {
+    color: #d63232;
 }
 
 .team-member-card.high-board-card {
-    border-bottom: 4px solid #1f003b;
-    width: 300px;
+    border-bottom: 4px solid #6815b2;
+}
+
+.team-member-card.high-board-card .team-member-info .member-role {
+    color: #6815b2;
+}
+
+.team-member-card.high-board-card-vice {
+    border-bottom: 4px solid #b1278c;
+}
+
+.team-member-card.high-board-card-vice .team-member-info .member-role {
+    color: #b1278c;
+}
+
+@media (max-width: 1200px) {
+    #team-board h1 {
+        font-size: 2.2rem;
+    }
+
+    .team-member-card {
+        width: 100%;
+        max-width: 270px;
+    }
+
+    .team-member-img-wrapper {
+        height: 250px;
+    }
+}
+
+@media (max-width: 1200px) {
+    #team-board h1 {
+        font-size: 2.2rem;
+    }
+
+    .team-member-card {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .team-member-img-wrapper {
+        height: 200px;
+    }
 }
 
 @media (max-width: 768px) {
     #team-board h1 {
         font-size: 2.2rem;
     }
+
     .team-member-card {
         width: 100%;
-        max-width: 320px;
+        max-width: 350px;
+    }
+
+    .team-member-img-wrapper {
+        height: 300px;
     }
 }
-
