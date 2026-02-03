@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- header 
-
-
-
-
-Main Page
-
-
-
-
--->
-
-
 <head>
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0" />
@@ -40,6 +27,9 @@ Main Page
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&amp;subset=latin-ext"
         rel="stylesheet" />
     <link rel="shortcut icon" href="all-images/logo.ico" />
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include Server Configuration -->
@@ -50,86 +40,141 @@ Main Page
     <!-- header -->
     <div id="myUniqueHeaderID"></div>
 
-    <div class="above-container">
-        <div id="container">
-            <span id="text1"></span>
-            <span id="text2"></span>
+    <!-- Hero Section -->
+    <section class="hero-section" aria-label="Hero Slider">
+        <!-- Animated Text Overlay -->
+        <div class="above-container" role="presentation">
+            <div id="container">
+                <span id="text1" aria-hidden="true"></span>
+                <span id="text2" aria-hidden="true"></span>
+            </div>
         </div>
 
-    </div>
-    <div class="row mb-2">
-        <h1>Our Team</h1>
-    </div>
+        <!-- Image Slider -->
+        <div class="image-slider" role="region" aria-label="Team Gallery">
+            <section class="slider__content">
+                <button type="button" class="slider-control--button prev-button" aria-label="Previous image">
+                    <svg width="16" height="16" fill="currentColor" class="icon arrow-left-circle" viewBox="0 0 16 16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+                    </svg>
+                </button>
+                <main class="image-display" role="img" aria-live="polite"></main>
+                <button type="button" class="slider-control--button next-button" aria-label="Next image">
+                    <svg width="16" height="16" fill="currentColor" class="icon arrow-right-circle" viewBox="0 0 16 16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+                    </svg>
+                </button>
+            </section>
 
-    <div class="image-slider">
-        <section class="slider__content">
-            <button type="button" class="slider-control--button prev-button">
-                <svg width="16" height="16" fill="currentColor" class="icon arrow-left-circle" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
-                </svg>
-            </button>
-            <main class="image-display"></main>
-            <button type="button" class="slider-control--button next-button">
-                <svg width="16" height="16" fill="currentColor" class="icon arrow-right-circle" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
-                </svg>
-            </button>
-        </section>
-        <nav class="slider-navigation">
-            <button class="nav-button" aria-selected="true">
-                <img class="thumbnail" src="all-images/RoboticsLap.jpg" alt="Thumbnail 1" />
-            </button>
-            <button class="nav-button" aria-selected="false">
-                <img class="thumbnail" src="all-images/rov111111111.jpg" alt="Thumbnail 2" />
-            </button>
-            <button class="nav-button" aria-selected="false">
-                <img class="thumbnail" src="all-images/mine.jpg" alt="Thumbnail 3" />
-            </button>
-            <button class="nav-button" aria-selected="false">
-                <img class="thumbnail" src="all-images/2.jpeg" alt="Thumbnail 4" />
-            </button>
-            <button class="nav-button" aria-selected="false">
-                <img class="thumbnail" src="all-images/Rov1.jpg" alt="Thumbnail 5" />
-            </button>
-            <button class="nav-button" aria-selected="false">
-                <img class="thumbnail" src="all-images/mine2.jpg" alt="Thumbnail 6" />
-            </button>
-            <button class="nav-button" aria-selected="false">
-                <img class="thumbnail" src="all-images/ourteam.jpg" alt="Thumbnail 6" />
-            </button>
-        </nav>
-        <!-- <script src="inex.js"></script> -->
-    </div>
+            <!-- Thumbnail Navigation -->
+            <nav class="slider-navigation" aria-label="Image thumbnails">
+                <button class="nav-button" aria-selected="true" aria-label="View robotics lab image">
+                    <img class="thumbnail" src="all-images/RoboticsLap.jpg" alt="Robotics Lab" loading="lazy" />
+                </button>
+                <button class="nav-button" aria-selected="false" aria-label="View ROV project image">
+                    <img class="thumbnail" src="all-images/rov111111111.jpg" alt="ROV Project" loading="lazy" />
+                </button>
+                <button class="nav-button" aria-selected="false" aria-label="View minesweeper robot image">
+                    <img class="thumbnail" src="all-images/mine.jpg" alt="Minesweeper Robot" loading="lazy" />
+                </button>
+                <button class="nav-button" aria-selected="false" aria-label="View team workshop image">
+                    <img class="thumbnail" src="all-images/2.jpeg" alt="Team Workshop" loading="lazy" />
+                </button>
+                <button class="nav-button" aria-selected="false" aria-label="View ROV competition image">
+                    <img class="thumbnail" src="all-images/Rov1.jpg" alt="ROV Competition" loading="lazy" />
+                </button>
+                <button class="nav-button" aria-selected="false" aria-label="View minesweeper competition image">
+                    <img class="thumbnail" src="all-images/mine2.jpg" alt="Minesweeper Competition" loading="lazy" />
+                </button>
+                <button class="nav-button" aria-selected="false" aria-label="View team photo">
+                    <img class="thumbnail" src="all-images/ourteam.jpg" alt="Our Team" loading="lazy" />
+                </button>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <!-- <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                <i class="fa fa-users"></i>
+                <span>100+</span>
+                <p>Members</p>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa fa-calendar"></i>
+                <span>15+</span>
+                <p>Years</p>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- What We Do Section -->
+    <section class="what-we-do">
+        <h2 data-aos="fade-up">What We Do</h2>
+        <div class="activities-grid">
+            <div class="activity-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="activity-icon">
+                    <i class="fa fa-cogs"></i>
+                </div>
+                <h3>Robotics Design</h3>
+                <p>Building advanced autonomous and ROV systems using cutting-edge technology</p>
+            </div>
+            <div class="activity-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="activity-icon">
+                    <i class="fa fa-flask"></i>
+                </div>
+                <h3>Research & Development</h3>
+                <p>Researching AI, control systems, and mechanical design to solve real-world problems</p>
+            </div>
+            <div class="activity-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="activity-icon">
+                    <i class="fa fa-graduation-cap"></i>
+                </div>
+                <h3>Training & Education</h3>
+                <p>Providing hands-on workshops in software, embedded systems, and mechanics</p>
+            </div>
+            <div class="activity-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="activity-icon">
+                    <i class="fa fa-trophy"></i>
+                </div>
+                <h3>Competitions</h3>
+                <p>Competing globally in ROV, Minesweepers, and AI challenges</p>
+            </div>
+        </div>
+    </section>
 
     <section id="committees">
-        <h1>Our Committees</h1>
-        <p class="subtitle">Discover the roles that drive our success.</p>
+        <h1 data-aos="fade-up">Our Committees</h1>
+        <p class="subtitle" data-aos="fade-up">Discover the roles that drive our success.</p>
 
-        <div id="committees-container"></div>
+        <div id="committees-container" data-aos="fade-up"></div>
     </section>
     <section>
-        <h1>Achievements</h1>
-        <p class="subtitle">we have achieved a perfect place in these competition</p>
-        <div id="Ach_cards">
+        <h1 data-aos="fade-up">Achievements</h1>
+        <p class="subtitle" data-aos="fade-up">we have achieved a perfect place in these competition</p>
+        <div id="Ach_cards" data-aos="fade-up">
             <!-- Content loaded via achievements-loader.js -->
         </div>
     </section>
 
     <!-- Team Board Section -->
     <section id="team-board">
-        <h1>Team Board</h1>
-        <p class="subtitle">Meet the dedicated individuals behind our success.</p>
-        <div id="team-board-container">
+        <h1 data-aos="fade-up">Team Board</h1>
+        <p class="subtitle" data-aos="fade-up">Meet the dedicated individuals behind our success.</p>
+        <div id="team-board-container" data-aos="fade-up">
             <!-- Content loaded via main/team-loader.js -->
         </div>
     </section>
 
     <section id="pioneers">
-        <h1>Pioneers</h1>
-        <p class="subtitle">Those who paved the way for our success.</p>
-        <div id="pioneers-container">
+        <h1 data-aos="fade-up">Pioneers</h1>
+        <p class="subtitle" data-aos="fade-up">Those who paved the way for our success.</p>
+        <div id="pioneers-container" data-aos="fade-up">
             <!-- Content loaded via main/pioneers-loader.js -->
         </div>
     </section>
@@ -149,6 +194,16 @@ Main Page
 
 
     <script src="./main/footerAndheader.js" defer></script>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
 
 </body>
 

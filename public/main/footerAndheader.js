@@ -1,6 +1,22 @@
 
 const token = window.localStorage.getItem("token") ? window.localStorage.getItem("token") : null;
 
+function setupToken() {
+    let token2 = window.localStorage.getItem("token");
+    if (token2 != undefined && token2 != null) {
+        console.log("profile");
+
+        document.getElementById("login").classList = "remove"
+        document.getElementById("profile").classList = ""
+    }
+    else {
+        console.log("login");
+
+        document.getElementById("login").classList = ""
+        document.getElementById("profile").classList = "remove"
+    }
+}
+
 function navButtonClick() {
     const topNav = document.getElementById("myTopnav");
 
@@ -93,6 +109,7 @@ function implement_views() {
             console.log("All HTML content loaded successfully. #Header");
             setupScrollNav();
             setupLogin();
+            setupToken();
         })
         .fail(function () {
             console.error("Error loading HTML content. #Header");
@@ -138,5 +155,7 @@ function setupLogin() {
     }
 }
 
-implement_views();
-setupColumns();
+window.onload = () => {
+    implement_views();
+    setupColumns();
+}

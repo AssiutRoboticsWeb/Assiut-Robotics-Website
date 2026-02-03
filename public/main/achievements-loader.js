@@ -20,6 +20,7 @@ async function loadAchievements() {
 function renderAchievements(data, container) {
      container.innerHTML = ''; // Clear hardcoded content
 
+     var i = 100;
      data.forEach(item => {
           const card = document.createElement('div');
           card.innerHTML = `
@@ -28,6 +29,9 @@ function renderAchievements(data, container) {
             <p>${item.description}</p>
             <a href="${item.link}"> <button class="learnMore">Learn more</button></a>
        `;
+          card.dataset.aos = "fade-up"; // Preparation for animation if used
+          card.dataset.aosDelay = i;
           container.appendChild(card);
+          i += 100;
      });
 }

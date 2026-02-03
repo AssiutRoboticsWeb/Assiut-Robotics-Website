@@ -20,20 +20,12 @@ async function loadCommittees() {
 function renderCommittees(data, container) {
      container.innerHTML = ''; // Clear container
 
-     let currentRow = null;
-
-     data.forEach((item, index) => {
-          // Create a new row every 3 items
-          if (index % 3 === 0) {
-               currentRow = document.createElement('div');
-               currentRow.className = 'row';
-               container.appendChild(currentRow);
-          }
-
+     var i = 100;
+     data.forEach((item) => {
           const col = document.createElement('div');
           col.className = 'column';
           col.innerHTML = `
-            <div class="card">
+            <div class="card" data-aos="fade-up" data-aos-delay="${i}">
                 <div class="img-container">
                     <img src="${item.image}" alt="${item.title}" loading="lazy" />
                 </div>
@@ -45,6 +37,7 @@ function renderCommittees(data, container) {
                 </div>
             </div>
         `;
-          currentRow.appendChild(col);
+          container.appendChild(col);
+          i += 100;
      });
 }

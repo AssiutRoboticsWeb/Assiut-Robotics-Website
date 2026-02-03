@@ -1,6 +1,7 @@
-// To use API_BASE_URL for API calls, example:
-// fetch(`${API_BASE_URL}/your-endpoint`)
+// ==================== Hero Text Animation ====================
+// API Base URL configuration
 const API_BASE_URL = window.API_BASE_URL;
+
 const elts = {
     text1: document.getElementById("text1"),
     text2: document.getElementById("text2"),
@@ -16,8 +17,11 @@ let time = new Date();
 let morph = 0;
 let cooldown = cooldownTime;
 
-elts.text1.textContent = texts[textIndex % texts.length];
-elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+// Initialize text content
+if (elts.text1 && elts.text2) {
+    elts.text1.textContent = texts[textIndex % texts.length];
+    elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+}
 
 function doMorph() {
     morph -= cooldown;
@@ -34,18 +38,28 @@ function doMorph() {
 }
 
 function setMorph(fraction) {
-    elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-    elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+    if (!elts.text1 || !elts.text2) return;
+
+    const blur = Math.min(8 / fraction - 8, 100);
+    const opacity = Math.pow(fraction, 0.4) * 100;
+
+    elts.text2.style.filter = `blur(${blur}px)`;
+    elts.text2.style.opacity = `${opacity}%`;
 
     fraction = 1 - fraction;
-    elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-    elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+    const blur1 = Math.min(8 / fraction - 8, 100);
+    const opacity1 = Math.pow(fraction, 0.4) * 100;
+
+    elts.text1.style.filter = `blur(${blur1}px)`;
+    elts.text1.style.opacity = `${opacity1}%`;
 
     elts.text1.textContent = texts[textIndex % texts.length];
     elts.text2.textContent = texts[(textIndex + 1) % texts.length];
 }
 
 function doCooldown() {
+    if (!elts.text1 || !elts.text2) return;
+
     morph = 0;
 
     elts.text2.style.filter = "";
@@ -58,9 +72,9 @@ function doCooldown() {
 function animate() {
     requestAnimationFrame(animate);
 
-    let newTime = new Date();
-    let shouldIncrementIndex = cooldown > 0;
-    let dt = (newTime - time) / 1000;
+    const newTime = new Date();
+    const shouldIncrementIndex = cooldown > 0;
+    const dt = (newTime - time) / 1000;
     time = newTime;
 
     cooldown -= dt;
@@ -75,14 +89,21 @@ function animate() {
     }
 }
 
-animate();
+// Start animation only if elements exist
+if (elts.text1 && elts.text2) {
+    animate();
+}
 
 
-//=============================slider image ===================================================
-
+// ==================== Image Slider Class ====================
 
 class Slider {
     constructor(slider) {
+        if (!slider) {
+            console.warn('Slider element not found');
+            return;
+        }
+
         this.slider = slider;
         this.display = slider.querySelector(".image-display");
         this.navButtons = Array.from(slider.querySelectorAll(".nav-button"));
@@ -91,6 +112,9 @@ class Slider {
         this.sliderNavigation = slider.querySelector(".slider-navigation");
         this.currentSlideIndex = 0;
         this.preloadedImages = {};
+        this.autoplayInterval = null;
+        this.autoplayDelay = 4000;
+        this.isUserInteracting = false;
 
         this.initialize();
     }
@@ -99,21 +123,31 @@ class Slider {
         this.setupSlider();
         this.preloadImages();
         this.eventListeners();
+        this.startAutoplay();
     }
 
     setupSlider() {
         this.showSlide(this.currentSlideIndex);
+
+        // Set grid columns dynamically
+        if (this.sliderNavigation && this.navButtons.length > 0) {
+            this.sliderNavigation.style.gridTemplateColumns =
+                `repeat(${this.navButtons.length}, 1fr)`;
+        }
     }
 
     showSlide(index) {
-        this.currentSlideIndex = index;
-        const navButtonImg = this.navButtons[
-            this.currentSlideIndex
-        ].querySelector("img");
-        if (navButtonImg) {
+        // Ensure index is within bounds
+        this.currentSlideIndex = ((index % this.navButtons.length) + this.navButtons.length) % this.navButtons.length;
+
+        const navButtonImg = this.navButtons[this.currentSlideIndex]?.querySelector("img");
+
+        if (navButtonImg && this.display) {
             const imgClone = navButtonImg.cloneNode();
+            imgClone.alt = navButtonImg.alt || "Slider image";
             this.display.replaceChildren(imgClone);
         }
+
         this.updateNavButtons();
     }
 
@@ -121,7 +155,7 @@ class Slider {
         this.navButtons.forEach((button, buttonIndex) => {
             const isSelected = buttonIndex === this.currentSlideIndex;
             button.setAttribute("aria-selected", isSelected);
-            // if (isSelected) button.focus();
+            button.setAttribute("tabindex", isSelected ? "0" : "-1");
         });
     }
 
@@ -139,71 +173,102 @@ class Slider {
     }
 
     eventListeners() {
+        // Keyboard navigation
         document.addEventListener("keydown", (event) => {
-            this.handleAction(event.key);
-        });
-
-        this.sliderNavigation.addEventListener("click", (event) => {
-            const targetButton = event.target.closest(".nav-button");
-            const index = targetButton
-                ? this.navButtons.indexOf(targetButton)
-                : -1;
-            if (index !== -1) {
-                this.showSlide(index);
+            if (event.target.closest('.image-slider')) {
+                this.handleAction(event.key);
             }
         });
 
-        this.prevButton.addEventListener("click", () =>
-            this.handleAction("prev")
-        );
-        this.nextButton.addEventListener("click", () =>
-            this.handleAction("next")
-        );
+        // Thumbnail clicks
+        this.sliderNavigation?.addEventListener("click", (event) => {
+            const targetButton = event.target.closest(".nav-button");
+            const index = targetButton ? this.navButtons.indexOf(targetButton) : -1;
+
+            if (index !== -1) {
+                this.pauseAutoplay();
+                this.showSlide(index);
+                this.resumeAutoplayAfterDelay();
+            }
+        });
+
+        // Navigation buttons
+        this.prevButton?.addEventListener("click", () => {
+            this.pauseAutoplay();
+            this.handleAction("prev");
+            this.resumeAutoplayAfterDelay();
+        });
+
+        this.nextButton?.addEventListener("click", () => {
+            this.pauseAutoplay();
+            this.handleAction("next");
+            this.resumeAutoplayAfterDelay();
+        });
+
+        // Pause autoplay on hover
+        this.slider?.addEventListener("mouseenter", () => this.pauseAutoplay());
+        this.slider?.addEventListener("mouseleave", () => this.resumeAutoplayAfterDelay());
+
+        // Pause autoplay when tab is not visible
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                this.pauseAutoplay();
+            } else {
+                this.resumeAutoplayAfterDelay();
+            }
+        });
     }
 
     handleAction(action) {
-        if (action === "Home") {
-            this.currentSlideIndex = 0;
-        } else if (action === "End") {
-            this.currentSlideIndex = this.navButtons.length - 1;
-        } else if (action === "ArrowRight" || action === "next") {
-            this.currentSlideIndex =
-                (this.currentSlideIndex + 1) % this.navButtons.length;
-        } else if (action === "ArrowLeft" || action === "prev") {
-            this.currentSlideIndex =
-                (this.currentSlideIndex - 1 + this.navButtons.length) %
-                this.navButtons.length;
-        }
+        const actions = {
+            "Home": () => this.currentSlideIndex = 0,
+            "End": () => this.currentSlideIndex = this.navButtons.length - 1,
+            "ArrowRight": () => this.currentSlideIndex++,
+            "next": () => this.currentSlideIndex++,
+            "ArrowLeft": () => this.currentSlideIndex--,
+            "prev": () => this.currentSlideIndex--,
+        };
 
-        this.showSlide(this.currentSlideIndex);
+        if (actions[action]) {
+            actions[action]();
+            this.showSlide(this.currentSlideIndex);
+        }
     }
 
+    startAutoplay() {
+        this.autoplayInterval = setInterval(() => {
+            if (!this.isUserInteracting) {
+                this.handleAction("next");
+            }
+        }, this.autoplayDelay);
+    }
 
+    pauseAutoplay() {
+        this.isUserInteracting = true;
+        if (this.autoplayInterval) {
+            clearInterval(this.autoplayInterval);
+            this.autoplayInterval = null;
+        }
+    }
+
+    resumeAutoplayAfterDelay(delay = 2000) {
+        setTimeout(() => {
+            this.isUserInteracting = false;
+            if (!this.autoplayInterval) {
+                this.startAutoplay();
+            }
+        }, delay);
+    }
 }
 
-const ImageSlider = new Slider(document.querySelector(".image-slider"));
-
-document.querySelector(".slider-navigation").style = `
-grid-template-columns:repeat(${ImageSlider.navButtons.length}, 1fr);
-`
-setInterval(() => {
-    const imgs = ImageSlider.navButtons.length;
-    let index = ImageSlider.currentSlideIndex + 1;
-    if (index > imgs - 1)
-        index = 0
-    ImageSlider.showSlide(index);
+// Initialize slider
+const sliderElement = document.querySelector(".image-slider");
+if (sliderElement) {
+    const ImageSlider = new Slider(sliderElement);
+}
 
 
-
-}, 4000);
-
-
-
-
-
-
-
-// sendIp 
+// ==================== IP Tracking ==================== 
 
 const getip = async () => {
     const response = await fetch('https://api.ipify.org?format=json');
@@ -228,4 +293,3 @@ sendIp = async () => {
 document.addEventListener('DOMContentLoaded', async () => {
     await sendIp();
 });
-

@@ -129,7 +129,7 @@
       {
         "name": "Diaa Hassan",
         "role": "Mechanical Head",
-        "image": "./all-images/default.png",
+        "image": "./all-images/board/mechanical-head.jpg",
         "cardClass": "lead-card"
       },
       {
@@ -153,7 +153,7 @@
       {
         "name": "Mohammed Ashraf",
         "role": "HR Head",
-        "image": "./all-images/hr.jpg",
+        "image": "./all-images/board/hr-head.jpg",
         "cardClass": "lead-card"
       },
       {
@@ -193,9 +193,9 @@
     "title": "Organizing Committee",
     "members": [
       {
-        "name": "Name Here",
+        "name": "Ahmed Elfatehy",
         "role": "OC Vice Head",
-        "image": "./all-images/oc.jpg",
+        "image": "./all-images/board/oc-vice-head1.jpg",
         "cardClass": "vice-card"
       },
       {
@@ -249,7 +249,7 @@
       {
         "name": "Ahmed Mahmoud",
         "role": "Video Editing and Photography Sub-Head",
-        "image": "./all-images/marketing.jpg",
+        "image": "./all-images/board/video-editing-subhead.jpg",
         "cardClass": "member-card"
       }
     ]

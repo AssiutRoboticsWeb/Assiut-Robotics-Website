@@ -1,38 +1,13 @@
-/* ==================== CSS Custom Properties ==================== */
-:root {
-    /* Slider Variables */
-    --slider-transition: all 0.3s ease-in-out;
-
-    /* Icon Colors */
-    --icon-default: #ffffff;
-    --icon-accent: #87c4ff;
-
-    /* Navigation Colors */
-    --navigation-color: rgba(0, 0, 0, 0.5);
-    --active-color: #39a7ff;
-
-    /* Text Colors */
-    --subtitle-color: #4a5568;
-}
-
 /*Text*/
 #container {
-    z-index: 1000;
+    z-index: -10;
     position: absolute;
     margin: auto;
     width: 100%;
     height: 100pt;
-    top: 0;
+    top: 15px;
     left: 0;
     filter: url(#threshold) blur(0.6px);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
 }
 
 #text1,
@@ -40,7 +15,8 @@
     position: absolute;
     width: 100%;
     display: inline-block;
-    color: #39a7ff;
+    /* color: #39a7ff; */
+    color: white;
     font-family: "Raleway", sans-serif;
     font-size: 90pt;
     text-align: center;
@@ -57,20 +33,10 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
-
-    #text1,
-    #text2 {
-        font-size: 30pt;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
-
     #container {
-        height: 40pt;
+        height: 80pt;
+        top: 10px;
     }
-
 }
 
 .row {
@@ -221,7 +187,6 @@ h1 {
     position: relative;
     width: 100%;
     overflow: hidden;
-    padding: 0 !important;
 }
 
 .above-container {
@@ -232,13 +197,6 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.above-container::after {
-    background-color: white;
-    opacity: 0.5;
-    width: 100%;
-    height: 100%;
 }
 
 @media screen and (min-width: 992px) {
@@ -261,27 +219,26 @@ h1 {
     }
 }
 
-/* ================================slider image    start============================= */
+/* ==================== Image Slider ==================== */
 
 .image-slider {
     display: flex;
     flex-flow: column;
     width: 100%;
-    /* Full viewport height minus header (assuming ~80px header) */
-    height: calc(100vh - 60px);
-    min-height: 600px;
+    aspect-ratio: 15 / 9;
+    min-height: 300px;
+    max-height: 600px;
     overflow: hidden;
     container-type: inline-size;
     contain: content;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    box-shadow:
+    box-shadow: 
         0 1px 2px rgba(0, 0, 0, 0.2),
         0 2px 4px rgba(0, 0, 0, 0.3),
         0 4px 8px rgba(0, 0, 0, 0.25),
         0 8px 16px rgba(0, 0, 0, 0.2),
         0 16px 32px rgba(0, 0, 0, 0.15);
     position: relative;
-    cursor: pointer;
 }
 
 .slider__content {
@@ -323,21 +280,18 @@ h1 {
 }
 
 .slider-control--button:where(:hover) {
-    background-image: linear-gradient(to var(--position),
-            transparent 0%,
-            rgba(0, 0, 0, 0.1) 50%,
-            rgba(0, 0, 0, 0.3) 100%);
+    background-image: linear-gradient(
+        to var(--position), 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.1) 50%, 
+        rgba(0, 0, 0, 0.3) 100%
+    );
 }
 
 .slider-control--button:where(:hover) .icon {
     fill: var(--icon-accent);
     background: rgba(0, 0, 0, 0.2);
     transform: scale(1.1);
-}
-
-.slider-control--button:active {
-    outline: 0.2em solid hsl(204 100 53);
-    outline-offset: -0.5em;
 }
 
 .slider-control--button:active .icon {
@@ -353,9 +307,12 @@ h1 {
 }
 
 .image-display {
-    position: fixed;
-    overflow: hidden;
+    position: absolute;
     inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .image-slider img {
@@ -363,20 +320,10 @@ h1 {
     object-fit: fill;
     width: 100%;
     height: 100%;
+    opacity: 0.8;
+    
+    opacity: 0.85;
     will-change: transform, opacity;
-}
-
-@media screen and (max-width: 768px) {
-
-    .image-slider {
-        height: 100%;
-        aspect-ratio: 12/9;
-        min-height: 250px;
-    }
-
-    .image-slider img {
-        object-fit: cover;
-    }
 }
 
 @keyframes slideIn {
@@ -384,7 +331,6 @@ h1 {
         transform: scale(1.1) translateY(-5%);
         opacity: 0;
     }
-
     to {
         opacity: 0.85;
         transform: scale(1) translateY(0);
@@ -449,36 +395,7 @@ h1 {
     outline-offset: 2px;
 }
 
-.nav-button[aria-selected="true"] {
-    scale: 1.1;
-}
 
-.nav-button[aria-selected="true"],
-.nav-button:focus-visible {
-    outline: 0.2em solid var(--active-color);
-    outline-offset: 0.2em;
-}
-
-.nav-button[aria-selected="false"] {
-    filter: opacity(0.7);
-}
-
-.nav-button[aria-selected="false"]:where(:hover, :focus-visible) {
-    filter: opacity(1);
-}
-
-.thumbnail {
-    display: block;
-    max-width: 100%;
-    width: 100%;
-    object-fit: cover;
-    height: 100%;
-    transition: transform 0.3s ease;
-}
-
-.nav-button:hover .thumbnail {
-    transform: scale(1.05);
-}
 
 .subtitle {
     font-size: clamp(1rem, 2vw, 1.2rem);
@@ -491,15 +408,15 @@ h1 {
 /* ==================== Responsive Enhancements ==================== */
 
 @media screen and (max-width: 768px) {
-    /* .image-slider {
+    .image-slider {
         aspect-ratio: 16 / 9;
         min-height: 250px;
-    } */
-
+    }
+    
     .slider-control--button {
         padding-inline: 0.5rem;
     }
-
+    
     .slider-navigation {
         gap: 0.5rem;
         padding: 0.5rem;
@@ -511,7 +428,7 @@ h1 {
         animation: none;
         opacity: 0.85;
     }
-
+    
     #text1,
     #text2 {
         will-change: auto;
@@ -1044,6 +961,7 @@ h1 {
 .team-member-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 40px rgba(57, 167, 255, 0.2);
+    cursor: pointer;
 }
 
 .team-member-img-wrapper {
@@ -1106,9 +1024,9 @@ h1 {
 .team-member-card.lead-card,
 .team-member-card.high-board-card {
     border-bottom: 4px solid #2e88d1;
-    transform: scale(1.10);
+    /* transform: scale(1.10); */
     z-index: 2;
-    margin: 1rem;
+    /* margin: 1rem; */
     flex: 1 0 40%;
 }
 
@@ -1123,7 +1041,7 @@ h1 {
 /* Visual Hierarchy: Vice cards slightly smaller/lower */
 .team-member-card.vice-card,
 .team-member-card.high-board-card-vice {
-    transform: scale(0.95) translateY(10px);
+    /* transform: scale(0.95); */
     z-index: 1;
 }
 
@@ -1261,15 +1179,15 @@ h1 {
 
     .team-member-card.lead-card,
     .team-member-card.high-board-card {
-        transform: scale(1.1);
-        margin: 0.5rem 0;
+        /* transform: scale(1.1); */
+        /* margin: 0.5rem 0; */
         flex: 1 0 40%;
     }
 
-    .team-member-card.vice-card,
+    /* .team-member-card.vice-card,
     .team-member-card.high-board-card-vice {
-        transform: scale(0.9) translateY(-1);
-    }
+        transform: scale(0.9);
+    } */
 
     .member-name {
         font-size: 1rem;

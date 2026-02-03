@@ -14,6 +14,7 @@ async function loadTeamData() {
           }
           const data = await response.json();
           renderTeamBoard(data, teamContainer);
+
      } catch (error) {
           console.error('Error loading team board:', error);
           teamContainer.innerHTML = '<p class="error-message">Unable to load team info.</p>';
@@ -84,8 +85,10 @@ function renderTeamBoard(departments, container) {
                // Reset margin if multiple grids to avoid big gaps, or handle via CSS if needed
                // Currently .team-grid has no vertical margin, strictly padding and gap.
 
+               var i = 100;
                membersList.forEach(member => {
-                    grid.appendChild(createMemberCard(member));
+                    grid.appendChild(createMemberCard(member, i));
+                    i += 100;
                });
                deptSection.appendChild(grid);
           };
@@ -121,9 +124,11 @@ function getRolePriority(role) {
      return priority;
 }
 
-function createMemberCard(member) {
+function createMemberCard(member, delay) {
      const card = document.createElement('div');
      card.className = `team-member-card ${member.cardClass || ''}`;
+     card.dataset.aos = "fade-up"; // Preparation for animation if used
+     card.dataset.aosDelay = delay;
 
      // Image Wrapper
      const imgWrapper = document.createElement('div');

@@ -1,23 +1,28 @@
 [
     {
-        "title": "Web Design Committee",
+        "title": "AC Electrical",
         "image": "all-images/web.jpg",
-        "description": "The Web Design Committee focuses on creating and maintaining websites that are user-friendly, visually appealing, and accessible."
+        "description": "The AC Electrical Committee focuses on the design, implementation, and maintenance of electrical systems in our projects, ensuring safety, efficiency, and innovation."
+    },
+    {
+        "title": "AC Mechanical",
+        "image": "all-images/web.jpg",
+        "description": "The AC Mechanical Committee focuses on the design, implementation, and maintenance of mechanical systems in our projects, ensuring safety, efficiency, and innovation."
+    },
+    {
+        "title": "Software Committee",
+        "image": "all-images/web.jpg",
+        "description": "The Software Committee focuses on creating and maintaining websites that are user-friendly, visually appealing, and accessible."
+    },
+    {
+        "title": "Digital Marketing Committee",
+        "image": "all-images/marketing.jpg",
+        "description": "The Digital Marketing Committee drives engagement and awareness by developing creative campaigns, managing promotional activities, and leveraging various marketing channels to reach our target audience."
     },
     {
         "title": "OC Committee",
         "image": "all-images/oc.jpg",
         "description": "The OC Committee ensures smooth execution of events by coordinating logistics, managing schedules, and overseeing event operations to ensure everything runs efficiently and effectively."
-    },
-    {
-        "title": "Media Committee",
-        "image": "all-images/media.jpg",
-        "description": "The Media Committee is responsible for capturing and sharing the essence of our events through photography, videography, and social media, ensuring a strong and positive online presence."
-    },
-    {
-        "title": "Marketing Committee",
-        "image": "all-images/marketing.jpg",
-        "description": "The Marketing Committee drives engagement and awareness by developing creative campaigns, managing promotional activities, and leveraging various marketing channels to reach our target audience."
     },
     {
         "title": "HR Committee",
@@ -28,15 +33,5 @@
         "title": "PR Committee",
         "image": "all-images/pr.jpg",
         "description": "The PR Committee manages the organization's public image by building relationships with media, crafting press releases, and handling communications to maintain a positive and professional reputation."
-    },
-    {
-        "title": "AC Electrical",
-        "image": "all-images/web.jpg",
-        "description": "The AC Electrical Committee focuses on the design, implementation, and maintenance of electrical systems in our projects, ensuring safety, efficiency, and innovation."
-    },
-    {
-        "title": "AC Mechanical",
-        "image": "all-images/web.jpg",
-        "description": "The AC Mechanical Committee focuses on the design, implementation, and maintenance of mechanical systems in our projects, ensuring safety, efficiency, and innovation."
     }
 ]
