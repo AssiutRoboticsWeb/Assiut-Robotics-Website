@@ -227,7 +227,7 @@ h1 {
 .above-container {
     position: absolute;
     width: 100%;
-    height: 150px;
+    height: 80px;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -254,10 +254,6 @@ h1 {
         flex: 0 0 33.33%;
         max-width: 33.33%;
         padding: 0 1em;
-    }
-
-    .above-container {
-        height: 180px;
     }
 }
 
@@ -501,7 +497,7 @@ h1 {
     }
 
     .slider-navigation {
-        gap: 0.5rem;
+        gap: 0.8rem;
         padding: 0.5rem;
     }
 }
@@ -571,9 +567,10 @@ h1 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
     justify-content: center;
-
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 #Ach_cards div:hover {
@@ -596,8 +593,9 @@ h1 {
 }
 
 #Ach_cards div {
-    min-width: 40rem;
+    flex: 0 0 300px;
     min-height: 30rem;
+    max-width: 400px;
     color: black;
     background-color: white;
     padding: 1rem;
@@ -621,13 +619,33 @@ h1 {
 }
 
 #Ach_cards div p {
-    width: 30rem;
+    width: 100%;
+    max-width: 30rem;
     white-space: pre-line;
 }
 
-@media (max-width : 768px) {
+/* Mobile Slider for Achievements */
+@media (max-width: 768px) {
+    #Ach_cards {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 1rem 1rem 2rem 1rem;
+        gap: 1rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #Ach_cards::-webkit-scrollbar {
+        display: none;
+        /* Hide scrollbar for cleanliness */
+    }
+
     #Ach_cards div {
-        min-width: 10px;
+        flex: 0 0 85%;
+        max-width: none;
+        min-width: 280px;
+        scroll-snap-align: center;
     }
 
     #Ach_cards div p {
