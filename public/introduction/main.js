@@ -7,41 +7,41 @@ const heroSection = document.getElementById('home');
 const aboutSection = document.getElementById('about');
 const committeesSection = document.getElementById('committees');
 const contactSection = document.getElementById('contact');
-function active(){
-    var scrollPosition = window.scrollY+200; // Adjust offset as needed
-    console.log(scrollPosition);
+function active() {
+    var scrollPosition = window.scrollY + 200; // Adjust offset as needed
+    // console.log(scrollPosition);
     if (scrollPosition >= heroSection.offsetTop && scrollPosition < aboutSection.offsetTop) {
         // Hero Section
         heroSection_link.classList.add('active');
         aboutSection_link.classList.remove('active');
         committeesSection_link.classList.remove('active');
         contactSection_link.classList.remove('active');
-        console.log("hero active")
-        console.log(heroSection_link.offsetTop)
+        // console.log("hero active")
+        // console.log(heroSection_link.offsetTop)
     } else if (scrollPosition >= aboutSection.offsetTop && scrollPosition < committeesSection.offsetTop) {
         // About Section
         aboutSection_link.classList.add('active');
         heroSection_link.classList.remove('active');
         committeesSection_link.classList.remove('active');
         contactSection_link.classList.remove('active');
-        console.log("about active")
-        console.log(aboutSection.offsetTop)
+        // console.log("about active")
+        // console.log(aboutSection.offsetTop)
     } else if (scrollPosition >= committeesSection.offsetTop && scrollPosition < contactSection.offsetTop) {
         // Committees Section
         committeesSection_link.classList.add('active');
         heroSection_link.classList.remove('active');
         aboutSection_link.classList.remove('active');
         contactSection_link.classList.remove('active');
-        console.log("committees active")
-        console.log(committeesSection.offsetTop)
+        // console.log("committees active")
+        // console.log(committeesSection.offsetTop)
     } else if (scrollPosition >= contactSection.offsetTop) {
         // Contact Section
         contactSection_link.classList.add('active');
         heroSection_link.classList.remove('active');
         aboutSection_link.classList.remove('active');
         committeesSection_link.classList.remove('active');
-        console.log("contact active")
-        console.log(contactSection_link.offsetTop)
+        // console.log("contact active")
+        // console.log(contactSection_link.offsetTop)
     }
 }
 window.addEventListener('scroll', active);
@@ -66,13 +66,13 @@ const heroImages = [
 
 let currentImageIndex = 0;
 const hero = document.querySelector('.hero');
-console.log(hero.before);
+// console.log(hero.before);
 
 
-function changeHeroImage() {    
-    console.log(currentImageIndex);
-    console.log(heroImages[currentImageIndex]);
-    console.log(currentImageIndex % heroImages.length);
+function changeHeroImage() {
+    // console.log(currentImageIndex);
+    // console.log(heroImages[currentImageIndex]);
+    // console.log(currentImageIndex % heroImages.length);
     hero.style.background = `url('${heroImages[currentImageIndex]}');`;
     currentImageIndex = (currentImageIndex + 1) % heroImages.length;
 }
@@ -561,7 +561,7 @@ const committeeDetails = {
 const modal = document.getElementById('modal');
 const modalContent = document.getElementById('modal-content');
 const closeBtn = document.querySelector('.close');
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
 
     if (!modal || !modalContent || !closeBtn) {
@@ -575,14 +575,14 @@ document.addEventListener('DOMContentLoaded', function() {
     closeBtn.onclick = closeModal;
 
     // Close modal when clicking outside of modal
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             closeModal();
         }
     };
 
     // Close modal when pressing Escape key
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape') {
             closeModal();
         }
@@ -602,7 +602,7 @@ function showDetails(committee) {
         console.error(`Details for committee ${committee} not found`);
         return;
     }
-    
+
     modal.style.display = 'block';
     modalContent.innerHTML = committeeDetails[committee].content;
 }
@@ -621,21 +621,21 @@ function switchTab(tabName, parent = null) {
 
     const cardContent = document.querySelector(`#${parent} .committee-text #${tabName}-content`);
     const cardButton = document.querySelector(`#${parent} .committee-tabs [onclick="switchTab('${tabName}', '${parent}')"]`);
-    console.log(cardButton);
-    
+    // console.log(cardButton);
+
     if (cardContent) cardContent.classList.add('active');
     if (cardButton) cardButton.classList.add('active');
 
     // Handle modal tabs
     const modalContents = document.querySelectorAll('.modal .tab-content');
     const modalButtons = document.querySelectorAll('.modal .tab-btn');
-    
+
     modalContents.forEach(content => content.classList.remove('active'));
     modalButtons.forEach(button => button.classList.remove('active'));
-    
+
     const modalContent = document.querySelector(`.modal #${tabName}-content`);
     const modalButton = document.querySelector(`.modal [onclick="switchTab('${tabName}')"]`);
-    
+
     if (modalContent) modalContent.classList.add('active');
     if (modalButton) modalButton.classList.add('active');
 }
@@ -658,42 +658,42 @@ const getClientIP = async () => {
 // send ip of the guest
 
 const sendIpApi = async (page) => {
-    try{
-    const clientIP = await getClientIP();
-    console.log("api function ", page, clientIP)
-    const response = await fetch(APIConfig.getGuestEndpoint(),{
-        method: "POST",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify({
-            ip: clientIP,
-            page: page
+    try {
+        const clientIP = await getClientIP();
+        // console.log("api function ", page, clientIP)
+        const response = await fetch(APIConfig.getGuestEndpoint(), {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                ip: clientIP,
+                page: page
+            })
         })
-    })
-    if(response.ok){
-        console.log("ok response")
-        const data = await response.json();
-        console.log("send ip success", data);
-        return data;
-    }else{
-        // throw new Error("Failed to login");
-        const data = await response.json();
-        console.log(" fail to send ip ",data )
-        return data;
+        if (response.ok) {
+            // console.log("ok response")
+            const data = await response.json();
+            // console.log("send ip success", data);
+            return data;
+        } else {
+            // throw new Error("Failed to login");
+            const data = await response.json();
+            // console.log(" fail to send ip ",data )
+            return data;
+        }
     }
-}
-catch(error){
-    console.log(error)
-    return error;
-}
+    catch (error) {
+        // console.log(error)
+        return error;
+    }
 }
 
 
 
 
 const formClick = document.querySelectorAll('.formClick');
-formClick.forEach(form => form.addEventListener('click', function() {
+formClick.forEach(form => form.addEventListener('click', function () {
     sendIpApi('form');
 }));
 
