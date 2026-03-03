@@ -41,7 +41,7 @@ function renderTeamBoard(departments, container) {
           const others = [];
 
           dept.members.forEach(member => {
-               if (member.name.toLowerCase() === "name here") return;
+               // if (member.name.toLowerCase() === "name here") return;
 
                const role = member.role || "";
 

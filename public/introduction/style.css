@@ -66,6 +66,7 @@
     from {
         width: 0%;
     }
+
     to {
         width: 100%;
     }
@@ -98,7 +99,8 @@
 }
 
 /* Base Styles */
-html, body {
+html,
+body {
     overflow-x: hidden;
     width: 100%;
     position: relative;
@@ -230,20 +232,24 @@ body {
     opacity: 0.5;
     animation: blink 3s infinite ease-in-out;
 }
+
 @keyframes blink {
-    0% { 
+    0% {
         opacity: 1;
         transform: translateY(0);
-     }
-    50% { 
+    }
+
+    50% {
         opacity: 0.1;
         transform: translateY(10px);
     }
-    100% { 
+
+    100% {
         opacity: 1;
         transform: translateY(0);
     }
 }
+
 .hero-content:hover {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
@@ -272,7 +278,8 @@ body {
     justify-content: center;
 }
 
-.primary-btn, .secondary-btn {
+.primary-btn,
+.secondary-btn {
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
     font-weight: 600;
@@ -288,6 +295,7 @@ body {
     width: 200px;
     height: 50px;
 }
+
 .primary-btn a {
     text-decoration: none;
     color: var(--primary-color);
@@ -368,7 +376,8 @@ body {
     margin-top: 2rem;
 }
 
-.mission h3, .vision h3 {
+.mission h3,
+.vision h3 {
     color: var(--primary-color);
     margin-bottom: 1rem;
 }
@@ -487,9 +496,11 @@ body {
     z-index: 1;
     transition: var(--transition);
 }
-.committee-overlay:hover{
+
+.committee-overlay:hover {
     opacity: 0.2;
 }
+
 .committee-content {
     padding: 2rem;
     display: flex;
@@ -804,29 +815,29 @@ body {
         width: 95%;
         margin: 2.5vh auto;
     }
-    
+
     .modal-header {
         padding: 1rem;
     }
-    
+
     .modal-body {
         padding: 1.5rem;
     }
-    
+
     .committee-detail-content {
         padding: 0.5rem;
     }
-    
+
     .committee-detail-content h2 {
         font-size: 1.5rem;
         margin-bottom: 1rem;
     }
-    
+
     .committee-detail-content h3 {
         font-size: 1.3rem;
         margin: 1.25rem 0 0.75rem;
     }
-    
+
     .committee-detail-content h4 {
         font-size: 1.1rem;
         margin: 1rem 0 0.5rem;
@@ -846,15 +857,15 @@ body {
         border-radius: 0;
         height: 100vh;
     }
-    
+
     .modal-header {
         padding: 0.75rem;
     }
-    
+
     .modal-body {
         padding: 1rem;
     }
-    
+
     .committee-detail-content {
         padding: 0.25rem;
     }
@@ -866,6 +877,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1481,7 +1493,7 @@ section {
     .container {
         padding: 0 15px;
     }
-    
+
     .nav-container {
         padding: 0.75rem 15px;
         width: 100%;
@@ -1493,7 +1505,7 @@ section {
     .container {
         padding: 0 10px;
     }
-    
+
     .nav-container {
         padding: 0.5rem 10px;
     }

@@ -61,7 +61,7 @@
         "cardClass": "member-card software-card"
       },
       {
-        "name": "Mahmoud Mohamed",
+        "name": "Mahmoud Mohamed Joma",
         "role": "UI/UX Sub-head",
         "image": "./all-images/web.jpg",
         "cardClass": "member-card software-card"
@@ -91,13 +91,13 @@
         "cardClass": "lead-card"
       },
       {
-        "name": "Name Here",
+        "name": "Afaf Sayed",
         "role": "Electrical Vice Head",
         "image": "./all-images/default.png",
         "cardClass": "vice-card"
       },
       {
-        "name": "Name Here",
+        "name": "Afaf Sayed",
         "role": "Hardware Sub-head",
         "image": "./all-images/default.png",
         "cardClass": "member-card"
@@ -109,7 +109,7 @@
         "cardClass": "member-card"
       },
       {
-        "name": "Name Here",
+        "name": "Ahmed Nady",
         "role": "Autonomous Sub-Head",
         "image": "./all-images/default.png",
         "cardClass": "member-card"
@@ -133,7 +133,7 @@
         "cardClass": "lead-card"
       },
       {
-        "name": "Name Here",
+        "name": "Taha Sarhan",
         "role": "Mechanical Vice Head",
         "image": "./all-images/default.png",
         "cardClass": "vice-card"
@@ -145,7 +145,7 @@
     "title": "Human Resources",
     "members": [
       {
-        "name": "Malak Mahmoud",
+        "name": "Malak Mahmoud Korashy",
         "role": "HR Vice Head",
         "image": "./all-images/hr.jpg",
         "cardClass": "vice-card"
@@ -161,6 +161,12 @@
         "role": "HR Vice Head",
         "image": "./all-images/hr.jpg",
         "cardClass": "vice-card"
+      },
+      {
+        "name": "Ahmed Ali",
+        "role": "HR Vice Head",
+        "image": "./all-images/hr.jpg",
+        "cardClass": "vice-card"
       }
     ]
   },
@@ -169,7 +175,7 @@
     "title": "Public Relations",
     "members": [
       {
-        "name": "Sara Mohamed",
+        "name": "Sarah Mohammed",
         "role": "PR Vice Head",
         "image": "./all-images/pr.jpg",
         "cardClass": "vice-card"
@@ -193,7 +199,7 @@
     "title": "Organizing Committee",
     "members": [
       {
-        "name": "Ahmed Elfatehy",
+        "name": "Ahmed Essam fatehy",
         "role": "OC Vice Head",
         "image": "./all-images/board/oc-vice-head1.jpg",
         "cardClass": "vice-card"
@@ -235,7 +241,7 @@
         "cardClass": "vice-card"
       },
       {
-        "name": "Mahmoud Mohamed",
+        "name": "Mahmoud Mohamed Joma",
         "role": "Graphic Design Sub-Head",
         "image": "./all-images/marketing.jpg",
         "cardClass": "member-card"
@@ -247,7 +253,7 @@
         "cardClass": "member-card"
       },
       {
-        "name": "Ahmed Mahmoud",
+        "name": "Ahmed Mahmoud Amin",
         "role": "Video Editing and Photography Sub-Head",
         "image": "./all-images/board/video-editing-subhead.jpg",
         "cardClass": "member-card"
