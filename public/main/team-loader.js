@@ -41,9 +41,13 @@ function renderTeamBoard(departments, container) {
           const others = [];
 
           dept.members.forEach(member => {
-               // if (member.name.toLowerCase() === "name here") return;
 
                const role = member.role || "";
+
+               if (member.name.toLowerCase() === "name here") {
+                    member.image = "./all-images/default.png";
+                    // return;
+               }
 
                // Special case: High Board (Team Leader & Vice) stays in one row
                if (dept.id === 'high-board' || dept.id === 'hr' || dept.id === 'oc' || dept.id === 'pr') {

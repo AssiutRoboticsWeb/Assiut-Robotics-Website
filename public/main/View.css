@@ -573,10 +573,8 @@ h1 {
     margin: 0 auto;
 }
 
-#Ach_cards div:hover {
-    background: #a9d2fc;
-    color: white;
-}
+
+
 
 .learnMore {
     text-decoration: none !important;
@@ -592,7 +590,7 @@ h1 {
     scale: 1.1;
 }
 
-#Ach_cards div {
+#Ach_cards .ach-card {
     flex: 0 0 300px;
     min-height: 30rem;
     max-width: 400px;
@@ -603,25 +601,35 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     text-align: center;
     transition: all 0.2s ease-out;
 }
 
-#Ach_cards div:hover {
+#Ach_cards .ach-card:hover {
     transition: all 0.2s ease-out;
     scale: 1.02;
+    background: #a9d2fc;
+    color: white;
 }
 
-#Ach_cards div img {
+#Ach_cards .ach-card img {
     width: 20rem;
 }
 
-#Ach_cards div p {
+#Ach_cards .ach-card p {
     width: 100%;
     max-width: 30rem;
     white-space: pre-line;
+}
+
+.ach-card-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 /* Mobile Slider for Achievements */
@@ -641,18 +649,18 @@ h1 {
         /* Hide scrollbar for cleanliness */
     }
 
-    #Ach_cards div {
+    #Ach_cards .ach-card {
         flex: 0 0 85%;
         max-width: none;
         min-width: 280px;
         scroll-snap-align: center;
     }
 
-    #Ach_cards div p {
+    #Ach_cards .ach-card p {
         width: auto;
     }
 
-    #Ach_cards div img {
+    #Ach_cards .ach-card img {
         width: 15rem;
     }
 }

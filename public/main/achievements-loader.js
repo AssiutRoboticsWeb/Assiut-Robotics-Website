@@ -23,11 +23,14 @@ function renderAchievements(data, container) {
      var i = 100;
      data.forEach(item => {
           const card = document.createElement('div');
+          card.className = 'ach-card';
           card.innerHTML = `
             <img src="${item.image}" alt="${item.title}" loading="lazy">
             <h2>${item.title}</h2>
             <p>${item.description}</p>
-            <a href="${item.link}"> <button class="learnMore">Learn more</button></a>
+            <div class="ach-card-footer">
+              <a href="${item.link}"> <button class="learnMore">Learn more</button></a>
+            </div>
        `;
           card.dataset.aos = "fade-up"; // Preparation for animation if used
           card.dataset.aosDelay = i;
