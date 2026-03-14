@@ -2,8 +2,7 @@
   {
     "id": "high-board",
     "title": "High Board",
-    "members": [
-      
+    "members": [     
       {
         "name": "Ahmed Eid",
         "role": "Team Leader",
@@ -70,7 +69,7 @@
       {
         "name": "Arwa Hassan",
         "role": "Electrical Head",
-        "image": "./all-images/empty_woman.png",
+        "image": "./all-images/board/ac-electrical-head.jpg",
         "cardClass": "lead-card"
       },
       {
@@ -94,7 +93,7 @@
       {
         "name": "Ahmed Nady",
         "role": "Autonomous Sub-Head",
-        "image": "./all-images/empty_man.png",
+        "image": "./all-images/board/autonomous-sub-head.jpg",
         "cardClass": "member-card"
       }
     ]
@@ -112,7 +111,7 @@
       {
         "name": "Taha Sarhan",
         "role": "Mechanical Vice Head",
-        "image": "./all-images/empty_man.png",
+        "image": "./all-images/board/ac-mechanical-vice-head.jpg",
         "cardClass": "vice-card"
       }
     ]
@@ -122,27 +121,27 @@
     "title": "Human Resources",
     "members": [
       {
-        "name": "Malak Mahmoud Korashy",
-        "role": "HR Vice Head",
-        "image": "./all-images/empty_woman.png",
-        "cardClass": "vice-card"
-      },
-      {
         "name": "Mohammed Ashraf",
         "role": "HR Head",
         "image": "./all-images/board/hr-head.jpg",
         "cardClass": "lead-card"
       },
       {
+        "name": "Malak Mahmoud Korashy",
+        "role": "HR Vice Head",
+        "image": "./all-images/board/hr-vice-head1.jpg",
+        "cardClass": "vice-card"
+      },
+      {
         "name": "Asmaa Hassan",
         "role": "HR Vice Head",
-        "image": "./all-images/empty_woman.png",
+        "image": "./all-images/board/hr-vice-head2.jpg",
         "cardClass": "vice-card"
       },
       {
         "name": "Ahmed Ali",
         "role": "HR Vice Head",
-        "image": "./all-images/empty_man.png",
+        "image": "./all-images/board/hr-vice-head3.jpg",
         "cardClass": "vice-card"
       }
     ]
@@ -154,13 +153,13 @@
       {
         "name": "Mariam Mahmoud",
         "role": "PR Head",
-        "image": "./all-images/empty_woman.png",
+        "image": "./all-images/board/pr-head.jpg",
         "cardClass": "lead-card"
       },
       {
         "name": "Sarah Mohammed",
         "role": "PR Vice Head",
-        "image": "./all-images/empty_woman.png",
+        "image": "./all-images/board/pr-vice-head.jpg",
         "cardClass": "vice-card"
       }
     ]
@@ -170,16 +169,16 @@
     "title": "Organizing Committee",
     "members": [
       {
+        "name": "Amena Hassan",
+        "role": "OC Head",
+        "image": "./all-images/board/oc-head.jpg",
+        "cardClass": "lead-card"
+      },
+      {
         "name": "Ahmed Essam fatehy",
         "role": "OC Vice Head",
         "image": "./all-images/board/oc-vice-head1.jpg",
         "cardClass": "vice-card"
-      },
-      {
-        "name": "Amena Hassan",
-        "role": "OC Head",
-        "image": "./all-images/empty_woman.png",
-        "cardClass": "lead-card"
       }
     ]
   },
@@ -190,7 +189,7 @@
       {
         "name": "Abeer AbdElaal",
         "role": "Marketing Head",
-        "image": "./all-images/empty_woman.png",
+        "image": "./all-images/board/digital-marketing-head.jpg",
         "cardClass": "lead-card"
       },
       {
@@ -208,7 +207,7 @@
       {
         "name": "Mai Sayed",
         "role": "Content and Marketing Sub-Head",
-        "image": "./all-images/empty_woman.png",
+        "image": "./all-images/board/content-and-marketing-sub-head.jpg",
         "cardClass": "member-card"
       },
       {
