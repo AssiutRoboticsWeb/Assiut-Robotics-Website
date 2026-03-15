@@ -2,21 +2,22 @@
   {
     "id": "high-board",
     "title": "High Board",
-    "members": [     
+    "members": [
       {
         "name": "Ahmed Eid",
         "role": "Team Leader",
         "image": "./all-images/board/team-leader.jpg",
         "cardClass": "high-board-card",
         "bio": "Leading the team towards innovation and success.",
-        "email": "ahmed.eid@example.com",
-        "date": "Since 2023"
+        "email": "ahmed.eid.almady@gmail.com"
       },
       {
         "name": "Ibrahim Sayed",
         "role": "Vice Team Leader",
         "image": "./all-images/board/vice-team-leader1.jpg",
-        "cardClass": "high-board-card-vice"
+        "cardClass": "high-board-card-vice",
+        "bio": "Supporting leadership and driving innovation.",
+        "email": "ibrahim2006sayed@gmail.com"
       }
     ]
   },
@@ -28,7 +29,8 @@
         "name": "Anthony Gaius",
         "role": "Software Head",
         "image": "./all-images/board/software-head.jpg",
-        "cardClass": "lead-card"
+        "cardClass": "lead-card",
+        "email": "anthonygaius234@gmail.com"
       },
       {
         "name": "Name Here",
@@ -40,25 +42,29 @@
         "name": "Mazen Magdy",
         "role": "Frontend Sub-head",
         "image": "./all-images/board/frontend-subhead.jpg",
-        "cardClass": "member-card software-card"
+        "cardClass": "member-card software-card",
+        "email": "mm1759467@gmail.com"
       },
       {
         "name": "Mostafa Ahmed",
         "role": "Backend Sub-head",
         "image": "./all-images/board/backend-subhead.jpg",
-        "cardClass": "member-card software-card"
+        "cardClass": "member-card software-card",
+        "email": "Mostafa7.11m@gmail.com"
       },
       {
         "name": "Mahmoud Mohamed Joma",
         "role": "UI/UX Sub-head",
         "image": "./all-images/empty_man.png",
-        "cardClass": "member-card software-card"
+        "cardClass": "member-card software-card",
+        "email": "8765bot@gmail.com"
       },
       {
         "name": "Karen Medhat",
         "role": "Application Sub-head",
         "image": "./all-images/empty_woman.png",
-        "cardClass": "member-card software-card"
+        "cardClass": "member-card software-card",
+        "email": ""
       }
     ]
   },
@@ -70,19 +76,22 @@
         "name": "Arwa Hassan",
         "role": "Electrical Head",
         "image": "./all-images/board/ac-electrical-head.jpg",
-        "cardClass": "lead-card"
+        "cardClass": "lead-card",
+        "email": "arwahassan969@gmail.com"
       },
       {
         "name": "Afaf Sayed",
         "role": "Electrical Vice Head",
         "image": "./all-images/empty_woman.png",
-        "cardClass": "vice-card"
+        "cardClass": "vice-card",
+        "email": "sayedafaf75@gmail.com"
       },
       {
         "name": "Afaf Sayed",
         "role": "Hardware Sub-head",
         "image": "./all-images/empty_woman.png",
-        "cardClass": "member-card"
+        "cardClass": "member-card",
+        "email": "sayedafaf75@gmail.com"
       },
       {
         "name": "Name Here",
@@ -94,7 +103,8 @@
         "name": "Ahmed Nady",
         "role": "Autonomous Sub-Head",
         "image": "./all-images/board/autonomous-sub-head.jpg",
-        "cardClass": "member-card"
+        "cardClass": "member-card",
+        "email": "ahmedqwnady1222@gmail.com"
       }
     ]
   },
@@ -106,13 +116,15 @@
         "name": "Diaa Hassan",
         "role": "Mechanical Head",
         "image": "./all-images/board/mechanical-head.jpg",
-        "cardClass": "lead-card"
+        "cardClass": "lead-card",
+        "email": "dieahassan501@gmail.com"
       },
       {
         "name": "Taha Sarhan",
         "role": "Mechanical Vice Head",
         "image": "./all-images/board/ac-mechanical-vice-head.jpg",
-        "cardClass": "vice-card"
+        "cardClass": "vice-card",
+        "email": "tahaabose7ly2006@gmail.com"
       }
     ]
   },
@@ -124,25 +136,29 @@
         "name": "Mohammed Ashraf",
         "role": "HR Head",
         "image": "./all-images/board/hr-head.jpg",
-        "cardClass": "lead-card"
+        "cardClass": "lead-card",
+        "email": "Mahammad2002Ashraf1@gmail.com"
       },
       {
         "name": "Malak Mahmoud Korashy",
         "role": "HR Vice Head",
         "image": "./all-images/board/hr-vice-head1.jpg",
-        "cardClass": "vice-card"
+        "cardClass": "vice-card",
+        "email": "malakkorashy5@gmail.com"
       },
       {
         "name": "Asmaa Hassan",
         "role": "HR Vice Head",
         "image": "./all-images/board/hr-vice-head2.jpg",
-        "cardClass": "vice-card"
+        "cardClass": "vice-card",
+        "email": "asmaahassajoma@gmail.com"
       },
       {
         "name": "Ahmed Ali",
         "role": "HR Vice Head",
         "image": "./all-images/board/hr-vice-head3.jpg",
-        "cardClass": "vice-card"
+        "cardClass": "vice-card",
+        "email": "engahmedali1710@gmail.com"
       }
     ]
   },
@@ -154,13 +170,15 @@
         "name": "Mariam Mahmoud",
         "role": "PR Head",
         "image": "./all-images/board/pr-head.jpg",
-        "cardClass": "lead-card"
+        "cardClass": "lead-card",
+        "email": "mariammahmoud0241@gmail.com"
       },
       {
         "name": "Sarah Mohammed",
         "role": "PR Vice Head",
         "image": "./all-images/board/pr-vice-head.jpg",
-        "cardClass": "vice-card"
+        "cardClass": "vice-card",
+        "email": "sarammohammeed5@gmail.com"
       }
     ]
   },
@@ -172,13 +190,15 @@
         "name": "Amena Hassan",
         "role": "OC Head",
         "image": "./all-images/board/oc-head.jpg",
-        "cardClass": "lead-card"
+        "cardClass": "lead-card",
+        "email": "amenahassan910@gmail.com"
       },
       {
         "name": "Ahmed Essam fatehy",
         "role": "OC Vice Head",
         "image": "./all-images/board/oc-vice-head1.jpg",
-        "cardClass": "vice-card"
+        "cardClass": "vice-card",
+        "email": "ahmedessam8304@gmail.com"
       }
     ]
   },
@@ -189,8 +209,9 @@
       {
         "name": "Abeer AbdElaal",
         "role": "Marketing Head",
-        "image": "./all-images/board/digital-marketing-head.jpg",
-        "cardClass": "lead-card"
+        "image": "./all-images/empty_woman.png",
+        "cardClass": "lead-card",
+        "email": "abeerabdelal9@gmail.com"
       },
       {
         "name": "Name Here",
@@ -202,19 +223,22 @@
         "name": "Mahmoud Mohamed Joma",
         "role": "Graphic Design Sub-Head",
         "image": "./all-images/empty_man.png",
-        "cardClass": "member-card"
+        "cardClass": "member-card",
+        "email": "8765bot@gmail.com"
       },
       {
         "name": "Mai Sayed",
         "role": "Content and Marketing Sub-Head",
         "image": "./all-images/board/content-and-marketing-sub-head.jpg",
-        "cardClass": "member-card"
+        "cardClass": "member-card",
+        "email": "meimso132005@gmail.com"
       },
       {
         "name": "Ahmed Mahmoud Amin",
         "role": "Video Editing and Photography Sub-Head",
         "image": "./all-images/board/video-editing-subhead.jpg",
-        "cardClass": "member-card"
+        "cardClass": "member-card",
+        "email": "m4457958@gmail.com"
       }
     ]
   }

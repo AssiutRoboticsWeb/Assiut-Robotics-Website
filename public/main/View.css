@@ -616,6 +616,7 @@ h1 {
 
 #Ach_cards .ach-card img {
     width: 20rem;
+    border-radius: 2rem;
 }
 
 #Ach_cards .ach-card p {

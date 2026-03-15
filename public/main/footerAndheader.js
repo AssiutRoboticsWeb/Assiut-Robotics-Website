@@ -123,6 +123,7 @@ function implement_views() {
     })
         .done(function () {
             console.log("All HTML content loaded successfully. #Footer");
+            setupScrollTop();
         })
         .fail(function () {
             console.error("Error loading HTML content. #Footer");
@@ -153,6 +154,27 @@ function setupLogin() {
         // registerButton.style.display = "inline-block";
         profileButton.style.display = "none";
     }
+}
+
+function setupScrollTop() {
+    var btn = document.getElementById('scrollToTopBtn');
+    if (!btn) return;
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 150) {
+            btn.classList.add('visible');
+        } else {
+            // Arrived at top — remove launching state and hide button
+            btn.classList.remove('visible');
+            btn.classList.remove('launching');
+        }
+    }, { passive: true });
+
+    btn.addEventListener('click', function () {
+        // Show particles while scrolling up
+        btn.classList.add('launching');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 }
 
 window.onload = () => {
