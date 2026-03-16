@@ -8,7 +8,6 @@
         "role": "Team Leader",
         "image": "./all-images/board/team-leader.jpg",
         "cardClass": "high-board-card",
-        "bio": "Leading the team towards innovation and success.",
         "email": "ahmed.eid.almady@gmail.com"
       },
       {
@@ -16,7 +15,6 @@
         "role": "Vice Team Leader",
         "image": "./all-images/board/vice-team-leader1.jpg",
         "cardClass": "high-board-card-vice",
-        "bio": "Supporting leadership and driving innovation.",
         "email": "ibrahim2006sayed@gmail.com"
       }
     ]
@@ -62,7 +60,7 @@
       {
         "name": "Karen Medhat",
         "role": "Application Sub-head",
-        "image": "./all-images/empty_woman.png",
+        "image": "./all-images/empty_woman_christian.png",
         "cardClass": "member-card software-card",
         "email": "Karenmedhat784@gmail.com"
       }
@@ -82,14 +80,14 @@
       {
         "name": "Afaf Sayed",
         "role": "Electrical Vice Head",
-        "image": "./all-images/empty_woman.png",
+        "image": "./all-images/empty_woman_muslim.png",
         "cardClass": "vice-card",
         "email": "sayedafaf75@gmail.com"
       },
       {
         "name": "Afaf Sayed",
         "role": "Hardware Sub-head",
-        "image": "./all-images/empty_woman.png",
+        "image": "./all-images/empty_woman_muslim.png",
         "cardClass": "member-card",
         "email": "sayedafaf75@gmail.com"
       },
@@ -209,7 +207,7 @@
       {
         "name": "Abeer AbdElaal",
         "role": "Marketing Head",
-        "image": "./all-images/empty_woman.png",
+        "image": "./all-images/empty_woman_muslim.png",
         "cardClass": "lead-card",
         "email": "abeerabdelal9@gmail.com"
       },
@@ -229,7 +227,7 @@
       {
         "name": "Mai Sayed",
         "role": "Content and Marketing Sub-Head",
-        "image": "./all-images/board/content-and-marketing-sub-head.jpg",
+        "image": "./all-images/empty_woman_muslim.png",
         "cardClass": "member-card",
         "email": "meimso132005@gmail.com"
       },
