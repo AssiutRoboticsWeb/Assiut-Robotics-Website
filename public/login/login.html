@@ -33,6 +33,7 @@
             <div class="input-box">
                 <input type="password" name="password" placeholder="Password" required>
                 <i class='bx bxs-lock'></i>
+                <i class='bx bxs-show toggle-password' id="toggleLoginPassword"></i>
             </div>
             <div class="remember-forgot">
                 <label><input type="checkbox" value="48h" name="remember"> Remember me</label>
@@ -56,6 +57,23 @@
 
     </script>
     <script src="../main/footerAndheader.js" defer></script>
+    <script>
+        document.querySelectorAll('.toggle-password').forEach(function(toggle) {
+            toggle.addEventListener('click', function() {
+                const inputBox = this.closest('.input-box');
+                const input = inputBox.querySelector('input');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    this.classList.remove('bxs-show');
+                    this.classList.add('bxs-hide');
+                } else {
+                    input.type = 'password';
+                    this.classList.remove('bxs-hide');
+                    this.classList.add('bxs-show');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
