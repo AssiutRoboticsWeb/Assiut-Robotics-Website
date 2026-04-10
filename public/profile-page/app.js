@@ -542,15 +542,34 @@ function renderHistoryTasks(tasks = []) {
 
 // ---------------------- Dark Mode ----------------------
 function initializeDarkMode() {
+  const darkModeIcon = darkModeToggle.querySelector("i");
+  const setDarkModeIcon = (isDark, animate = false) => {
+    if (!darkModeIcon) return;
+    if (animate && darkModeIcon.animate) {
+      darkModeIcon.animate(
+        [
+          { transform: "rotate(0deg) scale(1)", opacity: 1 },
+          { transform: "rotate(90deg) scale(0.75)", opacity: 0.35 },
+          { transform: "rotate(180deg) scale(1)", opacity: 1 },
+        ],
+        { duration: 320, easing: "ease-in-out" }
+      );
+    }
+    darkModeIcon.classList.toggle("fa-moon", !isDark);
+    darkModeIcon.classList.toggle("fa-sun", isDark);
+  };
+
   const isDark = localStorage.getItem("darkMode") === "true";
   document.body.classList.toggle("dark-mode", isDark);
   darkModeToggle.setAttribute("aria-pressed", String(isDark));
+  setDarkModeIcon(isDark);
 
   darkModeToggle.addEventListener("click", () => {
     const toggled = !document.body.classList.contains("dark-mode");
     document.body.classList.toggle("dark-mode", toggled);
     localStorage.setItem("darkMode", String(toggled));
     darkModeToggle.setAttribute("aria-pressed", String(toggled));
+    setDarkModeIcon(toggled, true);
   });
 }
 
