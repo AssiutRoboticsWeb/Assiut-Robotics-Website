@@ -1,162 +1,139 @@
-// function for the action of the read more button
-function modeAction(mode,Blog,Body, BLOG_IMG , textContainer,title,contentContainer,animateIt,Hcontent){
-    console.log("modeAction "); // debugging
+/**
+ * Assiut Robotics Blog Script
+ * Handles dynamic blog loading and the "focused" (expanded) card interaction.
+ */
+
+const BLOG_API = ServerConfig.getMainAPI();
+
+/**
+ * Toggle between standard and focused (expanded) mode for a blog card.
+ * @param {string} blogId 
+ */
+function toggleBlogFocus(blogId) {
+    const blogElement = document.getElementById(blogId);
+    const body = document.body;
     
-    if(mode === "no focused"){
-        //adding the removing animations that removes the focused status in an animation  
-        Body.classList.add("nofocus");
-        Blog.classList.add("unfocused");
-        //End of adding the removing animations that removes the focused status in an animation
-        
-        //waiting for the longest animation to finish and then make the changes that will be in html
+    if (!blogElement) return;
+
+    const isFocused = blogElement.classList.contains('focused');
+
+    if (isFocused) {
+        // Switch back to normal mode
+        blogElement.classList.remove('focused');
+        blogElement.classList.add('unfocusing');
+        body.classList.remove('blog-focus-active');
+
+        // Cleanup after animation
         setTimeout(() => {
-            if( BLOG_IMG.contains(title)){ 
-                BLOG_IMG.removeChild(title);      // remove title from Blog_IMG 
+            blogElement.classList.remove('unfocusing');
+        }, 600);
+    } else {
+        // Close any other focused blogs first
+        document.querySelectorAll('.section.focused, .pinnedBlog.focused').forEach(el => {
+            if (el.id !== blogId) {
+                el.classList.remove('focused');
             }
-            if( !textContainer.contains(title)){
-                textContainer.insertBefore(title,textContainer.firstChild); // Add title to text-container at the first child
-            }
-            animateIt.classList.add("disabled");  // disable the big paragraph that contains the full content of the blog
-            if( contentContainer.textContent == "" ){
-                contentContainer.textContent = Hcontent;  // asigning text to the attractive paraghraph that will be shown in the blog at unfocused mode
-            }
-            // removing the focused mode classes from the body and the blog and the removing animation classes to make the code cleaner 
-            Body.classList.remove("focus");
-            Body.classList.remove("nofocus");
-            Blog.classList.remove("focused");
-            Blog.classList.remove("unfocused");
-        }, 2000);
-    }
-    else if(mode === "focused"){
-        //remove the removing animations that removes the focused status in an animation  
-        Blog.classList.remove("unfocused");
-        Body.classList.remove("nofocus");
-        //End of remove the removing animations that removes the focused status in an animation  
+        });
 
-        if(!BLOG_IMG.contains(title) ){
-            BLOG_IMG.insertBefore(title,BLOG_IMG.firstChild);  // Add title to Blog_IMG at the first child
-        }
-        if(textContainer.contains(title)){
-            textContainer.removeChild(title); // removing title from the textContainer because it will be shown in the Blog_IMG container
-        }
-            animateIt.classList.remove('disabled');  // make the big paragraph that contains the full content of the blog visible
-        if(contentContainer.textContent != ""){
-            contentContainer.textContent = "";  // remove the text from the attractive paraghraph because its content is already shown in the big paragraph
-        }
-        // adding the focused mode classes to the body and the blog 
-        Body.classList.add("focus");
-        Blog.classList.add("focused");
-        //End of  adding the focused mode classes to the body and the blog 
-
+        // Switch to focused mode
+        blogElement.classList.add('focused');
+        body.classList.add('blog-focus-active');
     }
 }
-// End of the function for the action of the read more button
 
-function readMoreShow(toggleButton,id){
-    console.log("=================================================================================="); // debugging
-    // defining the variables that will be used in the modeAction function
-    let BlogId = toggleButton.id;
-    let mode = "focused";
-    let BLOG_IMG = document.querySelectorAll(".BLOG_IMG")[id];
-    let contentContainer = document.querySelectorAll(".content-container")[id];
-    let title = document.querySelectorAll(".title")[id];
-    let TextContent = document.querySelectorAll(".text-content")[id];
-    let animateIt = document.querySelectorAll(".animateIt")[id];
-    let Hcontent = document.querySelectorAll(".text-content")[id].textContent;
-    let Body = document.querySelector("body");
-    let Blog = document.getElementById(BlogId);
-    //End of  defining the variables that will be used in the modeAction function
-    console.log(contentContainer) // debugging
-    // making a spicial style for the pinned blog
-    if(id == 0){
-        Blog.style.backgroundColor = "rgb(43.9875, 174.012, 226.0065, 0.3) !important";
-    }
-
-    // adding the event listener to the read more button
-    toggleButton.addEventListener("click", () => {
-    console.log("click" , Blog); // debugging
+/**
+ * Create a blog card element from blog data.
+ * @param {Object} blog 
+ * @param {boolean} isPinned 
+ * @returns {string} HTML string
+ */
+function createBlogHTML(blog, isPinned = false) {
+    const headContent = blog.content.length > 200 ? blog.content.slice(0, 200) + '...' : blog.content;
+    const sectionClass = isPinned ? 'pinnedBlog' : 'section';
     
-    modeAction(mode,Blog,Body ,BLOG_IMG , contentContainer,title,TextContent,animateIt,Hcontent); //calling the modeAction function
-    mode = mode === "no focused" ? "focused" : "no focused"; // changing the mode to the opposite mode
-    })
+    return `
+        <article class="${sectionClass}" id="${blog._id}" data-aos="fade-up">
+            <div class="blog-layout">
+                <div class="blog-content-wrapper">
+                    <header class="blog-header">
+                        <h2 class="blog-title">${blog.title}</h2>
+                        <div class="blog-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i>
+                                ${new Date(blog.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+                            </span>
+                        </div>
+                    </header>
+                    
+                    <div class="blog-body">
+                        <p class="blog-excerpt">${headContent}</p>
+                        <div class="blog-full-content">
+                            ${blog.content}
+                        </div>
+                    </div>
+                    
+                    <footer class="blog-footer">
+                        <button class="btn-read-more" onclick="toggleBlogFocus('${blog._id}')">
+                            <span>Read More</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </footer>
+                </div>
+                
+                <div class="blog-image-container">
+                    <img src="../all-images/blogs/${blog.avatar}" alt="${blog.title}" loading="lazy">
+                </div>
+            </div>
+        </article>
+    `;
 }
 
-//load blogs from the server
-function loadBlogs() {
-    // make it returns a promise to be able to use the above functions after the blogs are loaded
-    return new Promise( (resolve,reject) =>{
-        let blogsContainer = document.querySelector(".unPinnedBlogs"); // getting the container that will contain the blogs
-        // function will make the request to the server to get the blogs and make the html for them 
-        async function load() {
-            // we used try and catch to handle if there is a problem we can catch it and handle it.   because it is an async function that will not affect the whole code so we can know that from the effect
-            try {
-                const res = await fetch(`${API_BASE_URL}/blogs/getBlogs`); // make the request to the server to get the blogs
-                if (res.ok) { // if the request is ok
-                    let response = await res.json(); // get the response from the server
-                    console.log(response); // debugging
-                    let blogs = response.data; // get the blogs from the response
-                    blogs.forEach((blog) => { // loop through the blogs to make the html for them
-                        let headContent = blog.content.slice(0, 200); // get the first 200 characters from the blog content to show it in the attractive paragraph 
-                        console.log(headContent); // debugging
-                        console.log(blog.title);    // debugging
-                        
-                        let section = `
-                        <section class="section" id="${blog._id}">
-                            <div class="text-container">
-                                <div class="content-container">
-                                    <h1  class="title" style="color: var(--defaultColor);">${blog.title}</h1>
-                                    <p class="text-content">${headContent}</p> 
-                                    <p style="text-align: justify; overflow: scroll;" class="disabled animateIt">${blog.content}</p>
-                                   <a  class="toggle-content" id="${blog._id}"><i class="fa-solid fa-caret-down" style="color: #2eade4; scale: 4;"></i></a>
-                                    <!--DATE-->
-                                    <div class="Date">
-                                        <img class="calender" src="../all-images/Calender.png" alt="">
-                                        <p class="date-text">${blog.date}</p>
-                                    </div>
-                                </div>
-                                <!--IMAGE-->
-                                <div class="BLOG_IMG">
-                                    <img src="../all-images/blogs/${blog.avatar}" alt="BLOG">
-                                </div>
-                            </div>
-                        </section>
-                        `; // the html for the blog
-                        blogsContainer.innerHTML += section; // add the blog to the container
-                    });
-                resolve(); // resolve the promise means that the blogs are loaded successfully and go to the then function and run it 
+/**
+ * Load blogs from the server and render them.
+ */
+async function loadBlogs() {
+    const blogsContainer = document.querySelector(".unPinnedBlogs");
+    const pinnedContainer = document.querySelector(".pinned-container") || blogsContainer;
 
-                } else {
-                    console.log("error");
-                }
-            } catch (error) {
-                console.error(error);
-                reject("error"); // reject the promise means that there is an error and go to the catch function and run it
+    if (!blogsContainer) return;
 
-            }
+    try {
+        const response = await fetch(`${BLOG_API}/blogs/getBlogs`);
+        if (!response.ok) throw new Error('Failed to fetch blogs');
+
+        const result = await response.json();
+        const blogs = result.data || [];
+
+        if (blogs.length === 0) {
+            blogsContainer.innerHTML = '<p class="no-blogs">We are currently preparing some exciting content for you. Check back soon!</p>';
+            return;
         }
-        
-        load(); // call the function to load the blogs
-    }).then(() =>{ // then function to run the code after the blogs are loaded
-        console.log("done") // debugging
-        let toggleButtons = Array.from(document.querySelectorAll(".toggle-content")); // get all the read more buttons
-        console.log(toggleButtons); // debugging
-        toggleButtons.forEach((button,id) => { // loop through the buttons to add the event listener to them
-            readMoreShow(button,id); // call the function 
-        })
-    }).catch((err) => { // catch function to handle the error
-        console.log(err); // log an error if there is an error
-    })
-   
+
+        // Clear existing placeholders
+        blogsContainer.innerHTML = '';
+        if (pinnedContainer !== blogsContainer) pinnedContainer.innerHTML = '';
+
+        blogs.forEach((blog, index) => {
+            // First blog is pinned
+            if (index === 0) {
+                pinnedContainer.insertAdjacentHTML('afterbegin', createBlogHTML(blog, true));
+            } else {
+                blogsContainer.insertAdjacentHTML('beforeend', createBlogHTML(blog, false));
+            }
+        });
+
+        // Re-initialize AOS if available
+        if (window.AOS) {
+            window.AOS.refresh();
+        }
+
+    } catch (error) {
+        console.error('Error loading blogs:', error);
+        blogsContainer.innerHTML = '<p class="error-msg">Something went wrong while loading blogs. Please try again later.</p>';
+    }
 }
 
-loadBlogs() // call the function to load the blogs
-
-
-/* 
-    The code consists of two main functions:
-        1. creating the Blogs includes: 1 big function that will make the request to the server to get the blogs and make the html for them and then add the event listener to the read more button
-        2. making the read more button work includes: 2 function that will make the action of the read more button and make the changes in the html to show the full content of the blog and make the blog in  focused and unfocused modes
-
-*/
-// every line are commented to make the code clear and easy to understand
-// End of the file
+// Initialize on DOM content loaded
+document.addEventListener('DOMContentLoaded', () => {
+    loadBlogs();
+});

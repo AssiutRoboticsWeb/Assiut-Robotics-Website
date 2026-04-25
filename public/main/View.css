@@ -1030,7 +1030,8 @@ body.dark .learnMore {
 /* -------------------- Team Board Section -------------------- */
 #team-board {
     padding: 4rem 1rem;
-    background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
+    /* background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%); */
+    background: none;
     position: relative;
     z-index: 1;
 }

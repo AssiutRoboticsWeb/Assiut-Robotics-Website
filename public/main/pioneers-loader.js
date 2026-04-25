@@ -96,9 +96,13 @@ function renderPioneers(data, container) {
                                    otherWrapper.style.maxHeight = otherWrapper.scrollHeight + "px";
 
                                    requestAnimationFrame(() => {
-                                        otherWrapper.style.maxHeight = null;
-                                        otherWrapper.classList.remove('expanded');
+                                        otherWrapper.style.maxHeight = "8.5rem";
                                    });
+
+                                   setTimeout(() => {
+                                        otherWrapper.classList.remove('expanded');
+                                        otherWrapper.style.maxHeight = null;
+                                   }, 400);
 
                                    if (otherBtn) {
                                         otherBtn.textContent = 'See more';
@@ -112,7 +116,7 @@ function renderPioneers(data, container) {
                               wrapper.style.maxHeight = wrapper.scrollHeight + "px";
 
                               requestAnimationFrame(() => {
-                                   wrapper.style.maxHeight = "8.5rem"; // match CSS collapsed height
+                                   wrapper.style.maxHeight = "8.5rem";
                               });
 
                               setTimeout(() => {
@@ -165,21 +169,6 @@ function renderPioneers(data, container) {
 
           prevBtn.disabled = index === 0;
           nextBtn.disabled = index === maxIndex;
-
-          // close all expanded cards
-          // slides.forEach(card => {
-          //      const wrapper = card.querySelector('.quote-wrapper');
-          //      const btn = card.querySelector('.see-more');
-
-          //      if (wrapper?.classList.contains('expanded')) {
-          //           wrapper.classList.remove('expanded');
-          //           wrapper.style.maxHeight = null;
-          //           if (btn) {
-          //                btn.textContent = 'See more';
-          //                btn.setAttribute('aria-expanded', 'false');
-          //           }
-          //      }
-          // });
      }
 
      function closeAllCards() {

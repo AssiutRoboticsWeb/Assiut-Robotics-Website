@@ -258,7 +258,7 @@
     font-size: 1.3rem;
     font-weight: 700;
     width: 100%;
-    color: #0f1f33;
+    color: var(--text-primary);
     margin: 0.5em 0 0.5em;
     transition: color 0.3s ease;
     line-height: 1.3;

@@ -93,7 +93,11 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 90px;
+    gap: 0;
+}
+
+body>*:nth-child(n+3) {
+    margin-top: 60px;
 }
 
 body.loaded {
