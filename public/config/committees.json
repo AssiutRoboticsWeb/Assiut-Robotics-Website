@@ -1,37 +1,91 @@
 [
     {
-        "title": "AC Electrical",
-        "image": "all-images/web.jpg",
-        "description": "The AC Electrical Committee focuses on the design, implementation, and maintenance of electrical systems in our projects, ensuring safety, efficiency, and innovation."
+        "title": {
+            "en": "Academic Electrical",
+            "ar": "اللجنة الأكاديمية الكهربية"
+        },
+        "image": "all-images/committees/ac-elec.jpg",
+        "description": {
+            "en": "Focuses on Embedded Systems, Hardware design, and Autonomous Systems (ROS/Vision) to build intelligent robots.",
+            "ar": "تركز على الأنظمة المدمجة، تصميم الهاردوير، والأنظمة المستقلة (ROS/Vision) لبناء روبوتات ذكية."
+        },
+        "details": {
+            "en": "The Academic Electrical Committee prepares members for technical roles in electrical and electronic systems through hands-on training and participation in projects and competitions.",
+            "ar": "تهدف اللجنة الأكاديمية الكهربية إلى تأهيل الأعضاء للعمل في المجالات التقنية المتعلقة بالأنظمة الكهربائية والإلكترونية من خلال التدريب العملي."
+        }
     },
     {
-        "title": "AC Mechanical",
-        "image": "all-images/web.jpg",
-        "description": "The AC Mechanical Committee focuses on the design, implementation, and maintenance of mechanical systems in our projects, ensuring safety, efficiency, and innovation."
+        "title": {
+            "en": "Academic Mechanical",
+            "ar": "اللجنة الأكاديمية الميكانيكية"
+        },
+        "image": "all-images/committees/ac-mech.jpg",
+        "description": {
+            "en": "Specializes in mechanical design using SolidWorks and ANSYS, along with engineering research for robust systems.",
+            "ar": "تتخصص في التصميم الميكانيكي باستخدام SolidWorks و ANSYS، بالإضافة إلى البحث الهندسي لبناء أنظمة قوية."
+        },
+        "details": {
+            "en": "The Academic Mechanical Committee focuses on designing and analyzing mechanical systems efficiently through CAD tools and simulation.",
+            "ar": "تهدف اللجنة الأكاديمية الميكانيكية إلى تأهيل الأعضاء للعمل بكفاءة في المجالات الهندسية المتعلقة بتصميم وتحليل الأنظمة الميكانيكية."
+        }
     },
     {
-        "title": "Software Committee",
-        "image": "all-images/web.jpg",
-        "description": "The Software Committee focuses on creating and maintaining websites that are user-friendly, visually appealing, and accessible."
+        "title": {
+            "en": "Software Committee",
+            "ar": "لجنة البرمجيات"
+        },
+        "image": "all-images/committees/software.jpg",
+        "description": {
+            "en": "Develops web and mobile applications, covering Frontend, BackEnd, Mobile, and UI/UX design.",
+            "ar": "تطور تطبيقات الويب والموبايل، وتغطي مجالات الواجهات الأمامية والخلفية وتطبيقات الهاتف وتصميم UI/UX."
+        },
+        "details": {
+            "en": "The Software Committee is responsible for developing and maintaining the software and applications that support the team's activities.",
+            "ar": "تعتبر لجنة البرمجيات هي المسؤولة عن تطوير وصيانة البرمجيات والتطبيقات التي تدعم أنشطة الفريق."
+        }
     },
     {
-        "title": "Digital Marketing Committee",
-        "image": "all-images/marketing.jpg",
-        "description": "The Digital Marketing Committee drives engagement and awareness by developing creative campaigns, managing promotional activities, and leveraging various marketing channels to reach our target audience."
+        "title": {
+            "en": "HR Committee",
+            "ar": "لجنة الموارد البشرية"
+        },
+        "image": "all-images/committees/hr.jpg",
+        "description": {
+            "en": "Manages member recruitment, monthly evaluations, elections, and professional development.",
+            "ar": "تدير قبول الأعضاء، التقييمات الشهرية، الانتخابات، والتطوير المهني للأعضاء."
+        }
     },
     {
-        "title": "OC Committee",
-        "image": "all-images/oc.jpg",
-        "description": "The OC Committee ensures smooth execution of events by coordinating logistics, managing schedules, and overseeing event operations to ensure everything runs efficiently and effectively."
+        "title": {
+            "en": "Marketing Committee",
+            "ar": "لجنة التسويق"
+        },
+        "image": "all-images/committees/marketing.jpg",
+        "description": {
+            "en": "Handles brand management, content creation across social media platforms, and event promotion.",
+            "ar": "تتعامل مع إدارة العلامة التجارية، صناعة المحتوى عبر منصات التواصل الاجتماعي، والترويج للفعاليات."
+        }
     },
     {
-        "title": "HR Committee",
-        "image": "all-images/hr.jpg",
-        "description": "The HR Committee focuses on recruitment, training, and development, ensuring that we have a motivated and well-prepared team to achieve our goals and maintain a positive organizational culture."
+        "title": {
+            "en": "OC Committee",
+            "ar": "لجنة التنظيم"
+        },
+        "image": "all-images/committees/oc.jpg",
+        "description": {
+            "en": "Ensures smooth event execution, manages lab resources, and handles team logistics.",
+            "ar": "تضمن تنفيذ الفعاليات بسلاسة، تدير موارد المعمل، وتتعامل مع الخدمات اللوجستية للفريق."
+        }
     },
     {
-        "title": "PR Committee",
-        "image": "all-images/pr.jpg",
-        "description": "The PR Committee manages the organization's public image by building relationships with media, crafting press releases, and handling communications to maintain a positive and professional reputation."
+        "title": {
+            "en": "PR Committee",
+            "ar": "لجنة العلاقات العامة"
+        },
+        "image": "all-images/committees/pr.jpg",
+        "description": {
+            "en": "Builds partnerships, handles official permits, and manages the team's public image.",
+            "ar": "تبني الشراكات، وتتعامل مع التصاريح الرسمية، وتدير الصورة العامة للفريق."
+        }
     }
 ]

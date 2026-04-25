@@ -17,7 +17,8 @@
 
     --bg-card: rgba(255, 255, 255, 0.9);
     --text-main: #1a202c;
-    --text-muted: #718096;
+    --text-muted: #4a5568;
+    --text-weak: #718096;
     --border-soft: rgba(0, 0, 0, 0.05);
     --accent: #39a7ff;
     --quote-color: #4a5568;
@@ -46,7 +47,8 @@
 
     --bg-card: rgba(20, 25, 35, 0.85);
     --text-main: #e2e8f0;
-    --text-muted: #a0aec0;
+    --text-muted: #cbd5e0;
+    --text-weak: #a0aec0;
     --border-soft: rgba(255, 255, 255, 0.08);
     --accent: #4db5ff;
     --quote-color: #cbd5e0;
@@ -54,6 +56,31 @@
     --divider-color: #e6cc97;
     --divider-glow: rgba(230, 204, 151, 0.8);
     --pulse-color: #ffffff;
+}
+
+/* ===== Language Switch Animation ===== */
+[data-en], [data-ar] {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lang-fade-out {
+    opacity: 0 !important;
+    transform: translateY(6px) !important;
+}
+
+.lang-fade-in {
+    animation: langFadeIn 0.3s ease forwards;
+}
+
+@keyframes langFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Body */
@@ -425,6 +452,43 @@ body.dark .activity-card {
     padding: 10px;
 }
 
+.lang-toggle {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.lang-toggle:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.lang-toggle .lang-flag {
+    width: 20px;
+    height: 14px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+@media screen and (max-width: 980px) {
+    .lang-toggle {
+        width: 75%;
+        justify-content: center;
+        margin: 5px 0;
+    }
+}
+
 .flex-div2 {
     display: flex;
     height: 100%;
@@ -573,7 +637,7 @@ body.dark .activity-card {
 .myUniqueFooterClass {
     background-color: #1a1a1a;
     width: 100%;
-    text-align: left;
+    text-align: start;
     font-family: "Poppins", sans-serif;
     font-weight: bold;
     font-size: 16px;
@@ -606,12 +670,35 @@ body.dark .activity-card {
     margin: 0;
 }
 
+.myUniqueFooterClass .team-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.myUniqueFooterClass .team-div span {
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+}
+
 .myUniqueFooterClass .about span {
     display: block;
     color: #87c4ff;
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 20px;
+}
+
+.myUniqueFooterClass .about-title {
+    line-height: 1.8;
+    color: white !important;
+    margin-bottom: 10px !important;
 }
 
 .myUniqueFooterClass .icons {

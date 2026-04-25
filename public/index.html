@@ -42,6 +42,7 @@
     <!-- Include Server Configuration -->
     <script src="config/server-config.js"></script>
     <script src="utiles/constants.js"></script>
+    <script src="main/language-manager.js"></script>
 </head>
 
 <body>
@@ -80,25 +81,25 @@
 
             <!-- Thumbnail Navigation -->
             <nav class="slider-navigation" aria-label="Image thumbnails">
-                <button class="nav-button" aria-selected="true" aria-label="View robotics lab image">
+                <button type="button" class="nav-button" aria-selected="true" aria-label="View robotics lab image">
                     <img class="thumbnail" src="all-images/RoboticsLap.jpg" alt="Robotics Lab" loading="lazy" />
                 </button>
-                <button class="nav-button" aria-selected="false" aria-label="View ROV project image">
+                <button type="button" class="nav-button" aria-selected="false" aria-label="View ROV project image">
                     <img class="thumbnail" src="all-images/competitions/rov/rov111111111.jpg" alt="ROV Project" loading="lazy" />
                 </button>
-                <button class="nav-button" aria-selected="false" aria-label="View minesweeper robot image">
+                <button type="button" class="nav-button" aria-selected="false" aria-label="View minesweeper robot image">
                     <img class="thumbnail" src="all-images/competitions/mine/mine.jpg" alt="Minesweeper Robot" loading="lazy" />
                 </button>
-                <button class="nav-button" aria-selected="false" aria-label="View team workshop image">
+                <button type="button" class="nav-button" aria-selected="false" aria-label="View team workshop image">
                     <img class="thumbnail" src="all-images/competitions/mine/mine2.jpg" alt="Team Workshop" loading="lazy" />
                 </button>
-                <button class="nav-button" aria-selected="false" aria-label="View ROV competition image">
+                <button type="button" class="nav-button" aria-selected="false" aria-label="View ROV competition image">
                     <img class="thumbnail" src="all-images/competitions/rov/Rov1.jpg" alt="ROV Competition" loading="lazy" />
                 </button>
-                <button class="nav-button" aria-selected="false" aria-label="View minesweeper competition image">
+                <button type="button" class="nav-button" aria-selected="false" aria-label="View minesweeper competition image">
                     <img class="thumbnail" src="all-images/competitions/mine/mine2.jpg" alt="Minesweeper Competition" loading="lazy" />
                 </button>
-                <button class="nav-button" aria-selected="false" aria-label="View team photo">
+                <button type="button" class="nav-button" aria-selected="false" aria-label="View team photo">
                     <img class="thumbnail" src="all-images/ourteam.jpg" alt="Our Team" loading="lazy" />
                 </button>
             </nav>
@@ -119,43 +120,86 @@
                 <p>Years</p>
             </div>
         </div>
-    </section> 
+    </section>  -->
 
-    <div class="divider-pulse" data-aos="fade-up"></div>
-    
-    -->
+    <!-- <div class="divider-pulse" data-aos="fade-up"></div> -->
+
+    <!-- About Section -->
+    <!-- <section id="about" class="about-section" data-aos="fade-up">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h1 data-en="About Us" data-ar="من نحن">About Us</h1>
+                    <p data-en="We are Assiut Robotics, the first team specialized in robotics at the Faculty of Engineering, Assiut University. We aim to develop technical and engineering skills for students through practical projects and local and international competitions." 
+                       data-ar="نحن فريق أسيوط روبوتكس، أول فريق متخصص في مجال الروبوتات في كلية الهندسة بجامعة أسيوط. نهدف إلى تطوير المهارات التقنية والهندسية للطلاب من خلال المشاريع العملية والمسابقات المحلية والدولية.">
+                        We are Assiut Robotics, the first team specialized in robotics at the Faculty of Engineering, Assiut University. We aim to develop technical and engineering skills for students through practical projects and local and international competitions.
+                    </p>
+                    <div class="mission-vision">
+                        <div class="mission">
+                            <h3 data-en="Our Vision" data-ar="رؤيتنا">Our Vision</h3>
+                            <p data-en="To be one of the most prominent leading teams in robotics, helping students develop their technical and engineering skills to efficiently integrate into the labor market."
+                               data-ar="أن نكون من أبرز الفرق الرائدة في مجال الروبوتات، وأن نساعد الطلاب على تطوير مهاراتهم التقنية والهندسية، مما يؤهلهم للاندماج في سوق العمل بكفاءة.">
+                                To be one of the most prominent leading teams in robotics, helping students develop their technical and engineering skills to efficiently integrate into the labor market.
+                            </p>
+                        </div>
+                        <div class="vision">
+                            <h3 data-en="Our Mission" data-ar="رسالتنا">Our Mission</h3>
+                            <p data-en="To inspire future generations of engineers and programmers through hands-on experience, teamwork, and continuous innovation."
+                               data-ar="إلهام الأجيال القادمة من المهندسين والمبرمجين من خلال التجربة العملية، والعمل الجماعي، والابتكار المستمر.">
+                                To inspire future generations of engineers and programmers through hands-on experience, teamwork, and continuous innovation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-pulse" data-aos="fade-up"></div> -->
 
     <!-- What We Do Section -->
     <section class="what-we-do">
-        <h1 data-aos="fade-up">What We Do</h1>
+        <h1 data-aos="fade-up" data-en="What We Do" data-ar="ما الذي نفعله؟">What We Do</h1>
         <div class="activities-grid">
             <div class="activity-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="activity-icon">
                     <i class="fa fa-cogs"></i>
                 </div>
-                <h3>Robotics Design</h3>
-                <p>Building advanced autonomous and ROV systems using cutting-edge technology</p>
+                <h3 data-en="Robotics Design" data-ar="تصميم الروبوتات">Robotics Design</h3>
+                <p data-en="Building advanced autonomous and ROV systems using cutting-edge technology" 
+                   data-ar="تطوير وتصميم الروبوتات المتقدمة باستخدام أحدث التقنيات">
+                    Building advanced autonomous and ROV systems using cutting-edge technology
+                </p>
             </div>
             <div class="activity-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="activity-icon">
                     <i class="fa fa-flask"></i>
                 </div>
-                <h3>Research & Development</h3>
-                <p>Researching AI, control systems, and mechanical design to solve real-world problems</p>
+                <h3 data-en="Research & Development" data-ar="التطوير والبحث">Research & Development</h3>
+                <p data-en="Researching AI, control systems, and mechanical design to solve real-world problems"
+                   data-ar="إجراء البحوث والتطوير في مجالات الروبوتات والذكاء الاصطناعي">
+                    Researching AI, control systems, and mechanical design to solve real-world problems
+                </p>
             </div>
             <div class="activity-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="activity-icon">
                     <i class="fa fa-graduation-cap"></i>
                 </div>
-                <h3>Training & Education</h3>
-                <p>Providing hands-on workshops in software, embedded systems, and mechanics</p>
+                <h3 data-en="Training & Education" data-ar="التدريب والتعليم">Training & Education</h3>
+                <p data-en="Providing hands-on workshops in software, embedded systems, and mechanics"
+                   data-ar="تقديم دورات تدريبية متخصصة لتطوير مهارات الطلاب">
+                    Providing hands-on workshops in software, embedded systems, and mechanics
+                </p>
             </div>
             <div class="activity-card" data-aos="fade-up" data-aos-delay="400">
                 <div class="activity-icon">
                     <i class="fa fa-trophy"></i>
                 </div>
-                <h3>Competitions</h3>
-                <p>Competing globally in ROV, Minesweepers, and AI challenges</p>
+                <h3 data-en="Competitions" data-ar="المسابقات">Competitions</h3>
+                <p data-en="Competing globally in ROV, Minesweepers, and AI challenges"
+                   data-ar="المشاركة في المسابقات المحلية والدولية">
+                    Competing globally in ROV, Minesweepers, and AI challenges
+                </p>
             </div>
         </div>
     </section>
@@ -163,17 +207,26 @@
     <div class="divider-pulse" data-aos="fade-up"></div>
 
     <section id="committees">
-        <h1 data-aos="fade-up">Our Committees</h1>
-        <p class="subtitle" data-aos="fade-up">Discover the roles that drive our success.</p>
+        <h1 data-aos="fade-up" data-en="Our Committees" data-ar="لجان الفريق">Our Committees</h1>
+        <p class="subtitle" data-aos="fade-up" data-en="Discover the roles that drive our success." data-ar="اكتشف الأدوار التي تدفعنا نحو النجاح.">Discover the roles that drive our success.</p>
 
         <div id="committees-container" data-aos="fade-up"></div>
+
+        <div class="section-cta" data-aos="fade-up">
+            <a href="committees/" class="learn-more-btn"
+               data-en="Learn More About Our Committees"
+               data-ar="اعرف المزيد عن لجاننا">
+                Learn More About Our Committees
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
     </section>
 
     <div class="divider-pulse" data-aos="fade-up"></div>
 
     <section>
-        <h1 data-aos="fade-up">Achievements</h1>
-        <p class="subtitle" data-aos="fade-up">we have achieved a perfect place in these competition</p>
+        <h1 data-aos="fade-up" data-en="Achievements" data-ar="الإنجازات">Achievements</h1>
+        <p class="subtitle" data-aos="fade-up" data-en="we have achieved a perfect place in these competition" data-ar="لقد حققنا مراكز مميزة في هذه المسابقات">we have achieved a perfect place in these competition</p>
         <div id="Ach_cards" data-aos="fade-up">
             <!-- Content loaded via achievements-loader.js -->
         </div>
@@ -183,8 +236,8 @@
 
     <!-- Team Board Section -->
     <section id="team-board">
-        <h1 data-aos="fade-up">Team Board</h1>
-        <p class="subtitle" data-aos="fade-up">Meet the dedicated individuals behind our success.</p>
+        <h1 data-aos="fade-up" data-en="Team Board" data-ar="مجلس الفريق">Team Board</h1>
+        <p class="subtitle" data-aos="fade-up" data-en="Meet the dedicated individuals behind our success." data-ar="تعرف على الأفراد المتفانين وراء نجاحنا.">Meet the dedicated individuals behind our success.</p>
         <div id="team-board-container" data-aos="fade-up">
             <!-- Content loaded via main/team-loader.js -->
         </div>
@@ -193,8 +246,8 @@
     <div class="divider-pulse" data-aos="fade-up"></div>
 
     <section id="pioneers">
-        <h1 data-aos="fade-up">Pioneers</h1>
-        <p class="subtitle" data-aos="fade-up">Those who paved the way for our success.</p>
+        <h1 data-aos="fade-up" data-en="Pioneers" data-ar="الرواد">Pioneers</h1>
+        <p class="subtitle" data-aos="fade-up" data-en="Those who paved the way for our success." data-ar="أولئك الذين مهدوا الطريق لنجاحنا.">Those who paved the way for our success.</p>
         <div id="pioneers-container" data-aos="fade-up">
             <!-- Content loaded via main/pioneers-loader.js -->
         </div>
@@ -204,8 +257,6 @@
     <div id="myUniqueFooterID"></div>
 
     <!--Scripts-->
-    <script src="./utiles/constants.js"></script>
-    <script src="./config/server-config.js"></script>
     <script src="main/View.js"></script>
 
     <!--Loaders-->

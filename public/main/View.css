@@ -483,6 +483,42 @@ h1 {
     padding: 2rem;
 }
 
+/* Section CTA Button */
+.section-cta {
+    text-align: center;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.learn-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #39a7ff, #6366f1);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(57, 167, 255, 0.3);
+}
+
+.learn-more-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(57, 167, 255, 0.4);
+    gap: 14px;
+}
+
+.learn-more-btn i {
+    transition: transform 0.3s ease;
+}
+
+.learn-more-btn:hover i {
+    transform: translateX(4px);
+}
+
 /* ==================== Responsive Enhancements ==================== */
 
 @media screen and (max-width: 768px) {
@@ -888,6 +924,13 @@ body.dark .learnMore {
 
 #pioneers .author.role {
     color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.3rem;
+}
+
+#pioneers .author.year {
+    color: var(--text-weak);
     font-size: 0.9rem;
     font-weight: 500;
     margin-top: 0.2rem;

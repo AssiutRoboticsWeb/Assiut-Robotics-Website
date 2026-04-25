@@ -1,0 +1,482 @@
+{
+     "academic": {
+          "title": "Academic Committees",
+          "titleAr": "اللجان الأكاديمية",
+          "description": {
+               "en": "Technical committees responsible for building strong engineering foundations through practical learning, projects, and hands-on training.",
+               "ar": "لجان تقنية تهدف إلى بناء أساس هندسي قوي من خلال التعلم العملي والمشاريع والتدريب التطبيقي."
+          },
+          "sections": {
+               "electrical": {
+                    "title": {
+                         "en": "Electrical Committee",
+                         "ar": "اللجنة الأكاديمية الكهربية"
+                    },
+                    "description": {
+                         "en": "Focuses on embedded systems, electronics, and autonomous technologies, preparing members for real-world robotics and industrial applications.",
+                         "ar": "تركز على الأنظمة المدمجة والإلكترونيات والأنظمة الذاتية، وتؤهل الأعضاء للتطبيقات العملية في الروبوتات والصناعة."
+                    },
+                    "fields": [
+                         {
+                              "title": {
+                                   "en": "Embedded Systems",
+                                   "ar": "الأنظمة المدمجة"
+                              },
+                              "description": {
+                                   "en": "Programming microcontrollers and interfacing hardware components to build intelligent robotic and embedded solutions.",
+                                   "ar": "برمجة المتحكمات الدقيقة وربط المكونات الإلكترونية لبناء أنظمة روبوتية وذكية."
+                              }
+                         },
+                         {
+                              "title": {
+                                   "en": "Hardware Design",
+                                   "ar": "تصميم الهاردوير"
+                              },
+                              "description": {
+                                   "en": "Designing, assembling, and testing electronic circuits from basic components to advanced systems.",
+                                   "ar": "تصميم وتجميع واختبار الدوائر الإلكترونية من المكونات الأساسية إلى الأنظمة المتقدمة."
+                              }
+                         },
+                         {
+                              "title": {
+                                   "en": "Autonomous Systems",
+                                   "ar": "الأنظمة الذاتية"
+                              },
+                              "description": {
+                                   "en": "Building systems capable of decision-making using robotics frameworks and computer vision technologies.",
+                                   "ar": "بناء أنظمة قادرة على اتخاذ القرار باستخدام أطر الروبوتات والرؤية الحاسوبية."
+                              },
+                              "items": {
+                                   "en": [
+                                        "ROS (Robot Operating System) – robotics middleware framework",
+                                        "Computer Vision – enabling machines to interpret visual data"
+                                   ],
+                                   "ar": [
+                                        "ROS نظام تشغيل الروبوتات – إطار عمل لبناء أنظمة روبوتية متقدمة",
+                                        "الرؤية الحاسوبية – تمكين الأنظمة من تحليل البيانات البصرية"
+                                   ]
+                              }
+                         }
+                    ]
+               },
+               "mechanical": {
+                    "title": {
+                         "en": "Mechanical Committee",
+                         "ar": "اللجنة الأكاديمية الميكانيكية"
+                    },
+                    "description": {
+                         "en": "Specializes in mechanical design, simulation, and engineering analysis for building efficient robotic systems.",
+                         "ar": "متخصصة في التصميم الميكانيكي والمحاكاة والتحليل الهندسي لبناء أنظمة روبوتية فعالة."
+                    },
+                    "fields": [
+                         {
+                              "title": "SolidWorks",
+                              "description": {
+                                   "en": "3D CAD modeling for designing mechanical parts and assemblies with simulation capabilities.",
+                                   "ar": "تصميم نماذج ثلاثية الأبعاد للأجزاء الميكانيكية مع إمكانية المحاكاة."
+                              }
+                         },
+                         {
+                              "title": "ANSYS",
+                              "description": {
+                                   "en": "Engineering simulation software used for stress, thermal, and structural analysis.",
+                                   "ar": "برنامج محاكاة هندسية لتحليل الإجهادات والحرارة والبنية الميكانيكية."
+                              }
+                         },
+                         {
+                              "title": {
+                                   "en": "Engineering Research",
+                                   "ar": "البحث الهندسي"
+                              },
+                              "description": {
+                                   "en": "Developing research skills to analyze technical papers, datasheets, and engineering references.",
+                                   "ar": "تطوير مهارات البحث العلمي وتحليل الأوراق والداتا شيتس الهندسية."
+                              }
+                         }
+                    ]
+               }
+          }
+     },
+     "software": {
+          "title": {
+               "en": "Software Committee",
+               "ar": "لجنة البرمجيات"
+          },
+          "description": {
+               "en": "Responsible for designing, developing, and maintaining digital systems, applications, and platforms for the organization.",
+               "ar": "مسؤولة عن تصميم وتطوير وصيانة الأنظمة والتطبيقات الرقمية الخاصة بالفريق."
+          },
+          "sections": {
+               "frontend": {
+                    "title": {
+                         "en": "Frontend",
+                         "ar": "الواجهة الأمامية"
+                    },
+                    "description": {
+                         "en": "Builds interactive and responsive user interfaces that connect users with backend systems.",
+                         "ar": "بناء واجهات مستخدم تفاعلية تربط المستخدم بالنظام الخلفي."
+                    },
+                    "fields": [
+                         {
+                              "title": {
+                                   "en": "Core Technologies",
+                                   "ar": "التقنيات الأساسية"
+                              },
+                              "items": {
+                                   "en": [
+                                        "HTML5",
+                                        "CSS3",
+                                        "JavaScript"
+                                   ],
+                                   "ar": [
+                                        "HTML5",
+                                        "CSS3",
+                                        "JavaScript"
+                                   ]
+                              }
+                         },
+                         {
+                              "title": {
+                                   "en": "Frameworks & Libraries",
+                                   "ar": "أطر العمل والمكتبات"
+                              },
+                              "items": {
+                                   "en": [
+                                        "Bootstrap",
+                                        "FontAwesome",
+                                        "React.js"
+                                   ],
+                                   "ar": [
+                                        "Bootstrap",
+                                        "FontAwesome",
+                                        "React.js"
+                                   ]
+                              }
+                         }
+                    ]
+               },
+               "backend": {
+                    "title": {
+                         "en": "Backend",
+                         "ar": "الواجهة الخلفية"
+                    },
+                    "description": {
+                         "en": "Handles server logic, APIs, and database architecture to ensure system reliability and performance.",
+                         "ar": "إدارة منطق السيرفر وقواعد البيانات والـ APIs لضمان أداء النظام."
+                    },
+                    "fields": [
+                         {
+                              "title": {
+                                   "en": "Server Technologies",
+                                   "ar": "تقنيات الخوادم"
+                              },
+                              "items": {
+                                   "en": [
+                                        "Node.js",
+                                        "Express.js"
+                                   ],
+                                   "ar": [
+                                        "Node.js",
+                                        "Express.js"
+                                   ]
+                              }
+                         },
+                         {
+                              "title": {
+                                   "en": "Databases",
+                                   "ar": "قواعد البيانات"
+                              },
+                              "items": {
+                                   "en": [
+                                        "MongoDB",
+                                        "SQL",
+                                        "NoSQL"
+                                   ],
+                                   "ar": [
+                                        "MongoDB",
+                                        "SQL",
+                                        "NoSQL"
+                                   ]
+                              }
+                         }
+                    ]
+               },
+               "mobile": {
+                    "title": {
+                         "en": "Mobile",
+                         "ar": "تطبيقات الموبايل"
+                    },
+                    "description": {
+                         "en": "Develops cross-platform mobile applications with modern UI and smooth performance.",
+                         "ar": "تطوير تطبيقات الهاتف بأداء سلس وواجهات حديثة."
+                    },
+                    "fields": [
+                         {
+                              "title": {
+                                   "en": "Frameworks",
+                                   "ar": "أطر العمل"
+                              },
+                              "items": {
+                                   "en": [
+                                        "React Native",
+                                        "Flutter"
+                                   ],
+                                   "ar": [
+                                        "React Native",
+                                        "Flutter"
+                                   ]
+                              }
+                         }
+                    ]
+               },
+               "uiux": {
+                    "title": {
+                         "en": "UI/UX",
+                         "ar": "تصميم الواجهات وتجربة المستخدم"
+                    },
+                    "description": {
+                         "en": "Designs user-centered interfaces focusing on usability, experience, and visual clarity.",
+                         "ar": "تصميم واجهات تركز على تجربة المستخدم وسهولة الاستخدام."
+                    },
+                    "fields": [
+                         {
+                              "title": {
+                                   "en": "Design Tools",
+                                   "ar": "أدوات التصميم"
+                              },
+                              "items": {
+                                   "en": [
+                                        "Figma",
+                                        "Adobe XD"
+                                   ],
+                                   "ar": [
+                                        "Figma",
+                                        "Adobe XD"
+                                   ]
+                              }
+                         }
+                    ]
+               }
+          }
+     },
+     "hr": {
+          "title": {
+               "en": "Human Resources",
+               "ar": "لجنة الموارد البشرية"
+          },
+          "description": {
+               "en": "Manages team members, evaluations, recruitment, and internal policies to ensure a healthy organizational structure.",
+               "ar": "إدارة الأعضاء والتقييمات والتجنيد والسياسات الداخلية لضمان تنظيم الفريق."
+          },
+          "tasks": [
+               {
+                    "en": "Recruitment & onboarding",
+                    "ar": "تجنيد الأعضاء الجدد وتأهيلهم"
+               },
+               {
+                    "en": "Performance evaluation",
+                    "ar": "تقييم الأداء الشهري"
+               },
+               {
+                    "en": "Member management",
+                    "ar": "إدارة شؤون الأعضاء"
+               }
+          ]
+     },
+     "marketing": {
+          "title": {
+               "en": "Digital Marketing",
+               "ar": "لجنة التسويق الإلكتروني"
+          },
+          "description": {
+               "en": "Responsible for promoting the team, building its brand identity, and managing digital presence across platforms.",
+               "ar": "مسؤولة عن التسويق وبناء الهوية البصرية وإدارة الحضور الرقمي للفريق."
+          },
+          "sections": {
+               "video": {
+                    "title": {
+                         "en": "Video Production",
+                         "ar": "إنتاج الفيديو"
+                    },
+                    "description": {
+                         "en": "Creates high-quality videos for documentation, promotion, and storytelling.",
+                         "ar": "إنتاج فيديوهات احترافية للتوثيق والتسويق."
+                    },
+                    "fields": [
+                         {
+                              "title": {
+                                   "en": "Tools & Software",
+                                   "ar": "الأدوات والبرامج"
+                              },
+                              "items": {
+                                   "en": [
+                                        "Adobe Premiere Pro",
+                                        "After Effects"
+                                   ],
+                                   "ar": [
+                                        "Adobe Premiere Pro",
+                                        "After Effects"
+                                   ]
+                              }
+                         }
+                    ]
+               },
+               "design": {
+                    "title": {
+                         "en": "Graphic Design",
+                         "ar": "تصميم الجرافيك"
+                    },
+                    "description": {
+                         "en": "Develops visual identity assets such as posters, logos, and branding materials.",
+                         "ar": "تصميم الهوية البصرية والبوسترات والعلامة التجارية."
+                    },
+                    "fields": [
+                         {
+                              "title": {
+                                   "en": "Tools & Software",
+                                   "ar": "الأدوات والبرامج"
+                              },
+                              "items": {
+                                   "en": [
+                                        "Adobe Photoshop",
+                                        "Adobe Illustrator"
+                                   ],
+                                   "ar": [
+                                        "Adobe Photoshop",
+                                        "Adobe Illustrator"
+                                   ]
+                              }
+                         }
+                    ]
+               },
+               "social": {
+                    "title": {
+                         "en": "Social Media Management",
+                         "ar": "إدارة وسائل التواصل الاجتماعي"
+                    },
+                    "description": {
+                         "en": "Manages social platforms and content strategy to increase engagement and reach.",
+                         "ar": "إدارة منصات التواصل واستراتيجية المحتوى."
+                    },
+                    "fields": [
+                         {
+                              "title": {
+                                   "en": "Platforms",
+                                   "ar": "المنصات"
+                              },
+                              "items": {
+                                   "en": [
+                                        "Facebook",
+                                        "Instagram",
+                                        "LinkedIn",
+                                        "YouTube"
+                                   ],
+                                   "ar": [
+                                        "فيسبوك",
+                                        "إنستجرام",
+                                        "لينكد إن",
+                                        "يوتيوب"
+                                   ]
+                              }
+                         }
+                    ]
+               }
+          }
+     },
+     "oc": {
+          "title": {
+               "en": "Organizing Committee",
+               "ar": "لجنة التنظيم"
+          },
+          "description": {
+               "en": "Handles logistics, lab organization, event planning, and financial management of the team.",
+               "ar": "إدارة المعمل والفعاليات والتنظيم والماليات الخاصة بالفريق."
+          },
+          "fields": [
+               {
+                    "title": {
+                         "en": "Core Responsibilities",
+                         "ar": "المسؤوليات الأساسية"
+                    },
+                    "items": {
+                         "en": [
+                              "Event Planning & Coordination",
+                              "Logistics Management",
+                              "Lab & Equipment Management"
+                         ],
+                         "ar": [
+                              "تخطيط وتنسيق الفعاليات",
+                              "إدارة اللوجستيات",
+                              "إدارة المعمل والمعدات"
+                         ]
+                    }
+               },
+               {
+                    "title": {
+                         "en": "Key Skills",
+                         "ar": "المهارات المكتسبة"
+                    },
+                    "items": {
+                         "en": [
+                              "Time Management",
+                              "Problem Solving",
+                              "Leadership & Teamwork"
+                         ],
+                         "ar": [
+                              "إدارة الوقت",
+                              "حل المشكلات",
+                              "القيادة والعمل الجماعي"
+                         ]
+                    }
+               }
+          ]
+     },
+     "pr": {
+          "title": {
+               "en": "Public Relations",
+               "ar": "لجنة العلاقات العامة"
+          },
+          "description": {
+               "en": "Builds partnerships, manages external communication, and represents the team publicly.",
+               "ar": "بناء العلاقات مع الجهات الخارجية وتمثيل الفريق بشكل رسمي."
+          },
+          "fields": [
+               {
+                    "title": {
+                         "en": "Core Responsibilities",
+                         "ar": "المسؤوليات الأساسية"
+                    },
+                    "items": {
+                         "en": [
+                              "External Communication & Partnerships",
+                              "Sponsorships & Fundraising",
+                              "Representing the Team Officially"
+                         ],
+                         "ar": [
+                              "التواصل الخارجي وبناء الشراكات",
+                              "الرعايات وجمع التبرعات",
+                              "التمثيل الرسمي للفريق"
+                         ]
+                    }
+               },
+               {
+                    "title": {
+                         "en": "Key Skills",
+                         "ar": "المهارات المكتسبة"
+                    },
+                    "items": {
+                         "en": [
+                              "Negotiation & Persuasion",
+                              "Public Speaking",
+                              "Professional Networking"
+                         ],
+                         "ar": [
+                              "التفاوض والإقناع",
+                              "التحدث أمام الجمهور",
+                              "بناء شبكة علاقات مهنية"
+                         ]
+                    }
+               }
+          ]
+     }
+}

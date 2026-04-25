@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Assiut Robotics — Committees</title>
+     <meta name="description"
+          content="Explore the committees of Assiut Robotics — Academic, Software, HR, Marketing, OC, and PR teams driving innovation.">
+
+     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="../main/footerAndheader.css" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Raleway:900&display=swap" rel="stylesheet" />
+     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&amp;subset=latin-ext"
+          rel="stylesheet" />
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+     <link rel="shortcut icon" href="../all-images/logo.ico" />
+
+     <!-- Include jQuery -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!-- Include Server Configuration -->
+     <script src="../config/server-config.js"></script>
+     <script src="../utiles/constants.js"></script>
+     <script src="../main/language-manager.js"></script>
+</head>
+
+<body>
+
+     <!-- header -->
+     <div id="myUniqueHeaderID"></div>
+
+     <!-- Hero Section -->
+     <section class="page-hero">
+          <div class="hero-particles" aria-hidden="true"></div>
+          <div class="container">
+               <div class="hero-badge" data-aos="fade-down" data-aos-delay="0">
+                    <i class="fas fa-robot"></i>
+                    <span data-en="Our Committees" data-ar="لجاننا">Our Committees</span>
+               </div>
+               <h1 data-aos="fade-up" data-aos-delay="100" data-en="Assiut Robotics Committees"
+                    data-ar="لجان فريق أسيوط روبوتكس">
+                    Assiut Robotics Committees
+               </h1>
+               <p data-aos="fade-up" data-aos-delay="200"
+                    data-en="Discover the core engines that drive our team towards innovation and excellence."
+                    data-ar="تعرف على المحركات الأساسية التي تدفع الفريق نحو الابتكار والتميز.">
+                    Discover the core engines that drive our team towards innovation and excellence.
+               </p>
+          </div>
+     </section>
+
+     <!-- Committees Section -->
+     <section class="committees-section">
+          <div class="container">
+               <div class="committees-grid">
+
+                    <!-- ========== Academic Committee ========== -->
+                    <div class="committee-card" data-aos="fade-up" id="card-academic">
+                         <div class="committee-header-img">
+                              <img src="../all-images/committees/ac-elec.jpg" alt="Academic Committee"
+                                   class="card-img active" id="img-academic-elec" loading="lazy">
+                              <img src="../all-images/committees/ac-mech.jpg" alt="Academic Committee - Mechanical"
+                                   class="card-img" id="img-academic-mech" loading="lazy">
+                              <div class="card-img-overlay">
+                                   <span class="committee-icon"><i class="fas fa-graduation-cap"></i></span>
+                                   <div class="overlay-text">
+                                        <h4 data-en="Academic Committees" data-ar="اللجان الأكاديمية">Academic
+                                             Committees</h4>
+                                        <p data-en="The core pillar of the educational process"
+                                             data-ar="الركيزة الأساسية للعملية التعليمية">The core pillar of the
+                                             educational process</p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="card-body">
+                              <h3 data-en="Academic Committees" data-ar="اللجان الأكاديمية">Academic Committees</h3>
+                              <div class="tabs">
+                                   <button class="tab-btn active"
+                                        onclick="openTab(event, 'electrical', 'img-academic-elec')" data-en="Electrical"
+                                        data-ar="كهرباء">Electrical</button>
+                                   <button class="tab-btn" onclick="openTab(event, 'mechanical', 'img-academic-mech')"
+                                        data-en="Mechanical" data-ar="ميكانيكا">Mechanical</button>
+                              </div>
+                              <div id="electrical" class="tab-content active">
+                                   <h4 data-en="Electrical Academic Committee" data-ar="اللجنة الأكاديمية الكهربية">
+                                        Electrical Academic Committee</h4>
+                                   <p data-en="Aims to qualify members to work in technical fields related to electrical and electronic systems, through practical training and participation in projects and competitions."
+                                        data-ar="تهدف إلى تأهيل الأعضاء للعمل في المجالات التقنية المتعلقة بالأنظمة الكهربائية والإلكترونية، من خلال التدريب العملي والمشاركة في المشاريع والمسابقات.">
+                                        Aims to qualify members to work in technical fields related to electrical and
+                                        electronic systems, through practical training and participation in projects and
+                                        competitions.
+                                   </p>
+                              </div>
+                              <div id="mechanical" class="tab-content">
+                                   <h4 data-en="Mechanical Academic Committee" data-ar="اللجنة الأكاديمية الميكانيكية">
+                                        Mechanical Academic Committee</h4>
+                                   <p data-en="Aims to qualify members to work efficiently in engineering fields related to designing and analyzing mechanical systems, through practical training on design and simulation tools, and participation in applied projects."
+                                        data-ar="تهدف اللجنة الأكاديمية الميكانيكية إلى تأهيل الأعضاء للعمل بكفاءة في المجالات الهندسية المتعلقة بتصميم وتحليل الأنظمة الميكانيكية، وذلك من خلال التدريب العملي على أدوات التصميم والمحاكاة، والمشاركة في المشاريع التطبيقية.">
+                                        Aims to qualify members to work efficiently in engineering fields related to
+                                        designing and analyzing mechanical systems, through practical training on design
+                                        and simulation tools, and participation in applied projects.
+                                   </p>
+                              </div>
+                              <button class="read-more" onclick="showDetails('academic')" data-en="Read More"
+                                   data-ar="اقرأ المزيد">Read More</button>
+                         </div>
+                    </div>
+
+                    <!-- ========== Software Committee ========== -->
+                    <div class="committee-card" data-aos="fade-up" data-aos-delay="100" id="card-software">
+                         <div class="committee-header-img">
+                              <img src="../all-images/committees/software.jpg" alt="Software Committee"
+                                   class="card-img active" id="img-software-main" loading="lazy">
+                              <img src="../all-images/committees/software2.jpg" alt="Software Committee - Alt"
+                                   class="card-img" id="img-software-alt" loading="lazy">
+                              <div class="card-img-overlay">
+                                   <span class="committee-icon"><i class="fas fa-code"></i></span>
+                                   <div class="overlay-text">
+                                        <h4 data-en="Software Committee" data-ar="لجنة البرمجيات">Software Committee
+                                        </h4>
+                                        <p data-en="Software and application development"
+                                             data-ar="تطوير البرمجيات والتطبيقات">Software and application development
+                                        </p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="card-body">
+                              <h3 data-en="Software Committee" data-ar="لجنة البرمجيات">Software Committee</h3>
+                              <div class="tabs">
+                                   <button class="tab-btn active"
+                                        onclick="openTab(event, 'frontend', 'img-software-main')" data-en="Frontend"
+                                        data-ar="الواجهة الأمامية">Frontend</button>
+                                   <button class="tab-btn" onclick="openTab(event, 'backend', 'img-software-alt')"
+                                        data-en="Backend" data-ar="الواجهة الخلفية">Backend</button>
+                                   <button class="tab-btn" onclick="openTab(event, 'sw-mobile', 'img-software-main')"
+                                        data-en="Mobile" data-ar="تطبيقات الموبايل">Mobile</button>
+                                   <button class="tab-btn" onclick="openTab(event, 'uiux', 'img-software-alt')"
+                                        data-en="UI/UX" data-ar="تصميم الواجهات وتجربة المستخدم">UI/UX</button>
+                              </div>
+                              <div id="frontend" class="tab-content active">
+                                   <h4 data-en="Frontend Division" data-ar="قسم الواجهة الأمامية">Frontend Division
+                                   </h4>
+                                   <ul>
+                                        <li data-en="Convert designs into interactive interfaces"
+                                             data-ar="تحويل التصاميم إلى واجهات تفاعلية">Convert designs into
+                                             interactive interfaces</li>
+                                        <li data-en="Fetch data from the Backend and display it"
+                                             data-ar="جلب البيانات من الواجهة الخلفية وعرضها">Fetch data from the Backend
+                                             and display it</li>
+                                        <li data-en="Optimize performance and site speed"
+                                             data-ar="تحسين الأداء وسرعة الموقع">Optimize performance and site speed
+                                        </li>
+                                        <li data-en="Improve search engine visibility (SEO)"
+                                             data-ar="تحسين الظهور في البحث">Improve search engine visibility (SEO)</li>
+                                   </ul>
+                              </div>
+                              <div id="backend" class="tab-content">
+                                   <h4 data-en="Backend Division" data-ar="قسم الواجهة الخلفية">Backend Division
+                                   </h4>
+                                   <ul>
+                                        <li data-en="Organize and manage databases efficiently"
+                                             data-ar="تنظيم قاعدة البيانات والتعامل معها بكفاءة">Organize and manage
+                                             databases efficiently</li>
+                                        <li data-en="Develop APIs (Application Programming Interfaces)"
+                                             data-ar="طوّر واجهات الربط (APIs)">Develop APIs (Application Programming
+                                             Interfaces)</li>
+                                        <li data-en="Secure data and ensure privacy"
+                                             data-ar="تأمين البيانات وضمان خصوصيتها">Secure data and ensure privacy</li>
+                                        <li data-en="Manage data flow between system components"
+                                             data-ar="ادارة تدفّق البيانات بين أجزاء النظام">Manage data flow between
+                                             system components</li>
+                                   </ul>
+                              </div>
+                              <div id="sw-mobile" class="tab-content">
+                                   <h4 data-en="Mobile Division" data-ar="قسم Mobile">Mobile Division</h4>
+                                   <ul>
+                                        <li data-en="Convert designs into functional apps"
+                                             data-ar="تحويل التصاميم إلى تطبيقات عملية">Convert designs into functional
+                                             apps</li>
+                                        <li data-en="Fetch data from the Backend and display it"
+                                             data-ar="جلب البيانات من الواجهة الخلفية وعرضها">Fetch data from the Backend
+                                             and display it</li>
+                                        <li data-en="Provide a comfortable user experience on mobile"
+                                             data-ar="توفير تجربة مستخدم مريحة على الهاتف">Provide a comfortable user
+                                             experience on mobile</li>
+                                        <li data-en="Support Android and iOS platforms"
+                                             data-ar="دعم أنظمة Android و iOS">Support Android and iOS platforms</li>
+                                   </ul>
+                              </div>
+                              <div id="uiux" class="tab-content">
+                                   <h4 data-en="UI/UX Division" data-ar="قسم UI/UX">UI/UX Division</h4>
+                                   <ul>
+                                        <li data-en="Focus on user experience from start to finish"
+                                             data-ar="الإهتمام بتجربة المستخدم من البداية للنهاية">Focus on user
+                                             experience from start to finish</li>
+                                        <li data-en="Coordinate colors and element layouts"
+                                             data-ar="تنسيق الألوان وتوزيع العناصر">Coordinate colors and element
+                                             layouts</li>
+                                        <li data-en="Design appealing animations and details"
+                                             data-ar="تصميم الحركات والتفاصيل الجذابة">Design appealing animations and
+                                             details</li>
+                                        <li data-en="Collaborate with developers to improve usability"
+                                             data-ar="التعاون مع المطورين لتحسين تجربة الاستخدام">Collaborate with
+                                             developers to improve usability</li>
+                                   </ul>
+                              </div>
+                              <button class="read-more" onclick="showDetails('software')" data-en="Read More"
+                                   data-ar="اقرأ المزيد">Read More</button>
+                         </div>
+                    </div>
+
+                    <!-- ========== HR Committee ========== -->
+                    <div class="committee-card" data-aos="fade-up" data-aos-delay="200" id="card-hr">
+                         <div class="committee-header-img">
+                              <img src="../all-images/committees/hr.jpg" alt="HR Committee" class="card-img active"
+                                   loading="lazy">
+                              <div class="card-img-overlay">
+                                   <span class="committee-icon"><i class="fas fa-users-cog"></i></span>
+                                   <div class="overlay-text">
+                                        <h4 data-en="Human Resources Committee" data-ar="لجنة الموارد البشرية">Human
+                                             Resources Committee</h4>
+                                        <p data-en="HR management and development"
+                                             data-ar="إدارة وتطوير الموارد البشرية">HR management and development</p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="card-body">
+                              <h3 data-en="Human Resources (HR)" data-ar="الموارد البشرية (HR)">Human Resources (HR)
+                              </h3>
+                              <h4 data-en="Key Responsibilities" data-ar="المهام الرئيسية">Key Responsibilities</h4>
+                              <ul>
+                                   <li data-en="Follow-up and evaluation of members" data-ar="متابعة وتقييم الأعضاء">
+                                        Follow-up and evaluation of members</li>
+                                   <li data-en="Organizing elections" data-ar="تنظيم الانتخابات">Organizing elections
+                                   </li>
+                                   <li data-en="Managing admissions" data-ar="إدارة القبول">Managing admissions</li>
+                                   <li data-en="Professional development" data-ar="التطوير المهني">Professional
+                                        development</li>
+                              </ul>
+                              <button class="read-more" onclick="showDetails('hr')" data-en="Read More"
+                                   data-ar="اقرأ المزيد">Read More</button>
+                         </div>
+                    </div>
+
+                    <!-- ========== Digital Marketing Committee ========== -->
+                    <div class="committee-card" data-aos="fade-up" data-aos-delay="300" id="card-marketing">
+                         <div class="committee-header-img">
+                              <img src="../all-images/committees/marketing.jpg" alt="Marketing Committee"
+                                   class="card-img active" id="img-marketing-main" loading="lazy">
+                              <img src="../all-images/committees/media.jpg" alt="Media Committee" class="card-img"
+                                   id="img-marketing-media" loading="lazy">
+                              <div class="card-img-overlay">
+                                   <span class="committee-icon"><i class="fas fa-bullhorn"></i></span>
+                                   <div class="overlay-text">
+                                        <h4 data-en="Digital Marketing Committee" data-ar="لجنة التسويق الإلكتروني">
+                                             Digital Marketing Committee</h4>
+                                        <p data-en="Content management and marketing" data-ar="إدارة المحتوى والتسويق">
+                                             Content management and marketing</p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="card-body">
+                              <h3 data-en="Digital Marketing" data-ar="التسويق الإلكتروني">Digital Marketing</h3>
+                              <div class="tabs">
+                                   <button class="tab-btn active"
+                                        onclick="openTab(event, 'social', 'img-marketing-main')" data-en="Social"
+                                        data-ar="سوشيال">Social</button>
+                                   <button class="tab-btn" onclick="openTab(event, 'video', 'img-marketing-media')"
+                                        data-en="Video" data-ar="فيديو">Video</button>
+                                   <button class="tab-btn" onclick="openTab(event, 'design', 'img-marketing-main')"
+                                        data-en="Design" data-ar="تصميم">Design</button>
+                              </div>
+                              <div id="social" class="tab-content active">
+                                   <h4 data-en="Social Media Division" data-ar="قسم السوشيال">Social Media Division</h4>
+                                   <p data-en="Managing social media platforms and sharing team achievements"
+                                        data-ar="إدارة منصات التواصل الاجتماعي ونشر إنجازات الفريق">
+                                        Managing social media platforms and sharing team achievements
+                                   </p>
+                              </div>
+                              <div id="video" class="tab-content">
+                                   <h4 data-en="Video Division" data-ar="قسم الفيديو">Video Division</h4>
+                                   <p data-en="Producing and editing visual content for the team"
+                                        data-ar="إنتاج وتحرير المحتوى المرئي للفريق">
+                                        Producing and editing visual content for the team
+                                   </p>
+                              </div>
+                              <div id="design" class="tab-content">
+                                   <h4 data-en="Design Division" data-ar="قسم التصميم">Design Division</h4>
+                                   <p data-en="Designing visual identity and creative content"
+                                        data-ar="تصميم الهوية البصرية والمحتوى الإبداعي">
+                                        Designing visual identity and creative content
+                                   </p>
+                              </div>
+                              <button class="read-more" onclick="showDetails('marketing')" data-en="Read More"
+                                   data-ar="اقرأ المزيد">Read More</button>
+                         </div>
+                    </div>
+
+                    <!-- ========== OC Committee ========== -->
+                    <div class="committee-card" data-aos="fade-up" data-aos-delay="400" id="card-oc">
+                         <div class="committee-header-img">
+                              <img src="../all-images/committees/oc.jpg" alt="OC Committee" class="card-img active"
+                                   loading="lazy">
+                              <div class="card-img-overlay">
+                                   <span class="committee-icon"><i class="fas fa-calendar-alt"></i></span>
+                                   <div class="overlay-text">
+                                        <h4 data-en="Organizing Committee" data-ar="لجنة التنظيم">Organizing Committee
+                                        </h4>
+                                        <p data-en="Organizing and coordinating events and activities"
+                                             data-ar="تنظيم وتنسيق الفعاليات والأنشطة">Organizing and coordinating
+                                             events and activities</p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="card-body">
+                              <h3 data-en="Organizing Committee (OC)" data-ar="لجنة التنظيم (OC)">Organizing Committee
+                                   (OC)</h3>
+                              <h4 data-en="Key Responsibilities" data-ar="المهام الرئيسية">Key Responsibilities</h4>
+                              <ul>
+                                   <li data-en="Organizing events and seminars" data-ar="تنظيم الفعاليات والندوات">
+                                        Organizing events and seminars</li>
+                                   <li data-en="Coordinating activities and workshops" data-ar="تنسيق الأنشطة والورش">
+                                        Coordinating activities and workshops</li>
+                                   <li data-en="Managing resources and logistics" data-ar="إدارة الموارد واللوجستيات">
+                                        Managing resources and logistics</li>
+                                   <li data-en="Collaborating with external parties"
+                                        data-ar="التعاون مع الجهات الخارجية">Collaborating with external parties</li>
+                              </ul>
+                              <button class="read-more" onclick="showDetails('oc')" data-en="Read More"
+                                   data-ar="اقرأ المزيد">Read More</button>
+                         </div>
+                    </div>
+
+                    <!-- ========== PR Committee ========== -->
+                    <div class="committee-card" data-aos="fade-up" data-aos-delay="500" id="card-pr">
+                         <div class="committee-header-img">
+                              <img src="../all-images/committees/pr.jpg" alt="PR Committee" class="card-img active"
+                                   loading="lazy">
+                              <div class="card-img-overlay">
+                                   <span class="committee-icon"><i class="fas fa-handshake"></i></span>
+                                   <div class="overlay-text">
+                                        <h4 data-en="Public Relations Committee" data-ar="لجنة العلاقات العامة">Public
+                                             Relations Committee</h4>
+                                        <p data-en="Building relationships and external communication"
+                                             data-ar="بناء العلاقات والتواصل الخارجي">Building relationships and
+                                             external communication</p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="card-body">
+                              <h3 data-en="Public Relations (PR)" data-ar="العلاقات العامة (PR)">Public Relations (PR)
+                              </h3>
+                              <h4 data-en="Key Responsibilities" data-ar="المهام الرئيسية">Key Responsibilities</h4>
+                              <ul>
+                                   <li data-en="Completing permits and official procedures"
+                                        data-ar="إتمام التصاريح والإجراءات الرسمية">Completing permits and official
+                                        procedures</li>
+                                   <li data-en="Organizing events and seminars" data-ar="تنظيم الفعاليات والندوات">
+                                        Organizing events and seminars</li>
+                                   <li data-en="Promoting events and activities" data-ar="الترويج للفعاليات">Promoting
+                                        events and activities</li>
+                                   <li data-en="Enhancing cooperation and partnership opportunities"
+                                        data-ar="تعزيز فرص التعاون والشراكات">Enhancing cooperation and partnership
+                                        opportunities</li>
+                              </ul>
+                              <button class="read-more" onclick="showDetails('pr')" data-en="Read More"
+                                   data-ar="اقرأ المزيد">Read More</button>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </section>
+
+     <!--  Detail Modal  -->
+     <div class="modal" id="modal">
+          <div class="modal-content">
+               <div class="modal-header">
+                    <h3 class="committee-name" id="modal-title"></h3>
+                    <span class="close" aria-label="Close">&times;</span>
+               </div>
+               <div class="modal-body" id="modal-content"></div>
+          </div>
+     </div>
+
+     <!--Footer-->
+     <div id="myUniqueFooterID"></div>
+
+     <script src="../main/footerAndheader.js" defer></script>
+     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+     <script src="script.js"></script>
+</body>
+
+</html>

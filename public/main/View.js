@@ -7,7 +7,16 @@ const elts = {
     text2: document.getElementById("text2"),
 };
 
-const texts = ["Let's", "Know", "More", "About", "Assiut", "Robotics", "Team", ":)"];
+const bilingualTexts = {
+    en: ["Innovating", "Building", "Leading", "Assiut", "Robotics", "Team", ":)"],
+    ar: ["نبتكر", "نبني", "نقود", "أسيوط", "روبوتكس", "فريق", ":)"]
+};
+
+let texts = bilingualTexts[window.LanguageManager?.currentLang || 'en'];
+window.addEventListener('languageChanged', (e) => {
+    texts = bilingualTexts[e.detail.language];
+    textIndex = 0; // Reset index on language change
+});
 
 const morphTime = 1;
 const cooldownTime = 0.25;

@@ -112,6 +112,7 @@ function implement_views() {
             setupScrollNav();
             setupLogin();
             setupToken();
+            if (window.LanguageManager) window.LanguageManager.updateElements();
             counter++;
             if (counter == 2) {
                 document.body.classList.add("loaded");
@@ -131,6 +132,7 @@ function implement_views() {
             console.log("All HTML content loaded successfully. #Footer");
             setupScrollTop();
             initializeDarkMode();
+            if (window.LanguageManager) window.LanguageManager.updateElements();
             counter++;
             if (counter == 2) {
                 document.body.classList.add("loaded");

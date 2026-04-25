@@ -275,7 +275,7 @@ const committeeDetails = {
                     <p>تعتبر لجنة البرمجيات هي المسؤولة عن تطوير وصيانة البرمجيات والتطبيقات التي تدعم أنشطة الفريق. تعمل اللجنة على تقديم حلول برمجية مبتكرة وفعالة من خلال اربعة أقسام متخصصة.</p>
                     
                     <div class="committee-tabs">
-                        <button class="tab-btn active" onclick="switchTab('frontend')">FrontEnd</button>
+                        <button class="tab-btn active" onclick="switchTab('frontend')">Frontend</button>
                         <button class="tab-btn" onclick="switchTab('backend')">BackEnd</button>
                         <button class="tab-btn" onclick="switchTab('mobile')">Mobile</button>
                         <button class="tab-btn" onclick="switchTab('uiux')">UI/UX</button>
@@ -324,7 +324,7 @@ const committeeDetails = {
                             </li>
                             <li>
                                 <strong>توفير ال APIs المناسبه</strong>
-                                <p>تصميم وتطوير واجهات برمجة التطبيقات (APIs) التي تضمن وصول المعلومات المناسبه لمطوري الFrontEnd , Mobile.</p>
+                                <p>تصميم وتطوير واجهات برمجة التطبيقات (APIs) التي تضمن وصول المعلومات المناسبه لمطوري الFrontend , Mobile.</p>
                             </li>
                             <li>
                                 <strong>تأمين قاعدة البيانات</strong>

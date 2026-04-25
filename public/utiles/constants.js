@@ -58,7 +58,7 @@
 
     const UI_CONFIG = {
         TOAST_DURATION: 2500,
-        SCROLL_THRESHOLD: 150,
+        SCROLL_THRESHOLD: 100,
         ANIMATION_DURATION: 320,
         LOGIN_REDIRECT_DELAY: 800
     };
