@@ -180,3 +180,8 @@ body{
 .Active{
     background: linear-gradient(to right, #a6f7e9, #9dcdf5) !important;
 }
+
+
+.hidden{
+    display: none;
+}

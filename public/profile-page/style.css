@@ -1,26 +1,6 @@
-:root {
-  --primary-bg: #f3f4f6;
-  --card-bg: #ffffff;
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --border-color: #e5e7eb;
-  --accent-color: #2daee2;
-  --success-bg: #dcfce7;
-  --success-text: #166534;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
 
-.dark-mode {
-  --primary-bg: #1f2937;
-  --card-bg: #111827;
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --border-color: #374151;
-  --accent-color: #2daee2;
-  --success-bg: #065f46;
-  --success-text: #34d399;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
+
+
 
 /* Reset */
 * {
@@ -296,36 +276,6 @@ main {
   opacity: 0.9;
 }
 
-/* Floating dark mode button */
-.dark-mode-toggle {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background-color: var(--accent-color);
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s;
-}
-.dark-mode-toggle:hover {
-  transform: scale(1.1);
-}
-
-.toggle-icon {
-  font-size: 1.5rem;
-  color: #fff;
-  transition: transform 0.32s ease, opacity 0.32s ease, color 0.3s ease;
-  will-change: transform, opacity;
-}
-
-
 /* Modal */
 .modal {
   display: none;
@@ -587,3 +537,4 @@ main {
 .disabled {
   display: none !important;
 }
+

@@ -124,6 +124,7 @@ function implement_views() {
         .done(function () {
             console.log("All HTML content loaded successfully. #Footer");
             setupScrollTop();
+            initializeDarkMode();
         })
         .fail(function () {
             console.error("Error loading HTML content. #Footer");
@@ -177,7 +178,48 @@ function setupScrollTop() {
     });
 }
 
-window.onload = () => {
+
+
+// ---------------------- Dark Mode ----------------------
+function initializeDarkMode() {
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const darkModeIcon = darkModeToggle.querySelector("i");
+    const setDarkModeIcon = (isDark, animate = false) => {
+        if (!darkModeIcon) return;
+        if (animate && darkModeIcon.animate) {
+            darkModeIcon.animate(
+                [
+                    { transform: "rotate(0deg) scale(1)", opacity: 1 },
+                    { transform: "rotate(90deg) scale(0.75)", opacity: 0.35 },
+                    { transform: "rotate(180deg) scale(1)", opacity: 1 },
+                ],
+                { duration: 320, easing: "ease-in-out" }
+            );
+        }
+        darkModeIcon.classList.toggle("fa-moon", !isDark);
+        darkModeIcon.classList.toggle("fa-sun", isDark);
+    };
+
+    const isDark = localStorage.getItem("darkMode") === "true";
+    document.body.classList.toggle("dark-mode", isDark);
+    document.body.classList.toggle("dark", isDark);
+    darkModeToggle.setAttribute("aria-pressed", String(isDark));
+    setDarkModeIcon(isDark);
+
+    darkModeToggle.addEventListener("click", () => {
+        const toggled = !document.body.classList.contains("dark-mode");
+        document.body.classList.toggle("dark-mode", toggled);
+        document.body.classList.toggle("dark", toggled);
+        localStorage.setItem("darkMode", String(toggled));
+        darkModeToggle.setAttribute("aria-pressed", String(toggled));
+        setDarkModeIcon(toggled, true);
+    });
+}
+
+if (localStorage.getItem("darkMode") === "true") document.body.classList.add("dark");
+
+
+window.addEventListener('load', () => {
     implement_views();
     setupColumns();
-}
+});

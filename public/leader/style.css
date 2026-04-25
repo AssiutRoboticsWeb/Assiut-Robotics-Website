@@ -25,7 +25,7 @@ body {
 .tabs {
     display: flex;
     justify-content: flex-start;
-    overflow: scroll;
+    /* overflow: scroll; */
     gap: 10px;
     margin-bottom: 20px;
     padding: 10px;
@@ -178,3 +178,27 @@ h3 {
     text-align: start;
 }
 
+.member-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.member-card h4 {
+    margin: 0 0 5px;
+}
+
+.member-card p {
+    margin: 5px 0;
+}
+
+.info-container {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}

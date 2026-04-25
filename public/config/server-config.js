@@ -9,9 +9,9 @@
     const configs = {
         development: {
             apiBase: "http://localhost:3000",
-            tracksBase: "http://localhost:3001",
-            electricalBase: "http://localhost:3002",
-            legacyBase: "http://localhost:3003"
+            tracksBase: "http://localhost:3000",
+            electricalBase: "http://localhost:3000",
+            legacyBase: "http://localhost:3000"
         },
         production: {
             apiBase: "https://assiut-robotics-server.vercel.app", // Main centralized server
@@ -99,7 +99,7 @@
 
             // ===== LAB DATES API =====
             lapDates: {
-                base: `${apiBase}/lapDates`
+                base: `${apiBase}/lap-dates`
             },
 
             // ===== LEGACY API =====

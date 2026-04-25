@@ -9,21 +9,21 @@ var components = [];
 const container = document.getElementById("mainComponents");
 
 
-function borrow(e){
+function borrow(e) {
     console.log(e.target.id);
     var token = localStorage.getItem("token");
-    console.log("token ",token);
-    
-    var userAsurance = window.prompt("Are you sure Y/N","N");
-    if(userAsurance == 'Y'){
+    console.log("token ", token);
+
+    var userAsurance = window.prompt("Are you sure Y/N", "N");
+    if (userAsurance == 'Y') {
         // create the form 
         console.log({
-                componentId : e.target.id
-            });
+            componentId: e.target.id
+        });
 
         fetch(ServerConfig.getComponentsRequestToBorrow(), {
             method: "POST",
-            headers: {    
+            headers: {
                 "Content-Type": "application/json",
                 Authorization: "bearer " + token
             },
@@ -31,22 +31,21 @@ function borrow(e){
                 componentId: e.target.id
             })
         }).then(res => res.json())
-        .then((res)=> {
-            console.log(res);
-            if(res.message == "jwt expired")
-                alert("Please sign in first to be able to borrow")
-            if(res.satus == "200")
-            {
-                alert("borrowed successfully")
-            }
-            else{
-                alert(res.message);
-            }
-        })
-        .catch(err => console.error(err))
+            .then((res) => {
+                console.log(res);
+                if (res.message == "jwt expired")
+                    alert("Please sign in first to be able to borrow")
+                if (res.satus == "200") {
+                    alert("borrowed successfully")
+                }
+                else {
+                    alert(res.message);
+                }
+            })
+            .catch(err => console.error(err))
         // submit the form
     }
-    else if(userAsurance == 'N'){
+    else if (userAsurance == 'N') {
         return
     }
 }
@@ -57,11 +56,21 @@ const getComponents = async () => {
         components = res.data;
         console.log(components);
 
+        if (components.length == 0) {
+            container.innerHTML = `<div class="component box">No components found</div>`;
+            let search = document.querySelector(".search-input");
+            search.classList.add("hidden");
+
+            let taps = document.querySelector(".taps");
+            taps.classList.add("hidden");
+            return;
+        }
+
         // make taps
         let step = (window.innerWidth > 1000 ? 16 : 8);
         const taps = document.querySelector(".taps");
         // calculate the number of taps
-        for (let i = 0; i < Math.ceil(components.length / step) ; i++) {
+        for (let i = 0; i < Math.ceil(components.length / step); i++) {
             taps.innerHTML += `<button id="${i}">${i + 1}</button>`;
         }
         const btns = document.querySelectorAll(".taps button");
@@ -80,7 +89,7 @@ const getComponents = async () => {
                 // clear the container
                 container.innerHTML = "";
                 // loop through the components
-                for(let i = button.id * step; i < Math.min(step * (Number(button.id) + 1), components.length); i++) {
+                for (let i = button.id * step; i < Math.min(step * (Number(button.id) + 1), components.length); i++) {
                     container.innerHTML += `
                         <div class="component box" >
                         <img src="${components[i].image}" alt="">
@@ -92,43 +101,42 @@ const getComponents = async () => {
             })
         })
         // Click the first button by default
-        btns[0].click();
+        // btns[0].click();
 
+        const search = document.querySelector(".search-input");
+        search.addEventListener("input", () => {
+            var componentsFounded = components.filter((component) => {
+                return component.title.toLowerCase().includes(search.value.toLowerCase());
+            });
+            console.log("component founded", componentsFounded);
+
+            container.innerHTML = "";
+            componentsFounded.forEach(element => {
+
+                container.innerHTML += `
+                <div class="component box">
+                    <img src="${element.image}" alt="">
+                    <div class="name"> ${element.title}</div>
+                    <button class="borrow" onclick="borrow(event)" id = "${element._id}">Borrow</button>
+                </div>`
+            });
+        });
+
+        search.addEventListener("focusout", () => {
+            console.log("out of focus");
+
+            if (search.value.trim() === "") {
+                container.innerHTML = "";
+                getComponents();
+            }
+        });
     } else {
         console.log(response);
     }
 }
 
 
-getComponents();
-
-console.log("run ");
-
-const search = document.querySelector(".search-input");
-search.addEventListener("input", () => {
-    var componentsFounded = components.filter((component) => {
-        return component.title.toLowerCase().includes(search.value.toLowerCase());
-    });
-    console.log("component founded", componentsFounded);
-
-    container.innerHTML = "";
-    componentsFounded.forEach(element => {
-
-        container.innerHTML += `
-                <div class="component box">
-                    <img src="${element.image}" alt="">
-                    <div class="name"> ${element.title}</div>
-                    <button class="borrow" onclick="borrow(event)" id = "${element._id}">Borrow</button>
-                </div>`
-    });
-});
-
-search.addEventListener("focusout", () => {
-    console.log("out of focus");
-
-    if (search.value.trim() === "") {
-        container.innerHTML = "";
-        getComponents();
-    }
-
+window.addEventListener('load', () => {
+    getComponents();
+    console.log("run ");
 });

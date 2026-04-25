@@ -17,6 +17,8 @@ async function loadPioneers() {
      }
 }
 
+
+
 function renderPioneers(data, container) {
      // 1. Build the Slider Layout (RTL)
      container.innerHTML = `
@@ -72,59 +74,106 @@ function renderPioneers(data, container) {
 
                // Check overflow on the text element (line-clamp)
                // Simple check: is scrollHeight (content) > clientHeight (box)?
-               const isOverflowing = quote.scrollHeight > quote.clientHeight;
+               // const isOverflowing = quote.scrollHeight > quote.clientHeight;
+               const isOverflowing = quote.offsetHeight < quote.scrollHeight;
 
                if (!isOverflowing) {
                     btn.style.display = 'none';
                } else {
                     btn.style.display = 'block'; // Ensure visible if needed
+
+
+                    // btn.addEventListener('click', () => {
+                    //      const isCurrentlyExpanded = wrapper.classList.contains('expanded');
+
+                    //      // Helper to smooth collapse
+                    //      const collapse = (el, btn) => {
+                    //           // 1. Lock current height in pixels
+                    //           el.style.maxHeight = el.scrollHeight + "px";
+
+                    //           // 2. Force reflow
+                    //           void el.offsetHeight;
+
+                    //           // 3. Animate to the collapsed CSS height (8.5rem)
+                    //           // We set this explicitly so the browser has a target to animate to
+                    //           el.style.maxHeight = '8.5rem';
+
+                    //           if (btn) {
+                    //                btn.setAttribute('aria-expanded', 'false');
+                    //                btn.textContent = 'See more';
+                    //           }
+
+                    //           // 4. Cleanup after transition
+                    //           setTimeout(() => {
+                    //                el.classList.remove('expanded');
+                    //                el.style.maxHeight = null; // Revert to CSS handling
+                    //           }, 400); // Matches CSS transition duration
+                    //      };
+
+                    //      // 1. Collapse ALL other cards
+                    //      slides.forEach(otherCard => {
+                    //           if (otherCard === card) return; // Skip self
+                    //           const otherWrapper = otherCard.querySelector('.quote-wrapper');
+                    //           const otherBtn = otherCard.querySelector('.see-more');
+
+                    //           if (otherWrapper && otherWrapper.classList.contains('expanded')) {
+                    //                collapse(otherWrapper, otherBtn);
+                    //           }
+                    //      });
+
+                    //      // 2. Toggle SELF
+                    //      if (isCurrentlyExpanded) {
+                    //           collapse(wrapper, btn);
+                    //      } else {
+                    //           // Expand
+                    //           wrapper.classList.add('expanded');
+                    //           wrapper.style.maxHeight = wrapper.scrollHeight + "px"; // Expand to exact height
+                    //           btn.setAttribute('aria-expanded', 'true');
+                    //           btn.textContent = 'See less';
+                    //      }
+                    // });
+
                     btn.addEventListener('click', () => {
-                         const isCurrentlyExpanded = wrapper.classList.contains('expanded');
+                         const isExpanded = wrapper.classList.contains('expanded');
 
-                         // Helper to smooth collapse
-                         const collapse = (el, btn) => {
-                              // 1. Lock current height in pixels
-                              el.style.maxHeight = el.scrollHeight + "px";
-
-                              // 2. Force reflow
-                              void el.offsetHeight;
-
-                              // 3. Animate to the collapsed CSS height (8.5rem)
-                              // We set this explicitly so the browser has a target to animate to
-                              el.style.maxHeight = '8.5rem';
-
-                              if (btn) {
-                                   btn.setAttribute('aria-expanded', 'false');
-                                   btn.textContent = 'See more';
-                              }
-
-                              // 4. Cleanup after transition
-                              setTimeout(() => {
-                                   el.classList.remove('expanded');
-                                   el.style.maxHeight = null; // Revert to CSS handling
-                              }, 400); // Matches CSS transition duration
-                         };
-
-                         // 1. Collapse ALL other cards
+                         // Collapse others
                          slides.forEach(otherCard => {
-                              if (otherCard === card) return; // Skip self
+                              if (otherCard === card) return;
+
                               const otherWrapper = otherCard.querySelector('.quote-wrapper');
                               const otherBtn = otherCard.querySelector('.see-more');
 
-                              if (otherWrapper && otherWrapper.classList.contains('expanded')) {
-                                   collapse(otherWrapper, otherBtn);
+                              if (otherWrapper?.classList.contains('expanded')) {
+                                   otherWrapper.style.maxHeight = otherWrapper.scrollHeight + "px";
+                                   requestAnimationFrame(() => {
+                                        otherWrapper.style.maxHeight = null;
+                                        otherWrapper.classList.remove('expanded');
+                                   });
+
+                                   if (otherBtn) {
+                                        otherBtn.textContent = 'See more';
+                                        otherBtn.setAttribute('aria-expanded', 'false');
+                                   }
                               }
                          });
 
-                         // 2. Toggle SELF
-                         if (isCurrentlyExpanded) {
-                              collapse(wrapper, btn);
+                         // Toggle current
+                         if (isExpanded) {
+                              wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+                              requestAnimationFrame(() => {
+                                   wrapper.style.maxHeight = null;
+                                   wrapper.classList.remove('expanded');
+                              });
+
+                              btn.textContent = 'See more';
+                              btn.setAttribute('aria-expanded', 'false');
+
                          } else {
-                              // Expand
                               wrapper.classList.add('expanded');
-                              wrapper.style.maxHeight = wrapper.scrollHeight + "px"; // Expand to exact height
-                              btn.setAttribute('aria-expanded', 'true');
+                              wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+
                               btn.textContent = 'See less';
+                              btn.setAttribute('aria-expanded', 'true');
                          }
                     });
                }
@@ -137,27 +186,68 @@ function renderPioneers(data, container) {
      function update() {
           if (!slides.length) return;
 
-          const slideWidth = slides[0].getBoundingClientRect().width;
-          // console.log('slideWidth:', slideWidth);
           const viewport = container.querySelector('.slider-viewport');
+          const viewportWidth = viewport.clientWidth;
+          const slideWidth = slides[0].offsetWidth;
           const gap = parseFloat(getComputedStyle(track).gap || 0);
+          const paddingStart = parseFloat(getComputedStyle(track).paddingInlineStart || 0);
 
-          const visibleCount = Math.max(1, Math.floor(viewport.clientWidth / (slideWidth + gap)));
+          const visibleCount = Math.max(1, Math.floor((viewportWidth + gap) / (slideWidth + gap)));
           const maxIndex = Math.max(0, slides.length - visibleCount);
 
           index = Math.min(Math.max(0, index), maxIndex);
-          const offset = index * (slideWidth + gap);
 
-          // RTL: Postive transform moves track to the right, revealing items on the left
-          track.style.transform = `translateX(${offset}px)`;
+          const currentVisibleCount = Math.min(visibleCount, slides.length - index);
+          const groupWidth = currentVisibleCount * slideWidth + (currentVisibleCount - 1) * gap;
+          const targetOffset = (viewportWidth - groupWidth) / 2;
+          
+          const itemPosition = paddingStart + index * (slideWidth + gap);
+          const offset = itemPosition - targetOffset;
+
+          // RTL: Positive transform moves track to the right, revealing items on the left
+          const direction = 1;
+          track.style.transform = `translateX(${offset * direction}px)`;
+
           prevBtn.disabled = index === 0;
           nextBtn.disabled = index === maxIndex;
+
+          // close all expanded cards
+          slides.forEach(card => {
+               const wrapper = card.querySelector('.quote-wrapper');
+               const btn = card.querySelector('.see-more');
+
+               if (wrapper?.classList.contains('expanded')) {
+                    wrapper.classList.remove('expanded');
+                    wrapper.style.maxHeight = null;
+                    if (btn) {
+                         btn.textContent = 'See more';
+                         btn.setAttribute('aria-expanded', 'false');
+                    }
+               }
+          });
+     }
+
+     function recalcOverflow() {
+          slides.forEach(card => {
+               const quote = card.querySelector('.quote');
+               const btn = card.querySelector('.see-more');
+
+               if (!quote || !btn) return;
+
+               const isOverflowing = quote.offsetHeight < quote.scrollHeight;
+               btn.style.display = isOverflowing ? 'block' : 'none';
+          });
      }
 
      // 5. Navigation Events
      prevBtn.addEventListener('click', () => { index -= 1; update(); });
      nextBtn.addEventListener('click', () => { index += 1; update(); });
-     window.addEventListener('resize', update);
+
+
+     window.addEventListener('resize', () => {
+          update();
+          recalcOverflow();
+     });
 
      // 6. Swipe Support
      let dragging = false;
@@ -204,20 +294,17 @@ function renderPioneers(data, container) {
           const totalDx = currentX - startX;
           if (!slides.length) return;
 
-          const slideWidth = slides[0].getBoundingClientRect().width;
+          const slideWidth = slides[0].offsetWidth;
           const threshold = slideWidth * 0.25;
 
+          // Dragged Right -> Move Track Right -> Reveal Left -> Next Item
           if (totalDx > threshold) {
-               // Dragged Right -> Move Track Right -> Reveal Left -> Next Item
-               const gap = parseFloat(getComputedStyle(track).gap || 0);
-               const viewportWidth = viewport.clientWidth;
-               const visibleCount = Math.max(1, Math.floor(viewportWidth / (slideWidth + gap)));
-               const maxIndex = Math.max(0, slides.length - visibleCount);
-               index = Math.min(maxIndex, index + 1);
+               index += 1;
           } else if (totalDx < -threshold) {
-               // Dragged Left -> Move Track Left -> Reveal Right -> Prev Item
-               index = Math.max(0, index - 1);
+               index -= 1;
           }
+
           update();
+
      }, { passive: true });
 }
