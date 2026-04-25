@@ -67,6 +67,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
 
@@ -87,7 +88,16 @@ body {
     user-select: none;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #eef0e5;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, opacity 0.4s ease;
+    opacity: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 90px;
+}
+
+body.loaded {
+    opacity: 1;
 }
 
 /* ================= DARK MODE ROOT ================= */
@@ -209,6 +219,80 @@ body.dark .activity-card {
         font-size: 1.25rem;
     }
 
+}
+
+/* --- Toasts --- */
+.toast-container {
+    z-index: 9999;
+    bottom: 2rem !important;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Base toast */
+.toast {
+    min-width: 250px;
+    max-width: 400px;
+    border-radius: 12px;
+    padding: 0.5rem 0.75rem;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    animation: toastIn 0.35s ease forwards;
+    pointer-events: auto;
+
+    backdrop-filter: blur(20px) !important;
+    background: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Exit animation */
+.toast.hide {
+    animation: toastOut 0.25s ease forwards;
+}
+
+/* Entry */
+@keyframes toastIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    70% {
+        transform: translateY(-5px) scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Exit */
+@keyframes toastOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+}
+
+.text-bg-success {
+    background: rgba(40, 167, 69, 0.8) !important;
+}
+
+.text-bg-danger {
+    background: rgba(220, 53, 69, 0.8) !important;
 }
 
 /* Header */

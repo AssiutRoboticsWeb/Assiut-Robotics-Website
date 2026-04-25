@@ -81,7 +81,12 @@ function renderContainers(committees) {
         container.appendChild(membersHeading);
 
         if (committee && committee.length > 0) {
-            const order = { head: 1, vice: 2, member: 3, "not accepted": 4 };
+            const order = {
+                [AppConstants.MEMBER_ROLES.HEAD]: 1,
+                [AppConstants.MEMBER_ROLES.VICE]: 2,
+                [AppConstants.MEMBER_ROLES.MEMBER]: 3,
+                [AppConstants.MEMBER_ROLES.NOT_ACCEPTED]: 4
+            };
             // Sort by custom order
             committee.sort((a, b) => order[a.role] - order[b.role]);
             console.log(committee);
@@ -90,15 +95,15 @@ function renderContainers(committees) {
                 const memberCard = document.createElement('div');
                 memberCard.className = 'card';
 
-                if (member.role !== "not accepted" && member.committee != "manager") {
+                if (member.role !== AppConstants.MEMBER_ROLES.NOT_ACCEPTED && member.committee != AppConstants.COMMITTEES.MANAGER) {
                     memberCard.innerHTML = `
                         <p>${member.name} (${member.role}) ${compareIDs(member._id) ? '<span style="color: #1e88e5ff"><b> (You)</b></span>' : ''}</p>
                         ${!compareIDs(member._id) ? `<button onclick="approveMember('${member.name}','${member.email}', 'false')">Remove</button>` : ''}
-                        ${member.role !== 'head' && !compareIDs(member._id)
+                        ${member.role !== AppConstants.MEMBER_ROLES.HEAD && !compareIDs(member._id)
                             ? `<button onclick="setHead('${member._id}')">Set Head</button>`
                             : ''
                         }
-                        ${member.role !== 'vice' && !compareIDs(member._id) ? `<button onclick="setVice('${member._id}')">Set Vice</button>` : ''}
+                        ${member.role !== AppConstants.MEMBER_ROLES.VICE && !compareIDs(member._id) ? `<button onclick="setVice('${member._id}')">Set Vice</button>` : ''}
                         <button onclick="showMemberInfo(${JSON.stringify(member).replace(/"/g, '&quot;')})">Show Info</button>
                     `;
                 } else if (member.committee != "manager") {

@@ -1,68 +1,162 @@
-body {
-    font-family: Arial, sans-serif;
-    color: #1f003b;
-}
+/* =========================
+   ABOUT PAGE (SYSTEM ALIGNED)
+========================= */
 
 .page-content {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 20px auto;
-}
-
-.header {
-    background-color: #a9d2fc;
-    padding: 1em 0;
-    text-align: center;
-    box-shadow: 0 0 2.4em rgba(25, 0, 58, 0.1);
     width: 100%;
 }
 
-.header h1 {
-    margin: 0;
-    color: #1f003b;
-}
-
-.about-us {
-    padding: 2em 1em;
+/* HERO */
+.about-hero {
+    width: 100%;
+    padding: 90px 20px 50px;
     text-align: center;
+    /* background: linear-gradient(135deg, var(--accent-color), rgba(45, 174, 226, 0.15));
+    color: #fff; */
 }
 
-.about-us .container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    padding: 2em;
-    box-shadow: 0 0 2.4em rgba(25, 0, 58, 0.1);
-    border-radius: 0.6em;
+.about-hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
 }
 
-.about-us h2 {
-    color: #1f003b;
-    margin-bottom: 1em;
+.about-hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: auto;
+    opacity: 0.95;
 }
 
-.about-us p {
-    color: #333;
-    line-height: 1.6;
+/* SECTION WRAPPER */
+.about-section {
+    padding: 60px 20px;
+    /* background: var(--primary-bg); */
 }
 
-.footer {
-    background-color: #3f0077;
-    color: #ffffff;
-    text-align: center;
-    padding: 1em 0;
-    bottom: 0;
-    width: 90%;
-    box-shadow: 0 0 2.4em rgba(25, 0, 58, 0.2);
-    border-radius: 50px;
-    align-self: center;
-    display: block;
+/* GRID */
+.about-content,
+.about-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: center;
 }
 
-.footer p {
-    margin: 0;
+/* TEXT */
+.about-text h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+.about-text p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* MISSION / VISION */
+.mission-vision {
+    margin-top: 25px;
+    display: grid;
+    gap: 15px;
+}
+
+.mission-vision .card {
+    background: var(--card-bg);
+    color: var(--card-text);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: 0.3s ease;
+}
+
+.mission-vision .card:hover {
+    transform: translateY(-5px);
+    background: var(--card-hover-bg);
+    color: var(--card-hover-text);
+}
+
+.mission-vision i {
+    font-size: 24px;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+/* IMAGES */
+.about-image,
+.about-images {
+    display: grid;
+    gap: 15px;
+}
+
+.about-image img,
+.about-images img {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    transition: 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.about-image img:hover,
+.about-images img:hover {
+    transform: scale(1.03);
+}
+
+/* DIVIDER */
+.about-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    margin: 60px auto;
+    width: 80%;
+    opacity: 0.5;
+}
+
+/* DARK MODE FIXES */
+body.dark .about-hero {
+    /* background: linear-gradient(135deg, #0ea5e9, #111827); */
+}
+
+body.dark .mission-vision .card {
+    background: var(--card-bg);
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+
+    .about-content,
+    .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .about-hero h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .about-hero {
+        padding: 70px 15px 40px;
+    }
+
+    .about-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .about-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .mission-vision .card {
+        padding: 15px;
+    }
 }

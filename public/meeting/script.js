@@ -8,22 +8,6 @@ let currentSlot = null;
 
 const modal = new bootstrap.Modal(document.getElementById('timeSlotModal'));
 
-// ================= TOAST =================
-function showToast(message, type = "success") {
-     const toast = document.createElement("div");
-     toast.className = `toast text-bg-${type} show mb-2`;
-     toast.innerHTML = `<div class="toast-body">${message}</div>`;
-     document.getElementById("toastContainer").appendChild(toast);
-     setTimeout(() => toast.remove(), 3000);
-}
-
-// ================= DARK MODE =================
-function toggleDarkMode() {
-     document.body.classList.toggle("dark");
-     localStorage.setItem("darkMode", document.body.classList.contains("dark"));
-}
-if (localStorage.getItem("darkMode") === "true") document.body.classList.add("dark");
-
 // ================= FETCH =================
 async function fetchMeetings() {
      try {

@@ -8,12 +8,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <link rel="stylesheet" href="login.css">
-    <title> Sign In Form</title>
+
+
+    <title>Sign In Form</title>
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    
     <link rel="stylesheet" href="../main/footerAndheader.css" />
     <link rel="shortcut icon" href="../all-images/logo.ico" />
+    
+    
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -22,6 +33,8 @@
 
     <!-- header -->
     <div id="myUniqueHeaderID"></div>
+
+
     <div class="container">
 
         <form id="loginForm">
@@ -52,28 +65,12 @@
     <!--Footer-->
     <div id="myUniqueFooterID"></div>
 
+    <script src="../utiles/constants.js"></script>
     <script src="../config/server-config.js"></script>
     <script src="appForLogin.js">
 
     </script>
     <script src="../main/footerAndheader.js" defer></script>
-    <script>
-        document.querySelectorAll('.toggle-password').forEach(function(toggle) {
-            toggle.addEventListener('click', function() {
-                const inputBox = this.closest('.input-box');
-                const input = inputBox.querySelector('input');
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    this.classList.remove('bxs-show');
-                    this.classList.add('bxs-hide');
-                } else {
-                    input.type = 'password';
-                    this.classList.remove('bxs-hide');
-                    this.classList.add('bxs-show');
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

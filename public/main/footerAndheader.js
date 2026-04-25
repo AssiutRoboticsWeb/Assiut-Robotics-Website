@@ -101,6 +101,8 @@ function setupColumns() {
     });
 }
 
+let counter = 0;
+
 function implement_views() {
     $.get("../main/header.html", function (data) {
         $("#myUniqueHeaderID").html(data);
@@ -110,6 +112,10 @@ function implement_views() {
             setupScrollNav();
             setupLogin();
             setupToken();
+            counter++;
+            if (counter == 2) {
+                document.body.classList.add("loaded");
+            }
         })
         .fail(function () {
             console.error("Error loading HTML content. #Header");
@@ -125,6 +131,10 @@ function implement_views() {
             console.log("All HTML content loaded successfully. #Footer");
             setupScrollTop();
             initializeDarkMode();
+            counter++;
+            if (counter == 2) {
+                document.body.classList.add("loaded");
+            }
         })
         .fail(function () {
             console.error("Error loading HTML content. #Footer");
@@ -157,12 +167,34 @@ function setupLogin() {
     }
 }
 
+// ================= TOAST =================
+function showToast(message, type = "success") {
+    const container = document.getElementById("toastContainer");
+
+    const toast = document.createElement("div");
+    toast.className = `toast text-bg-${type} show`;
+    toast.innerHTML = `<div class="toast-body">${message}</div>`;
+
+    container.appendChild(toast);
+
+    // Auto remove with animation
+    setTimeout(() => {
+        toast.classList.add("hide");
+
+        toast.addEventListener("animationend", () => {
+            toast.remove();
+        });
+    }, AppConstants.UI_CONFIG.TOAST_DURATION);
+}
+
+window.showToast = showToast;
+
 function setupScrollTop() {
     var btn = document.getElementById('scrollToTopBtn');
     if (!btn) return;
 
     window.addEventListener('scroll', function () {
-        if (window.scrollY > 150) {
+        if (window.scrollY > AppConstants.UI_CONFIG.SCROLL_THRESHOLD) {
             btn.classList.add('visible');
         } else {
             // Arrived at top — remove launching state and hide button
@@ -193,7 +225,7 @@ function initializeDarkMode() {
                     { transform: "rotate(90deg) scale(0.75)", opacity: 0.35 },
                     { transform: "rotate(180deg) scale(1)", opacity: 1 },
                 ],
-                { duration: 320, easing: "ease-in-out" }
+                { duration: AppConstants.UI_CONFIG.ANIMATION_DURATION, easing: "ease-in-out" }
             );
         }
         darkModeIcon.classList.toggle("fa-moon", !isDark);

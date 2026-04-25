@@ -61,7 +61,7 @@ window.onclick = (event) => {
 
 // Display leader
 function displayLeader(members) {
-    const leaders = members.filter(member => member.role === 'leader' || member.role === 'viceLeader');
+    const leaders = members.filter(member => member.role === 'leader' || member.role === 'vice-leader');
     leaders.forEach(leader => {
         if (leader) {
             const leaderContainer = document.getElementById('leader-container');
@@ -80,7 +80,7 @@ function startAutoSlide(slider, interval = 3000) {
     setInterval(() => {
         const scrollAmount = 320;
         const maxScroll = slider.scrollWidth - slider.clientWidth;
-        
+
         if (slider.scrollLeft >= maxScroll) {
             slider.scrollLeft = 0;
         } else {
@@ -93,7 +93,7 @@ function startAutoSlide(slider, interval = 3000) {
 function displayHeads(members) {
     const heads = members.filter(member => member.role === 'head');
     const slider = document.getElementById('heads-slider');
-    
+
     heads.forEach((head, index) => {
         const headCard = document.createElement('div');
         headCard.className = 'member-card';
@@ -108,7 +108,7 @@ function displayHeads(members) {
 
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
-    
+
     prevBtn.onclick = () => slider.scrollLeft -= 320;
     nextBtn.onclick = () => slider.scrollLeft += 320;
 }
@@ -154,7 +154,7 @@ function calculateTaskScores(member) {
                                 score: score
                             });
                             trackTasks.totalScore += score;
-                            trackTasks.totalPoints += task.task.score-0; // افتراض أن كل مهمة في المسار = 10 نقاط
+                            trackTasks.totalPoints += task.task.score - 0; // افتراض أن كل مهمة في المسار = 10 نقاط
                         }
                     });
                 }
@@ -180,7 +180,7 @@ function calculateTaskScores(member) {
 function displayBestMembers(members) {
     const bestMembersContainer = document.getElementById('best-members-container');
     const committees = [...new Set(members.filter(m => m.committee).map(m => m.committee))];
-    
+
     committees.forEach((committee, index) => {
         const committeeMembers = members.filter(m => m.committee === committee);
         if (committeeMembers.length > 0) {
@@ -217,7 +217,7 @@ function displayBestMembers(members) {
 function displayCommitteeMembers(members) {
     const container = document.getElementById('committee-members-container');
     const committees = [...new Set(members.filter(m => m.committee).map(m => m.committee))];
-    
+
     committees.forEach((committee, index) => {
         const committeeMembers = members.filter(m => m.committee === committee);
         if (committeeMembers.length > 0) {
@@ -278,9 +278,9 @@ function showMemberDetails(member, showScore = true) {
                             <div class="task-item">
                                 <p>${task.title}</p>
                                 <div class="progress-bar">
-                                    <div class="progress" style="width: ${(task.rate/task.points)*100}%"></div>
+                                    <div class="progress" style="width: ${(task.rate / task.points) * 100}%"></div>
                                 </div>
-                                <span class="score-text">${task.rate}/${task.points} (${((task.rate/task.points)*100).toFixed(1)}%)</span>
+                                <span class="score-text">${task.rate}/${task.points} (${((task.rate / task.points) * 100).toFixed(1)}%)</span>
                             </div>
                         `).join('')}
                         <div class="total-task-score">
@@ -292,22 +292,22 @@ function showMemberDetails(member, showScore = true) {
                 ${scores.trackTasks.scores.length > 0 ? `
                     <h3>Track Tasks</h3>
                     <div class="tasks-list">
-                        ${member.startedTracks.map(track => 
-                            track.courses.map(course => 
-                                course.submittedTasks.map(task => 
-                                    
-                                    task.rate ? `
+                        ${member.startedTracks.map(track =>
+            track.courses.map(course =>
+                course.submittedTasks.map(task =>
+
+                    task.rate ? `
                                         <div class="task-item">
                                             <p>Track Task: ${task.task.name}</p>
                                             <div class="progress-bar">
-                                                <div class="progress" style="width: ${(task.rate/task.task.score)*100}%"></div>
+                                                <div class="progress" style="width: ${(task.rate / task.task.score) * 100}%"></div>
                                             </div>
-                                            <span class="score-text">${task.rate}/${task.task.score} (${((task.rate/task.task.score)*100).toFixed(1)}%)</span>
+                                            <span class="score-text">${task.rate}/${task.task.score} (${((task.rate / task.task.score) * 100).toFixed(1)}%)</span>
                                         </div>
                                     ` : ''
-                                ).join('')
-                            ).join('')
-                        ).join('')}
+                ).join('')
+            ).join('')
+        ).join('')}
                         <div class="total-task-score">
                             <p>Total Track Tasks Score: ${scores.trackTasks.totalScore}/${scores.trackTasks.totalPoints}</p>
                         </div>

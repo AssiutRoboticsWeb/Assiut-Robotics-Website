@@ -55,7 +55,3 @@ body {
      height: 35px;
      border-radius: 50%;
 }
-
-.toast-container {
-     z-index: 9999;
-}

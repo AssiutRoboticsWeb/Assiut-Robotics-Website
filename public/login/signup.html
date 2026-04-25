@@ -9,9 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="login.css">
-    <title> Sign Up Form</title>
+
+    <title>Sign Up Form</title>
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    
     <link rel="stylesheet" href="../main/footerAndheader.css" />
     <link rel="shortcut icon" href="../all-images/logo.ico" />
     <!-- Include jQuery -->
@@ -105,6 +112,7 @@
     <!--Footer-->
     <div id="myUniqueFooterID"></div>
 
+    <script src="../utiles/constants.js"></script>
     <script src="../config/server-config.js"></script>
     <script src="appForSignup.js">
 
@@ -112,8 +120,8 @@
 
     <script src="../main/footerAndheader.js" defer></script>
     <script>
-        document.querySelectorAll('.toggle-password').forEach(function(toggle) {
-            toggle.addEventListener('click', function() {
+        document.querySelectorAll('.toggle-password').forEach(function (toggle) {
+            toggle.addEventListener('click', function () {
                 const inputBox = this.closest('.input-box');
                 const input = inputBox.querySelector('input[type="password"], input[type="text"]');
                 if (input.type === 'password') {
