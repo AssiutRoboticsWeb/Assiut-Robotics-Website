@@ -80,63 +80,12 @@ function renderPioneers(data, container) {
                if (!isOverflowing) {
                     btn.style.display = 'none';
                } else {
-                    btn.style.display = 'block'; // Ensure visible if needed
-
-
-                    // btn.addEventListener('click', () => {
-                    //      const isCurrentlyExpanded = wrapper.classList.contains('expanded');
-
-                    //      // Helper to smooth collapse
-                    //      const collapse = (el, btn) => {
-                    //           // 1. Lock current height in pixels
-                    //           el.style.maxHeight = el.scrollHeight + "px";
-
-                    //           // 2. Force reflow
-                    //           void el.offsetHeight;
-
-                    //           // 3. Animate to the collapsed CSS height (8.5rem)
-                    //           // We set this explicitly so the browser has a target to animate to
-                    //           el.style.maxHeight = '8.5rem';
-
-                    //           if (btn) {
-                    //                btn.setAttribute('aria-expanded', 'false');
-                    //                btn.textContent = 'See more';
-                    //           }
-
-                    //           // 4. Cleanup after transition
-                    //           setTimeout(() => {
-                    //                el.classList.remove('expanded');
-                    //                el.style.maxHeight = null; // Revert to CSS handling
-                    //           }, 400); // Matches CSS transition duration
-                    //      };
-
-                    //      // 1. Collapse ALL other cards
-                    //      slides.forEach(otherCard => {
-                    //           if (otherCard === card) return; // Skip self
-                    //           const otherWrapper = otherCard.querySelector('.quote-wrapper');
-                    //           const otherBtn = otherCard.querySelector('.see-more');
-
-                    //           if (otherWrapper && otherWrapper.classList.contains('expanded')) {
-                    //                collapse(otherWrapper, otherBtn);
-                    //           }
-                    //      });
-
-                    //      // 2. Toggle SELF
-                    //      if (isCurrentlyExpanded) {
-                    //           collapse(wrapper, btn);
-                    //      } else {
-                    //           // Expand
-                    //           wrapper.classList.add('expanded');
-                    //           wrapper.style.maxHeight = wrapper.scrollHeight + "px"; // Expand to exact height
-                    //           btn.setAttribute('aria-expanded', 'true');
-                    //           btn.textContent = 'See less';
-                    //      }
-                    // });
+                    btn.style.display = 'block';
 
                     btn.addEventListener('click', () => {
                          const isExpanded = wrapper.classList.contains('expanded');
 
-                         // Collapse others
+                         // Close all others
                          slides.forEach(otherCard => {
                               if (otherCard === card) return;
 
@@ -145,6 +94,7 @@ function renderPioneers(data, container) {
 
                               if (otherWrapper?.classList.contains('expanded')) {
                                    otherWrapper.style.maxHeight = otherWrapper.scrollHeight + "px";
+
                                    requestAnimationFrame(() => {
                                         otherWrapper.style.maxHeight = null;
                                         otherWrapper.classList.remove('expanded');
@@ -160,10 +110,15 @@ function renderPioneers(data, container) {
                          // Toggle current
                          if (isExpanded) {
                               wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+
                               requestAnimationFrame(() => {
-                                   wrapper.style.maxHeight = null;
-                                   wrapper.classList.remove('expanded');
+                                   wrapper.style.maxHeight = "8.5rem"; // match CSS collapsed height
                               });
+
+                              setTimeout(() => {
+                                   wrapper.classList.remove('expanded');
+                                   wrapper.style.maxHeight = null;
+                              }, 400);
 
                               btn.textContent = 'See more';
                               btn.setAttribute('aria-expanded', 'false');
@@ -200,7 +155,7 @@ function renderPioneers(data, container) {
           const currentVisibleCount = Math.min(visibleCount, slides.length - index);
           const groupWidth = currentVisibleCount * slideWidth + (currentVisibleCount - 1) * gap;
           const targetOffset = (viewportWidth - groupWidth) / 2;
-          
+
           const itemPosition = paddingStart + index * (slideWidth + gap);
           const offset = itemPosition - targetOffset;
 
@@ -212,6 +167,22 @@ function renderPioneers(data, container) {
           nextBtn.disabled = index === maxIndex;
 
           // close all expanded cards
+          // slides.forEach(card => {
+          //      const wrapper = card.querySelector('.quote-wrapper');
+          //      const btn = card.querySelector('.see-more');
+
+          //      if (wrapper?.classList.contains('expanded')) {
+          //           wrapper.classList.remove('expanded');
+          //           wrapper.style.maxHeight = null;
+          //           if (btn) {
+          //                btn.textContent = 'See more';
+          //                btn.setAttribute('aria-expanded', 'false');
+          //           }
+          //      }
+          // });
+     }
+
+     function closeAllCards() {
           slides.forEach(card => {
                const wrapper = card.querySelector('.quote-wrapper');
                const btn = card.querySelector('.see-more');
@@ -219,6 +190,7 @@ function renderPioneers(data, container) {
                if (wrapper?.classList.contains('expanded')) {
                     wrapper.classList.remove('expanded');
                     wrapper.style.maxHeight = null;
+
                     if (btn) {
                          btn.textContent = 'See more';
                          btn.setAttribute('aria-expanded', 'false');
@@ -240,9 +212,17 @@ function renderPioneers(data, container) {
      }
 
      // 5. Navigation Events
-     prevBtn.addEventListener('click', () => { index -= 1; update(); });
-     nextBtn.addEventListener('click', () => { index += 1; update(); });
+     prevBtn.addEventListener('click', () => {
+          index -= 1;
+          closeAllCards();
+          update();
+     });
 
+     nextBtn.addEventListener('click', () => {
+          index += 1;
+          closeAllCards();
+          update();
+     });
 
      window.addEventListener('resize', () => {
           update();
