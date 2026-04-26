@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Assiut Robotics - AC Period</title>
+
+     <!-- Standard Site Fonts & Icons -->
+     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+     <!-- Standard Global CSS -->
+     <link rel="stylesheet" href="../main/footerAndheader.css">
+
+     <!-- Tailwind CSS for AC Period -->
+     <link rel="stylesheet" href="styles.css">
+     <!-- Include jQuery -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!-- Include Server Configuration -->
+     <script src="../config/server-config.js"></script>
+     <script src="../utiles/constants.js"></script>
+     <script src="../main/language-manager.js"></script>
+</head>
+
+<body class="bg-gray-50">
+
+     <!-- Global Header -->
+     <div id="myUniqueHeaderID"></div>
+
+     <!-- Main Content from AC Period -->
+
+     <main class="page-enter">
+          <div id="root">
+               <div class="min-h-screen bg-gray-50 page-enter">
+                    <nav class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white shadow-lg">
+                         <div class="max-w-7xl mx-auto px-4">
+                              <div class="flex justify-between items-center h-20"><a
+                                        class="flex items-center space-x-3 group" href="/">
+                                        <div
+                                             class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
+                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-bot text-blue-400 group-hover:text-blue-300 transition-colors duration-300 animate-pulse-slow">
+                                                  <path d="M12 8V4H8"></path>
+                                                  <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+                                                  <path d="M2 14h2"></path>
+                                                  <path d="M20 14h2"></path>
+                                                  <path d="M15 13v2"></path>
+                                                  <path d="M9 13v2"></path>
+                                             </svg>
+                                        </div><span class="font-bold text-2xl">Assiut Robotics</span>
+                                   </a>
+                                   <div class="hidden md:flex space-x-6"><a
+                                             class="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                                             href="/"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-home ">
+                                                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                             </svg><span class="font-medium">Home</span></a><a
+                                             class="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                                             href="/hardware"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                  height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-laptop ">
+                                                  <path
+                                                       d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16">
+                                                  </path>
+                                             </svg><span class="font-medium">Hardware</span></a><a
+                                             class="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                                             href="/embedded"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                  height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-circuit-board ">
+                                                  <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                                  <path d="M11 9h4a2 2 0 0 0 2-2V3"></path>
+                                                  <circle cx="9" cy="9" r="2"></circle>
+                                                  <path d="M7 21v-4a2 2 0 0 1 2-2h4"></path>
+                                                  <circle cx="15" cy="15" r="2"></circle>
+                                             </svg><span class="font-medium">Embedded</span></a><a
+                                             class="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                                             href="/ros"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-bot ">
+                                                  <path d="M12 8V4H8"></path>
+                                                  <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+                                                  <path d="M2 14h2"></path>
+                                                  <path d="M20 14h2"></path>
+                                                  <path d="M15 13v2"></path>
+                                                  <path d="M9 13v2"></path>
+                                             </svg><span class="font-medium">ROS &amp; Raspberry</span></a><a
+                                             class="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                                             href="/computer-vision"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                  height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-eye ">
+                                                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                                  <circle cx="12" cy="12" r="3"></circle>
+                                             </svg><span class="font-medium">Computer Vision</span></a></div>
+                                   <div class="w-14 h-14 rounded-full overflow-hidden"><img
+                                             src="https://res.cloudinary.com/dhjyfpw6f/image/upload/v1737757792/Rob_bpibmx.png"
+                                             alt="Assiut Robotics Logo" class="w-full h-full object-cover"></div>
+                              </div>
+                         </div>
+                    </nav>
+                    <div class="min-h-screen">
+                         <div class="hero-pattern">
+                              <div class="relative max-w-7xl mx-auto px-4 py-20">
+                                   <div class="text-center mb-16">
+                                        <h1 class="text-6xl font-bold text-white mb-6 animate-fade-in">Welcome to Assiut
+                                             Robotics
+                                        </h1>
+                                        <p class="text-3xl text-blue-200 font-light animate-fade-in"
+                                             style="animation-delay: 0.3s;">Learn How To Learn</p>
+                                   </div>
+                                   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16"><a
+                                             class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-red-200 track-card animate-fade-in"
+                                             href="/hardware" style="animation-delay: 0s;">
+                                             <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                       height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-laptop w-8 h-8 mb-4 text-red-600">
+                                                       <path
+                                                            d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16">
+                                                       </path>
+                                                  </svg>
+                                                  <h3 class="text-xl font-semibold text-gray-800 mb-3">Hardware</h3>
+                                                  <p class="text-gray-600">Learn about electronic components and circuit
+                                                       design
+                                                  </p>
+                                             </div>
+                                        </a><a
+                                             class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-blue-200 track-card animate-fade-in"
+                                             href="/embedded" style="animation-delay: 0.2s;">
+                                             <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                       height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-circuit-board w-8 h-8 mb-4 text-blue-600">
+                                                       <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                                       <path d="M11 9h4a2 2 0 0 0 2-2V3"></path>
+                                                       <circle cx="9" cy="9" r="2"></circle>
+                                                       <path d="M7 21v-4a2 2 0 0 1 2-2h4"></path>
+                                                       <circle cx="15" cy="15" r="2"></circle>
+                                                  </svg>
+                                                  <h3 class="text-xl font-semibold text-gray-800 mb-3">Embedded Systems
+                                                  </h3>
+                                                  <p class="text-gray-600">Master microcontroller programming and
+                                                       interfacing</p>
+                                             </div>
+                                        </a><a
+                                             class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-green-200 track-card animate-fade-in"
+                                             href="/ros" style="animation-delay: 0.4s;">
+                                             <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                       height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-bot w-8 h-8 mb-4 text-green-600">
+                                                       <path d="M12 8V4H8"></path>
+                                                       <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+                                                       <path d="M2 14h2"></path>
+                                                       <path d="M20 14h2"></path>
+                                                       <path d="M15 13v2"></path>
+                                                       <path d="M9 13v2"></path>
+                                                  </svg>
+                                                  <h3 class="text-xl font-semibold text-gray-800 mb-3">ROS &amp;
+                                                       Raspberry</h3>
+                                                  <p class="text-gray-600">Explore Robot Operating System and Raspberry
+                                                       Pi
+                                                       development</p>
+                                             </div>
+                                        </a><a
+                                             class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-yellow-200 track-card animate-fade-in"
+                                             href="/computer-vision" style="animation-delay: 0.6s;">
+                                             <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                       height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-eye w-8 h-8 mb-4 text-yellow-600">
+                                                       <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                                       <circle cx="12" cy="12" r="3"></circle>
+                                                  </svg>
+                                                  <h3 class="text-xl font-semibold text-gray-800 mb-3">Computer Vision
+                                                  </h3>
+                                                  <p class="text-gray-600">Learn image processing and object detection
+                                                  </p>
+                                             </div>
+                                        </a></div>
+                              </div>
+                         </div>
+                         <section class="py-20 bg-gradient-to-b from-indigo-900 to-blue-900 relative overflow-hidden">
+                              <div class="absolute inset-0 geometric-pattern opacity-20"></div>
+                              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-900/50"></div>
+                              <div class="max-w-7xl mx-auto px-4 relative">
+                                   <div class="text-center mb-12">
+                                        <h2 class="text-4xl font-bold text-white mb-4 animate-fade-in">Track
+                                             Leaderboards</h2>
+                                        <div class="w-24 h-1 bg-blue-500 mx-auto rounded-full animate-glow"></div>
+                                   </div>
+                                   <div class="flex flex-wrap justify-center gap-4 mb-8"><button
+                                             class="flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 bg-blue-500 text-white scale-105"><span
+                                                  class="w-5 h-5"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                       height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-zap ">
+                                                       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2">
+                                                       </polygon>
+                                                  </svg></span><span>All Tracks</span></button><button
+                                             class="flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 bg-white/10 text-white/70 hover:bg-white/20"><span
+                                                  class="w-5 h-5"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                       height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-laptop ">
+                                                       <path
+                                                            d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16">
+                                                       </path>
+                                                  </svg></span><span>Hardware</span></button><button
+                                             class="flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 bg-white/10 text-white/70 hover:bg-white/20"><span
+                                                  class="w-5 h-5"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                       height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-eye ">
+                                                       <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                                       <circle cx="12" cy="12" r="3"></circle>
+                                                  </svg></span><span>Computer Vision</span></button><button
+                                             class="flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 bg-white/10 text-white/70 hover:bg-white/20"><span
+                                                  class="w-5 h-5"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                       height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-bot ">
+                                                       <path d="M12 8V4H8"></path>
+                                                       <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+                                                       <path d="M2 14h2"></path>
+                                                       <path d="M20 14h2"></path>
+                                                       <path d="M15 13v2"></path>
+                                                       <path d="M9 13v2"></path>
+                                                  </svg></span><span>ROS &amp; Raspberry</span></button><button
+                                             class="flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 bg-white/10 text-white/70 hover:bg-white/20"><span
+                                                  class="w-5 h-5"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                       height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-circuit-board ">
+                                                       <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                                       <path d="M11 9h4a2 2 0 0 0 2-2V3"></path>
+                                                       <circle cx="9" cy="9" r="2"></circle>
+                                                       <path d="M7 21v-4a2 2 0 0 1 2-2h4"></path>
+                                                       <circle cx="15" cy="15" r="2"></circle>
+                                                  </svg></span><span>Embedded</span></button></div>
+                                   <div
+                                        class="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl animate-fade-in">
+                                        <div
+                                             class="flex items-center justify-between p-4 border-b border-white/10 transition-all duration-300 bg-gradient-to-r from-yellow-500/20 to-transparent border-l-4 border-yellow-400">
+                                             <div class="flex items-center space-x-4">
+                                                  <div class="w-8 flex justify-center"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-trophy w-6 h-6 text-yellow-400 animate-pulse-slow">
+                                                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                                            <path d="M4 22h16"></path>
+                                                            <path
+                                                                 d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22">
+                                                            </path>
+                                                            <path
+                                                                 d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22">
+                                                            </path>
+                                                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                                       </svg></div>
+                                                  <div><span class="text-white font-medium block">Diea
+                                                            Hassan</span><span class="text-blue-300 text-sm">ROS &amp;
+                                                            Raspberry</span></div>
+                                             </div>
+                                             <div class="flex items-center space-x-3">
+                                                  <div class="text-2xl font-bold text-blue-400 power-pulse">0</div><svg
+                                                       xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-zap w-5 h-5 text-yellow-400 animate-pulse">
+                                                       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2">
+                                                       </polygon>
+                                                  </svg>
+                                             </div>
+                                        </div>
+                                        <div
+                                             class="flex items-center justify-between p-4 border-b border-white/10 transition-all duration-300 bg-gradient-to-r from-gray-500/20 to-transparent border-l-4 border-gray-400">
+                                             <div class="flex items-center space-x-4">
+                                                  <div class="w-8 flex justify-center"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-medal w-6 h-6 text-gray-400 animate-pulse-slow">
+                                                            <path
+                                                                 d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15">
+                                                            </path>
+                                                            <path d="M11 12 5.12 2.2"></path>
+                                                            <path d="m13 12 5.88-9.8"></path>
+                                                            <path d="M8 7h8"></path>
+                                                            <circle cx="12" cy="17" r="5"></circle>
+                                                            <path d="M12 18v-2h-.5"></path>
+                                                       </svg></div>
+                                                  <div><span class="text-white font-medium block">Mazen
+                                                            Magdy</span><span
+                                                            class="text-blue-300 text-sm">Embedded</span></div>
+                                             </div>
+                                             <div class="flex items-center space-x-3">
+                                                  <div class="text-2xl font-bold text-blue-400 power-pulse">0</div><svg
+                                                       xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-zap w-5 h-5 text-yellow-400 animate-pulse">
+                                                       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2">
+                                                       </polygon>
+                                                  </svg>
+                                             </div>
+                                        </div>
+                                        <div
+                                             class="flex items-center justify-between p-4 border-b border-white/10 transition-all duration-300 bg-gradient-to-r from-amber-800/20 to-transparent border-l-4 border-amber-600">
+                                             <div class="flex items-center space-x-4">
+                                                  <div class="w-8 flex justify-center"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-award w-6 h-6 text-amber-600 animate-pulse-slow">
+                                                            <circle cx="12" cy="8" r="6"></circle>
+                                                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                                                       </svg></div>
+                                                  <div><span class="text-white font-medium block">Youssef
+                                                            Bahaa</span><span
+                                                            class="text-blue-300 text-sm">Embedded</span></div>
+                                             </div>
+                                             <div class="flex items-center space-x-3">
+                                                  <div class="text-2xl font-bold text-blue-400 power-pulse">0</div><svg
+                                                       xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-zap w-5 h-5 text-yellow-400 animate-pulse">
+                                                       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2">
+                                                       </polygon>
+                                                  </svg>
+                                             </div>
+                                        </div>
+                                        <div
+                                             class="flex items-center justify-between p-4 border-b border-white/10 transition-all duration-300 bg-white/5 hover:bg-white/10">
+                                             <div class="flex items-center space-x-4">
+                                                  <div class="w-8 flex justify-center"><span
+                                                            class="w-6 h-6 text-white/50">4</span></div>
+                                                  <div><span class="text-white font-medium block">Shahd
+                                                            Safwat</span><span
+                                                            class="text-blue-300 text-sm">Hardware</span></div>
+                                             </div>
+                                             <div class="flex items-center space-x-3">
+                                                  <div class="text-2xl font-bold text-blue-400 power-pulse">0</div><svg
+                                                       xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-zap w-5 h-5 text-yellow-400 animate-pulse">
+                                                       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2">
+                                                       </polygon>
+                                                  </svg>
+                                             </div>
+                                        </div>
+                                        <div
+                                             class="flex items-center justify-between p-4 border-b border-white/10 transition-all duration-300 bg-white/5 hover:bg-white/10">
+                                             <div class="flex items-center space-x-4">
+                                                  <div class="w-8 flex justify-center"><span
+                                                            class="w-6 h-6 text-white/50">5</span></div>
+                                                  <div><span class="text-white font-medium block">Lojien
+                                                            Diaa</span><span
+                                                            class="text-blue-300 text-sm">Hardware</span></div>
+                                             </div>
+                                             <div class="flex items-center space-x-3">
+                                                  <div class="text-2xl font-bold text-blue-400 power-pulse">0</div><svg
+                                                       xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-zap w-5 h-5 text-yellow-400 animate-pulse">
+                                                       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2">
+                                                       </polygon>
+                                                  </svg>
+                                             </div>
+                                        </div>
+                                        <div
+                                             class="flex items-center justify-between p-4 border-b border-white/10 transition-all duration-300 bg-white/5 hover:bg-white/10">
+                                             <div class="flex items-center space-x-4">
+                                                  <div class="w-8 flex justify-center"><span
+                                                            class="w-6 h-6 text-white/50">6</span></div>
+                                                  <div><span class="text-white font-medium block">Rahma
+                                                            Mohamed</span><span
+                                                            class="text-blue-300 text-sm">Hardware</span></div>
+                                             </div>
+                                             <div class="flex items-center space-x-3">
+                                                  <div class="text-2xl font-bold text-blue-400 power-pulse">0</div><svg
+                                                       xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-zap w-5 h-5 text-yellow-400 animate-pulse">
+                                                       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2">
+                                                       </polygon>
+                                                  </svg>
+                                             </div>
+                                        </div>
+                                        <div
+                                             class="flex items-center justify-between p-4 border-b border-white/10 transition-all duration-300 bg-white/5 hover:bg-white/10">
+                                             <div class="flex items-center space-x-4">
+                                                  <div class="w-8 flex justify-center"><span
+                                                            class="w-6 h-6 text-white/50">7</span></div>
+                                                  <div><span class="text-white font-medium block">John Emad</span><span
+                                                            class="text-blue-300 text-sm">Embedded</span></div>
+                                             </div>
+                                             <div class="flex items-center space-x-3">
+                                                  <div class="text-2xl font-bold text-blue-400 power-pulse">0</div><svg
+                                                       xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                       class="lucide lucide-zap w-5 h-5 text-yellow-400 animate-pulse">
+                                                       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2">
+                                                       </polygon>
+                                                  </svg>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                         </section>
+                         <section class="py-12 bg-gradient-to-b from-blue-900 to-indigo-900 overflow-hidden relative">
+                              <div class="absolute inset-0 geometric-pattern opacity-20"></div>
+                              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-blue-900/50"></div>
+                              <div class="max-w-7xl mx-auto px-4 relative">
+                                   <div class="text-center mb-8">
+                                        <h2 class="text-4xl font-bold text-white mb-3 animate-fade-in">Meet Our Team
+                                        </h2>
+                                        <div class="w-24 h-1 bg-blue-500 mx-auto rounded-full animate-glow animate-fade-in"
+                                             style="animation-delay: 0.3s;"></div>
+                                   </div>
+                                   <div class="relative group"><button
+                                             class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"><svg
+                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-chevron-left ">
+                                                  <path d="m15 18-6-6 6-6"></path>
+                                             </svg></button><button
+                                             class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"><svg
+                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-chevron-right ">
+                                                  <path d="m9 18 6-6-6-6"></path>
+                                             </svg></button>
+                                        <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar cursor-grab active:cursor-grabbing"
+                                             style="scroll-behavior: smooth;">
+                                             <div class="flex-none w-full md:w-1/3 px-2 md:px-3 snap-center">
+                                                  <div class="relative flex flex-col min-h-[450px] transform scale-[1.02] bg-gradient-to-br from-blue-900/90 to-indigo-900/90 border-2 border-yellow-400 backdrop-blur-sm rounded-xl p-4 text-center hover:border-blue-400/50 transition-all duration-500 animate-fade-in"
+                                                       style="animation-delay: 0s;">
+                                                       <div
+                                                            class="absolute top-0 left-0 w-full h-full overflow-hidden rounded-xl pointer-events-none">
+                                                            <div
+                                                                 class="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-transparent animate-shine">
+                                                            </div>
+                                                       </div>
+                                                       <div class="relative mt-4 mb-3">
+                                                            <div
+                                                                 class="absolute inset-0 rounded-full animate-pulse-slow opacity-20 bg-yellow-400">
+                                                            </div><img
+                                                                 src="https://res.cloudinary.com/dhjyfpw6f/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1737651791/fff82686c6fe583253ddd8411980c5e1_as9okv.jpg"
+                                                                 alt="Arwa Hassan"
+                                                                 class="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto relative z-10 animate-float border-4 border-yellow-400 ring-4 ring-yellow-400/30 hover:border-blue-400 transition-colors duration-300 object-cover">
+                                                       </div>
+                                                       <div class="flex-grow">
+                                                            <h3
+                                                                 class="text-lg md:text-xl font-semibold text-white mb-1 text-yellow-400">
+                                                                 Arwa Hassan</h3>
+                                                            <p
+                                                                 class="text-sm md:text-base mb-2 shimmer text-yellow-200">
+                                                                 Committee Head, Computer Vision &amp; Python</p>
+                                                            <p
+                                                                 class="text-gray-300 mb-4 text-sm md:text-base line-clamp-3">
+                                                                 Faculty of Engineering, Department of Mechanical
+                                                                 Engineering, Mechatronics Section.</p>
+                                                       </div>
+                                                       <div class="flex justify-center space-x-3 mt-auto pt-3"><a
+                                                                 href="https://www.linkedin.com/in/arwa-hassan-253425221/"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full hover:text-yellow-400 hover:bg-yellow-400/10"
+                                                                 title="LinkedIn"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                      height="18" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-linkedin ">
+                                                                      <path
+                                                                           d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                                                      </path>
+                                                                      <rect width="4" height="12" x="2" y="9"></rect>
+                                                                      <circle cx="4" cy="4" r="2"></circle>
+                                                                 </svg></a><a href="arwahassan969@gamil.com"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full hover:text-yellow-400 hover:bg-yellow-400/10"
+                                                                 title="Email"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                      width="18" height="18" viewBox="0 0 24 24"
+                                                                      fill="none" stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-mail ">
+                                                                      <rect width="20" height="16" x="2" y="4" rx="2">
+                                                                      </rect>
+                                                                      <path
+                                                                           d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7">
+                                                                      </path>
+                                                                 </svg></a><a href="https://wa.me/+201123026677"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full hover:text-yellow-400 hover:bg-yellow-400/10"
+                                                                 title="WhatsApp"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                      height="18" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-message-circle ">
+                                                                      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                                                                 </svg></a></div>
+                                                  </div>
+                                             </div>
+                                             <div class="flex-none w-full md:w-1/3 px-2 md:px-3 snap-center">
+                                                  <div class="relative flex flex-col min-h-[450px]  bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:border-blue-400/50 transition-all duration-500 animate-fade-in"
+                                                       style="animation-delay: 0.2s;">
+                                                       <div class="relative mt-4 mb-3">
+                                                            <div
+                                                                 class="absolute inset-0 rounded-full animate-pulse-slow opacity-20 bg-blue-500">
+                                                            </div><img
+                                                                 src="https://res.cloudinary.com/dhjyfpw6f/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1737651250/IMG_20240316_142657_606insta_mychir.jpg"
+                                                                 alt="Ahmed Mostafa"
+                                                                 class="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto relative z-10 animate-float border-4 border-white/20 hover:border-blue-400 transition-colors duration-300 object-cover">
+                                                       </div>
+                                                       <div class="flex-grow">
+                                                            <h3
+                                                                 class="text-lg md:text-xl font-semibold text-white mb-1 ">
+                                                                 Ahmed Mostafa</h3>
+                                                            <p class="text-sm md:text-base mb-2 shimmer text-blue-200">
+                                                                 Vice Head, C, Arduino, Embedded, ROS &amp; Raspberry
+                                                            </p>
+                                                            <p
+                                                                 class="text-gray-300 mb-4 text-sm md:text-base line-clamp-3">
+                                                                 Faculty of Engineering, Department of Electrical
+                                                                 Engineering, Computer &amp; Control Section.</p>
+                                                       </div>
+                                                       <div class="flex justify-center space-x-3 mt-auto pt-3"><a
+                                                                 href="https://www.linkedin.com/in/a7hmedmbs/"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full "
+                                                                 title="LinkedIn"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                      height="18" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-linkedin ">
+                                                                      <path
+                                                                           d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                                                      </path>
+                                                                      <rect width="4" height="12" x="2" y="9"></rect>
+                                                                      <circle cx="4" cy="4" r="2"></circle>
+                                                                 </svg></a><a href="https://wa.me/+201023457165"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full "
+                                                                 title="WhatsApp"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                      height="18" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-message-circle ">
+                                                                      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                                                                 </svg></a></div>
+                                                  </div>
+                                             </div>
+                                             <div class="flex-none w-full md:w-1/3 px-2 md:px-3 snap-center">
+                                                  <div class="relative flex flex-col min-h-[450px]  bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:border-blue-400/50 transition-all duration-500 animate-fade-in"
+                                                       style="animation-delay: 0.4s;">
+                                                       <div class="relative mt-4 mb-3">
+                                                            <div
+                                                                 class="absolute inset-0 rounded-full animate-pulse-slow opacity-20 bg-blue-500">
+                                                            </div><img src="https://res.cloudinary.com/dn0eejvbo/image/upload/v1752260672/Ahmed_Hamdy_Mostafa_gadzys.jpg
+" alt="Ahmed Hamdy" class="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto relative z-10 animate-float border-4 border-white/20 hover:border-blue-400 transition-colors duration-300 object-cover">
+                                                       </div>
+                                                       <div class="flex-grow">
+                                                            <h3
+                                                                 class="text-lg md:text-xl font-semibold text-white mb-1 ">
+                                                                 Ahmed Hamdy</h3>
+                                                            <p class="text-sm md:text-base mb-2 shimmer text-blue-200">
+                                                                 C, Digital</p>
+                                                            <p
+                                                                 class="text-gray-300 mb-4 text-sm md:text-base line-clamp-3">
+                                                                 Faculty of Engineering, Department of Electrical
+                                                                 Engineering, Computer &amp; Control Section.</p>
+                                                       </div>
+                                                       <div class="flex justify-center space-x-3 mt-auto pt-3"><a
+                                                                 href="https://www.linkedin.com/in/ahmed-hamdy-a19150252/"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full "
+                                                                 title="LinkedIn"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                      height="18" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-linkedin ">
+                                                                      <path
+                                                                           d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                                                      </path>
+                                                                      <rect width="4" height="12" x="2" y="9"></rect>
+                                                                      <circle cx="4" cy="4" r="2"></circle>
+                                                                 </svg></a><a href="https://wa.me/+201096047302"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full "
+                                                                 title="WhatsApp"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                      height="18" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-message-circle ">
+                                                                      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                                                                 </svg></a></div>
+                                                  </div>
+                                             </div>
+                                             <div class="flex-none w-full md:w-1/3 px-2 md:px-3 snap-center">
+                                                  <div class="relative flex flex-col min-h-[450px]  bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:border-blue-400/50 transition-all duration-500 animate-fade-in"
+                                                       style="animation-delay: 0.6s;">
+                                                       <div class="relative mt-4 mb-3">
+                                                            <div
+                                                                 class="absolute inset-0 rounded-full animate-pulse-slow opacity-20 bg-blue-500">
+                                                            </div><img
+                                                                 src="https://res.cloudinary.com/dn0eejvbo/image/upload/v1752260801/IMG_5956_ueunev.jpg"
+                                                                 alt="Mostafa Asran"
+                                                                 class="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto relative z-10 animate-float border-4 border-white/20 hover:border-blue-400 transition-colors duration-300 object-cover">
+                                                       </div>
+                                                       <div class="flex-grow">
+                                                            <h3
+                                                                 class="text-lg md:text-xl font-semibold text-white mb-1 ">
+                                                                 Mostafa Asran</h3>
+                                                            <p class="text-sm md:text-base mb-2 shimmer text-blue-200">
+                                                                 Circuits &amp; Devices</p>
+                                                            <p
+                                                                 class="text-gray-300 mb-4 text-sm md:text-base line-clamp-3">
+                                                                 Faculty of Engineering, Department of Electrical
+                                                                 Engineering, Communications Section.</p>
+                                                       </div>
+                                                       <div class="flex justify-center space-x-3 mt-auto pt-3"><a
+                                                                 href="https://www.linkedin.com/in/mostafa-asran-4749b1313?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B4gKmMrO3QGCl5g6VCrPDXg%3D%3D"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full "
+                                                                 title="LinkedIn"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                      height="18" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-linkedin ">
+                                                                      <path
+                                                                           d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                                                      </path>
+                                                                      <rect width="4" height="12" x="2" y="9"></rect>
+                                                                      <circle cx="4" cy="4" r="2"></circle>
+                                                                 </svg></a><a href="mostafaasran656@gmail.com"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full "
+                                                                 title="Email"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                      width="18" height="18" viewBox="0 0 24 24"
+                                                                      fill="none" stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-mail ">
+                                                                      <rect width="20" height="16" x="2" y="4" rx="2">
+                                                                      </rect>
+                                                                      <path
+                                                                           d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7">
+                                                                      </path>
+                                                                 </svg></a></div>
+                                                  </div>
+                                             </div>
+                                             <div class="flex-none w-full md:w-1/3 px-2 md:px-3 snap-center">
+                                                  <div class="relative flex flex-col min-h-[450px]  bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:border-blue-400/50 transition-all duration-500 animate-fade-in"
+                                                       style="animation-delay: 0.8s;">
+                                                       <div class="relative mt-4 mb-3">
+                                                            <div
+                                                                 class="absolute inset-0 rounded-full animate-pulse-slow opacity-20 bg-blue-500">
+                                                            </div><img
+                                                                 src="https://res.cloudinary.com/dn0eejvbo/image/upload/v1752260672/Ahmed_Abdullah_Mohammed_-AC_Elec_wuq90m.jpg"
+                                                                 alt="Ahmed Abdulla"
+                                                                 class="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto relative z-10 animate-float border-4 border-white/20 hover:border-blue-400 transition-colors duration-300 object-cover">
+                                                       </div>
+                                                       <div class="flex-grow">
+                                                            <h3
+                                                                 class="text-lg md:text-xl font-semibold text-white mb-1 ">
+                                                                 Ahmed Abdulla</h3>
+                                                            <p class="text-sm md:text-base mb-2 shimmer text-blue-200">
+                                                                 ROS </p>
+                                                            <p
+                                                                 class="text-gray-300 mb-4 text-sm md:text-base line-clamp-3">
+                                                                 Faculty of Engineering, Department of Mechanical
+                                                                 Engineering, Mechatronics Section.</p>
+                                                       </div>
+                                                       <div class="flex justify-center space-x-3 mt-auto pt-3"><a
+                                                                 href="https://www.linkedin.com/in/ahmed-abdullah-a51488258?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B%2FOIj%2BAS1RB2FH7Z4vc6%2FYA%3D%3D"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full "
+                                                                 title="LinkedIn"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                      height="18" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-linkedin ">
+                                                                      <path
+                                                                           d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                                                      </path>
+                                                                      <rect width="4" height="12" x="2" y="9"></rect>
+                                                                      <circle cx="4" cy="4" r="2"></circle>
+                                                                 </svg></a><a href="ahmedabdullah7447@gmail.com"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full "
+                                                                 title="Email"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                      width="18" height="18" viewBox="0 0 24 24"
+                                                                      fill="none" stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-mail ">
+                                                                      <rect width="20" height="16" x="2" y="4" rx="2">
+                                                                      </rect>
+                                                                      <path
+                                                                           d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7">
+                                                                      </path>
+                                                                 </svg></a></div>
+                                                  </div>
+                                             </div>
+                                             <div class="flex-none w-full md:w-1/3 px-2 md:px-3 snap-center">
+                                                  <div class="relative flex flex-col min-h-[450px]  bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:border-blue-400/50 transition-all duration-500 animate-fade-in"
+                                                       style="animation-delay: 1s;">
+                                                       <div class="relative mt-4 mb-3">
+                                                            <div
+                                                                 class="absolute inset-0 rounded-full animate-pulse-slow opacity-20 bg-blue-500">
+                                                            </div><img
+                                                                 src="https://res.cloudinary.com/dn0eejvbo/image/upload/v1752260672/Diea_Hassan_lgrnon.jpg"
+                                                                 alt="Diea Hassan"
+                                                                 class="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto relative z-10 animate-float border-4 border-white/20 hover:border-blue-400 transition-colors duration-300 object-cover">
+                                                       </div>
+                                                       <div class="flex-grow">
+                                                            <h3
+                                                                 class="text-lg md:text-xl font-semibold text-white mb-1 ">
+                                                                 Diea Hassan</h3>
+                                                            <p class="text-sm md:text-base mb-2 shimmer text-blue-200">
+                                                                 ROS</p>
+                                                            <p
+                                                                 class="text-gray-300 mb-4 text-sm md:text-base line-clamp-3">
+                                                                 Faculty of Engineering, Department of Mechanical
+                                                                 Engineering, Mechatronics Section.</p>
+                                                       </div>
+                                                       <div class="flex justify-center space-x-3 mt-auto pt-3"><a
+                                                                 href="https://www.linkedin.com/in/diea-hassan-36004926a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BhpMpnny5RASXMz2Rz8v1jQ%3D%3D"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full "
+                                                                 title="LinkedIn"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                      height="18" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-linkedin ">
+                                                                      <path
+                                                                           d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                                                      </path>
+                                                                      <rect width="4" height="12" x="2" y="9"></rect>
+                                                                      <circle cx="4" cy="4" r="2"></circle>
+                                                                 </svg></a><a href="dieahassan501@gmail.com"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-1.5 hover:bg-white/10 rounded-full "
+                                                                 title="Email"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                      width="18" height="18" viewBox="0 0 24 24"
+                                                                      fill="none" stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-mail ">
+                                                                      <rect width="20" height="16" x="2" y="4" rx="2">
+                                                                      </rect>
+                                                                      <path
+                                                                           d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7">
+                                                                      </path>
+                                                                 </svg></a></div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div class="flex justify-center mt-6 space-x-2"><button
+                                                  class="w-2 h-2 rounded-full transition-all duration-300 bg-blue-500 w-4"></button><button
+                                                  class="w-2 h-2 rounded-full transition-all duration-300 bg-white/50 hover:bg-white/80"></button>
+                                        </div>
+                                   </div>
+                              </div>
+                         </section>
+                         <section class="py-20 bg-gradient-to-b from-indigo-900 to-blue-900 overflow-hidden relative">
+                              <div class="absolute inset-0 geometric-pattern opacity-20"></div>
+                              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-900/50"></div>
+                              <div class="max-w-7xl mx-auto px-4 relative">
+                                   <div class="text-center mb-12">
+                                        <h2 class="text-5xl font-bold text-white mb-4 animate-fade-in">Our Assistant
+                                             Team</h2>
+                                        <div class="w-24 h-1 bg-blue-500 mx-auto rounded-full animate-glow animate-fade-in"
+                                             style="animation-delay: 0.3s;"></div>
+                                   </div>
+                                   <div class="relative group"><button
+                                             class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"><svg
+                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-chevron-left ">
+                                                  <path d="m15 18-6-6 6-6"></path>
+                                             </svg></button><button
+                                             class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"><svg
+                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-chevron-right ">
+                                                  <path d="m9 18 6-6-6-6"></path>
+                                             </svg></button>
+                                        <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar cursor-grab active:cursor-grabbing"
+                                             style="scroll-behavior: smooth;">
+                                             <div class="flex-none w-full md:w-[calc(100%/3)] snap-center px-4">
+                                                  <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center h-full border border-white/10 hover:border-indigo-400/50 transition-all duration-500 animate-fade-in"
+                                                       style="animation-delay: 0s;">
+                                                       <div class="relative inline-block mb-6">
+                                                            <div
+                                                                 class="absolute inset-0 bg-indigo-500 rounded-full animate-pulse-slow opacity-20">
+                                                            </div><img
+                                                                 src="https://res.cloudinary.com/dhjyfpw6f/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1737651791/fff82686c6fe583253ddd8411980c5e1_as9okv.jpg"
+                                                                 alt="Manar Hamada"
+                                                                 class="w-32 h-32 rounded-full relative z-10 animate-float border-4 border-white/20 hover:border-indigo-400 transition-colors duration-300 object-cover">
+                                                            <div
+                                                                 class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full animate-rotate opacity-20">
+                                                            </div>
+                                                       </div>
+                                                       <h3 class="text-xl font-semibold text-white mb-2">Manar Hamada
+                                                       </h3>
+                                                       <p class="text-indigo-200 mb-3 shimmer">Electronics &amp; PCB</p>
+                                                       <p class="text-gray-300 mb-6">Faculty of Engineering, Department
+                                                            of Electrical
+                                                            Engineering, Communications Section.</p>
+                                                       <div class="flex justify-center space-x-4"><a
+                                                                 href="https://www.linkedin.com/in/manar-hamada-341b1524b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B1hrsJa84QFu15yZQ5XFr2w%3D%3D"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                                                                 title="LinkedIn"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                      height="20" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-linkedin ">
+                                                                      <path
+                                                                           d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                                                      </path>
+                                                                      <rect width="4" height="12" x="2" y="9"></rect>
+                                                                      <circle cx="4" cy="4" r="2"></circle>
+                                                                 </svg></a><a href="manarhamada632@gmail.com"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                                                                 title="Email"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                      width="20" height="20" viewBox="0 0 24 24"
+                                                                      fill="none" stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-mail ">
+                                                                      <rect width="20" height="16" x="2" y="4" rx="2">
+                                                                      </rect>
+                                                                      <path
+                                                                           d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7">
+                                                                      </path>
+                                                                 </svg></a></div>
+                                                  </div>
+                                             </div>
+                                             <div class="flex-none w-full md:w-[calc(100%/3)] snap-center px-4">
+                                                  <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center h-full border border-white/10 hover:border-indigo-400/50 transition-all duration-500 animate-fade-in"
+                                                       style="animation-delay: 0.2s;">
+                                                       <div class="relative inline-block mb-6">
+                                                            <div
+                                                                 class="absolute inset-0 bg-indigo-500 rounded-full animate-pulse-slow opacity-20">
+                                                            </div><img
+                                                                 src="https://res.cloudinary.com/dhjyfpw6f/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1737651791/fff82686c6fe583253ddd8411980c5e1_as9okv.jpg"
+                                                                 alt="Renad Radwan"
+                                                                 class="w-32 h-32 rounded-full relative z-10 animate-float border-4 border-white/20 hover:border-indigo-400 transition-colors duration-300 object-cover">
+                                                            <div
+                                                                 class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full animate-rotate opacity-20">
+                                                            </div>
+                                                       </div>
+                                                       <h3 class="text-xl font-semibold text-white mb-2">Renad Radwan
+                                                       </h3>
+                                                       <p class="text-indigo-200 mb-3 shimmer">Circuits, Arduino</p>
+                                                       <p class="text-gray-300 mb-6">Faculty of Engineering, Department
+                                                            of Electrical
+                                                            Engineering, Computer &amp; Control Section.</p>
+                                                       <div class="flex justify-center space-x-4"><a
+                                                                 href="https://www.linkedin.com/in/renad-radwan-b5492b307/"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                                                                 title="LinkedIn"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                      height="20" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-linkedin ">
+                                                                      <path
+                                                                           d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                                                      </path>
+                                                                      <rect width="4" height="12" x="2" y="9"></rect>
+                                                                      <circle cx="4" cy="4" r="2"></circle>
+                                                                 </svg></a><a href="https://wa.me/+201123350113"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                                                                 title="WhatsApp"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                      height="20" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-message-circle ">
+                                                                      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                                                                 </svg></a></div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div class="flex justify-center mt-8 space-x-2"><button
+                                                  class="w-3 h-3 rounded-full transition-all duration-300 bg-indigo-500 w-6"></button>
+                                        </div>
+                                   </div>
+                              </div>
+                         </section>
+                         <section class="py-20 bg-gradient-to-b from-blue-900 to-purple-900 overflow-hidden relative">
+                              <div class="absolute inset-0 geometric-pattern opacity-20"></div>
+                              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-purple-900/50"></div>
+                              <div class="max-w-7xl mx-auto px-4 relative">
+                                   <div class="text-center mb-12">
+                                        <h2 class="text-5xl font-bold text-white mb-4 animate-fade-in">Our HR Team</h2>
+                                        <div class="w-24 h-1 bg-purple-500 mx-auto rounded-full animate-glow animate-fade-in"
+                                             style="animation-delay: 0.3s;"></div>
+                                   </div>
+                                   <div class="relative group"><button
+                                             class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"><svg
+                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-chevron-left ">
+                                                  <path d="m15 18-6-6 6-6"></path>
+                                             </svg></button><button
+                                             class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"><svg
+                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"
+                                                  class="lucide lucide-chevron-right ">
+                                                  <path d="m9 18 6-6-6-6"></path>
+                                             </svg></button>
+                                        <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar cursor-grab active:cursor-grabbing"
+                                             style="scroll-behavior: smooth;">
+                                             <div class="flex-none w-full md:w-[calc(100%/3)] snap-center px-4">
+                                                  <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center h-full border border-white/10 hover:border-purple-400/50 transition-all duration-500 animate-fade-in"
+                                                       style="animation-delay: 0s;">
+                                                       <div class="relative inline-block mb-6">
+                                                            <div
+                                                                 class="absolute inset-0 bg-purple-500 rounded-full animate-pulse-slow opacity-20">
+                                                            </div><img
+                                                                 src="https://res.cloudinary.com/dhjyfpw6f/image/upload/v1737732272/WhatsApp_Image_2025-01-24_at_17.19.58_76d9da22_w1xclb.jpg"
+                                                                 alt="Youssef AbdelAal"
+                                                                 class="w-32 h-32 rounded-full relative z-10 animate-float border-4 border-white/20 hover:border-purple-400 transition-colors duration-300 object-cover">
+                                                            <div
+                                                                 class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-rotate opacity-20">
+                                                            </div>
+                                                       </div>
+                                                       <h3 class="text-xl font-semibold text-white mb-2">Youssef
+                                                            AbdelAal</h3>
+                                                       <p class="text-purple-200 mb-3 shimmer"></p>
+                                                       <p class="text-gray-300 mb-6">Faculty of Engineering, Department
+                                                            of Electrical
+                                                            Engineering, Power Section.</p>
+                                                       <div class="flex justify-center space-x-4"><a
+                                                                 href="https://www.linkedin.com/in/youssef-abdelaal-007558289/"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                                                                 title="LinkedIn"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                      height="20" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-linkedin ">
+                                                                      <path
+                                                                           d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                                                      </path>
+                                                                      <rect width="4" height="12" x="2" y="9"></rect>
+                                                                      <circle cx="4" cy="4" r="2"></circle>
+                                                                 </svg></a><a href="https://wa.me/+201147312206"
+                                                                 target="_blank" rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                                                                 title="WhatsApp"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                      height="20" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-message-circle ">
+                                                                      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                                                                 </svg></a></div>
+                                                  </div>
+                                             </div>
+                                             <div class="flex-none w-full md:w-[calc(100%/3)] snap-center px-4">
+                                                  <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center h-full border border-white/10 hover:border-purple-400/50 transition-all duration-500 animate-fade-in"
+                                                       style="animation-delay: 0.2s;">
+                                                       <div class="relative inline-block mb-6">
+                                                            <div
+                                                                 class="absolute inset-0 bg-purple-500 rounded-full animate-pulse-slow opacity-20">
+                                                            </div><img
+                                                                 src="https://res.cloudinary.com/dhjyfpw6f/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1743622833/Screenshot_2025-04-02_213723_wlcnx5.png"
+                                                                 alt="Mohamed Ashraf"
+                                                                 class="w-32 h-32 rounded-full relative z-10 animate-float border-4 border-white/20 hover:border-purple-400 transition-colors duration-300 object-cover">
+                                                            <div
+                                                                 class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-rotate opacity-20">
+                                                            </div>
+                                                       </div>
+                                                       <h3 class="text-xl font-semibold text-white mb-2">Mohamed Ashraf
+                                                       </h3>
+                                                       <p class="text-purple-200 mb-3 shimmer"></p>
+                                                       <p class="text-gray-300 mb-6">Faculty of Engineering, Department
+                                                            of Mechanical
+                                                            Engineering, Mechatronics Section.</p>
+                                                       <div class="flex justify-center space-x-4"><a
+                                                                 href="https://wa.me/+201064980957" target="_blank"
+                                                                 rel="noopener noreferrer"
+                                                                 class="text-gray-300 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                                                                 title="WhatsApp"><svg
+                                                                      xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                      height="20" viewBox="0 0 24 24" fill="none"
+                                                                      stroke="currentColor" stroke-width="2"
+                                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                                      class="lucide lucide-message-circle ">
+                                                                      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                                                                 </svg></a></div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div class="flex justify-center mt-8 space-x-2"><button
+                                                  class="w-3 h-3 rounded-full transition-all duration-300 bg-purple-500 w-6"></button>
+                                        </div>
+                                   </div>
+                              </div>
+                         </section>
+                    </div>
+                    <footer class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-12">
+                         <div class="max-w-7xl mx-auto px-4">
+                              <div class="text-center">
+                                   <p class="text-lg mb-2">Made by <span class="font-semibold">Eng. Ramadan
+                                             Mohamed</span></p>
+                                   <p class="text-blue-200">© 2026 Assiut Robotics - AC Electrical Committee</p>
+                              </div>
+                         </div>
+                    </footer>
+               </div>
+          </div>
+     </main>
+
+     <!-- Global Footer -->
+     <div id="myUniqueFooterID"></div>
+
+     <!-- Standard Site Scripts -->
+     <script src="../main/language-manager.js"></script>
+     <script src="../main/footerAndheader.js" defer></script>
+
+     <!-- Vanilla JS for Carousels & Interactions -->
+     <script src="script.js"></script>
+</body>
+
+</html>
