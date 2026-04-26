@@ -1,26 +1,34 @@
 [
     {
         "title": "IAM3D & RC Cars",
+        "title_ar": "مسابقة IAM3D والسيارات اللاسلكية",
         "image": "./achievements/images/competitions/iam3d/iam3d_logo.png",
         "description": "IAM3D is a 3D-printing robotics challenge (1st Place) and RC Cars Challenge by EFx ASME tests RC car design and manufacturing skills (2nd Place). Two engineering competitions showcasing our team's design and performance excellence.",
+        "description_ar": "مسابقة IAM3D هي تحدي روبوتات يعتمد على الطباعة ثلاثية الأبعاد (المركز الأول)، بينما يختبر تحدي السيارات اللاسلكية من EFx ASME مهارات تصميم وتصنيع السيارات (المركز الثاني). مسابقتان هندسيتان تبرزان تميز فريقنا في التصميم والأداء.",
         "link": "./achievements/index_iam3d.html"
     },
     {
         "title": "ROV2017",
+        "title_ar": "الغواصات الآلية (ROV) 2017",
         "image": "./achievements/images/competitions/rov/ROV2017.png",
         "description": "The 2017 ROV Competition, organized by the MATE Center, was a global event promoting innovation in underwater robotics. Teams from around the world built and operated ROVs to complete complex underwater missions. The competition aimed to inspire students to pursue STEM careers through real-world challenges.",
+        "description_ar": "مسابقة الغواصات الآلية 2017، التي نظمها مركز MATE، كانت حدثاً عالمياً لتعزيز الابتكار في الروبوتات تحت الماء. قامت الفرق من جميع أنحاء العالم ببناء وتشغيل غواصات لإنجاز مهام معقدة. هدفت المسابقة إلى إلهام الطلاب لمتابعة مساراتهم في مجالات العلوم والتكنولوجيا.",
         "link": "./achievements/index_rov.html"
     },
     {
         "title": "Minesweepers Competition",
+        "title_ar": "مسابقة كاسحات الألغام",
         "image": "./achievements/images/competitions/mine/mines.png",
         "description": "The Minesweepers Competition is a global event focused on developing robotic solutions for landmine detection and removal. It promotes innovation and teamwork among international teams to build safe and efficient systems for dangerous environments. The competition supports technological advancement in humanitarian demining.",
+        "description_ar": "مسابقة كاسحات الألغام هي حدث عالمي يركز على تطوير حلول روبوتية لاكتشاف وإزالة الألغام الأرضية. تعزز الابتكار والعمل الجماعي بين الفرق الدولية لبناء أنظمة آمنة وفعالة، وتدعم التقدم التكنولوجي في إزالة الألغام للأغراض الإنسانية.",
         "link": "./achievements/index_mins.html"
     },
     {
         "title": "Micromouse Competition",
+        "title_ar": "مسابقة المايكروماوس",
         "image": "./achievements/images/competitions/micro/micrologo.png",
         "description": "The Micromouse competition challenges small autonomous robots to navigate a 16×16 maze and reach the center on their own. Robots explore the maze, detect walls, and track their position to find the goal. After mapping the maze, they race through the optimal path in the shortest time.",
+        "description_ar": "تتحدى مسابقة المايكروماوس روبوتات صغيرة ذاتية القيادة للتنقل في متاهة بحجم 16×16 للوصول إلى المركز بمفردها. تستكشف الروبوتات المتاهة، وتكتشف الجدران لتصل إلى الهدف. بعد رسم خريطة المتاهة، تتسابق عبر المسار الأمثل في أقصر وقت ممكن.",
         "link": "./achievements/index_micro.html"
     }
 ]

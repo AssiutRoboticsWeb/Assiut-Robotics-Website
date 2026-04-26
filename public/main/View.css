@@ -604,20 +604,21 @@ h1 {
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
+    align-items: stretch;
     max-width: 1400px;
     margin: 0 auto;
 }
 
 #Ach_cards .ach-card {
-    flex: 0 0 300px;
+    flex: 1 1 300px;
     min-height: 30rem;
     max-width: 400px;
 
     color: var(--card-text);
     background-color: var(--card-bg);
 
-    padding: 1rem;
-    border-radius: 2rem;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
 
     display: flex;
     flex-direction: column;
@@ -628,27 +629,32 @@ h1 {
     text-align: center;
 
     transition: all 0.25s ease;
-    box-shadow: 0 5px 15px var(--card-shadow);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 8px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* ===== HOVER ===== */
 #Ach_cards .ach-card:hover {
-    transform: translateY(-5px) scale(1.02);
-
+    transform: translateY(-8px);
+    border-color: rgba(135, 196, 255, 0.25);
+    box-shadow: 0 24px 64px rgba(37, 64, 97, 0.14), 0 8px 24px rgba(37, 64, 97, 0.08);
     background: var(--card-hover-bg);
     color: var(--card-hover-text);
 }
 
 /* ===== IMAGE ===== */
 #Ach_cards .ach-card img {
-    width: 20rem;
-    border-radius: 1.5rem;
-    transition: 0.3s;
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    background: linear-gradient(135deg, #f0f5fa 0%, #e8f0f8 100%);
+    border-radius: 1rem;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* subtle zoom on hover */
 #Ach_cards .ach-card:hover img {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 /* ===== TEXT ===== */
@@ -657,6 +663,50 @@ h1 {
     max-width: 30rem;
     white-space: pre-line;
     opacity: 0.9;
+    color: #5a6a7a;
+    margin-bottom: 0;
+
+    text-align: justify;
+    text-align-last: justify;
+    word-spacing: 0.05em;
+    /* fine-tune spacing */
+    line-height: 1.6;
+    /* improves readability */
+}
+
+#Ach_cards .ach-card p.truncated {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.toggle-desc-btn {
+    background: none;
+    border: none;
+    color: #4a9eff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.2rem 0;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: color 0.3s ease;
+    margin-bottom: 0.5rem;
+}
+
+.toggle-desc-btn:hover {
+    color: #3a8eef;
+    text-decoration: underline;
+}
+
+#Ach_cards .ach-card h2 {
+    text-align: center;
+    width: 100%;
+    font-size: 1.3rem;
 }
 
 /* ===== FOOTER ===== */
@@ -670,22 +720,26 @@ h1 {
 
 /* ===== BUTTON ===== */
 .learnMore {
-    padding: 8px 20px;
-    border-radius: 20px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
     border: none;
-    background: #e6cc97;
-    color: black;
-    transition: 0.3s;
+    background: linear-gradient(135deg, #4a9eff 0%, #6eb8fd 100%);
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 body.dark .learnMore {
-    background: #e6cc97;
-    color: black;
+    background: linear-gradient(135deg, #4a9eff 0%, #6eb8fd 100%);
+    color: #ffffff;
 }
 
 .learnMore:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
+    background: linear-gradient(135deg, #3a8eef 0%, #5ea8ed 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 158, 255, 0.35);
 }
 
 /* ===== MOBILE ===== */
@@ -711,7 +765,8 @@ body.dark .learnMore {
     }
 
     #Ach_cards .ach-card img {
-        width: 15rem;
+        width: 100%;
+        height: 180px;
     }
 }
 

@@ -9,7 +9,7 @@ const elts = {
 
 const bilingualTexts = {
     en: ["Innovating", "Building", "Leading", "Assiut", "Robotics", "Team", ":)"],
-    ar: ["نبتكر", "نبني", "نقود", "أسيوط", "روبوتكس", "فريق", ":)"]
+    ar: ["نبتكر", "نبني", "نقود", "فريق", "أسيوط", "روبوتكس", ":)"]
 };
 
 let texts = bilingualTexts[window.LanguageManager?.currentLang || 'en'];
@@ -287,16 +287,21 @@ const getip = async () => {
 
 
 sendIp = async () => {
-    const ip = await getip();
-    const response = await fetch(APIConfig.getVisitorEndpoint(), {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ip }),
-    });
-    const data = await response.json();
-    return data;
+    try {
+        const ip = await getip();
+        const response = await fetch(APIConfig.getVisitorEndpoint(), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ip }),
+        });
+        if (!response.ok) return;
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.warn('Analytics server unreachable. This is expected in development.');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

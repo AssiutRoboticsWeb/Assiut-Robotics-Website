@@ -3,15 +3,22 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadCommittees();
+    // Wait for i18next to be ready before initial load
+    if (window.i18next && typeof i18next.t === 'function') {
+        loadCommittees(window.LanguageManager ? window.LanguageManager.currentLang : i18next.language);
+    } else {
+        window.addEventListener('i18nReady', (e) => {
+            loadCommittees(e.detail.language);
+        }, { once: true });
+    }
     
     // Re-render when language changes
-    window.addEventListener('languageChanged', () => {
-        loadCommittees();
+    window.addEventListener('languageChanged', (e) => {
+        loadCommittees(e.detail.language);
     });
 });
 
-async function loadCommittees() {
+async function loadCommittees(lang) {
     const container = document.getElementById('committees-container');
     if (!container) return;
 
@@ -19,21 +26,21 @@ async function loadCommittees() {
         const response = await fetch('./config/committees.json');
         if (!response.ok) throw new Error('Failed to load committees');
         const data = await response.json();
-        renderCommittees(data, container);
+        renderCommittees(data, container, lang);
     } catch (error) {
         console.error('Committees Error:', error);
         container.innerHTML = '<p class="error-text">Unable to load committees content.</p>';
     }
 }
 
-function renderCommittees(data, container) {
-    const lang = window.LanguageManager?.currentLang || 'en';
+function renderCommittees(data, container, lang) {
+    const currentLang = (lang || (window.LanguageManager ? window.LanguageManager.currentLang : (i18next.language || 'en'))).split('-')[0];
     container.innerHTML = ''; // Clear container
 
     let delay = 100;
     data.forEach((item) => {
-        const title = typeof item.title === 'object' ? item.title[lang] : item.title;
-        const description = typeof item.description === 'object' ? item.description[lang] : item.description;
+        const title = typeof item.title === 'object' ? (item.title[currentLang] || item.title['en']) : item.title;
+        const description = typeof item.description === 'object' ? (item.description[currentLang] || item.description['en']) : item.description;
 
         const col = document.createElement('div');
         col.className = 'column';

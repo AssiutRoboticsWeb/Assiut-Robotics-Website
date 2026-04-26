@@ -59,7 +59,8 @@
 }
 
 /* ===== Language Switch Animation ===== */
-[data-en], [data-ar] {
+[data-en],
+[data-ar] {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -77,6 +78,7 @@
         opacity: 0;
         transform: translateY(-6px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -842,11 +844,10 @@ body.dark .activity-card {
 
 /* Button Styling */
 #auth-buttons {
-    margin-right: 10px;
+    margin: 0 10px;
 }
 
 #auth-buttons a {
-    /* margin-left: 10px; */
     width: 100% !important;
 }
 

@@ -1,0 +1,68 @@
+/* LTR Support Overrides */
+[dir="ltr"] {
+     text-align: left;
+}
+
+[dir="ltr"] body {
+     font-family: 'Poppins', 'Cairo', sans-serif;
+     /* Prefer Latin-first font */
+}
+
+/* Margins reset */
+[dir="ltr"] .ml-auto {
+     margin-left: auto;
+     margin-right: 0;
+}
+
+[dir="ltr"] .mr-auto {
+     margin-right: auto;
+     margin-left: 0;
+}
+
+/* Absolute positioned elements */
+[dir="ltr"] .card .card-description {
+     transform: translate(15%, -80%);
+}
+
+/* Icons (restore default directions) */
+[dir="ltr"] .fa-arrow-right:before {
+     content: "\f061";
+     /* fa-arrow-right */
+}
+
+[dir="ltr"] .fa-arrow-left:before {
+     content: "\f060";
+     /* fa-arrow-left */
+}
+
+[dir="ltr"] .learn-more-btn i {
+     transform: rotate(0deg);
+}
+
+[dir="ltr"] .learn-more-btn:hover i {
+     transform: translateX(4px);
+}
+
+/* Slider */
+[dir="ltr"] .prev-button svg {
+     transform: rotate(0deg);
+}
+
+[dir="ltr"] .next-button svg {
+     transform: rotate(0deg);
+}
+
+/* Text alignment */
+[dir="ltr"] .ach-card p {
+     text-align: left;
+     text-align-last: left;
+}
+
+/* Navigation */
+[dir="ltr"] .flex-div2 {
+     flex-direction: row;
+}
+
+[dir="ltr"] .topnav a {
+     float: left;
+}
