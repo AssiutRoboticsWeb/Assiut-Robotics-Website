@@ -12,7 +12,7 @@ function goSlide(n) {
      slides[current].classList.remove('active');
      current = n;
      slides[current].classList.add('active');
-     wrapper.style.transform = `translateX(-${current * 100}vw)`;
+     wrapper.style.transform = `translateX(-${current * 10}%)`;
      progressBar.style.width = `${((current + 1) / total) * 100}%`;
      slideNum.textContent = String(current + 1).padStart(2, '0');
      prevBtn.style.opacity = current === 0 ? '0' : '1';
