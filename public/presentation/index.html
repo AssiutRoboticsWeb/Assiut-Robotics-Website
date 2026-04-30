@@ -51,6 +51,10 @@
 </head>
 
 <body>
+  <!-- Custom Cursor -->
+  <div id="cursor" class="fixed w-8 h-8 border-2 border-blue-400/50 rounded-full pointer-events-none z-[9999] transition-all duration-300 ease-out -translate-x-1/2 -translate-y-1/2 hidden md:block backdrop-blur-[2px]"></div>
+  <div id="cursor-dot" class="fixed w-2 h-2 bg-amber-400 rounded-full pointer-events-none z-[10000] transition-transform duration-75 ease-out -translate-x-1/2 -translate-y-1/2 hidden md:block shadow-[0_0_10px_#f59e0b]"></div>
+
   <div class="fixed bottom-0 left-0 w-full h-[3px] bg-white/5 z-[100]">
     <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-amber-400" style="width:10%"></div>
   </div>
