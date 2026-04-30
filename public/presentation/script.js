@@ -1,4 +1,4 @@
-const total = 10;
+const total = 11;
 let current = 0;
 const wrapper = document.getElementById('slides-wrapper');
 const slides = document.querySelectorAll('.slide');
@@ -12,7 +12,7 @@ function goSlide(n) {
      slides[current].classList.remove('active');
      current = n;
      slides[current].classList.add('active');
-     wrapper.style.transform = `translateX(-${current * 10}%)`;
+     wrapper.style.transform = `translateX(-${current * (100 / total)}%)`;
      progressBar.style.width = `${((current + 1) / total) * 100}%`;
      slideNum.textContent = String(current + 1).padStart(2, '0');
      prevBtn.style.opacity = current === 0 ? '0' : '1';

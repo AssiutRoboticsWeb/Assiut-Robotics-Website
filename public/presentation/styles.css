@@ -18,13 +18,13 @@ body {
 
 #slides-wrapper {
      transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
-     width: 1000%;
+     width: 1100%;
      height: 100%;
      display: flex;
 }
 
 .slide {
-     width: 10%;
+     width: calc(100% / 11);
      height: 100vh;
      flex-shrink: 0;
      position: relative;
