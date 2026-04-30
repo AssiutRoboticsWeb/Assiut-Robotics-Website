@@ -23,6 +23,8 @@
     "i18next-http-middleware": "^3.9.6",
     "node": "^22.10.0",
     "nodemon": "^3.1.7",
+    "pptxgenjs": "^4.0.1",
+    "puppeteer": "^24.42.0",
     "toastify-js": "^1.12.0"
   }
 }
