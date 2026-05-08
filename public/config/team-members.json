@@ -215,7 +215,8 @@
         "name": "Maryam Elsayed Abdellatif",
         "role": "Marketing Vice Head",
         "image": "./all-images/empty_woman_muslim.png",
-        "cardClass": "vice-card"
+        "cardClass": "vice-card",
+        "email": "maryom1563@gmail.com"
       },
       {
         "name": "Mahmoud Mohamed Joma",
