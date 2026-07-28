@@ -280,8 +280,22 @@ window.addEventListener('load', () => {
                         searchResults.style.display = 'block';
                         searchResults.innerHTML = '<div style="text-align: center; color: #888;">Searching...</div>';
                         
-                        const res = await window.api.get(`/search?q=${encodeURIComponent(query)}`);
-                        const data = res.data;
+                        const baseUrl = (window.ServerConfig && window.ServerConfig.getAllUrls().baseUrl) 
+                            ? window.ServerConfig.getAllUrls().baseUrl 
+                            : 'http://localhost:3000';
+                            
+                        const response = await fetch(`${baseUrl}/api/search?q=${encodeURIComponent(query)}`, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            credentials: 'include'
+                        });
+                        
+                        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                        const jsonRes = await response.json();
+                        const data = jsonRes.data;
                         
                         let html = '';
                         
@@ -323,6 +337,7 @@ window.addEventListener('load', () => {
                         
                         searchResults.innerHTML = html;
                     } catch (err) {
+                        console.error("Search error caught:", err);
                         searchResults.innerHTML = '<div style="text-align: center; color: #ef4444;">Error fetching results</div>';
                     }
                 }, 400); // 400ms debounce
