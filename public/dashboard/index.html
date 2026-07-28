@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Assiut Robotics</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    
+    <!-- Config and API -->
+    <script src="../config/server-config.js"></script>
+    <script src="../js/api.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-robot"></i> Assiut Robotics
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active"><i class="fas fa-chart-pie"></i> Overview</a></li>
+            <li><a href="components.html"><i class="fas fa-microchip"></i> Inventory</a></li>
+            <li><a href="members.html"><i class="fas fa-users"></i> Members</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Events</a></li>
+            <li><a href="#"><i class="fas fa-tasks"></i> Tasks</a></li>
+            <li style="margin-top: 40px;"><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="dashboard-header">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button id="mobileMenuBtn" class="btn" style="display: none; background: transparent; color: white; font-size: 20px;"><i class="fas fa-bars"></i></button>
+                <h1>Dashboard Overview</h1>
+            </div>
+            
+            <div class="user-profile">
+                <span id="userName" style="color: var(--text-secondary); font-weight: 500;">Loading...</span>
+                <img src="../all-images/default.png" alt="Profile" id="userAvatar">
+            </div>
+        </header>
+
+        <!-- Dynamic Loader -->
+        <div id="loader" class="loader"></div>
+
+        <!-- Dashboard Content -->
+        <div id="dashboardContent" style="display: none;">
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="metric-info">
+                        <h3>Total Members</h3>
+                        <p id="metric-members">--</p>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="metric-info">
+                        <h3>Completed Tasks</h3>
+                        <p id="metric-tasks">--</p>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="metric-info">
+                        <h3>Pending Borrow Requests</h3>
+                        <p id="metric-requests">--</p>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="metric-info">
+                        <h3>Upcoming Events</h3>
+                        <p id="metric-events">--</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Table (Placeholder for now) -->
+            <div class="data-container">
+                <div class="data-container-header">
+                    <h2>Recent System Activity</h2>
+                    <button class="btn btn-primary">View All</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>User</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activityTableBody">
+                        <tr><td colspan="4" style="text-align:center;">Loading activity...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth <= 768) mobileBtn.style.display = 'block';
+            
+            mobileBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+
+            // Fetch Dashboard Data
+            try {
+                // Try leader dashboard first. If 403, fallback to committee dashboard
+                let res;
+                try {
+                    res = await window.api.get('/dashboard/leader');
+                } catch (e) {
+                    res = await window.api.get('/dashboard/committee');
+                }
+                
+                const data = res.data;
+
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('dashboardContent').style.display = 'block';
+
+                document.getElementById('metric-members').textContent = data.members.active || data.members.total;
+                document.getElementById('metric-tasks').textContent = data.tasks.completed;
+                
+                if (data.components) {
+                    document.getElementById('metric-requests').textContent = data.components.pendingRequests;
+                } else {
+                    document.getElementById('metric-requests').textContent = "N/A";
+                }
+
+                if (data.events) {
+                    document.getElementById('metric-events').textContent = data.events.upcoming;
+                } else {
+                    document.getElementById('metric-events').textContent = "N/A";
+                }
+
+            } catch (err) {
+                console.error("Dashboard Error:", err);
+                alert("Failed to load dashboard data. Are you logged in as a Leader or Head?");
+            }
+
+            // Logout handler
+            document.getElementById('logoutBtn').addEventListener('click', async (e) => {
+                e.preventDefault();
+                try {
+                    await window.api.post('/auth/logout');
+                    window.location.href = '../index.html';
+                } catch(err) {
+                    alert("Logout failed");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

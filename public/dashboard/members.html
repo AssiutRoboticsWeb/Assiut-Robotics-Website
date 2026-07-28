@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members | Dashboard</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    
+    <script src="../config/server-config.js"></script>
+    <script src="../js/api.js"></script>
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-robot"></i> Assiut Robotics
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-chart-pie"></i> Overview</a></li>
+            <li><a href="components.html"><i class="fas fa-microchip"></i> Inventory</a></li>
+            <li><a href="members.html" class="active"><i class="fas fa-users"></i> Members</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Events</a></li>
+            <li><a href="#"><i class="fas fa-tasks"></i> Tasks</a></li>
+            <li style="margin-top: 40px;"><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="dashboard-header">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button id="mobileMenuBtn" class="btn" style="display: none; background: transparent; color: white; font-size: 20px;"><i class="fas fa-bars"></i></button>
+                <h1>Members Directory</h1>
+            </div>
+        </header>
+
+        <div class="data-container">
+            <div class="data-container-header">
+                <h2>All Members</h2>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Avatar</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Committee</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membersTableBody">
+                        <tr><td colspan="5" style="text-align:center;">Loading members...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Since pagination is enabled on API, we'll fetch page 1 for now
+                const res = await window.api.get('/members?page=1&limit=50');
+                // The API features returns data.data for results usually
+                const members = res.data; 
+                
+                const tbody = document.getElementById('membersTableBody');
+                
+                if (!members || members.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No members found.</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = '';
+                members.forEach(m => {
+                    const avatarSrc = m.avatar && m.avatar !== 'default' ? m.avatar : '../all-images/default.png';
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><img src="${avatarSrc}" alt="${m.name}" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--border-color);"></td>
+                        <td style="font-weight: 600;">${m.name}</td>
+                        <td>${m.email}</td>
+                        <td><span class="badge badge-warning">${m.committee}</span></td>
+                        <td><span class="badge badge-success">${m.role}</span></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                document.getElementById('membersTableBody').innerHTML = `<tr><td colspan="5" style="text-align:center; color: red;">Error loading members</td></tr>`;
+            }
+        });
+    </script>
+</body>
+</html>

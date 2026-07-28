@@ -256,4 +256,84 @@ if (localStorage.getItem("darkMode") === "true") document.body.classList.add("da
 window.addEventListener('load', () => {
     implement_views();
     setupColumns();
+    
+    // Setup Global Search after a short delay to ensure header is loaded
+    setTimeout(() => {
+        const searchInput = document.getElementById('globalSearchInput');
+        const searchResults = document.getElementById('globalSearchResults');
+        
+        if (searchInput && searchResults) {
+            let debounceTimer;
+            
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.trim();
+                
+                clearTimeout(debounceTimer);
+                
+                if (query.length < 2) {
+                    searchResults.style.display = 'none';
+                    return;
+                }
+                
+                debounceTimer = setTimeout(async () => {
+                    try {
+                        searchResults.style.display = 'block';
+                        searchResults.innerHTML = '<div style="text-align: center; color: #888;">Searching...</div>';
+                        
+                        const res = await window.api.get(`/search?q=${encodeURIComponent(query)}`);
+                        const data = res.data;
+                        
+                        let html = '';
+                        
+                        // Members
+                        if (data.members && data.members.length > 0) {
+                            html += '<div style="font-weight: bold; margin-bottom: 5px; color: #3b82f6; border-bottom: 1px solid #334155; padding-bottom: 5px;">Members</div>';
+                            data.members.forEach(m => {
+                                html += `<div style="padding: 5px 0; font-size: 14px; color: #f8fafc;">${m.name} <span style="font-size: 12px; color: #94a3b8;">(${m.committee})</span></div>`;
+                            });
+                        }
+                        
+                        // Components
+                        if (data.components && data.components.length > 0) {
+                            html += '<div style="font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #10b981; border-bottom: 1px solid #334155; padding-bottom: 5px;">Components</div>';
+                            data.components.forEach(c => {
+                                html += `<div style="padding: 5px 0; font-size: 14px; color: #f8fafc;">${c.title} <span style="font-size: 12px; color: #94a3b8;">(${c.category})</span></div>`;
+                            });
+                        }
+                        
+                        // Events
+                        if (data.events && data.events.length > 0) {
+                            html += '<div style="font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #8b5cf6; border-bottom: 1px solid #334155; padding-bottom: 5px;">Events</div>';
+                            data.events.forEach(e => {
+                                html += `<div style="padding: 5px 0; font-size: 14px; color: #f8fafc;">${e.title}</div>`;
+                            });
+                        }
+                        
+                        // Tasks
+                        if (data.tasks && data.tasks.length > 0) {
+                            html += '<div style="font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #f59e0b; border-bottom: 1px solid #334155; padding-bottom: 5px;">Tasks</div>';
+                            data.tasks.forEach(t => {
+                                html += `<div style="padding: 5px 0; font-size: 14px; color: #f8fafc;">${t.title}</div>`;
+                            });
+                        }
+                        
+                        if (html === '') {
+                            html = '<div style="text-align: center; color: #888;">No results found.</div>';
+                        }
+                        
+                        searchResults.innerHTML = html;
+                    } catch (err) {
+                        searchResults.innerHTML = '<div style="text-align: center; color: #ef4444;">Error fetching results</div>';
+                    }
+                }, 400); // 400ms debounce
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.style.display = 'none';
+                }
+            });
+        }
+    }, 1000); // Give header 1 second to load
 });

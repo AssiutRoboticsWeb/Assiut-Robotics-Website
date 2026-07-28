@@ -51,11 +51,21 @@
 
     <!-- Hero Section -->
     <section class="hero-section" aria-label="Hero Slider">
-        <!-- Animated Text Overlay -->
-        <div class="above-container" role="presentation">
-            <div id="container">
-                <span id="text1" aria-hidden="true"></span>
-                <span id="text2" aria-hidden="true"></span>
+        <!-- Animated Text Overlay & CTA -->
+        <div class="above-container" role="presentation" style="height: 100%; display: flex; flex-direction: column; justify-content: center; background: rgba(0,0,0,0.4); z-index: 5;">
+            <div id="container" style="position: relative; height: auto; margin-top: 15vh;">
+                <span id="text1" aria-hidden="true" style="color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.5);"></span>
+                <span id="text2" aria-hidden="true" style="color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.5);"></span>
+            </div>
+            
+            <!-- Premium CTA Buttons -->
+            <div class="hero-cta" style="margin-top: 40px; text-align: center; z-index: 10;">
+                <a href="../login/signup.html" class="learn-more-btn" style="padding: 16px 40px; font-size: 1.2rem; background: linear-gradient(135deg, #2563eb, #4f46e5); border-radius: 30px; box-shadow: 0 10px 25px rgba(37,99,235,0.4);">
+                    Join the Team <i class="fas fa-rocket"></i>
+                </a>
+                <a href="#committees" class="learn-more-btn" style="margin-left: 15px; padding: 16px 40px; font-size: 1.2rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                    Explore More <i class="fas fa-arrow-down"></i>
+                </a>
             </div>
         </div>
 
