@@ -14,8 +14,8 @@
             legacyBase: "http://localhost:3000"
         },
         production: {
-            apiBase: "https://assiut-robotics-server.vercel.app", // Main centralized server
-            tracksBase: "https://assiut-robotics-server.vercel.app",
+            apiBase: window.location.hostname.includes('staging') ? "https://staging-robotics-server.vercel.app" : "https://assiut-robotics-server.vercel.app", // Main centralized server
+            tracksBase: window.location.hostname.includes('staging') ? "https://staging-robotics-server.vercel.app" : "https://assiut-robotics-server.vercel.app",
             electricalBase: "https://tempbackendelectrical-production.up.railway.app",
             legacyBase: "https://assiutrobotics-production.up.railway.app"
         }
