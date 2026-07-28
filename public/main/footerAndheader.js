@@ -168,7 +168,7 @@ function setupLogin() {
         profileButton.style.display = "none";
         
         // Hide search if not logged in
-        const searchContainer = tempDiv.querySelector('.global-search-container');
+        const searchContainer = document.querySelector('.global-search-container');
         if (searchContainer) searchContainer.style.display = 'none';
     }
 }
