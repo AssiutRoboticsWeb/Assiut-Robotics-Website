@@ -4,11 +4,10 @@
  */
 class ApiClient {
     constructor() {
-        // Backend URL should typically come from an env var, 
-        // but for Vanilla JS it's usually window.location.origin in production 
-        // or a hardcoded localhost for dev.
-        // Assuming there's a global SERVER_URL defined in config/server-config.js
-        this.baseURL = window.SERVER_URL || 'http://localhost:4000/api';
+        // Use the centralized server-config.js if available, otherwise fallback
+        this.baseURL = (window.ServerConfig && window.ServerConfig.getAllUrls().baseUrl) 
+            ? window.ServerConfig.getAllUrls().baseUrl + '/api'
+            : 'http://localhost:4000/api';
     }
 
     /**

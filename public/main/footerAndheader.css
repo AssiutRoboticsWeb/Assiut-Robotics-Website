@@ -331,7 +331,6 @@ body.dark .activity-card {
 /* Header */
 
 .topnav {
-    overflow: hidden;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
