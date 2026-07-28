@@ -154,7 +154,18 @@ class Slider {
         if (navButtonImg && this.display) {
             const imgClone = navButtonImg.cloneNode();
             imgClone.alt = navButtonImg.alt || "Slider image";
-            this.display.replaceChildren(imgClone);
+            
+            // Wrap in an anchor tag so it's clickable and goes to it
+            const link = document.createElement("a");
+            link.href = imgClone.src;
+            link.target = "_blank"; // Open in new tab
+            link.style.display = "block";
+            link.style.width = "100%";
+            link.style.height = "100%";
+            link.style.cursor = "pointer";
+            link.appendChild(imgClone);
+
+            this.display.replaceChildren(link);
         }
 
         this.updateNavButtons();

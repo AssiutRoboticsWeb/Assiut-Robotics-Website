@@ -238,6 +238,7 @@ function renderPioneers(data, container) {
     let baseTranslateX = 0;
     const viewport = container.querySelector('.slider-viewport');
 
+    // Touch Events
     viewport.addEventListener('touchstart', (e) => {
         if (!e.touches || e.touches.length === 0) return;
         startX = e.touches[0].clientX;
@@ -289,6 +290,63 @@ function renderPioneers(data, container) {
         update();
 
     }, { passive: true });
+
+    // Mouse Events for dragging
+    viewport.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        currentX = startX;
+        dragging = true;
+        viewport.style.cursor = 'grabbing';
+
+        const style = getComputedStyle(track).transform;
+        if (style && style !== 'none') {
+            try {
+                const m = new DOMMatrixReadOnly(style);
+                baseTranslateX = m.m41;
+            } catch (err) {
+                const match = style.match(/matrix\([^,]+,[^,]+,[^,]+,[^,]+,\s*([^,]+),/);
+                baseTranslateX = match ? parseFloat(match[1]) : 0;
+            }
+        } else {
+            baseTranslateX = 0;
+        }
+        track.style.transition = 'none';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!dragging) return;
+        e.preventDefault(); // Prevent text selection while dragging
+        currentX = e.clientX;
+        const dx = currentX - startX;
+        track.style.transform = `translateX(${baseTranslateX + dx}px)`;
+    });
+
+    const handleMouseUp = (e) => {
+        if (!dragging) return;
+        dragging = false;
+        viewport.style.cursor = 'grab';
+        track.style.transition = '';
+
+        const totalDx = currentX - startX;
+        if (!slides.length) return;
+
+        const slideWidth = slides[0].offsetWidth;
+        const threshold = slideWidth * 0.25;
+
+        // Dragged Right -> Move Track Right -> Reveal Left -> Next Item
+        if (totalDx > threshold) {
+            index += 1;
+        } else if (totalDx < -threshold) {
+            index -= 1;
+        }
+
+        update();
+    };
+
+    window.addEventListener('mouseup', handleMouseUp);
+    
+    // Set initial cursor
+    viewport.style.cursor = 'grab';
 
     if (window.AOS) {
         window.AOS.refresh()
