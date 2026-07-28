@@ -115,7 +115,7 @@
     function detectEnvironment() {
         const hostname = window.location.hostname;
         const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1';
-        const isDevelopment = hostname.includes('dev') || hostname.includes('staging');
+        const isDevelopment = hostname.includes('dev');
         const devFlag = localStorage.getItem('DEV_MODE') === 'true';
 
         return (isLocalhost || isDevelopment || devFlag) ? 'development' : 'production';
