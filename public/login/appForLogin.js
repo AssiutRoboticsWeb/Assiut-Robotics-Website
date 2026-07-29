@@ -4,40 +4,44 @@ try {
     document.forms['loginForm'].addEventListener('submit', async (event) => {
         // alert('submitting form');
         event.preventDefault();
-        event.target.action = ServerConfig.getMembersLogin();
-        let data = {
-            email: event.target.email.value,
-            password: event.target.password.value,
-            ip: await getip()
-        }
-        data = JSON.stringify(data);
-        console.log(data);
-        // alert('data is : ' + data);
-
-        // TODO do something here to show user that form is being submitted
-        const response = await fetch(event.target.action, {
-            method: 'POST',
-            body: data,
-            headers: {
-                'Content-Type': 'application/json'
+        
+        if (window.showLoading) window.showLoading('Logging In...');
+        try {
+            event.target.action = ServerConfig.getMembersLogin();
+            let data = {
+                email: event.target.email.value,
+                password: event.target.password.value,
+                ip: await getip()
             }
-        });
-        let JSONresponse = await response.json();
+            data = JSON.stringify(data);
+            console.log(data);
+            // alert('data is : ' + data);
 
-        const msg = document.querySelector(".message");
-        console.log(JSONresponse);
-        if (!response.ok) {
-            msg.className = "message error";
-            msg.innerHTML = JSONresponse.message;
-        } else {
-            msg.className = "message success";
-            msg.innerHTML = JSONresponse.message;
-            window.localStorage.setItem('token', JSONresponse.data.token);
-            setTimeout(() => {
-                window.location.href = (document.referrer !== window.location.href && document.referrer !== null && !(document.referrer.includes('signup') || document.referrer.includes('login') || document.referrer.includes('404'))) ? document.referrer : '../profile-page/index.html';
-            }, AppConstants.UI_CONFIG.LOGIN_REDIRECT_DELAY);
+            const response = await fetch(event.target.action, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let JSONresponse = await response.json();
+
+            const msg = document.querySelector(".message");
+            console.log(JSONresponse);
+            if (!response.ok) {
+                msg.className = "message error";
+                msg.innerHTML = JSONresponse.message;
+            } else {
+                msg.className = "message success";
+                msg.innerHTML = JSONresponse.message;
+                window.localStorage.setItem('token', JSONresponse.data.token);
+                setTimeout(() => {
+                    window.location.href = (document.referrer !== window.location.href && document.referrer !== null && !(document.referrer.includes('signup') || document.referrer.includes('login') || document.referrer.includes('404'))) ? document.referrer : '../profile-page/index.html';
+                }, AppConstants.UI_CONFIG.LOGIN_REDIRECT_DELAY);
+            }
+        } finally {
+            if (window.hideLoading) window.hideLoading();
         }
-
     })
 
 } catch (error) {

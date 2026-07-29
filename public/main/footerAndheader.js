@@ -158,14 +158,14 @@ function setupLogin() {
     // Update button visibility based on login status
     if (token) {
         // User is logged in → Show Profile, hide Log In and Register
-        loginButton.style.display = "none";
+        if (loginButton) loginButton.style.display = "none";
         // registerButton.style.display = "none";
-        profileButton.style.display = "inline-block";
+        if (profileButton) profileButton.style.display = "inline-block";
     } else {
         // User is NOT logged in → Show Log In and Register, hide Profile
-        loginButton.style.display = "inline-block";
+        if (loginButton) loginButton.style.display = "inline-block";
         // registerButton.style.display = "inline-block";
-        profileButton.style.display = "none";
+        if (profileButton) profileButton.style.display = "none";
         
         // Hide search if not logged in
         const searchContainer = document.querySelector('.global-search-container');
@@ -356,3 +356,36 @@ window.addEventListener('load', () => {
         }
     }, 1000); // Give header 1 second to load
 });
+
+/* Loading utility – show/hide a premium overlay */
+
+(function() {
+  const overlay = document.createElement('div');
+  overlay.id = 'globalLoading';
+  overlay.className = 'loading-overlay';
+  overlay.innerHTML = `
+    <div class="spinner"></div>
+    <div class="loading-message" id="loadingMessage">Loading...</div>
+  `;
+  
+  // Wait for body to exist before appending
+  const appendOverlay = () => {
+    if (document.body) {
+      document.body.appendChild(overlay);
+    } else {
+      setTimeout(appendOverlay, 50);
+    }
+  };
+  appendOverlay();
+
+  // expose helpers globally
+  window.showLoading = function(message = 'Loading...') {
+    const msgEl = document.getElementById('loadingMessage');
+    if (msgEl) msgEl.textContent = message;
+    overlay.classList.add('active');
+  };
+
+  window.hideLoading = function() {
+    overlay.classList.remove('active');
+  };
+})();

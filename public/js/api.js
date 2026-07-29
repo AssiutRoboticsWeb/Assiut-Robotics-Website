@@ -27,6 +27,9 @@ class ApiClient {
     async request(endpoint, options = {}) {
         const url = `${this.baseURL}${endpoint}`;
         
+        // ---- BEGIN LOADING ----
+        showLoading();
+        
         // Ensure credentials (cookies) are sent with every request
         const config = {
             ...options,
@@ -55,6 +58,9 @@ class ApiClient {
         } catch (error) {
             console.error(`[API Error] ${endpoint}:`, error.message);
             throw error;
+        } finally {
+            // ---- END LOADING ----
+            hideLoading();
         }
     }
 
