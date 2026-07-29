@@ -7,7 +7,7 @@ class ApiClient {
         // Use the centralized server-config.js if available, otherwise fallback
         this.baseURL = (window.ServerConfig && window.ServerConfig.getAllUrls().baseUrl) 
             ? window.ServerConfig.getAllUrls().baseUrl + '/api'
-            : 'http://localhost:4000/api';
+            : 'http://localhost:3000/api';
     }
 
     /**

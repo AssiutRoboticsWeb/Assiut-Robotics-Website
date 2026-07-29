@@ -154,18 +154,11 @@ class Slider {
         if (navButtonImg && this.display) {
             const imgClone = navButtonImg.cloneNode();
             imgClone.alt = navButtonImg.alt || "Slider image";
-            
-            // Wrap in an anchor tag so it's clickable and goes to it
-            const link = document.createElement("a");
-            link.href = imgClone.src;
-            link.target = "_blank"; // Open in new tab
-            link.style.display = "block";
-            link.style.width = "100%";
-            link.style.height = "100%";
-            link.style.cursor = "pointer";
-            link.appendChild(imgClone);
-
-            this.display.replaceChildren(link);
+            const anchor = document.createElement('a');
+            anchor.href = imgClone.src;
+            anchor.target = '_blank';
+            anchor.appendChild(imgClone);
+            this.display.replaceChildren(anchor);
         }
 
         this.updateNavButtons();
@@ -200,7 +193,7 @@ class Slider {
             }
         });
 
-        // Thumbnail clicks
+        // Thumbnail clicks (existing delegated listener)
         this.sliderNavigation?.addEventListener("click", (event) => {
             const targetButton = event.target.closest(".nav-button");
             const index = targetButton ? this.navButtons.indexOf(targetButton) : -1;
@@ -210,6 +203,15 @@ class Slider {
                 this.showSlide(index);
                 this.resumeAutoplayAfterDelay();
             }
+        });
+
+        // Direct click listeners for each nav button (ensure navigation works even if event delegation fails)
+        this.navButtons.forEach((button, i) => {
+            button.addEventListener('click', () => {
+                this.pauseAutoplay();
+                this.showSlide(i);
+                this.resumeAutoplayAfterDelay();
+            });
         });
 
         // Navigation buttons
@@ -225,8 +227,13 @@ class Slider {
             this.resumeAutoplayAfterDelay();
         });
 
-        // Pause autoplay on hover
-        this.slider?.addEventListener("mouseenter", () => this.pauseAutoplay());
+        // Click on main image opens full version in new tab
+        this.display?.addEventListener('click', (e) => {
+            const img = this.display.querySelector('img');
+            if (img && img.src) {
+                window.open(img.src, '_blank');
+            }
+        });
         this.slider?.addEventListener("mouseleave", () => this.resumeAutoplayAfterDelay());
 
         // Pause autoplay when tab is not visible
