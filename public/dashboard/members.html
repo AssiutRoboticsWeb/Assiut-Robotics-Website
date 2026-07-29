@@ -24,14 +24,14 @@
             <li><a href="members.html" class="active"><i class="fas fa-users"></i> Members</a></li>
             <li><a href="#"><i class="fas fa-calendar-alt"></i> Events</a></li>
             <li><a href="#"><i class="fas fa-tasks"></i> Tasks</a></li>
-            <li style="margin-top: 40px;"><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li class="mt-40"><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </aside>
 
     <main class="main-content">
         <header class="dashboard-header">
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <button id="mobileMenuBtn" class="btn" style="display: none; background: transparent; color: white; font-size: 20px;"><i class="fas fa-bars"></i></button>
+            <div class="flex-center gap-15">
+                <button id="mobileMenuBtn" class="btn bg-transparent text-white text-lg d-none" aria-label="Toggle Mobile Menu"><i class="fas fa-bars"></i></button>
                 <h1>Members Directory</h1>
             </div>
         </header>
@@ -41,7 +41,7 @@
                 <h2>All Members</h2>
             </div>
             
-            <div style="overflow-x: auto;">
+            <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
@@ -53,7 +53,7 @@
                         </tr>
                     </thead>
                     <tbody id="membersTableBody">
-                        <tr><td colspan="5" style="text-align:center;">Loading members...</td></tr>
+                        <tr><td colspan="5" class="text-center">Loading members...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -71,7 +71,7 @@
                 const tbody = document.getElementById('membersTableBody');
                 
                 if (!members || members.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No members found.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="5" class="text-center">No members found.</td></tr>`;
                     return;
                 }
 
@@ -80,8 +80,8 @@
                     const avatarSrc = m.avatar && m.avatar !== 'default' ? m.avatar : '../all-images/default.png';
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td><img src="${avatarSrc}" alt="${m.name}" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--border-color);"></td>
-                        <td style="font-weight: 600;">${m.name}</td>
+                        <td><img src="${avatarSrc}" alt="${m.name}" class="w-40 h-40 rounded-full border-2"></td>
+                        <td class="font-semibold">${m.name}</td>
                         <td>${m.email}</td>
                         <td><span class="badge badge-warning">${m.committee}</span></td>
                         <td><span class="badge badge-success">${m.role}</span></td>
@@ -89,7 +89,7 @@
                     tbody.appendChild(tr);
                 });
             } catch (err) {
-                document.getElementById('membersTableBody').innerHTML = `<tr><td colspan="5" style="text-align:center; color: red;">Error loading members</td></tr>`;
+                document.getElementById('membersTableBody').innerHTML = `<tr><td colspan="5" class="text-center text-danger">Error loading members</td></tr>`;
             }
         });
     </script>

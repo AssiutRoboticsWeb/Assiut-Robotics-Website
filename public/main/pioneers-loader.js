@@ -149,6 +149,15 @@ function renderPioneers(data, container) {
                     }
                 });
             }
+            
+            // Navigate to slide when clicked anywhere on the card (except the button)
+            card.addEventListener('click', (e) => {
+                if (!e.target.closest('.see-more')) {
+                    index = slides.indexOf(card);
+                    closeAllCards();
+                    update();
+                }
+            });
         });
 
         // Initial update

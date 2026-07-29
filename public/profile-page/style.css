@@ -658,8 +658,9 @@ body.dark-mode .status-badge.pending {
 
 .link-card:hover {
   transform: translateY(-2px);
-  background: #eaf6fc;
-  border-color: #bae6fd;
+  background: var(--card-hover-bg, #eaf6fc);
+  border-color: var(--accent-color, #bae6fd);
+  color: var(--card-hover-text, #000);
 }
 
 .link-card:active {

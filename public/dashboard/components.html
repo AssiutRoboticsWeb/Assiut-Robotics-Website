@@ -25,14 +25,14 @@
             <li><a href="members.html"><i class="fas fa-users"></i> Members</a></li>
             <li><a href="#"><i class="fas fa-calendar-alt"></i> Events</a></li>
             <li><a href="#"><i class="fas fa-tasks"></i> Tasks</a></li>
-            <li style="margin-top: 40px;"><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li class="mt-40"><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </aside>
 
     <main class="main-content">
         <header class="dashboard-header">
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <button id="mobileMenuBtn" class="btn" style="display: none; background: transparent; color: white; font-size: 20px;"><i class="fas fa-bars"></i></button>
+            <div class="flex-center gap-15">
+                <button id="mobileMenuBtn" class="btn bg-transparent text-white text-lg d-none" aria-label="Toggle Mobile Menu"><i class="fas fa-bars"></i></button>
                 <h1>Component Inventory</h1>
             </div>
         </header>
@@ -45,7 +45,7 @@
                 </button>
             </div>
             
-            <div style="overflow-x: auto;">
+            <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
@@ -58,7 +58,7 @@
                         </tr>
                     </thead>
                     <tbody id="componentsTableBody">
-                        <tr><td colspan="6" style="text-align:center;">Loading inventory...</td></tr>
+                        <tr><td colspan="6" class="text-center">Loading inventory...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -74,7 +74,7 @@
                 const tbody = document.getElementById('componentsTableBody');
                 
                 if (components.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No components found.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center">No components found.</td></tr>`;
                     return;
                 }
 
@@ -89,14 +89,14 @@
 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td><img src="${comp.image}" alt="${comp.title}" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;"></td>
-                        <td style="font-weight: 600;">${comp.title}</td>
+                        <td><img src="${comp.image}" alt="${comp.title}" class="w-50 h-50 rounded-8 object-cover"></td>
+                        <td class="font-semibold">${comp.title}</td>
                         <td>${comp.category || 'N/A'}</td>
                         <td>${comp.total || 1}</td>
                         <td>${statusBadge}</td>
                         <td>
-                            <button class="btn" style="background: rgba(59,130,246,0.1); color: #3b82f6; padding: 6px 12px;"><i class="fas fa-edit"></i></button>
-                            <button class="btn" style="background: rgba(239,68,68,0.1); color: #ef4444; padding: 6px 12px;"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-icon btn-delete"><i class="fas fa-trash"></i></button>
                         </td>
                     `;
                     tbody.appendChild(tr);

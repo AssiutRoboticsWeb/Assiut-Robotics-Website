@@ -149,6 +149,7 @@ function renderMemberData(data) {
   userAvatar.alt = `${data.name}'s avatar`;
   userName.textContent = data.name;
   userRole.textContent = data.role;
+  document.getElementById("userRoleInfo").textContent = data.role;
   userEmail.textContent = data.email;
   userCommittee.textContent = data.committee;
   userPhone.textContent = data.phoneNumber;
@@ -634,9 +635,7 @@ function handleApply(index, buttonEl, liEl) {
 function initialize() {
   verifyToken().then(() => {
     setupRelatedLinksToggle();
-    initializeDarkMode();
     loadNotifications();
-
   });
 
   // Esc to close modal or links popup

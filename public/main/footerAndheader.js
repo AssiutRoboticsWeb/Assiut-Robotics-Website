@@ -202,10 +202,12 @@ function setupScrollTop() {
     window.addEventListener('scroll', function () {
         if (window.scrollY > AppConstants.UI_CONFIG.SCROLL_THRESHOLD) {
             btn.classList.add('visible');
+            document.body.classList.add('scrolled');
         } else {
             // Arrived at top — remove launching state and hide button
             btn.classList.remove('visible');
             btn.classList.remove('launching');
+            document.body.classList.remove('scrolled');
         }
     }, { passive: true });
 
@@ -292,7 +294,8 @@ window.addEventListener('load', () => {
                             method: 'GET',
                             headers: {
                                 'Content-Type': 'application/json',
-                                'Accept': 'application/json'
+                                'Accept': 'application/json',
+                                ...(token ? { 'Authorization': `Bearer ${token}` } : {})
                             },
                             credentials: 'include'
                         });
@@ -387,5 +390,48 @@ window.addEventListener('load', () => {
 
   window.hideLoading = function() {
     overlay.classList.remove('active');
+  };
+
+  // Global Fetch Interceptor to automatically show loading spinner
+  let activeRequests = 0;
+  const originalFetch = window.fetch;
+  
+  window.fetch = async function(...args) {
+    const url = args[0];
+    const options = args[1] || {};
+    const method = (options.method || 'GET').toUpperCase();
+    
+    // Ignore static files and background pings
+    const isBackground = typeof url === 'string' && (
+      url.endsWith('.json') || 
+      url.endsWith('.html') || 
+      url.includes('api.ipify.org')
+    );
+
+    // Show loading for modifying requests or anything that isn't a static/background fetch
+    const shouldShowLoader = !isBackground && (
+      ['POST', 'PUT', 'DELETE', 'PATCH'].includes(method) || 
+      (typeof url === 'string' && url.includes('/api/')) || 
+      (typeof url === 'string' && url.includes('/members/')) || 
+      (typeof url === 'string' && url.includes('/components/'))
+    );
+
+    if (shouldShowLoader) {
+      activeRequests++;
+      if (window.showLoading) window.showLoading("Processing...");
+    }
+    
+    try {
+      const response = await originalFetch.apply(this, args);
+      return response;
+    } finally {
+      if (shouldShowLoader) {
+        activeRequests--;
+        if (activeRequests <= 0) {
+          activeRequests = 0;
+          if (window.hideLoading) window.hideLoading();
+        }
+      }
+    }
   };
 })();
