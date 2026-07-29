@@ -74,7 +74,7 @@ function setupScrollNav() {
         });
 
         $(window).on("resize", function () {
-            if (isMobile()) {
+            if (window.innerWidth > 980) {
                 hideNav();
             }
         });
@@ -104,45 +104,49 @@ function setupColumns() {
 let counter = 0;
 
 function implement_views() {
+    const handleHeaderLoaded = () => {
+        console.log("All HTML content loaded successfully. #Header");
+        setupScrollNav();
+        setupLogin();
+        setupToken();
+        if (window.LanguageManager) window.LanguageManager.updateElements();
+        counter++;
+        if (counter == 2) {
+            document.body.classList.add("loaded");
+        }
+    };
+
+    const handleFooterLoaded = () => {
+        console.log("All HTML content loaded successfully. #Footer");
+        setupScrollTop();
+        initializeDarkMode();
+        if (window.LanguageManager) window.LanguageManager.updateElements();
+        counter++;
+        if (counter == 2) {
+            document.body.classList.add("loaded");
+        }
+    };
+
     $.get("../main/header.html", function (data) {
         $("#myUniqueHeaderID").html(data);
     })
-        .done(function () {
-            console.log("All HTML content loaded successfully. #Header");
-            setupScrollNav();
-            setupLogin();
-            setupToken();
-            if (window.LanguageManager) window.LanguageManager.updateElements();
-            counter++;
-            if (counter == 2) {
-                document.body.classList.add("loaded");
-            }
-        })
+        .done(handleHeaderLoaded)
         .fail(function () {
             console.error("Error loading HTML content. #Header");
             $.get("./main/header.html", function (data) {
                 $("#myUniqueHeaderID").html(data);
-            })
+            }).done(handleHeaderLoaded);
         });
 
     $.get("../main/footer.html", function (data) {
         $("#myUniqueFooterID").html(data);
     })
-        .done(function () {
-            console.log("All HTML content loaded successfully. #Footer");
-            setupScrollTop();
-            initializeDarkMode();
-            if (window.LanguageManager) window.LanguageManager.updateElements();
-            counter++;
-            if (counter == 2) {
-                document.body.classList.add("loaded");
-            }
-        })
+        .done(handleFooterLoaded)
         .fail(function () {
             console.error("Error loading HTML content. #Footer");
             $.get("./main/footer.html", function (data) {
                 $("#myUniqueFooterID").html(data);
-            })
+            }).done(handleFooterLoaded);
         });
 }
 

@@ -52,18 +52,18 @@
     <!-- Hero Section -->
     <section class="hero-section" aria-label="Hero Slider">
         <!-- Animated Text Overlay & CTA -->
-        <div class="above-container" role="presentation" style="height: 100%; display: flex; flex-direction: column; justify-content: center; background: rgba(0,0,0,0.4); z-index: 5;">
-            <div id="container" style="position: relative; height: auto; margin-top: 15vh;">
-                <span id="text1" aria-hidden="true" style="color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.5);"></span>
-                <span id="text2" aria-hidden="true" style="color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.5);"></span>
+        <div class="above-container hero-overlay" role="presentation">
+            <div id="container" class="hero-text-container">
+                <span id="text1" aria-hidden="true" class="hero-text-item"></span>
+                <span id="text2" aria-hidden="true" class="hero-text-item"></span>
             </div>
-            
+
             <!-- Premium CTA Buttons -->
-            <div class="hero-cta" style="">
-                <a href="../login/signup.html" class="learn-more-btn" style="padding: 16px 40px; font-size: 1.2rem; background: linear-gradient(135deg, #2563eb, #4f46e5); border-radius: 30px; box-shadow: 0 10px 25px rgba(37,99,235,0.4);">
+            <div class="hero-cta">
+                <a href="../login/signup.html" class="learn-more-btn btn-primary-gradient">
                     Join the Team <i class="fas fa-rocket"></i>
                 </a>
-                <a href="#committees" class="learn-more-btn" style="margin-left: 15px; padding: 16px 40px; font-size: 1.2rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                <a href="#committees" class="learn-more-btn btn-glass">
                     Explore More <i class="fas fa-arrow-down"></i>
                 </a>
             </div>
@@ -211,13 +211,13 @@
 
     <section id="committees">
         <h1 data-aos="fade-up" data-i18n="our_committees">Our Committees</h1>
-        <p class="subtitle" data-aos="fade-up" data-i18n="discover_the_roles_that_drive_our_succes">Discover the roles that drive our success.</p>
+        <p class="subtitle" data-aos="fade-up" data-i18n="discover_the_roles_that_drive_our_succes">Discover the roles
+            that drive our success.</p>
 
         <div id="committees-container" data-aos="fade-up"></div>
 
         <div class="section-cta" data-aos="fade-up">
-            <a href="committees/" class="learn-more-btn"
-               data-i18n="learn_more_about_our_committees">
+            <a href="committees/" class="learn-more-btn" data-i18n="learn_more_about_our_committees">
                 Learn More About Our Committees
                 <i class="fas fa-arrow-right"></i>
             </a>
@@ -228,14 +228,14 @@
 
     <section>
         <h1 data-aos="fade-up" data-i18n="achievements">Achievements</h1>
-        <p class="subtitle" data-aos="fade-up" data-i18n="we_have_achieved_a_perfect_place_in_thes">we have achieved a perfect place in these competition</p>
+        <p class="subtitle" data-aos="fade-up" data-i18n="we_have_achieved_a_perfect_place_in_thes">we have achieved a
+            perfect place in these competition</p>
         <div id="Ach_cards" data-aos="fade-up">
             <!-- Content loaded via achievements-loader.js -->
         </div>
 
         <div class="section-cta" data-aos="fade-up">
-            <a href="achievements/" class="learn-more-btn"
-               data-i18n="learn_more_about_our_achievements">
+            <a href="achievements/" class="learn-more-btn" data-i18n="learn_more_about_our_achievements">
                 Learn More About Our Achievements
                 <i class="fas fa-arrow-right"></i>
             </a>
@@ -247,7 +247,8 @@
     <!-- Team Board Section -->
     <section id="team-board">
         <h1 data-aos="fade-up" data-i18n="team_board">Team Board</h1>
-        <p class="subtitle" data-aos="fade-up" data-i18n="meet_the_dedicated_individuals_behind_ou">Meet the dedicated individuals behind our success.</p>
+        <p class="subtitle" data-aos="fade-up" data-i18n="meet_the_dedicated_individuals_behind_ou">Meet the dedicated
+            individuals behind our success.</p>
         <div id="team-board-container" data-aos="fade-up">
             <!-- Content loaded via main/team-loader.js -->
         </div>
@@ -257,7 +258,8 @@
 
     <section id="pioneers">
         <h1 data-aos="fade-up" data-i18n="pioneers">Pioneers</h1>
-        <p class="subtitle" data-aos="fade-up" data-i18n="those_who_paved_the_way_for_our_success">Those who paved the way for our success.</p>
+        <p class="subtitle" data-aos="fade-up" data-i18n="those_who_paved_the_way_for_our_success">Those who paved the
+            way for our success.</p>
         <div id="pioneers-container" data-aos="fade-up">
             <!-- Content loaded via main/pioneers-loader.js -->
         </div>
